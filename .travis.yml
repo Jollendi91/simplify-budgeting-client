@@ -1,5 +1,14 @@
 language: node_js
 node_js: node
 cache:
- directories:
+  directories:
   - node_modules
+env: 
+  - CI=true
+deploy:
+  provider: heroku
+  api_key:
+    secure: T0qCupTx2je+ZtKfU6eeRVNfLe3aJzc1B+wRhBvxGDi0FYFvt+Lt0BBvIwuFYKpAnolPumD0vlPEIaWXAhJzfo8smQy7XfFjkAkh0YLN3ILIdh50kZcihBwuA4A2c4YUajjBJblv3zs1fPanTsywfRlGMIv0cBSxycp3VPWe3bBQLx1qMWAKod8jOFxWgZqPakZi5scXwfj7cYgxtnlrarndNnjDUaWnvNjQnYxyowjYOzt82nZU7xqjgq2B1YnWhdfz+yf6fr2rESlsZ0muSNkMYlYUiQvyOD/eUnvOtZhzIPK17QYUa2m8P6qYRxpCzJcNqQPgIvgNaxMejBcVcgBClm537gPVveClQQQClqlzwazNhV60kxWYqlmbFry5jXQobn4dn4uqjoAEhlr0IAd+K/IWXyHaWSFFVHaa2/NfA6q326z5k7Twok2NSYVZCwUstjP16M3NL1U0SNDtYiqi81uM0G+/GJmokkpOh+Ji4mArF/N8Y7vzy4KgMKUX/ltFl0N1gwZXFysZJoGUyEiyekaMoPVGg0/jEKvT93wz2oBSUCpjsntZRMePo0ZJuDCn9Rif8Puyx5G1BL2b9fuUUKOq5szL//ysSIE/X2dYN8JIZRajmmYzgrMgQgwQBex9qjtWR9PiJ4x5r3gxt+bhs4J4a1cmQ2b2UWiS4xE=
+  app: simplify-budgeting-client
+  on:
+    repo: Jollendi91/simplify-budgeting-client
