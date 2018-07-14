@@ -9,7 +9,7 @@ deploy:
   provider: heroku
   api_key:
     secure: Sd4rpzgevWIqd4vG0hWbApr9YjcMdBl4HWQR9ckKsF+6h/XYYd+D5CrrhIKehNdEVWuW7JKgJRg9Jt6FO/v0vilSx8mUERJG3Ny+3oCSfQ1gn8DlBXAqUp7+sG+l73ygK0s0/a6JvMN1IT5pF/3LM61MqgCxVYADQnyUCBA87yGGdhRB763nGQ0RrRP2TE4I8a7SbivqPOdY+xb4d/ErNznepJrWyb7RBNFXR4jzZxMbIoUfmdVZEYclvTXnPVNp6lAK3GDQ0yHIjwIPxf8wocYhITcSYXfXKLmAq5upPNs0Jfb1yC8Kabx2oIdIaKwoetuI/kmTpZoyWyJKNEQE/gVW6E8+AseYG45mvXnFIWtwd6FH6OR+B0oXbtFgA+8RH1mHhGkUOFi5A33aBHeLViCov+jsWUSfoInvGLoQGFMq+1bImKsutwrhKf/T+x/9Ties2b8S5FGjTeOOquUZ2tRrn1E80YN9tR6QxJ5y1InCw+j46T0NAhbma5w1qtYs9QWedC0DBNzM2kXjWdL5+wy0JnM20vwVEo3gpHH0itsJw3PV/lbNsWRo77MuXaU+4iIdV/CejqVqFIRL6x/whGxfy0BguolIRTzqQho0RfL9mLI9OmPUXT5m4B0P+0ksDLzw7miU+nXGBI/5dxey+Z3vZPgzG475/Uuh9Tu2EaU=
-  app: simplify-budgeting-client
+  app: gentle-escarpment-27186
   on:
     repo: Jollendi91/simplify-budgeting-client
     
