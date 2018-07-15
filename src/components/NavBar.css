@@ -1,0 +1,19 @@
+nav, footer {
+    background-color: #bbb;
+    padding: 5px 0;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
+  }
+  
+  nav h1 {
+    font-size: 30px;
+    margin: 10px;
+  }

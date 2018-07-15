@@ -1,4 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
+import './LoginForm.css';
+
 
 export default function LoginForm(props) {
     return (
@@ -11,7 +15,9 @@ export default function LoginForm(props) {
           <label for="password">Password</label>
           <input type="password" name="password" id="password"/>
         </div>
-        <button type="submit">Log in</button>
+        <Link to="/account-setup">
+            <button type="submit">Log in</button>
+        </Link>
       </form>
     )
 }

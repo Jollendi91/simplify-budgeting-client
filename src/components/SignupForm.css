@@ -1,0 +1,18 @@
+.signup-form {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .signup-form label, .signup-form input{
+    display: inline-block;
+  }
+  
+  .signup-form label {
+    width: 33%;
+    text-align: right;
+  }
+  
+  form h2 {
+    margin-top: 0;
+  }
+  
