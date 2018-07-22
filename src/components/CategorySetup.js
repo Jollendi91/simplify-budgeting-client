@@ -7,16 +7,16 @@ export default function CategorySetup(props) {
 	if (props.type === 'edit-profile') {
 		buttons = <div className='buttons'>
 					<Link to="/dashboard">
-						<button type="submit" onClick={() => props.onClick('dashboard')}>Save Changes</button>
+						<button type="submit">Save Changes</button>
 					</Link>
 				</div>
 	} else {
 		buttons = <div className='buttons'>
 					<Link to="/">
-						<button onClick={() => props.onClick('signup')}>Back</button>
+						<button >Back</button>
 					</Link>
 					<Link to="/dashboard">
-						<button type="submit" onClick={() => props.onClick('dashboard')}>Finish Setup</button>
+						<button type="submit">Finish Setup</button>
 					</Link>
 				</div>
 	}

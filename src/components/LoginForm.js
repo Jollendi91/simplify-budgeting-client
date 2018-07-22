@@ -16,7 +16,7 @@ export default function LoginForm(props) {
           <input type="password" name="password" id="password"/>
         </div>
         <Link to="/account-setup">
-            <button type="submit" onClick={props.onClick}>Log in</button>
+            <button type="submit">Log in</button>
         </Link>
       </form>
     )

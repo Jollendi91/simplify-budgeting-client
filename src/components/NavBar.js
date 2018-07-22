@@ -15,7 +15,7 @@ export default function NavBar(props) {
                 <h1 className="logo">Simplify</h1>
                 <ul>
                     <Link to="/">
-                        <li onClick={() => props.onClick('signup')}>Logout</li>
+                        <li>Logout</li>
                     </Link>
                 </ul>
             </nav>
@@ -24,7 +24,7 @@ export default function NavBar(props) {
         return (
             <nav className="nav-bar">
                 <h1 className="logo">Simplify</h1>
-                <LoginForm onClick={() => props.onClick('setup')}/>
+                <LoginForm />
             </nav>
         )
     } else if (props.page === 'dashboard') {
@@ -42,7 +42,7 @@ export default function NavBar(props) {
                         <li>Bills</li>
                     </Link>
                     <Link to="/">
-                        <li onClick={() => props.onClick('signup')}>Logout</li>
+                        <li>Logout</li>
                     </Link>
                 </ul>
                  
