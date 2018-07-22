@@ -4,18 +4,40 @@ import {BrowserRouter, Redirect, Route} from 'react-router-dom';
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import AccountSetup from './AccountSetup';
+import Dashboard from './Dashboard';
 
-export default function Simplify(props) {
-    return (
-        <BrowserRouter>
-            <div className="app-container">
-                <header>
-                    <NavBar />
-                </header>
+export default class Simplify extends React.Component {
+    constructor(props){
+        super(props);
 
-                <Route exact path="/" component={LandingPage}/>
-                <Route exact path="/account-setup" component={AccountSetup}/>
-            </div>
-        </BrowserRouter>
-    )
+        this.state = {
+            page: 'signup'
+        }
+    }
+
+    updatePage(page) {
+        this.setState({
+            page
+        })
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <div className="app-container">
+                    <header>
+                        <NavBar page={this.state.page} onClick={page => this.updatePage(page)} />
+                    </header>
+    
+                    <Route exact path="/" component={LandingPage}/>
+
+                    <Route exact path="/account-setup" component={() => <AccountSetup onClick={page => this.updatePage(page)}/>}/>
+
+                    <Route exact path="/dashboard" component={Dashboard}/>
+
+                </div>
+            </BrowserRouter>
+        )
+    }
+    
 }

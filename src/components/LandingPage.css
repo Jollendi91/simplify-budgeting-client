@@ -1,17 +1,17 @@
-.main-header {
+.landing-page .main-header {
     margin-top: 75px;
     padding: 40px 15px;
   }
   
-  section {
+  .landing-page section {
     min-height: 200px;
     padding: 30px 15px;
   }
   
-  section:nth-child(odd) {
+  .landing-page section:nth-child(odd) {
     background-color: #ccc;
   }
   
-  section:nth-child(even) {
+  .landing-page section:nth-child(even) {
     background-color: #ddd;
   }

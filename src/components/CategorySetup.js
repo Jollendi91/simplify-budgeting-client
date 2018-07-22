@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function CategorySetup(props) {
     return (
@@ -44,8 +45,12 @@ export default function CategorySetup(props) {
 						</tr>
 					</tbody>
 				</table>
-            <button>Back</button>
-            <button type="submit">Finish Setup</button>
+			<Link to="/">
+          	  <button onClick={() => props.onClick('signup')}>Back</button>
+			</Link>
+			<Link to="/dashboard">
+            	<button type="submit" onClick={() => props.onClick('dashboard')}>Finish Setup</button>
+			</Link>
 		</section>
     )
 }
