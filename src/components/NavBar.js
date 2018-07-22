@@ -32,8 +32,12 @@ export default function NavBar(props) {
             <nav className="nav-bar">
                 <h1 className="logo">Simplify</h1>
                 <ul>
-                    <li>Edit Profile</li>
-                    <li>Bills</li>
+                    <Link to="/edit-profile">
+                        <li>Edit Profile</li>
+                    </Link>
+                    <Link to="/bills">
+                        <li>Bills</li>
+                    </Link>
                     <Link to="/">
                         <li onClick={() => props.onClick('signup')}>Logout</li>
                     </Link>

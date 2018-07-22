@@ -1,6 +1,5 @@
 nav, footer {
     background-color: #bbb;
-    padding: 5px 0;
   }
   
   nav {
@@ -30,6 +29,11 @@ nav, footer {
     height: 100%;
   }
 
+  ul a {
+    text-decoration: none;
+    color: black;
+  }
+
   ul li {
     font-size: 18px;
     display: flex;
@@ -37,6 +41,10 @@ nav, footer {
     justify-content: center;
     padding: 0 15px;
     border-left: 1px solid #aaa;
+  }
+
+  ul li:hover {
+    background-color: #ddd;
   }
 
   .log-out {
