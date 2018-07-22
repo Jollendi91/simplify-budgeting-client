@@ -1,0 +1,22 @@
+
+.dashboard-container .main-header {
+    margin-top: 75px;
+  }
+  
+.dashboard-container  section {
+    max-width: 500px;
+    padding: 20px;
+    margin: 10px auto;
+  
+  }
+
+
+.dashboard-container section:nth-child(even) {
+    background-color: #eee;
+  }
+  
+  
+.dashboard-container section:nth-child(odd) {
+    background-color: #ccc;
+  }
+  
