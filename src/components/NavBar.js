@@ -32,6 +32,9 @@ export default function NavBar(props) {
             <nav className="nav-bar">
                 <h1 className="logo">Simplify</h1>
                 <ul>
+                    <Link to="/dashboard">
+                        <li>Dashboard</li>
+                    </Link>
                     <Link to="/edit-profile">
                         <li>Edit Profile</li>
                     </Link>
