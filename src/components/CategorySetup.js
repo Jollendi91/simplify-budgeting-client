@@ -2,6 +2,25 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 export default function CategorySetup(props) {
+
+	let buttons;
+	if (props.type === 'edit-profile') {
+		buttons = <div className='buttons'>
+					<Link to="/dashboard">
+						<button type="submit" onClick={() => props.onClick('dashboard')}>Save Changes</button>
+					</Link>
+				</div>
+	} else {
+		buttons = <div className='buttons'>
+					<Link to="/">
+						<button onClick={() => props.onClick('signup')}>Back</button>
+					</Link>
+					<Link to="/dashboard">
+						<button type="submit" onClick={() => props.onClick('dashboard')}>Finish Setup</button>
+					</Link>
+				</div>
+	}
+
     return (
         <section class="category-container">
 			<h3><span>Monthly Pay </span>-<span> Monthly Bills </span>=<span> Remaining</span></h3>
@@ -45,12 +64,7 @@ export default function CategorySetup(props) {
 						</tr>
 					</tbody>
 				</table>
-			<Link to="/">
-          	  <button onClick={() => props.onClick('signup')}>Back</button>
-			</Link>
-			<Link to="/dashboard">
-            	<button type="submit" onClick={() => props.onClick('dashboard')}>Finish Setup</button>
-			</Link>
+			{buttons}
 		</section>
     )
 }
