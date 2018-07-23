@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Category from './Category';
+import './CategorySetup.css';
 
 export function CategorySetup(props) {
 
@@ -32,10 +32,25 @@ export function CategorySetup(props) {
 
     return (
         <section class="category-container">
-			<h3><span> ${props.monthlySalary} </span>-<span> ${props.billsTotal} </span> = <span> ${props.monthlySalary - props.billsTotal}</span></h3>
-            <h2>Categories</h2>
+			<h2>Categories</h2>
             <p>Set up some categories that you would like to budget for, such as spending, savings, or debts.</p>
             <p>How would you like to budget the remaining amount?</p>
+			<section className="remaining-calc">
+				<div>
+					<p className="title">Salary</p>
+					<p>${props.monthlySalary}</p> 
+				</div>
+				<p> - </p>
+				<div>
+					<p className="title">Bills</p>
+					<p>${props.billsTotal}</p>
+				</div>
+				<p> = </p>
+				<div>
+					<p className="title">Remaining</p>
+					<p> ${props.monthlySalary - props.billsTotal}</p>
+				</div>
+			</section>
             <form>
 				<div>
 					<label for="category-name">Name</label>
