@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import CategoryModule from './CategoryModule';
 import NavBar from './NavBar';
@@ -7,11 +8,11 @@ import NavBar from './NavBar';
 import './Dashboard.css';
 
 
-export default function Dashboard(props) {
+export function Dashboard(props) {
 
-    const categories = props.categories.map((category, index) => 
-        <Link to={`category/${category.categoryName}`}>
-         <CategoryModule key={index} {...category} />
+    const categories = props.categories.map((category) => 
+        <Link to={`category/${category.name}`}>
+         <CategoryModule key={category.id} {...category} />
         </Link>
     )
 
@@ -33,3 +34,8 @@ export default function Dashboard(props) {
     )
 }
 
+const mapStateToProps = state => ({
+    categories: state.categories
+})
+
+export default connect(mapStateToProps)(Dashboard);

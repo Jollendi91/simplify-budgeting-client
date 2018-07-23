@@ -1,6 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default function MonthlyBillsSetup(props) {
+export function MonthlyBillsSetup(props) {
+
+    const bills = props.bills.map(bill => 
+        <tr>
+            <td>{bill.name}</td>
+            <td>${bill.amount}</td>
+        </tr>
+    );
+
     return (
         <section className="monthly-bills-form-container">
             <h2>Monthly Bills</h2>
@@ -23,20 +32,21 @@ export default function MonthlyBillsSetup(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Rent</td>
-                        <td>$450.00</td>
-                    </tr>
-                    <tr>
-                        <td>Electricity</td>
-                        <td>$70.00</td>
-                    </tr>
+                    {bills}
                 </tbody>
                 <tfoot>
                 <td>Total</td>
-                <td>$520.00</td>
+                <td>${props.billsTotal}</td>
                 </tfoot>
 			</table>
 		</section>
     )
 }
+
+const mapStateToProps = state => ({
+    monthlySalary: state.monthlySalary,
+    bills: state.bills,
+    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+});
+
+export default connect(mapStateToProps)(MonthlyBillsSetup);
