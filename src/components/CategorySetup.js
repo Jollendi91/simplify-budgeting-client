@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import Category from './Category';
 
 export function CategorySetup(props) {
 
@@ -22,9 +23,16 @@ export function CategorySetup(props) {
 				</div>
 	}
 
+	let categories = props.categories.map((category, index) => 
+			<tr key={index}>
+				<td>{category.name}</td>
+				<td>${category.amount}</td>
+				<td>{Math.round(category.amount / (props.monthlySalary - props.billsTotal)* 10000)/100}%</td>
+			</tr>)
+
     return (
         <section class="category-container">
-			<h3><span> ${props.monthlySalary} </span>-<span> ${props.billsTotal} </span>=<span> ${props.monthlySalary - props.billsTotal}</span></h3>
+			<h3><span> ${props.monthlySalary} </span>-<span> ${props.billsTotal} </span> = <span> ${props.monthlySalary - props.billsTotal}</span></h3>
             <h2>Categories</h2>
             <p>Set up some categories that you would like to budget for, such as spending, savings, or debts.</p>
             <p>How would you like to budget the remaining amount?</p>
@@ -48,21 +56,7 @@ export function CategorySetup(props) {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Spending Money</td>
-							<td>$540</td>
-                            <td>60%</td>
-						</tr>
-						<tr>
-							<td>Savings</td>
-                            <td>$180</td>
-							<td>20%</td>							
-						</tr>
-						<tr>
-							<td>Debts</td>
-                            <td>$180</td>
-							<td>20%</td>							
-						</tr>
+						{categories}
 					</tbody>
 				</table>
 			{buttons}
@@ -71,6 +65,7 @@ export function CategorySetup(props) {
 }
 
 const mapStateToProps = state => ({
+	categories: state.categories,
 	monthlySalary: state.monthlySalary,
 	billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
 })

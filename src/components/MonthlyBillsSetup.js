@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 
 export function MonthlyBillsSetup(props) {
 
-    const bills = props.bills.map(bill => 
-        <tr>
+    const bills = props.bills.map((bill, index)=> 
+        <tr key={index}>
             <td>{bill.name}</td>
             <td>${bill.amount}</td>
         </tr>
