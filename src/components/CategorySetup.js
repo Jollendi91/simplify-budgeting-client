@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-export default function CategorySetup(props) {
+export function CategorySetup(props) {
 
 	let buttons;
 	if (props.type === 'edit-profile') {
@@ -23,7 +24,7 @@ export default function CategorySetup(props) {
 
     return (
         <section class="category-container">
-			<h3><span>Monthly Pay </span>-<span> Monthly Bills </span>=<span> Remaining</span></h3>
+			<h3><span> ${props.monthlySalary} </span>-<span> ${props.billsTotal} </span>=<span> ${props.monthlySalary - props.billsTotal}</span></h3>
             <h2>Categories</h2>
             <p>Set up some categories that you would like to budget for, such as spending, savings, or debts.</p>
             <p>How would you like to budget the remaining amount?</p>
@@ -68,3 +69,10 @@ export default function CategorySetup(props) {
 		</section>
     )
 }
+
+const mapStateToProps = state => ({
+	monthlySalary: state.monthlySalary,
+	billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+})
+
+export default connect(mapStateToProps)(CategorySetup);
