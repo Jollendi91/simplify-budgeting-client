@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import './MonthlyPayEdit.css';
+import { updateSalary } from '../actions';
 
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
@@ -10,6 +11,17 @@ export class MonthlyPayEdit extends React.Component {
         this.state ={
             editing: false
         }
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onSubmit(event) {
+        event.preventDefault();
+        const salary = this.salaryInput.value.trim();
+        if(salary) {
+            this.props.dispatch(updateSalary(salary));
+        }
+
+        this.salaryInput.value = '';
     }
 
     setEditing() {
@@ -27,8 +39,8 @@ export class MonthlyPayEdit extends React.Component {
                         </div>
         } else {
             salaryForm = 
-            <form>
-                <input className="salaryInput" type="number" min="0" step="0.01" />
+            <form className="update-salary-form" onSubmit={this.onSubmit}>
+                <input className="salaryInput" type="number" min="0" step="0.01" ref={input => this.salaryInput = input}/>
                 <div>
                     <button type="submit">Update</button>
                     <button onClick={() => this.setEditing()}>Cancel</button>

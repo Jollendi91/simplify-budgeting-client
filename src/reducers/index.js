@@ -1,3 +1,4 @@
+import {UPDATE_SALARY} from '../actions';
 
 const initialState= {
     user: {
@@ -75,5 +76,10 @@ const initialState= {
 };
 
 export const simplifyReducer = (state=initialState, action) => {
+    if (action.type === UPDATE_SALARY) {
+        return Object.assign({}, state, {
+            monthlySalary: action.salary
+        });
+    }
     return state;
 }
