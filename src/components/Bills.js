@@ -3,16 +3,28 @@ import {connect} from 'react-redux';
 
 import NavBar from './NavBar';
 import './Bills.css';
+import { addBill } from '../actions';
 
 export function Bills(props) {
 
     const bills = props.bills.map((bill, index)=> 
         <tr key={index}>
             <td>{bill.name}</td>
-            <td>${bill.amount}</td>
+            <td>${bill.amount.toFixed(2)}</td>
             <td>X</td>
         </tr>
     );
+
+    let billName;
+    let billAmount;
+
+    function onSubmit(event) {
+        event.preventDefault();
+        props.dispatch(addBill(billName.value, parseFloat(billAmount.value), props.userId));
+
+        billName.value = '';
+        billAmount.value = '';
+    }
 
     return (
         <div>
@@ -20,17 +32,17 @@ export function Bills(props) {
             <main className='bills-container'>
                 <header>
                     <h1>Monthly Bills</h1>
-                    <h2>${props.billsTotal}/Month</h2>
+                    <h2>${props.billsTotal.toFixed(2)}/Month</h2>
                 </header>
                 <section class="monthly-bills-form-container">
-                    <form>
+                    <form className="add-bill-form" onSubmit={(event) => onSubmit(event)}>
                         <div>
                             <label for="description">Description</label>
-                            <input type="text" name="description" placeholder="Rent, Utilities, etc." id="description" />
+                            <input type="text" name="description" placeholder="Rent, Utilities, etc." id="description" ref={input => billName = input}/>
                         </div>
                         <div>
                             <label for="amount">Amount</label>
-                            <input type="number" step="0.01" name="amount" id="amount" min="0.01" />
+                            <input type="number" step="0.01" name="amount" id="amount" min="0.01" ref={input => billAmount = input}/>
                         </div>
                         <button>Add Bill</button>
                     </form>
@@ -46,7 +58,7 @@ export function Bills(props) {
                         </tbody>
                         <tfoot>
                             <td>Total</td>
-                            <td colspan="2">${props.billsTotal}</td>
+                            <td colspan="2">${props.billsTotal.toFixed(2)}</td>
                         </tfoot>
                     </table>
                 </section>
@@ -58,7 +70,8 @@ export function Bills(props) {
 
 const mapStateToProps = state => ({
     bills: state.bills,
-    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0), 
+    userId: state.user.id
 });
 
 export default connect(mapStateToProps)(Bills);
