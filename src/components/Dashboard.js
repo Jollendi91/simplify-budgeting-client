@@ -11,7 +11,7 @@ import './Dashboard.css';
 export function Dashboard(props) {
 
     const categories = props.categories.map((category) => 
-        <Link to={`category/${category.name}`}>
+        <Link key={category.id} to={`category/${category.id}`}>
          <CategoryModule key={category.id} {...category} />
         </Link>
     )
@@ -21,8 +21,8 @@ export function Dashboard(props) {
             <NavBar page={'dashboard'} />
 
             <div className='dashboard-container'>
-                <header class="main-header">
-                    <section class="portfolio-data">
+                <header className="main-header">
+                    <section className="portfolio-data">
                         <p>[graph of data]</p>
                     </section>
                 </header>

@@ -1,32 +1,48 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import NavBar from './NavBar';
 
+import './Category.css';
 
-export default function Category(props) {
+
+export function Category(props) {
+
+    const transactions = props.transactions.map(transaction =>
+        <tr>
+            <td>{transaction.name}</td>
+            <td>{transaction.date}</td>
+            <td>${transaction.amount}</td>
+            <td>X</td>
+        </tr>
+    );
+
+    const transactionsTotal = props.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
+
+    console.log(props.category);
     return (
         <div>
             <NavBar page={'dashboard'}/>
             <div className="category-container">
                 <header>
-                    <h1>{props.categoryName}</h1>
-                    <div class="category-header">
-                        <h2>{props.categoryAmount}/Month</h2>
+                    <h1>{props.category.name}</h1>
+                    <div className="category-header">
+                        <h2>${props.category.amount}/Month</h2>
                         <div>
                             <h1>July</h1>
-                            <select name="transaction-data-month">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option selected>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
+                            <select name="transaction-data-month" defaultValue="july">
+                                <option value="january">January</option>
+                                <option value="february">February</option>
+                                <option value="march">March</option>
+                                <option value="april">April</option>
+                                <option value="may">May</option>
+                                <option value="june">June</option>
+                                <option value="july">July</option>
+                                <option value="august">August</option>
+                                <option value="september">September</option>
+                                <option value="october">October</option>
+                                <option value="november">November</option>
+                                <option value="december">December</option>
                             </select>
                             <select name="transaction-data-year">
                                 <option>2017</option>
@@ -36,22 +52,22 @@ export default function Category(props) {
                     </div>
                 </header>
                 <main>
-                    <section class="progress-bar">
-                        <p>Spent so far: $350 / $700</p>
+                    <section className="progress-bar">
+                        <p>Spent so far: ${transactionsTotal} / ${props.category.amount}</p>
                         <p>[Progress Bar]</p>
                     </section>
                     <section>
                         <form>
                             <div>
-                                <label for="transaction-description">Description</label>
+                                <label htmlFor="transaction-description">Description</label>
                                 <input type="type" name="transaction-description" id="transaction-description" />
                             </div>
                             <div>
-                                <label for="transaction-date">Transaction Date</label>
+                                <label htmlFor="transaction-date">Transaction Date</label>
                                 <input type="date" name="transaction-date" id="transaction-date" />
                             </div>
                             <div>
-                                <label for="account-amount">Amount</label>
+                                <label htmlFor="account-amount">Amount</label>
                                 <input type="number" step="0.01" min="0" name="account-amount" id="account-amount" />
                             </div>
                             <button type="submit">Add Transaction</button>
@@ -62,22 +78,11 @@ export default function Category(props) {
                                     <tr>
                                         <th>Description</th>
                                         <th>Date</th>
-                                        <th colspan="2">Amount</th>
+                                        <th colSpan="2">Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Groceries - Aldi</td>
-                                        <td>07/07/2018</td>
-                                        <td>$75.00</td>
-                                        <td>X</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gas</td>
-                                        <td>07/16/2018</td>
-                                        <td>$25.00</td>
-                                        <td>X</td>
-                                    </tr>
+                                   {transactions}
                                 </tbody>
                             </table>
                         </div>
@@ -86,4 +91,13 @@ export default function Category(props) {
             </div>
         </div>
     );
-}
+};
+
+
+const mapStateToProps = (state, props) => ({
+    category: state.categories.find(category => category.id.toString() === props.match.params.categoryId),
+    transactions: state.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId)
+})
+
+
+export default connect(mapStateToProps)(Category);

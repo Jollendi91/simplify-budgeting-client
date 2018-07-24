@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter, Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import AccountSetup from './AccountSetup';
 import Dashboard from './Dashboard';
@@ -23,7 +22,7 @@ export function Simplify(props) {
 
                 <Route exact path="/dashboard" component={() => <Dashboard categories={props.categories}/>}/>
 
-                <Route exact path="/category/:categoryName" component={Category} />
+                <Route exact path="/category/:categoryId" component={Category} />
 
                 <Route exact path='/bills' component={Bills} />
 
