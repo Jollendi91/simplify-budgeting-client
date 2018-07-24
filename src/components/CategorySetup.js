@@ -59,8 +59,17 @@ export function CategorySetup(props) {
 				</div>
 				<p> = </p>
 				<div>
-					<p className="title">Remaining</p>
 					<p> ${props.monthlySalary - props.billsTotal}</p>
+				</div>
+			</section>
+			<section className="remaining-calc">
+				<div>
+					<p className="title">Remaining</p>
+					<p>${(props.monthlySalary - props.billsTotal) - props.categoriesTotal}</p>
+				</div>
+				<div>
+					<p className="title">Budgeted</p>
+					<p>${props.categoriesTotal}</p>
 				</div>
 			</section>
             <form className="add-category-form" onSubmit={(event) => onSubmit(event)}>
@@ -93,6 +102,7 @@ export function CategorySetup(props) {
 
 const mapStateToProps = state => ({
 	categories: state.categories,
+	categoriesTotal: state.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0),
 	monthlySalary: state.monthlySalary,
 	billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
 	userId: state.user.id
