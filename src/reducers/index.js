@@ -96,6 +96,16 @@ export const simplifyReducer = (state=initialState, action) => {
                 user_id: action.userId
             }]
         });
+    } else if (action.type === actions.ADD_TRANSACTION) {
+        return Object.assign({}, state, {
+            transactions: [...state.transactions, {
+                name: action.transName,
+                date: action.transDate,
+                amount: action.transAmount,
+                category_id: action.categoryId,
+                user_id: action.userId
+            }]
+        });
     }
 
     return state;

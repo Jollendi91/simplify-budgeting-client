@@ -27,7 +27,7 @@ export function Category(props) {
                 <header>
                     <h1>{props.category.name}</h1>
                     <div className="category-header">
-                        <h2>${props.category.amount}/Month</h2>
+                        <h2>${props.category.amount.toFixed(2)}/Month</h2>
                         <div>
                             <h1>July</h1>
                             <select name="transaction-data-month" defaultValue="july">
@@ -53,7 +53,7 @@ export function Category(props) {
                 </header>
                 <main>
                     <section className="progress-bar">
-                        <p>Spent so far: ${transactionsTotal} / ${props.category.amount}</p>
+                        <p>Spent so far: ${transactionsTotal.toFixed(2)} / ${props.category.amount.toFixed(2)}</p>
                         <p>[Progress Bar]</p>
                     </section>
                     <section>
@@ -96,7 +96,8 @@ export function Category(props) {
 
 const mapStateToProps = (state, props) => ({
     category: state.categories.find(category => category.id.toString() === props.match.params.categoryId),
-    transactions: state.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId)
+    transactions: state.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId),
+    userId: state.user.id
 })
 
 

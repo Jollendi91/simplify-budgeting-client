@@ -19,3 +19,13 @@ export const addCategory = (categoryName, categoryAmount, userId) => ({
     categoryAmount,
     userId
 });
+
+export const ADD_TRANSACTION = 'ADD_TRANSACTION';
+export const addTransaction = (transName, transDate, transAmount, categoryId, userId) => ({
+    type: ADD_TRANSACTION,
+    transName, 
+    transDate,
+    transAmount,
+    categoryId,
+    userId
+});
