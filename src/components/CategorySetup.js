@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './CategorySetup.css';
+import { addCategory } from '../actions';
 
 export function CategorySetup(props) {
 
@@ -23,15 +24,26 @@ export function CategorySetup(props) {
 				</div>
 	}
 
+	let categoryName;
+	let categoryAmount;
+
+	function onSubmit(event) {
+		event.preventDefault();
+		props.dispatch(addCategory(categoryName.value, parseFloat(categoryAmount.value), props.userId));
+
+		categoryName.value = '';
+		categoryAmount.value = '';
+	}
+
 	let categories = props.categories.map((category, index) => 
 			<tr key={index}>
 				<td>{category.name}</td>
-				<td>${category.amount}</td>
+				<td>${category.amount.toFixed(2)}</td>
 				<td>{Math.round(category.amount / (props.monthlySalary - props.billsTotal)* 10000)/100}%</td>
 			</tr>)
 
     return (
-        <section class="category-container">
+        <section className="category-container">
 			<h2>Categories</h2>
             <p>Set up some categories that you would like to budget for, such as spending, savings, or debts.</p>
             <p>How would you like to budget the remaining amount?</p>
@@ -51,14 +63,14 @@ export function CategorySetup(props) {
 					<p> ${props.monthlySalary - props.billsTotal}</p>
 				</div>
 			</section>
-            <form>
+            <form className="add-category-form" onSubmit={(event) => onSubmit(event)}>
 				<div>
-					<label for="category-name">Name</label>
-					<input type="text" name="category-name" id="category-name"/>
+					<label htmlFor="category-name">Name</label>
+					<input type="text" name="category-name" id="category-name" ref={input => categoryName = input}/>
 				</div>
 				<div>
-					<label for="current-total">Amount</label>
-					<input type="number" name="allocation-percentage" id="allocation-percentage" min="1" max="100"/>
+					<label htmlFor="current-total">Amount</label>
+					<input type="number" name="allocation-percentage" id="allocation-percentage" min="1" ref={input => categoryAmount = input}/>
 				</div>
 				<button type="submit">Add Category</button>
             </form>
@@ -82,7 +94,8 @@ export function CategorySetup(props) {
 const mapStateToProps = state => ({
 	categories: state.categories,
 	monthlySalary: state.monthlySalary,
-	billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+	billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
+	userId: state.user.id
 })
 
 export default connect(mapStateToProps)(CategorySetup);

@@ -16,7 +16,7 @@ export function MonthlyBillsSetup(props) {
 
     function onSubmit(event) {
         event.preventDefault();
-        props.dispatch(addBill(billName.value, parseFloat(billAmount.value)));
+        props.dispatch(addBill(billName.value, parseFloat(billAmount.value), props.userId));
 
         billName.value = '';
         billAmount.value = '';
@@ -27,11 +27,11 @@ export function MonthlyBillsSetup(props) {
             <h2>Monthly Bills</h2>
             <form className="add-bill-form" onSubmit={(event) => onSubmit(event)}>
                 <div>
-                    <label for="description">Description</label>
+                    <label htmlFor="description">Description</label>
                     <input type="text" name="description" placeholder="Rent, Utilities, etc." id="description" ref={input => billName = input}/>
                 </div>
                 <div>
-                    <label for="amount">Amount</label>
+                    <label htmlFor="amount">Amount</label>
                     <input type="number" step="0.01" name="amount" id="amount" min="0.01" ref={input => billAmount = input}/>
                 </div>
                 <button>Add Bill</button>
@@ -47,8 +47,10 @@ export function MonthlyBillsSetup(props) {
                     {bills}
                 </tbody>
                 <tfoot>
-                <td>Total</td>
-                <td>${props.billsTotal.toFixed(2)}</td>
+                    <tr>
+                        <td>Total</td>
+                        <td>${props.billsTotal.toFixed(2)}</td>
+                    </tr>
                 </tfoot>
 			</table>
 		</section>
@@ -58,7 +60,8 @@ export function MonthlyBillsSetup(props) {
 const mapStateToProps = state => ({
     monthlySalary: state.monthlySalary,
     bills: state.bills,
-    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
+    userId: state.user.id
 });
 
 export default connect(mapStateToProps)(MonthlyBillsSetup);

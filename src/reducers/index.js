@@ -84,7 +84,16 @@ export const simplifyReducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             bills: [...state.bills, {
                 name: action.billName,
-                amount: action.billAmount
+                amount: action.billAmount,
+                user_id: action.userId
+            }]
+        });
+    } else if (action.type === actions.ADD_CATEGORY) {
+        return Object.assign({}, state, {
+            categories: [...state.categories, {
+                name: action.categoryName,
+                amount: action.categoryAmount,
+                user_id: action.userId
             }]
         });
     }
