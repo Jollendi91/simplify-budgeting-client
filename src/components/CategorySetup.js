@@ -6,24 +6,6 @@ import { addCategory } from '../actions';
 
 export function CategorySetup(props) {
 
-	let buttons;
-	if (props.type === 'edit-profile') {
-		buttons = <div className='buttons'>
-					<Link to="/dashboard">
-						<button type="submit">Save Changes</button>
-					</Link>
-				</div>
-	} else {
-		buttons = <div className='buttons'>
-					<Link to="/">
-						<button >Back</button>
-					</Link>
-					<Link to="/dashboard">
-						<button type="submit">Finish Setup</button>
-					</Link>
-				</div>
-	}
-
 	let categoryName;
 	let categoryAmount;
 
@@ -95,7 +77,6 @@ export function CategorySetup(props) {
 						{categories}
 					</tbody>
 				</table>
-			{buttons}
 		</section>
     )
 }

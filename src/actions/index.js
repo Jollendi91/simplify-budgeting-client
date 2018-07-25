@@ -28,3 +28,9 @@ export const addTransaction = (transName, transDate, transAmount, categoryId, us
     transAmount,
     categoryId
 });
+
+export const SETUP_STEP = 'SETUP_STEP';
+export const setupStep = (step) => ({
+    type: SETUP_STEP,
+    step
+});

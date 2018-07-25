@@ -1,34 +1,54 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import './AccountSetup.css';
 
 import MonthlyPaySetup from './MonthlyPaySetup';
-import MonthlyPayEdit from './MonthlyPayEdit';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
+import {connect} from 'react-redux';
+import { setupStep } from '../actions';
 
-export default function AccountSetup(props) {
-    let greeting;
-    let salaryStatus;
+export function AccountSetup(props) {
 
-    if(props.type === 'account-setup') {
-
-        greeting = "Let's get setup!";
-        salaryStatus = <MonthlyPaySetup />
-
-    }else if (props.type === 'edit-profile') {
-        greeting = "Edit your profile";
-        salaryStatus = <MonthlyPayEdit />
+    function setStep(step) {
+        props.dispatch(setupStep(step));
     }
 
-    return (
-        <div>
-            <main className="account-setup-container">
-                <h1>{greeting}</h1>
-                {salaryStatus}
-                <MonthlyBillsSetup />
-                <CategorySetup />
-            </main>
-        </div>
-    )
+    if (props.step === 1) {
+        return (
+            <section className="setup-step">
+                <h1>Let's get setup!</h1>
+                <p>Step {props.step} / 3</p>
+                <MonthlyPaySetup />
+            </section>
+        ) 
+    } else if (props.step === 2) {
+        return (<section className="setup-step">
+            <p>Step {props.step} / 3</p>
+            <MonthlyBillsSetup />
+            <div className="setup-buttons">
+                <button onClick={() => setStep(1)}>Back</button>
+                <button onClick={() => setStep(3)}>Next</button>
+            </div>
+        </section>)
+    } else if (props.step === 3) {
+        return (<section className="setup-step">
+            <p>Step {props.step} / 3</p>
+            <CategorySetup />
+            <div className="setup-buttons">
+                <button onClick={() => setStep(2)}>Back</button>
+                <Link to='/dashboard'>
+                    <button>Finish Setup</button>
+                </Link>
+            </div>
+        </section>)
+    }
 };
+
+const MapStateToProps = state => ({
+    step: state.setupStep
+});
+
+
+export default connect(MapStateToProps)(AccountSetup);

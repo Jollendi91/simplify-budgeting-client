@@ -24,6 +24,10 @@
   .account-setup-container  input {
     width: 150px;
   }
+
+  .setup-step {
+    margin-top: 80px;
+  }
   
   table {
     width: 100%;

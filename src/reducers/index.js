@@ -1,6 +1,7 @@
 import * as actions from '../actions';
 
 const initialState= {
+    setupStep: 1,
     user: {
         id: 1,
         username: 'fakeUser'
@@ -104,6 +105,10 @@ export const simplifyReducer = (state=initialState, action) => {
                 amount: action.transAmount,
                 category_id: action.categoryId
             }]
+        });
+    } else if (action.type === actions.SETUP_STEP) {
+        return Object.assign({}, state, {
+            setupStep: action.step
         });
     }
 
