@@ -8,6 +8,10 @@ export function MonthlyBillsSetup(props) {
         <tr key={index}>
             <td>{bill.bill}</td>
             <td>${bill.amount.toFixed(2)}</td>
+            <td className="edit-buttons">
+                <button>Edit</button>
+                <button>X</button>
+            </td>
         </tr>
     );
 
@@ -41,7 +45,7 @@ export function MonthlyBillsSetup(props) {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Amount</th>
+                        <th colspan="2">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +54,7 @@ export function MonthlyBillsSetup(props) {
                 <tfoot>
                     <tr>
                         <td>Total</td>
-                        <td>${props.billsTotal.toFixed(2)}</td>
+                        <td colspan="2">${props.billsTotal.toFixed(2)}</td>
                     </tr>
                 </tfoot>
 			</table>

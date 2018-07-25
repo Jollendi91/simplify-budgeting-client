@@ -12,3 +12,13 @@ body {
   text-align: center;
   line-height: 1.5;
 }
+
+.edit-buttons {
+  text-align: center;
+  width: 20%;
+}
+
+.edit-buttons button {
+  margin-right: 5px;
+}
+
