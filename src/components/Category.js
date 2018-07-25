@@ -13,7 +13,7 @@ export function Category(props) {
         <tr>
             <td>{transaction.description}</td>
             <td>{transaction.date}</td>
-            <td>${transaction.amount}</td>
+            <td>${transaction.amount.toFixed(2)}</td>
             <td>X</td>
         </tr>
     );

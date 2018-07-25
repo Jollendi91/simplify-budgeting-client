@@ -9,7 +9,7 @@ export function Bills(props) {
 
     const bills = props.bills.map((bill, index)=> 
         <tr key={index}>
-            <td>{bill.name}</td>
+            <td>{bill.bill}</td>
             <td>${bill.amount.toFixed(2)}</td>
             <td>X</td>
         </tr>
