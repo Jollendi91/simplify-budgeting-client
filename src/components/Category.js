@@ -4,13 +4,14 @@ import {connect} from 'react-redux';
 import NavBar from './NavBar';
 
 import './Category.css';
+import { addTransaction } from '../actions';
 
 
 export function Category(props) {
 
     const transactions = props.transactions.map(transaction =>
         <tr>
-            <td>{transaction.name}</td>
+            <td>{transaction.description}</td>
             <td>{transaction.date}</td>
             <td>${transaction.amount}</td>
             <td>X</td>
@@ -18,8 +19,20 @@ export function Category(props) {
     );
 
     const transactionsTotal = props.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
+    
+    let transactionName;
+    let transactionDate;
+    let transactionAmount;
 
-    console.log(props.category);
+    function onSubmit(event) {
+        event.preventDefault();
+        props.dispatch(addTransaction(transactionName.value, transactionDate.value, parseFloat(transactionAmount.value), props.category.id, props));
+
+        transactionName.value = '';
+        transactionDate.value = '';
+        transactionAmount.value = '';
+    }
+
     return (
         <div>
             <NavBar page={'dashboard'}/>
@@ -57,18 +70,18 @@ export function Category(props) {
                         <p>[Progress Bar]</p>
                     </section>
                     <section>
-                        <form>
+                        <form className="add-transaction-form" onSubmit={(event) => onSubmit(event)}>
                             <div>
                                 <label htmlFor="transaction-description">Description</label>
-                                <input type="type" name="transaction-description" id="transaction-description" />
+                                <input type="type" name="transaction-description" id="transaction-description" ref={input => transactionName = input} />
                             </div>
                             <div>
                                 <label htmlFor="transaction-date">Transaction Date</label>
-                                <input type="date" name="transaction-date" id="transaction-date" />
+                                <input type="date" name="transaction-date" id="transaction-date" ref={input => transactionDate = input} />
                             </div>
                             <div>
                                 <label htmlFor="account-amount">Amount</label>
-                                <input type="number" step="0.01" min="0" name="account-amount" id="account-amount" />
+                                <input type="number" step="0.01" min="0" name="account-amount" id="account-amount" ref={input => transactionAmount = input}/>
                             </div>
                             <button type="submit">Add Transaction</button>
                         </form>
@@ -96,8 +109,7 @@ export function Category(props) {
 
 const mapStateToProps = (state, props) => ({
     category: state.categories.find(category => category.id.toString() === props.match.params.categoryId),
-    transactions: state.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId),
-    userId: state.user.id
+    transactions: state.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId)
 })
 
 

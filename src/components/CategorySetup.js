@@ -37,7 +37,7 @@ export function CategorySetup(props) {
 
 	let categories = props.categories.map((category, index) => 
 			<tr key={index}>
-				<td>{category.name}</td>
+				<td>{category.category}</td>
 				<td>${category.amount.toFixed(2)}</td>
 				<td>{Math.round(category.amount / (props.monthlySalary - props.billsTotal)* 10000)/100}%</td>
 			</tr>)

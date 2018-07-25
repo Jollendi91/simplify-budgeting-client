@@ -8,17 +8,17 @@ const initialState= {
     monthlySalary: 1800,
     bills: [
         {
-            name: 'Rent',
+            bill: 'Rent',
             amount: 450,
             user_id: 1
         },
         {
-            name: 'Electricity',
+            bill: 'Electricity',
             amount: 80,
             user_id: 1
         },
         {
-            name: 'Credit Card',
+            bill: 'Credit Card',
             amount: 25,
             user_id: 1
         }
@@ -26,47 +26,47 @@ const initialState= {
     categories: [
         {
             id: 1,
-            name: 'Spending',
+            category: 'Spending',
             amount: 600,
             user_id: 1
         },
         {
             id: 2,
-            name: 'Debts',
+            category: 'Debts',
             amount: 200,
             user_id: 1
         },
         {
             id: 3,
-            name: 'Savings',
+            category: 'Savings',
             amount: 200,
             user_id: 1
         }
     ],
     transactions: [
         {
-            name: 'Groceries',
+            description: 'Groceries',
             date: "07/22/2018",
             amount: 70,
             category_id: 1,
             user_id: 1
         },
         {
-            name: 'Movie',
+            description: 'Movie',
             date: '07/21/2018',
             amount: 10,
             category_id: 1,
             user_id: 1
         },
         {
-            name: 'Credit Card',
+            description: 'Credit Card',
             date: '07/20/2018',
             amount: 50,
             category_id: 2,
             user_id: 1
         },
         {
-            name: 'Birthday Money',
+            description: 'Birthday Money',
             date: '07/19/2018',
             amount: 100,
             category_id: 3,
@@ -83,7 +83,7 @@ export const simplifyReducer = (state=initialState, action) => {
     } else if (action.type === actions.ADD_BILL) {
         return Object.assign({}, state, {
             bills: [...state.bills, {
-                name: action.billName,
+                bill: action.billName,
                 amount: action.billAmount,
                 user_id: action.userId
             }]
@@ -91,7 +91,7 @@ export const simplifyReducer = (state=initialState, action) => {
     } else if (action.type === actions.ADD_CATEGORY) {
         return Object.assign({}, state, {
             categories: [...state.categories, {
-                name: action.categoryName,
+                category: action.categoryName,
                 amount: action.categoryAmount,
                 user_id: action.userId
             }]
@@ -99,11 +99,10 @@ export const simplifyReducer = (state=initialState, action) => {
     } else if (action.type === actions.ADD_TRANSACTION) {
         return Object.assign({}, state, {
             transactions: [...state.transactions, {
-                name: action.transName,
+                description: action.transName,
                 date: action.transDate,
                 amount: action.transAmount,
-                category_id: action.categoryId,
-                user_id: action.userId
+                category_id: action.categoryId
             }]
         });
     }

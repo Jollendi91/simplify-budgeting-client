@@ -26,6 +26,5 @@ export const addTransaction = (transName, transDate, transAmount, categoryId, us
     transName, 
     transDate,
     transAmount,
-    categoryId,
-    userId
+    categoryId
 });
