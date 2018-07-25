@@ -26,6 +26,12 @@ export const addCategory = (categoryName, categoryAmount, userId) => ({
     userId
 });
 
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const deleteCategory = (categoryId) => ({
+    type: DELETE_CATEGORY,
+    categoryId
+});
+
 export const ADD_TRANSACTION = 'ADD_TRANSACTION';
 export const addTransaction = (transName, transDate, transAmount, categoryId, userId) => ({
     type: ADD_TRANSACTION,

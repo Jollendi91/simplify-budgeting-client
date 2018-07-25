@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './CategorySetup.css';
-import { addCategory } from '../actions';
+import { addCategory, deleteCategory } from '../actions';
 
 export function CategorySetup(props) {
 	let buttonDisabled;
@@ -31,6 +31,10 @@ export function CategorySetup(props) {
 				<td>{category.category}</td>
 				<td>${category.amount.toFixed(2)}</td>
 				<td>{Math.round(category.amount / (props.monthlySalary - props.billsTotal)* 10000)/100}%</td>
+				<td className="edit-buttons">
+					<button>Edit</button>
+					<button onClick={() => props.dispatch(deleteCategory(category.id))}>X</button>
+				</td>
 			</tr>)
 
     return (
@@ -79,7 +83,7 @@ export function CategorySetup(props) {
 						<tr>
 							<th>Name</th>
                             <th>Amount</th>
-							<th>Percentage</th>
+							<th colspan="2">Percentage</th>
 						</tr>
 					</thead>
 					<tbody>

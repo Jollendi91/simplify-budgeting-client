@@ -1,14 +1,13 @@
 import * as actions from '../actions';
 
-const initialState= {
+const initialState = {
     setupStep: 1,
     user: {
         id: 1,
         username: 'fakeUser'
     },
     monthlySalary: 1800,
-    bills: [
-        {
+    bills: [{
             id: 1,
             bill: 'Rent',
             amount: 450,
@@ -27,8 +26,7 @@ const initialState= {
             user_id: 1
         }
     ],
-    categories: [
-        {
+    categories: [{
             id: 1,
             category: 'Spending',
             amount: 600,
@@ -47,8 +45,7 @@ const initialState= {
             user_id: 1
         }
     ],
-    transactions: [
-        {
+    transactions: [{
             id: 1,
             description: 'Groceries',
             date: "07/22/2018",
@@ -56,7 +53,7 @@ const initialState= {
             category_id: 1,
             user_id: 1
         },
-        {   
+        {
             id: 2,
             description: 'Movie',
             date: '07/21/2018',
@@ -83,12 +80,15 @@ const initialState= {
     ]
 };
 
-export const simplifyReducer = (state=initialState, action) => {
+export const simplifyReducer = (state = initialState, action) => {
     if (action.type === actions.UPDATE_SALARY) {
+
         return Object.assign({}, state, {
             monthlySalary: action.salary
         });
+
     } else if (action.type === actions.ADD_BILL) {
+
         return Object.assign({}, state, {
             bills: [...state.bills, {
                 bill: action.billName,
@@ -96,10 +96,13 @@ export const simplifyReducer = (state=initialState, action) => {
                 user_id: action.userId
             }]
         });
-    } else if (action.type ===actions.DELETE_BILL) {
+
+    } else if (action.type === actions.DELETE_BILL) {
+
         return Object.assign({}, state, {
             bills: state.bills.filter(bill => bill.id !== action.billId)
         });
+
     } else if (action.type === actions.ADD_CATEGORY) {
         return Object.assign({}, state, {
             categories: [...state.categories, {
@@ -108,7 +111,15 @@ export const simplifyReducer = (state=initialState, action) => {
                 user_id: action.userId
             }]
         });
+
+    } else if (action.type === actions.DELETE_CATEGORY) {
+
+        return Object.assign({}, state, {
+            categories: state.categories.filter(category => category.id !== action.categoryId)
+        });
+
     } else if (action.type === actions.ADD_TRANSACTION) {
+
         return Object.assign({}, state, {
             transactions: [...state.transactions, {
                 description: action.transName,
@@ -117,10 +128,13 @@ export const simplifyReducer = (state=initialState, action) => {
                 category_id: action.categoryId
             }]
         });
+
     } else if (action.type === actions.SETUP_STEP) {
+
         return Object.assign({}, state, {
             setupStep: action.step
         });
+
     }
 
     return state;
