@@ -5,6 +5,15 @@ import './CategorySetup.css';
 import { addCategory } from '../actions';
 
 export function CategorySetup(props) {
+	let buttonDisabled;
+	let remainingAmount = (props.monthlySalary - props.billsTotal) - props.categoriesTotal;
+
+	if (remainingAmount <= 0) {
+		buttonDisabled = true;
+	} else {
+		buttonDisabled = false;
+	}
+
 
 	let categoryName;
 	let categoryAmount;
@@ -47,7 +56,7 @@ export function CategorySetup(props) {
 			<section className="remaining-calc">
 				<div>
 					<p className="title">Remaining</p>
-					<p>${(props.monthlySalary - props.billsTotal) - props.categoriesTotal}</p>
+					<p>${remainingAmount}</p>
 				</div>
 				<div>
 					<p className="title">Budgeted</p>
@@ -61,9 +70,9 @@ export function CategorySetup(props) {
 				</div>
 				<div>
 					<label htmlFor="current-total">Amount</label>
-					<input type="number" name="allocation-percentage" id="allocation-percentage" min="1" ref={input => categoryAmount = input}/>
+					<input type="number" name="allocation-amount" id="allocation-amount" min="1"  max={remainingAmount} ref={input => categoryAmount = input}/>
 				</div>
-				<button type="submit">Add Category</button>
+				<button type="submit" disabled={buttonDisabled}>Add Category</button>
             </form>
 				<table>
 					<thead>

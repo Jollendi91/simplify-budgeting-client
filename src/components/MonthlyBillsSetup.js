@@ -25,6 +25,7 @@ export function MonthlyBillsSetup(props) {
     return (
         <section className="monthly-bills-form-container">
             <h2>Monthly Bills</h2>
+            <p>Enter all expenses that recur each month</p>
             <form className="add-bill-form" onSubmit={(event) => onSubmit(event)}>
                 <div>
                     <label htmlFor="description">Description</label>

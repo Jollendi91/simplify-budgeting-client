@@ -1,9 +1,10 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import LandingPage from './LandingPage';
 import AccountSetup from './AccountSetup';
+import EditProfile from './EditProfile';
 import Dashboard from './Dashboard';
 import Category from './Category';
 import Bills from './Bills';
@@ -19,7 +20,7 @@ export function Simplify(props) {
 
                 <Route exact path="/account-setup" component={() => <AccountSetup type={"account-setup"}/>}/>
 
-                <Route exact path="/edit-profile" component={() => <AccountSetup type={"edit-profile"}/>}/>
+                <Route exact path="/edit-profile" component={() => <EditProfile type={"edit-profile"}/>}/>
 
                 <Route exact path="/dashboard" component={() => <Dashboard categories={props.categories}/>}/>
 

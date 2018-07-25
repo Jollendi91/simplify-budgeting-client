@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import CategoryModule from './CategoryModule';
-import NavBar from './NavBar';
+
 
 import './Dashboard.css';
 
