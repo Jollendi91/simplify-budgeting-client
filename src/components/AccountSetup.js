@@ -39,7 +39,7 @@ export function AccountSetup(props) {
             <div className="setup-buttons">
                 <button onClick={() => setStep(2)}>Back</button>
                 <Link to='/dashboard'>
-                    <button>Finish Setup</button>
+                    <button onClick={() => setStep(null)}>Finish Setup</button>
                 </Link>
             </div>
         </section>)

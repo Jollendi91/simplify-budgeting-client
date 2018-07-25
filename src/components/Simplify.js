@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import LandingPage from './LandingPage';
@@ -18,7 +18,11 @@ export function Simplify(props) {
                 
                 <Route exact path="/" component={LandingPage}/>
 
-                <Route exact path="/account-setup" component={() => <AccountSetup type={"account-setup"}/>}/>
+                <Route exact path="/account-setup" render={() => (
+                props.step === null ? ( 
+                    <Redirect to="/dashboard" />
+                ) : (
+                <AccountSetup type={"account-setup"}/>))}/>
 
                 <Route exact path="/edit-profile" component={() => <EditProfile type={"edit-profile"}/>}/>
 
