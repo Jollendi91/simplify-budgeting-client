@@ -5,10 +5,14 @@ import Simplify from './components/Simplify';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 import './index.css';
+import { ConnectedRouter } from 'connected-react-router';
+import {history} from './store';
 
 ReactDOM.render(
 <Provider store={store}>
-    <Simplify />
+    <ConnectedRouter history={history}>
+        <Simplify />
+    </ConnectedRouter>
 </Provider>,
  document.getElementById('root'));
 registerServiceWorker();

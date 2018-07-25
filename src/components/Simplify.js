@@ -7,12 +7,13 @@ import AccountSetup from './AccountSetup';
 import Dashboard from './Dashboard';
 import Category from './Category';
 import Bills from './Bills';
+import NavBar from './NavBar';
 
 export function Simplify(props) {
 
     return (
-        <BrowserRouter>
             <div className="app-container">
+                <NavBar page={props.pathname} />
                 
                 <Route exact path="/" component={LandingPage}/>
 
@@ -27,13 +28,13 @@ export function Simplify(props) {
                 <Route exact path='/bills' component={Bills} />
 
             </div>
-        </BrowserRouter>
     )
 };
 
 const mapStateToProps = state => ({
     page: state.page,
-    categories: state.categories
+    categories: state.categories,
+    pathname: state.router.location.pathname
 });
 
 export default connect(mapStateToProps)(Simplify);

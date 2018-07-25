@@ -8,7 +8,6 @@ import './LandingPage.css';
 export default function LandingPage(props) {
     return (
         <div className="landing-page">
-            <NavBar page={'signup'} />
             <header className="main-header">
                 <h1>Simplify</h1>
             </header>

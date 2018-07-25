@@ -18,8 +18,6 @@ export function Dashboard(props) {
 
     return (
         <div>
-            <NavBar page={'dashboard'} />
-
             <div className='dashboard-container'>
                 <header className="main-header">
                     <section className="portfolio-data">

@@ -35,7 +35,7 @@ export class MonthlyPayEdit extends React.Component {
 
         if (!this.state.editing) {
             salaryForm = <div>
-                            <button onClick={() => this.setEditing()}>Edit Salary</button>
+                            <button onClick={() => this.setEditing()}>Edit Pay</button>
                         </div>
         } else {
             salaryForm = 
@@ -50,10 +50,10 @@ export class MonthlyPayEdit extends React.Component {
 
         return (
             <section className="monthly-pay-container">
-                <h2>Monthly Salary</h2>
+                <h2>Take Home Pay</h2>
                 <section className="salary-container">
                     <div>
-                       <p>Current monthly salary:  
+                       <p>Current monthly take home pay:  
                            <span> ${this.props.monthlySalary}</span></p>
                     </div>
                     {salaryForm}

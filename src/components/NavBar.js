@@ -9,7 +9,7 @@ import './NavBar.css';
 
 export default function NavBar(props) {
     
-    if (props.page === 'setup') {
+    if (props.page === '/account-setup') {
         return (
             <nav className="nav-bar">
                 <h1 className="logo">Simplify</h1>
@@ -20,14 +20,14 @@ export default function NavBar(props) {
                 </ul>
             </nav>
         )
-    } else if (props.page === 'signup') {
+    } else if (props.page === '/') {
         return (
             <nav className="nav-bar">
                 <h1 className="logo">Simplify</h1>
                 <LoginForm />
             </nav>
         )
-    } else if (props.page === 'dashboard') {
+    } else {
         return (
             <nav className="nav-bar">
                 <h1 className="logo">Simplify</h1>
