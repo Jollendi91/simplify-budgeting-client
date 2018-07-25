@@ -12,6 +12,12 @@ export const addBill = (billName, billAmount, userId) => ({
     userId
 });
 
+export const DELETE_BILL = 'DELETE_BILL';
+export const deleteBill = (billId) => ({
+    type: DELETE_BILL,
+    billId
+});
+
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const addCategory = (categoryName, categoryAmount, userId) => ({
     type: ADD_CATEGORY,

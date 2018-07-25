@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { addBill } from '../actions';
+import { addBill, deleteBill } from '../actions';
 
 export function MonthlyBillsSetup(props) {
 
@@ -10,7 +10,7 @@ export function MonthlyBillsSetup(props) {
             <td>${bill.amount.toFixed(2)}</td>
             <td className="edit-buttons">
                 <button>Edit</button>
-                <button>X</button>
+                <button onClick={() => props.dispatch(deleteBill(bill.id))}>X</button>
             </td>
         </tr>
     );

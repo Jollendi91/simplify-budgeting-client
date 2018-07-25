@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import NavBar from './NavBar';
 import './Bills.css';
-import { addBill } from '../actions';
+import { addBill, deleteBill } from '../actions';
 
 export function Bills(props) {
 
@@ -11,9 +11,13 @@ export function Bills(props) {
         <tr key={index}>
             <td>{bill.bill}</td>
             <td>${bill.amount.toFixed(2)}</td>
-            <td>X</td>
+            <td className="edit-buttons">
+                <button>Edit</button>
+                <button onClick={() => props.dispatch(deleteBill(bill.id))}>X</button>
+            </td>
         </tr>
     );
+
 
     let billName;
     let billAmount;

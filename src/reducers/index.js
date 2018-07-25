@@ -9,16 +9,19 @@ const initialState= {
     monthlySalary: 1800,
     bills: [
         {
+            id: 1,
             bill: 'Rent',
             amount: 450,
             user_id: 1
         },
         {
+            id: 2,
             bill: 'Electricity',
             amount: 80,
             user_id: 1
         },
         {
+            id: 3,
             bill: 'Credit Card',
             amount: 25,
             user_id: 1
@@ -46,13 +49,15 @@ const initialState= {
     ],
     transactions: [
         {
+            id: 1,
             description: 'Groceries',
             date: "07/22/2018",
             amount: 70,
             category_id: 1,
             user_id: 1
         },
-        {
+        {   
+            id: 2,
             description: 'Movie',
             date: '07/21/2018',
             amount: 10,
@@ -60,6 +65,7 @@ const initialState= {
             user_id: 1
         },
         {
+            id: 3,
             description: 'Credit Card',
             date: '07/20/2018',
             amount: 50,
@@ -67,6 +73,7 @@ const initialState= {
             user_id: 1
         },
         {
+            id: 4,
             description: 'Birthday Money',
             date: '07/19/2018',
             amount: 100,
@@ -88,6 +95,10 @@ export const simplifyReducer = (state=initialState, action) => {
                 amount: action.billAmount,
                 user_id: action.userId
             }]
+        });
+    } else if (action.type ===actions.DELETE_BILL) {
+        return Object.assign({}, state, {
+            bills: state.bills.filter(bill => bill.id !== action.billId)
         });
     } else if (action.type === actions.ADD_CATEGORY) {
         return Object.assign({}, state, {
