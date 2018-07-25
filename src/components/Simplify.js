@@ -39,7 +39,8 @@ export function Simplify(props) {
 const mapStateToProps = state => ({
     page: state.page,
     categories: state.categories,
-    pathname: state.router.location.pathname
+    pathname: state.router.location.pathname,
+    step: state.setupStep
 });
 
 export default connect(mapStateToProps)(Simplify);
