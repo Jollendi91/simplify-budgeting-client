@@ -12,6 +12,14 @@ export const addBill = (billName, billAmount, userId) => ({
     userId
 });
 
+export const UPDATE_BILL = 'UPDATE_BILL';
+export const updateBill = (billName, billAmount, billId) => ({
+    type: UPDATE_BILL,
+    billName,
+    billAmount,
+    billId
+});
+
 export const DELETE_BILL = 'DELETE_BILL';
 export const deleteBill = (billId) => ({
     type: DELETE_BILL,

@@ -97,6 +97,18 @@ export const simplifyReducer = (state = initialState, action) => {
             }]
         });
 
+    } else if (action.type === actions.UPDATE_BILL) {
+
+        return Object.assign({}, state, {
+            bills: state.bills.map(bill =>
+            bill.id === action.billId ? {
+                id: bill.id,
+                bill: action.billName,
+                amount: action.billAmount,
+                user_id: bill.user_id
+            } : bill)
+        });
+
     } else if (action.type === actions.DELETE_BILL) {
 
         return Object.assign({}, state, {

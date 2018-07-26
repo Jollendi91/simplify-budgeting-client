@@ -19,7 +19,7 @@ export class CatRow extends React.Component {
         });
     }
 
-    dispatchUpdate(categoryId) {
+    dispatchCategoryUpdate(categoryId) {
         if ( this.state.categoryAmount >  (this.props.remainingAmount + this.props.amount)) {
             return
         }
@@ -51,8 +51,8 @@ export class CatRow extends React.Component {
                 </td>
                 <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
                 <td className="edit-buttons">
-                    <button onClick={() => this.dispatchUpdate(this.props.id)}>Update</button>
-                    <button onClick={() => this.setEditing()}>X</button>
+                    <button onClick={() => this.dispatchCategoryUpdate(this.props.id)}>Update</button>
+                    <button onClick={() => this.setEditing()}>Cancel</button>
                 </td>
             </tr>)
         } else {
