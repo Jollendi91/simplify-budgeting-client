@@ -26,6 +26,14 @@ export const addCategory = (categoryName, categoryAmount, userId) => ({
     userId
 });
 
+export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
+export const updateCategory = (categoryName, categoryAmount, categoryId) => ({
+    type: UPDATE_CATEGORY,
+    categoryName,
+    categoryAmount,
+    categoryId
+});
+
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const deleteCategory = (categoryId) => ({
     type: DELETE_CATEGORY,

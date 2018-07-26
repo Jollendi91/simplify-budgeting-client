@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { deleteCategory } from '../actions';
+import { deleteCategory, updateCategory } from '../actions';
 
 export class CatRow extends React.Component {
     constructor(props) {
@@ -19,24 +19,39 @@ export class CatRow extends React.Component {
         });
     }
 
+    dispatchUpdate(categoryId) {
+        if ( this.state.categoryAmount >  (this.props.remainingAmount + this.props.amount)) {
+            return
+        }
+
+        this.props.dispatch(updateCategory(this.state.categoryName, parseFloat(this.state.categoryAmount), categoryId));
+        this.setEditing();
+    }
+
+
     render() {
         if (this.state.editing) {
           return  (<tr key={this.props.index}>
                 <td>
-                    <input value={this.state.categoryName}
-                    onChange={e => this.setState({
-                        categoryName: e.target.value
+                    <input 
+                        value={this.state.categoryName}
+                        onChange={e => this.setState({
+                            categoryName: e.target.value
                     })}/>
                 </td>
                 <td>
-                    $<input value={this.state.categoryAmount}
-                    onChange={e => this.setState({
-                        categoryAmount: e.target.value
+                    $<input 
+                        type="number" 
+                        min="1" 
+                        max={this.props.amount + this.props.remainingAmount} 
+                        value={this.state.categoryAmount}
+                        onChange={e => this.setState({
+                            categoryAmount: e.target.value
                     })}/>
                 </td>
                 <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
                 <td className="edit-buttons">
-                    <button onClick={() => this.setEditing()}>Update</button>
+                    <button onClick={() => this.dispatchUpdate(this.props.id)}>Update</button>
                     <button onClick={() => this.setEditing()}>X</button>
                 </td>
             </tr>)

@@ -29,7 +29,7 @@ export function CategorySetup(props) {
 	}
 
 	let categories = props.categories.map((category, index) => 
-		<CatRow index={index} {...category} />
+		<CatRow index={index} {...category} remainingAmount={remainingAmount}/>
 			)
 
     return (
