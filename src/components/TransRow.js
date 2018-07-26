@@ -41,7 +41,7 @@ export class TransRow extends React.Component {
                         })} />
                     </td>
                     <td>
-                        $<input type="number" value={this.state.transAmount} onChange={e => this.setState({
+                        $<input type="number" step="0.01" min="1" value={this.state.transAmount} onChange={e => this.setState({
                             transAmount: e.target.value
                         })} />
                     </td>

@@ -36,7 +36,7 @@ export class BillRow extends React.Component {
                         })} />
                     </td>
                     <td>
-                        $<input value={this.state.billAmount} onChange={e => this.setState({
+                        $<input type="number" step="0.01" min="1" value={this.state.billAmount} onChange={e => this.setState({
                             billAmount: e.target.value
                         })} />
                     </td>

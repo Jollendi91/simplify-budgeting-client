@@ -42,6 +42,7 @@ export class CatRow extends React.Component {
                 <td>
                     $<input 
                         type="number" 
+                        step="0.01"
                         min="1" 
                         max={this.props.amount + this.props.remainingAmount} 
                         value={this.state.categoryAmount}
