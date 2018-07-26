@@ -152,6 +152,19 @@ export const simplifyReducer = (state = initialState, action) => {
             }]
         });
 
+    } else if (action.type === actions.UPDATE_TRANSACTION) {
+
+        return Object.assign({}, state, {
+            transactions: state.transactions.map(transaction => 
+                transaction.id === action.transactionId ? {
+                    id: transaction.id,
+                    description: action.transName,
+                    date: action.transDate,
+                    amount: action.transAmount,
+                    category_id: transaction.category_id
+                } : transaction)
+        });
+
     } else if (action.type === actions.DELETE_TRANSACTION) {
 
         return Object.assign({}, state, {
