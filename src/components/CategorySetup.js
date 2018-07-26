@@ -65,11 +65,11 @@ export function CategorySetup(props) {
             <form className="add-category-form" onSubmit={(event) => onSubmit(event)}>
 				<div>
 					<label htmlFor="category-name">Name</label>
-					<input type="text" name="category-name" id="category-name" ref={input => categoryName = input}/>
+					<input type="text" name="category-name" id="category-name" ref={input => categoryName = input} required="true"/>
 				</div>
 				<div>
 					<label htmlFor="current-total">Amount</label>
-					<input type="number" name="allocation-amount" id="allocation-amount" min="1"  max={remainingAmount} ref={input => categoryAmount = input}/>
+					<input type="number" name="allocation-amount" id="allocation-amount" min="1" step="0.01"  max={remainingAmount} ref={input => categoryAmount = input} required="true"/>
 				</div>
 				<button type="submit" disabled={buttonDisabled}>Add Category</button>
             </form>

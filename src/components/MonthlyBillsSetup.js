@@ -28,11 +28,11 @@ export function MonthlyBillsSetup(props) {
             <form className="add-bill-form" onSubmit={(event) => onSubmit(event)}>
                 <div>
                     <label htmlFor="description">Description</label>
-                    <input type="text" name="description" placeholder="Rent, Utilities, etc." id="description" ref={input => billName = input}/>
+                    <input type="text" name="description" placeholder="Rent, Utilities, etc." id="description" ref={input => billName = input} required="true"/>
                 </div>
                 <div>
                     <label htmlFor="amount">Amount</label>
-                    <input type="number" step="0.01" name="amount" id="amount" min="0.01" ref={input => billAmount = input}/>
+                    <input type="number" step="0.01" name="amount" id="amount" min="0.01" ref={input => billAmount = input} required="true"/>
                 </div>
                 <button>Add Bill</button>
             </form>

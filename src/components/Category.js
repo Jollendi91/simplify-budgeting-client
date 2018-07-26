@@ -22,7 +22,7 @@ export function Category(props) {
 
     function onSubmit(event) {
         event.preventDefault();
-        props.dispatch(addTransaction(transactionName.value, transactionDate.value, parseFloat(transactionAmount.value), props.category.id, props));
+        props.dispatch(addTransaction(transactionName.value, transactionDate.value, parseFloat(transactionAmount.value), props.category.id));
 
         transactionName.value = '';
         transactionDate.value = '';
@@ -69,15 +69,15 @@ export function Category(props) {
                         <form className="add-transaction-form" onSubmit={(event) => onSubmit(event)}>
                             <div>
                                 <label htmlFor="transaction-description">Description</label>
-                                <input type="type" name="transaction-description" id="transaction-description" ref={input => transactionName = input} />
+                                <input type="type" name="transaction-description" id="transaction-description" ref={input => transactionName = input} required="true"/>
                             </div>
                             <div>
                                 <label htmlFor="transaction-date">Transaction Date</label>
-                                <input type="date" name="transaction-date" id="transaction-date" ref={input => transactionDate = input} />
+                                <input type="date" name="transaction-date" id="transaction-date" ref={input => transactionDate = input} required="true"/>
                             </div>
                             <div>
                                 <label htmlFor="account-amount">Amount</label>
-                                <input type="number" step="0.01" min="0" name="account-amount" id="account-amount" ref={input => transactionAmount = input}/>
+                                <input type="number" step="0.01" min="0" name="account-amount" id="account-amount" ref={input => transactionAmount = input} required="true"/>
                             </div>
                             <button type="submit">Add Transaction</button>
                         </form>

@@ -91,6 +91,7 @@ export const simplifyReducer = (state = initialState, action) => {
 
         return Object.assign({}, state, {
             bills: [...state.bills, {
+                id: state.bills.length + 1,
                 bill: action.billName,
                 amount: action.billAmount,
                 user_id: action.userId
@@ -118,6 +119,7 @@ export const simplifyReducer = (state = initialState, action) => {
     } else if (action.type === actions.ADD_CATEGORY) {
         return Object.assign({}, state, {
             categories: [...state.categories, {
+                id: state.categories.length + 1,
                 category: action.categoryName,
                 amount: action.categoryAmount,
                 user_id: action.userId
@@ -145,6 +147,7 @@ export const simplifyReducer = (state = initialState, action) => {
 
         return Object.assign({}, state, {
             transactions: [...state.transactions, {
+                id: state.transactions.length + 1,
                 description: action.transName,
                 date: action.transDate,
                 amount: action.transAmount,

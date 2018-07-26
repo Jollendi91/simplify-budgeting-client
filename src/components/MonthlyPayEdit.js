@@ -40,7 +40,7 @@ export class MonthlyPayEdit extends React.Component {
         } else {
             salaryForm = 
             <form className="update-salary-form" onSubmit={this.onSubmit}>
-                <input className="salaryInput" type="number" min="0" step="0.01" ref={input => this.salaryInput = input}/>
+                <input className="salaryInput" type="number" min="0" step="0.01" ref={input => this.salaryInput = input} require="true"/>
                 <div>
                     <button type="submit">Update</button>
                     <button onClick={() => this.setEditing()}>Cancel</button>
