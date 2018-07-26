@@ -48,7 +48,7 @@ const initialState = {
     transactions: [{
             id: 1,
             description: 'Groceries',
-            date: "07/22/2018",
+            date: "2018-07-22",
             amount: 70,
             category_id: 1,
             user_id: 1
@@ -56,7 +56,7 @@ const initialState = {
         {
             id: 2,
             description: 'Movie',
-            date: '07/21/2018',
+            date: '2018-07-21',
             amount: 10,
             category_id: 1,
             user_id: 1
@@ -64,7 +64,7 @@ const initialState = {
         {
             id: 3,
             description: 'Credit Card',
-            date: '07/20/2018',
+            date: '2018-07-20',
             amount: 50,
             category_id: 2,
             user_id: 1
@@ -72,7 +72,7 @@ const initialState = {
         {
             id: 4,
             description: 'Birthday Money',
-            date: '07/19/2018',
+            date: '2018-07-19',
             amount: 100,
             category_id: 3,
             user_id: 1
@@ -151,6 +151,12 @@ export const simplifyReducer = (state = initialState, action) => {
                 category_id: action.categoryId
             }]
         });
+
+    } else if (action.type === actions.DELETE_TRANSACTION) {
+
+        return Object.assign({}, state, {
+            transactions: state.transactions.filter(trans => trans.id !== action.transactionId)
+        });       	
 
     } else if (action.type === actions.SETUP_STEP) {
 

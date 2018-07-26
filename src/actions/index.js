@@ -49,12 +49,27 @@ export const deleteCategory = (categoryId) => ({
 });
 
 export const ADD_TRANSACTION = 'ADD_TRANSACTION';
-export const addTransaction = (transName, transDate, transAmount, categoryId, userId) => ({
+export const addTransaction = (transName, transDate, transAmount, categoryId) => ({
     type: ADD_TRANSACTION,
     transName, 
     transDate,
     transAmount,
     categoryId
+});
+
+export const UPDATE_TRANSACTION = 'UPDATE_TRANSACTION';
+export const updateTransaction = (transName, transDate, transAmount, transactionId) => ({
+    type: UPDATE_TRANSACTION,
+    transName,
+    transDate, 
+    transAmount,
+    transactionId
+});
+
+export const DELETE_TRANSACTION = 'DELETE_TRANSACTION';
+export const deleteTransaction = (transactionId) => ({
+    type: DELETE_TRANSACTION,
+    transactionId
 });
 
 export const SETUP_STEP = 'SETUP_STEP';

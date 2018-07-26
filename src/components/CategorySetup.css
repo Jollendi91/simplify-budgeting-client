@@ -16,3 +16,7 @@
 .title {
     font-weight: bold;
 }
+
+.categories-table th, .categories-table td {
+    width: 24%;
+}

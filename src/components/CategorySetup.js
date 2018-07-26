@@ -55,11 +55,11 @@ export function CategorySetup(props) {
 			<section className="remaining-calc">
 				<div>
 					<p className="title">Remaining</p>
-					<p>${remainingAmount}</p>
+					<p>${remainingAmount.toFixed(2)}</p>
 				</div>
 				<div>
 					<p className="title">Budgeted</p>
-					<p>${props.categoriesTotal}</p>
+					<p>${props.categoriesTotal.toFixed(2)}</p>
 				</div>
 			</section>
             <form className="add-category-form" onSubmit={(event) => onSubmit(event)}>
@@ -73,7 +73,7 @@ export function CategorySetup(props) {
 				</div>
 				<button type="submit" disabled={buttonDisabled}>Add Category</button>
             </form>
-				<table>
+				<table className="categories-table">
 					<thead>
 						<tr>
 							<th>Name</th>

@@ -5,17 +5,13 @@ import NavBar from './NavBar';
 
 import './Category.css';
 import { addTransaction } from '../actions';
+import  TransRow  from './TransRow';
 
 
 export function Category(props) {
 
-    const transactions = props.transactions.map(transaction =>
-        <tr>
-            <td>{transaction.description}</td>
-            <td>{transaction.date}</td>
-            <td>${transaction.amount.toFixed(2)}</td>
-            <td>X</td>
-        </tr>
+    const transactions = props.transactions.map((transaction, index) =>
+        <TransRow key={index} {...transaction} />
     );
 
     const transactionsTotal = props.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
@@ -86,7 +82,7 @@ export function Category(props) {
                             <button type="submit">Add Transaction</button>
                         </form>
                         <div>
-                            <table>
+                            <table className="categories-table">
                                 <thead>
                                     <tr>
                                         <th>Description</th>
