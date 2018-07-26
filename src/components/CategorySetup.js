@@ -2,7 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './CategorySetup.css';
-import { addCategory, deleteCategory } from '../actions';
+import { addCategory } from '../actions';
+import CatRow from './CatRow';
+
 
 export function CategorySetup(props) {
 	let buttonDisabled;
@@ -27,15 +29,8 @@ export function CategorySetup(props) {
 	}
 
 	let categories = props.categories.map((category, index) => 
-			<tr key={index}>
-				<td>{category.category}</td>
-				<td>${category.amount.toFixed(2)}</td>
-				<td>{Math.round(category.amount / (props.monthlySalary - props.billsTotal)* 10000)/100}%</td>
-				<td className="edit-buttons">
-					<button>Edit</button>
-					<button onClick={() => props.dispatch(deleteCategory(category.id))}>X</button>
-				</td>
-			</tr>)
+		<CatRow index={index} {...category} />
+			)
 
     return (
         <section className="category-container">
