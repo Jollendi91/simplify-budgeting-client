@@ -34,7 +34,7 @@ export function Category(props) {
             <NavBar page={'dashboard'}/>
             <div className="category-container">
                 <header>
-                    <h1>{props.category.name}</h1>
+                    <h1>{props.category.category}</h1>
                     <div className="category-header">
                         <h2>${props.category.amount.toFixed(2)}/Month</h2>
                         <div>

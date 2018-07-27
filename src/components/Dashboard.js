@@ -10,9 +10,9 @@ import './Dashboard.css';
 
 export function Dashboard(props) {
 
-    const categories = props.categories.map((category) => 
-        <Link key={category.id} to={`category/${category.id}`}>
-         <CategoryModule key={category.id} {...category} />
+    const categories = props.categories.map((category, index) => 
+        <Link key={index} to={`category/${category.id}`}>
+         <CategoryModule key={index} {...category} />
         </Link>
     )
 
