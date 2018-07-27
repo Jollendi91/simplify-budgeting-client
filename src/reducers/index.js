@@ -1,5 +1,7 @@
 import * as actions from '../actions';
 
+const uuidv4 = require('uuid/v4');
+
 const initialState = {
     setupStep: 1,
     user: {
@@ -91,7 +93,7 @@ export const simplifyReducer = (state = initialState, action) => {
 
         return Object.assign({}, state, {
             bills: [...state.bills, {
-                id: state.bills.length + 1,
+                id: uuidv4(),
                 bill: action.billName,
                 amount: action.billAmount,
                 user_id: action.userId
@@ -119,7 +121,7 @@ export const simplifyReducer = (state = initialState, action) => {
     } else if (action.type === actions.ADD_CATEGORY) {
         return Object.assign({}, state, {
             categories: [...state.categories, {
-                id: state.categories.length + 1,
+                id: uuidv4(),
                 category: action.categoryName,
                 amount: action.categoryAmount,
                 user_id: action.userId
@@ -147,7 +149,7 @@ export const simplifyReducer = (state = initialState, action) => {
 
         return Object.assign({}, state, {
             transactions: [...state.transactions, {
-                id: state.transactions.length + 1,
+                id: uuidv4(),
                 description: action.transName,
                 date: action.transDate,
                 amount: action.transAmount,

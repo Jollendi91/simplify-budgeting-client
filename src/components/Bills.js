@@ -3,19 +3,13 @@ import {connect} from 'react-redux';
 
 import NavBar from './NavBar';
 import './Bills.css';
+import BillRow from './BillRow';
 import { addBill, deleteBill } from '../actions';
 
 export function Bills(props) {
 
     const bills = props.bills.map((bill, index)=> 
-        <tr key={index}>
-            <td>{bill.bill}</td>
-            <td>${bill.amount.toFixed(2)}</td>
-            <td className="edit-buttons">
-                <button>Edit</button>
-                <button onClick={() => props.dispatch(deleteBill(bill.id))}>X</button>
-            </td>
-        </tr>
+        <BillRow key={index} {...bill} />
     );
 
 
