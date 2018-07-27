@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {PieChart} from 'react-easy-chart';
 import {connect} from 'react-redux';
 
 import CategoryModule from './CategoryModule';
@@ -16,12 +17,29 @@ export function Dashboard(props) {
         </Link>
     )
 
+    const data = props.categories.map(category => ({
+        key: category.category,
+        value: category.amount
+    }));
+
+    data.push({
+        key: 'Remaining',
+        value: props.remainingMoney
+    });
+
+    console.log(props.remainingMoney);
+
     return (
         <div>
             <div className='dashboard-container'>
                 <header className="main-header">
                     <section className="portfolio-data">
-                        <p>[graph of data]</p>
+                        <PieChart 
+                            innerHoleSize={200}
+                            labels 
+                            data={data} 
+
+                        />
                     </section>
                 </header>
                 <main>
@@ -33,7 +51,8 @@ export function Dashboard(props) {
 }
 
 const mapStateToProps = state => ({
-    categories: state.categories
-})
+    categories: state.categories,
+    remainingMoney: state.monthlySalary - state.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+});
 
 export default connect(mapStateToProps)(Dashboard);

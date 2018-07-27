@@ -1,5 +1,6 @@
 .account-setup-container {
-    margin-top: 75px;
+    max-width: 50em;
+    margin: 5em auto 0;
   }
   
  .account-setup-container form {
@@ -35,7 +36,7 @@
     margin: 10px 0;
   }
   
-  th {
+  table, th {
     border: 1px solid #ccc;
   }
   
