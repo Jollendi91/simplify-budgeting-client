@@ -72,10 +72,20 @@ export class Dashboard extends React.Component {
             value: category.amount
         }));
 
-        data.push({
-            key: 'Remaining',
-            value: this.props.remainingMoney
-        });
+        if (this.props.remainingMoney) {
+            data.push({
+                key: 'Remaining',
+                value: this.props.remainingMoney
+            });
+        }
+
+        if (this.props.billsTotal) {
+            data.push({
+                key: 'Bills',
+                value: this.props.billsTotal
+            });
+        }
+        
 
         console.log(this.props.remainingMoney);
         
@@ -106,7 +116,8 @@ export class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
     categories: state.categories,
-    remainingMoney: state.monthlySalary - state.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+    remainingMoney: state.monthlySalary - state.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
+    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
 });
 
 export default connect(mapStateToProps)(Dashboard);
