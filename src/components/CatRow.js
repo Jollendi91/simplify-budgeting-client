@@ -50,7 +50,7 @@ export class CatRow extends React.Component {
                             categoryAmount: e.target.value
                     })}/>
                 </td>
-                <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
+                <td>{Math.round(this.state.categoryAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
                 <td className="edit-buttons">
                     <button onClick={() => this.dispatchCategoryUpdate(this.props.id)}>Update</button>
                     <button onClick={() => this.setEditing()}>Cancel</button>
