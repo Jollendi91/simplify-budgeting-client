@@ -105,7 +105,7 @@ export class Dashboard extends React.Component {
                             {this.createTooltip()}
                         </section>
                     </header>
-                    <main>
+                    <main className="category-modules">
                         {categories}
                     </main>
                 </div>

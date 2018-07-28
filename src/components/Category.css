@@ -3,9 +3,27 @@
     margin: 80px auto 0;
 }
 
-.category-info {
+.category-container header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
+}
+
+.category-container header h1 {
+    font-size: 50px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.category-container header h2 {
+    margin-top: 0;
+}
+
+.category-container header section {
+    margin-top: 20px;
+}
+
+.filter-transactions h3 {
+    margin: 0;
+    padding: 3px;
 }

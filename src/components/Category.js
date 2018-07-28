@@ -51,44 +51,45 @@ export function Category(props) {
             <NavBar page={'dashboard'}/>
             <div className="category-container">
                 <header>
-                    <h1>{props.category.category}</h1>
-                    <div className="category-header">
-                        <h2>${props.category.amount.toFixed(2)}/Month</h2>
-                    </div>
+                    <section>
+                        <h1>{props.category.category}</h1>
+                        <div className="category-header">
+                            <h2>${props.category.amount.toFixed(2)}/Month</h2>
+                        </div>
+                        <div className="filter-transactions">
+                            <h3>July</h3>
+                            <select name="transaction-data-month" defaultValue="july">
+                                <option value="january">January</option>
+                                <option value="february">February</option>
+                                <option value="march">March</option>
+                                <option value="april">April</option>
+                                <option value="may">May</option>
+                                <option value="june">June</option>
+                                <option value="july">July</option>
+                                <option value="august">August</option>
+                                <option value="september">September</option>
+                                <option value="october">October</option>
+                                <option value="november">November</option>
+                                <option value="december">December</option>
+                            </select>
+                            <select name="transaction-data-year">
+                                <option>2017</option>
+                                <option selected>2018</option>
+                            </select>
+                        </div>
+                    </section>
+                    <section className="progress-bar">
+                        <PieChart 
+                            labels
+                            size={350}
+                            innerHoleSize={200}
+                            data={data}/>
+                        <p>Spent so far: ${transactionsTotal.toFixed(2)} / ${props.category.amount.toFixed(2)}</p>
+                    </section>
                 </header>
                 <main>
-                    <section className="category-info">
-                        <section className="progress-bar">
-                            <PieChart 
-                                labels
-                                size={350}
-                                innerHoleSize={200}
-                                data={data}/>
-                            <p>Spent so far: ${transactionsTotal.toFixed(2)} / ${props.category.amount.toFixed(2)}</p>
-                        </section>
-                        <section>
-                            <div>
-                                <h1>July</h1>
-                                <select name="transaction-data-month" defaultValue="july">
-                                    <option value="january">January</option>
-                                    <option value="february">February</option>
-                                    <option value="march">March</option>
-                                    <option value="april">April</option>
-                                    <option value="may">May</option>
-                                    <option value="june">June</option>
-                                    <option value="july">July</option>
-                                    <option value="august">August</option>
-                                    <option value="september">September</option>
-                                    <option value="october">October</option>
-                                    <option value="november">November</option>
-                                    <option value="december">December</option>
-                                </select>
-                                <select name="transaction-data-year">
-                                    <option>2017</option>
-                                    <option selected>2018</option>
-                                </select>
-                            </div>
-                            <form className="add-transaction-form" onSubmit={(event) => onSubmit(event)}>
+                    <section>
+                        <form className="add-transaction-form" onSubmit={(event) => onSubmit(event)}>
                             <div>
                                 <label htmlFor="transaction-description">Description</label>
                                 <input type="type" name="transaction-description" id="transaction-description" ref={input => transactionName = input} required="true"/>
@@ -103,7 +104,6 @@ export function Category(props) {
                             </div>
                             <button type="submit">Add Transaction</button>
                         </form>
-                        </section>
                     </section>
                     <section>
                         <div>
