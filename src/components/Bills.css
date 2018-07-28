@@ -1,3 +1,4 @@
 .bills-container {
-    margin-top: 80px;
+    max-width: 50em;
+    margin: 80px auto 0;
 }

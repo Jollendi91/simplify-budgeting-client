@@ -1,3 +1,11 @@
 .category-container {
-    margin-top: 80px;
+    max-width: 50em;
+    margin: 80px auto 0;
+}
+
+.category-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
