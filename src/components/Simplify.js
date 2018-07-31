@@ -1,65 +1,46 @@
 import React from 'react';
 import {BrowserRouter, Redirect, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import AccountSetup from './AccountSetup';
+import EditProfile from './EditProfile';
 import Dashboard from './Dashboard';
 import Category from './Category';
 import Bills from './Bills';
+import NavBar from './NavBar';
 
-export default class Simplify extends React.Component {
-    constructor(props){
-        super(props);
+export function Simplify(props) {
 
-        this.state = {
-            page: 'signup',
-            categories: [
-                {
-                    categoryName: 'Spending',
-                    categoryAmount: '$500'
-                },
-                {
-                    categoryName: 'Debts',
-                    categoryAmount: '$2500'
-                },
-                {
-                    categoryName: 'Savings',
-                    categoryAmount: '$3000'
-                }
-            ]
-        }
-    }
+    return (
+            <div className="app-container">
+                <NavBar page={props.pathname} />
+                
+                <Route exact path="/" component={LandingPage}/>
 
-    updatePage(page) {
-        this.setState({
-            page
-        })
-    }
+                <Route exact path="/account-setup" render={() => (
+                props.step === null ? ( 
+                    <Redirect to="/dashboard" />
+                ) : (
+                <AccountSetup type={"account-setup"}/>))}/>
 
-    render() {
-        return (
-            <BrowserRouter>
-                <div className="app-container">
-                    <header>
-                        <NavBar page={this.state.page} onClick={page => this.updatePage(page)} />
-                    </header>
-    
-                    <Route exact path="/" component={LandingPage}/>
+                <Route exact path="/edit-profile" component={() => <EditProfile type={"edit-profile"}/>}/>
 
-                    <Route exact path="/account-setup" component={() => <AccountSetup type={"account-setup"} onClick={page => this.updatePage(page)}/>}/>
+                <Route exact path="/dashboard" component={() => <Dashboard categories={props.categories}/>}/>
 
-                    <Route exact path="/edit-profile" component={() => <AccountSetup type={"edit-profile"}/>}/>
+                <Route exact path="/category/:categoryId" component={Category} />
 
-                    <Route exact path="/dashboard" component={() => <Dashboard categories={this.state.categories}/>}/>
+                <Route exact path='/bills' component={Bills} />
 
-                    <Route exact path="/category/:categoryName" component={Category} />
+            </div>
+    )
+};
 
-                    <Route exact path='/bills' component={Bills} />
+const mapStateToProps = state => ({
+    page: state.page,
+    categories: state.categories,
+    pathname: state.router.location.pathname,
+    step: state.setupStep
+});
 
-                </div>
-            </BrowserRouter>
-        )
-    }
-    
-}
+export default connect(mapStateToProps)(Simplify);

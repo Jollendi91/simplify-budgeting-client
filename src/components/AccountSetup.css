@@ -1,5 +1,6 @@
 .account-setup-container {
-    margin-top: 75px;
+    max-width: 50em;
+    margin: 5em auto 0;
   }
   
  .account-setup-container form {
@@ -24,6 +25,10 @@
   .account-setup-container  input {
     width: 150px;
   }
+
+  .setup-step {
+    margin-top: 80px;
+  }
   
   table {
     width: 100%;
@@ -31,7 +36,7 @@
     margin: 10px 0;
   }
   
-  th {
+  table, th {
     border: 1px solid #ccc;
   }
   
@@ -42,6 +47,7 @@
   th, td {
     text-align: left;
     padding: 8px;
+    width: 33%;
   }
   
   tbody tr:nth-child(odd) {
