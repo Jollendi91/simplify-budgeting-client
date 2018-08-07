@@ -11,11 +11,11 @@ import  TransRow  from './TransRow';
 
 export function Category(props) {
 
-    const transactions = props.transactions.map((transaction, index) =>
+    const transactions = props.category.transactions.map((transaction, index) =>
         <TransRow key={index} {...transaction} />
     );
 
-    const transactionsTotal = props.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
+    const transactionsTotal = props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
     
     let transactionName;
     let transactionDate;
@@ -129,9 +129,8 @@ export function Category(props) {
 
 
 const mapStateToProps = (state, props) => ({
-    category: state.simplify.categories.find(category => category.id.toString() === props.match.params.categoryId),
-    transactions: state.simplify.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId)
-})
+    category: state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId)
+});
 
 
 export default connect(mapStateToProps)(Category);

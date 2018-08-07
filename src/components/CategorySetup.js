@@ -90,10 +90,10 @@ export function CategorySetup(props) {
 }
 
 const mapStateToProps = state => ({
-	categories: state.simplify.categories,
-	categoriesTotal: state.simplify.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0),
-	monthlySalary: state.simplify.monthlySalary,
-	billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
+	categories: state.simplify.user.categories,
+	categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0),
+	monthlySalary: state.simplify.user.monthlySalary,
+	billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
 	userId: state.simplify.user.id
 })
 

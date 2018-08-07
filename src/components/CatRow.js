@@ -74,8 +74,8 @@ export class CatRow extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    monthlySalary: state.simplify.monthlySalary,
-    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+    monthlySalary: state.simplify.user.monthlySalary,
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
 });
 
 export default connect(mapStateToProps)(CatRow);

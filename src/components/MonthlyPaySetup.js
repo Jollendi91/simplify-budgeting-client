@@ -24,7 +24,7 @@ export function MonthlyPaySetup(props) {
 }
 
 const mapStateToProps = state => ({
-    monthlySalary: state.simplify.monthlySalary
+    monthlySalary: state.simplify.user.monthlySalary
 })
 
 export default connect(mapStateToProps)(MonthlyPaySetup); 

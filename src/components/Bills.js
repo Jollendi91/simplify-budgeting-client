@@ -67,8 +67,8 @@ export function Bills(props) {
 
 
 const mapStateToProps = state => ({
-    bills: state.simplify.bills,
-    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0), 
+    bills: state.simplify.user.bills,
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0), 
     userId: state.simplify.user.id
 });
 

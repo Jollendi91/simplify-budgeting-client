@@ -58,9 +58,9 @@ export function MonthlyBillsSetup(props) {
 }
 
 const mapStateToProps = state => ({
-    monthlySalary: state.simplify.monthlySalary,
-    bills: state.simplify.bills,
-    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
+    monthlySalary: state.simplify.user.monthlySalary,
+    bills: state.simplify.user.bills,
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
     userId: state.simplify.user.id
 });
 
