@@ -12,7 +12,7 @@ import  TransRow  from './TransRow';
 export function Category(props) {
 
     const transactions = props.category.transactions.map((transaction, index) =>
-        <TransRow key={index} {...transaction} />
+        <TransRow key={index} categoryId={props.category.id} {...transaction} />
     );
 
     const transactionsTotal = props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);

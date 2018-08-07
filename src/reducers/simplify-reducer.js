@@ -37,7 +37,7 @@ const initialState = {
                 transactions: [
                     {
                         id: 1,
-                        description: 'Groceries',
+                        transaction: 'Groceries',
                         date: "2018-07-22",
                         amount: 70,
                         category_id: 1,
@@ -45,7 +45,7 @@ const initialState = {
                     },
                     {
                         id: 2,
-                        description: 'Movie',
+                        transaction: 'Movie',
                         date: '2018-07-21',
                         amount: 10,
                         category_id: 1,
@@ -61,7 +61,7 @@ const initialState = {
                 transactions: [
                     {
                         id: 3,
-                        description: 'Credit Card',
+                        transaction: 'Credit Card',
                         date: '2018-07-20',
                         amount: 50,
                         category_id: 2,
@@ -77,7 +77,7 @@ const initialState = {
                 transactions: [
                     {
                         id: 4,
-                        description: 'Birthday Money',
+                        transaction: 'Birthday Money',
                         date: '2018-07-19',
                         amount: 100,
                         category_id: 3,
@@ -185,7 +185,7 @@ export const simplifyReducer = (state = initialState, action) => {
                     ...category,
                     transactions: [...category.transactions, {
                         id: uuidv4(),
-                description: action.transName,
+                transaction: action.transName,
                 date: action.transDate,
                 amount: action.transAmount,
                 category_id: action.categoryId
@@ -196,21 +196,33 @@ export const simplifyReducer = (state = initialState, action) => {
 
     } else if (action.type === actions.UPDATE_TRANSACTION) {
 
+        // Find a category that matches the category ID then map over its transactions and update transaction that matches transaction ID
         return Object.assign({}, state, {
-            transactions: state.transactions.map(transaction => 
-                transaction.id === action.transactionId ? {
-                    id: transaction.id,
-                    description: action.transName,
-                    date: action.transDate,
-                    amount: action.transAmount,
-                    category_id: transaction.category_id
-                } : transaction)
+            user: {
+                ...state.user,
+                categories: state.user.categories.map(category => category.id === action.categoryId ? {
+                    ...category,
+                    transactions: category.transactions.map(transaction => transaction.id === action.transactionId ? {
+                        id: transaction.id,
+                        transaction: action.transName,
+                        date: action.transDate,
+                        amount: action.transAmount,
+                        category_id: transaction.category_id
+                    } : transaction)
+                 } : category)
+            } 
         });
 
     } else if (action.type === actions.DELETE_TRANSACTION) {
 
         return Object.assign({}, state, {
-            transactions: state.transactions.filter(trans => trans.id !== action.transactionId)
+            user: {
+                ...state.user,
+                categories: state.user.categories.map(category => category.id === action.categoryId ? {
+                    ...category,
+                    transactions: category.transactions.filter(trans => trans.id !== action.transactionId)
+                 } : category)
+            } 
         });       	
 
     } else if (action.type === actions.SETUP_STEP) {

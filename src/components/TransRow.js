@@ -8,7 +8,7 @@ export class TransRow extends React.Component {
 
         this.state = {
             editing: false,
-            transName: this.props.description,
+            transName: this.props.transaction,
             transDate: this.props.date,
             transAmount: this.props.amount
         }
@@ -21,7 +21,7 @@ export class TransRow extends React.Component {
     }
 
     dispatchTransactionUpdate(transactionId) {
-        this.props.dispatch(updateTransaction(this.state.transName, this.state.transDate, parseFloat(this.state.transAmount), transactionId));
+        this.props.dispatch(updateTransaction(this.state.transName, this.state.transDate, parseFloat(this.state.transAmount), transactionId, this.props.categoryId));
 
         this.setEditing();
     }
@@ -54,12 +54,12 @@ export class TransRow extends React.Component {
         } else {
             return (
                 <tr>
-                    <td>{this.props.description}</td>
+                    <td>{this.props.transaction}</td>
                     <td>{this.props.date}</td>
                     <td>${this.props.amount.toFixed(2)}</td>
                     <td>
                     <button onClick={() => this.setEditing()}>Edit</button>
-                        <button onClick={() => this.props.dispatch(deleteTransaction(this.props.id))}>X</button>
+                        <button onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}>X</button>
                     </td>
                 </tr>
             )

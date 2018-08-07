@@ -58,18 +58,20 @@ export const addTransaction = (transName, transDate, transAmount, categoryId) =>
 });
 
 export const UPDATE_TRANSACTION = 'UPDATE_TRANSACTION';
-export const updateTransaction = (transName, transDate, transAmount, transactionId) => ({
+export const updateTransaction = (transName, transDate, transAmount, transactionId, categoryId) => ({
     type: UPDATE_TRANSACTION,
     transName,
     transDate, 
     transAmount,
-    transactionId
+    transactionId,
+    categoryId
 });
 
 export const DELETE_TRANSACTION = 'DELETE_TRANSACTION';
-export const deleteTransaction = (transactionId) => ({
+export const deleteTransaction = (transactionId, categoryId) => ({
     type: DELETE_TRANSACTION,
-    transactionId
+    transactionId,
+    categoryId
 });
 
 export const SETUP_STEP = 'SETUP_STEP';
