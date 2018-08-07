@@ -93,75 +93,105 @@ export const simplifyReducer = (state = initialState, action) => {
     if (action.type === actions.UPDATE_SALARY) {
 
         return Object.assign({}, state, {
-            monthlySalary: action.salary
+            user: {
+                ...state.user,
+                monthlySalary: action.salary
+            }
         });
 
     } else if (action.type === actions.ADD_BILL) {
 
         return Object.assign({}, state, {
-            bills: [...state.bills, {
-                id: uuidv4(),
-                bill: action.billName,
-                amount: action.billAmount,
-                user_id: action.userId
-            }]
+            user: {
+                ...state.user,
+                bills: [...state.user.bills, {
+                    id: uuidv4(),
+                    bill: action.billName,
+                    amount: action.billAmount,
+                    user_id: action.userId
+                }]
+            }
         });
 
     } else if (action.type === actions.UPDATE_BILL) {
 
         return Object.assign({}, state, {
-            bills: state.bills.map(bill =>
-            bill.id === action.billId ? {
-                id: bill.id,
-                bill: action.billName,
-                amount: action.billAmount,
-                user_id: bill.user_id
-            } : bill)
+            user: {
+                ...state.user,
+                bills: state.user.bills.map(bill =>
+                    bill.id === action.billId ? {
+                        id: bill.id,
+                        bill: action.billName,
+                        amount: action.billAmount,
+                        user_id: bill.user_id
+                    } : bill)
+            }  
         });
 
     } else if (action.type === actions.DELETE_BILL) {
 
         return Object.assign({}, state, {
-            bills: state.bills.filter(bill => bill.id !== action.billId)
+            user: {
+                ...state.user,
+                bills: state.user.bills.filter(bill => bill.id !== action.billId)
+            }
         });
 
     } else if (action.type === actions.ADD_CATEGORY) {
         return Object.assign({}, state, {
-            categories: [...state.categories, {
-                id: uuidv4(),
-                category: action.categoryName,
-                amount: action.categoryAmount,
-                user_id: action.userId
-            }]
+            user: {
+                ...state.user,
+                categories: [...state.user.categories, {
+                    id: uuidv4(),
+                    category: action.categoryName,
+                    amount: action.categoryAmount,
+                    user_id: action.userId,
+                    transactions: null
+                }]
+            }
         });
 
     } else if (action.type === actions.UPDATE_CATEGORY) {
 
-      return  Object.assign({}, state, {
-            categories: state.categories.map(category => category.id === action.categoryId ? {
-                id: action.categoryId,
-                category: action.categoryName,
-                amount: action.categoryAmount,
-                user_id: category.user_id
-            } : category)
-        })
+        return  Object.assign({}, state, {
+            user: {
+                ...state.user,
+                categories: state.user.categories.map(category => category.id === action.categoryId ? {
+                    id: category.id,
+                    category: action.categoryName,
+                    amount: action.categoryAmount,
+                    user_id: category.user_id,
+                    transactions: category.transactions
+                } : category)
+            }
+        });
 
     } else if (action.type === actions.DELETE_CATEGORY) {
 
         return Object.assign({}, state, {
-            categories: state.categories.filter(category => category.id !== action.categoryId)
+            user: {
+                ...state.user,
+                categories: state.user.categories.filter(category => category.id !== action.categoryId)
+            }
         });
 
     } else if (action.type === actions.ADD_TRANSACTION) {
 
+        // Find the category that matches category ID and add a transaction
         return Object.assign({}, state, {
-            transactions: [...state.transactions, {
-                id: uuidv4(),
+            user: {
+                ...state.user,
+                categories: state.user.categories.map(category => category.id === action.categoryId ? {
+                    ...category,
+                    transactions: [...category.transactions, {
+                        id: uuidv4(),
                 description: action.transName,
                 date: action.transDate,
                 amount: action.transAmount,
                 category_id: action.categoryId
-            }]
+                    }]
+                } : category)
+            }
         });
 
     } else if (action.type === actions.UPDATE_TRANSACTION) {
@@ -186,7 +216,10 @@ export const simplifyReducer = (state = initialState, action) => {
     } else if (action.type === actions.SETUP_STEP) {
 
         return Object.assign({}, state, {
-            setupStep: action.step
+            user: {
+                ...state.user,
+                setupStep: action.step
+            }
         });
 
     }
