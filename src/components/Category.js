@@ -129,8 +129,8 @@ export function Category(props) {
 
 
 const mapStateToProps = (state, props) => ({
-    category: state.categories.find(category => category.id.toString() === props.match.params.categoryId),
-    transactions: state.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId)
+    category: state.simplify.categories.find(category => category.id.toString() === props.match.params.categoryId),
+    transactions: state.simplify.transactions.filter(transaction => transaction.category_id.toString() === props.match.params.categoryId)
 })
 
 

@@ -67,9 +67,9 @@ export function Bills(props) {
 
 
 const mapStateToProps = state => ({
-    bills: state.bills,
-    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0), 
-    userId: state.user.id
+    bills: state.simplify.bills,
+    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0), 
+    userId: state.simplify.user.id
 });
 
 export default connect(mapStateToProps)(Bills);

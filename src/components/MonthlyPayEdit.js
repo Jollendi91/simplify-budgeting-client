@@ -64,7 +64,7 @@ export class MonthlyPayEdit extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    monthlySalary: state.monthlySalary
+    monthlySalary: state.simplify.monthlySalary
 })
 
 export default connect(mapStateToProps)(MonthlyPayEdit); 

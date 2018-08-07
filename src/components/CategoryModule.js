@@ -13,7 +13,7 @@ export function CategoryModule(props) {
 }
 
 const mapStateToProps = (state, props) => ({
-    transactionAmount: state.transactions.filter(transaction => transaction.category_id === props.id).reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0)
+    transactionAmount: state.simplify.transactions.filter(transaction => transaction.category_id === props.id).reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0)
 });
 
 export default connect(mapStateToProps)(CategoryModule);

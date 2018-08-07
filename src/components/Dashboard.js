@@ -115,9 +115,9 @@ export class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    categories: state.categories,
-    remainingMoney: state.monthlySalary - state.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
-    billsTotal: state.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+    categories: state.simplify.categories,
+    remainingMoney: state.simplify.monthlySalary - state.simplify.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
+    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
 });
 
 export default connect(mapStateToProps)(Dashboard);
