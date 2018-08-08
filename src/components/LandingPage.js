@@ -3,8 +3,14 @@ import React from 'react';
 import SignupForm from './SignupForm';
 
 import './LandingPage.css';
+import { connect } from 'http2';
 
-export default function LandingPage(props) {
+export function LandingPage(props) {
+
+    if (props.loggedIn) {
+        return <Redirect to="/dashboard" />;
+    }
+
     return (
         <div className="landing-page">
             <header className="main-header">
@@ -40,3 +46,9 @@ export default function LandingPage(props) {
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    loggedIn: state.auth.curentUser !== null
+});
+
+export default connect(mapStateToProps)(LandingPage);
