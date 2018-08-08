@@ -1,96 +1,28 @@
-import * as actions from '../actions';
+import * as actions from '../actions/protected-data';
 
 const uuidv4 = require('uuid/v4');
 
 const initialState = {
     loggedIn: false,
-    user: {
-        id: null,
-        username: null,
-        setupStep: 1,
-        monthlySalary: 0,
-        bills: [
-            {
-                id: 1,
-                bill: 'Rent',
-                amount: 450,
-                user_id: 1
-            },
-            {
-                id: 2,
-                bill: 'Electricity',
-                amount: 80,
-                user_id: 1
-            },
-            {
-                id: 3,
-                bill: 'Credit Card',
-                amount: 25,
-                user_id: 1
-            }
-        ],
-        categories: [{
-                id: 1,
-                category: 'Spending',
-                amount: 600,
-                user_id: 1,
-                transactions: [
-                    {
-                        id: 1,
-                        transaction: 'Groceries',
-                        date: "2018-07-22",
-                        amount: 70,
-                        category_id: 1,
-                        user_id: 1
-                    },
-                    {
-                        id: 2,
-                        transaction: 'Movie',
-                        date: '2018-07-21',
-                        amount: 10,
-                        category_id: 1,
-                        user_id: 1
-                    },
-                ]
-            },
-            {
-                id: 2,
-                category: 'Debts',
-                amount: 200,
-                user_id: 1,
-                transactions: [
-                    {
-                        id: 3,
-                        transaction: 'Credit Card',
-                        date: '2018-07-20',
-                        amount: 50,
-                        category_id: 2,
-                        user_id: 1
-                    }
-                ]
-            },
-            {
-                id: 3,
-                category: 'Savings',
-                amount: 200,
-                user_id: 1,
-                transactions: [
-                    {
-                        id: 4,
-                        transaction: 'Birthday Money',
-                        date: '2018-07-19',
-                        amount: 100,
-                        category_id: 3,
-                        user_id: 1
-                    }
-                ]
-            }
-        ]
-    }
+    user: '',
+    error
 };
 
 export const simplifyReducer = (state = initialState, action) => {
-    if (action.type === actions.UPDATE_SALARY) {
+    if (action.type === actions.FETCH_PROTECTED_USER_SUCCESS) {
+
+        return Object.assign({}, state, {
+            user: action.user,
+            error: null
+        });
+        
+    } else if (action.type === actions.FETCH_PROTECTED_USER_ERROR) {
+
+        return Object.assign({}, state, {
+            error: action.error
+        });
+
+    } else if (action.type === actions.UPDATE_SALARY) {
 
         return Object.assign({}, state, {
             user: {
@@ -233,8 +165,7 @@ export const simplifyReducer = (state = initialState, action) => {
                 setupStep: action.step
             }
         });
-
-    }
+    } 
 
     return state;
 }

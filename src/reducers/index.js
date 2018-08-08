@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {simplifyReducer} from './simplify-reducer';
+import {simplifyReducer} from './protected-data';
 import {reducer as formReducer} from 'redux-form';
 import {authReducer} from './auth';
 

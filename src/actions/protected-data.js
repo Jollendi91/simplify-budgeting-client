@@ -1,3 +1,34 @@
+import {API_BASE_URL} from '../config';
+import {normalizeResponseErrors} from './utils';
+
+export const FETCH_PROTECTED_USER_SUCCESS = 'FETCH_PROTECTED_USER_SUCCESS';
+export const fetchProtectedUserSuccess = user => ({
+    type: FETCH_PROTECTED_USER_SUCCESS,
+    user
+});
+
+export const FETCH_PROTECTED_USER_ERROR = 'FETCH_PROTECTED_USER_ERROR';
+export const fetchProtectedUserError = error => ({
+    type: FETCH_PROTECTED_USER_ERROR,
+    error
+});
+
+export const fetchProtectedUser = () => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/dashboard`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(({user}) => dispatch(fetchProtectedUserSuccess(user)))
+    .catch(err => {
+        dispatch(fetchProtectedUserError(err));
+    });
+};
+
 
 export const UPDATE_SALARY = 'UPDATE_SALARY';
 export const updateSalary = salary => ({
