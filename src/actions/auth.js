@@ -32,3 +32,60 @@ export const authError = error => ({
     type: AUTH_ERROR,
     error
 });
+
+const storeAuthInfo = (authToken, dispatch) => {
+    const decodedToken = jwtDecode(authToken);
+    dispatch(setAuthToken(authToken));
+    dispatch(authSuccess(decodedToken.user));
+    saveAuthToken(authToken);
+};
+
+export const login = (user, password) => dispatch => {
+    dispatch(authRequest());
+    return (
+        fetch(`${API_BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        .catch(err => {
+            const {code} = err;
+            const message =
+                code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
+                dispatch(authError(err));
+
+                return Promise.reject(
+                    new SubmissionError({
+                        _error: message
+                    })
+                );
+        })
+    );
+};
+
+export const refreshAuthToken = () => (dispatch, getState) => {
+    dispatch(authRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+    .catch(err => {
+        dispatch(authError(err));
+        dispatch(clearAuth());
+        clearAuthToken(authToken);
+    });
+};
