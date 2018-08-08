@@ -2,14 +2,16 @@ export const required = value => value ? undefined : 'Required';
 
 export const notEmpty = value => value.trim() !== '' ? undefined : 'Cannot be empty';
 
-export const noWhitespace = value => value.trim() === value ? undefined : 'Cannot start or end with whitespace';
+export const isTrimmed = value => value.trim() === value ? undefined : 'Cannot start or end with whitespace';
 
-export const tooSmallUsername = value => value.length > 5 ? undefined : 'Username must be at least 6 characters long';
+export const length = length => value => {
+    if (length.min && value.length < length.min) {
+        return `Must be at least ${length.min} characters long`;
+    }
+    if (length.max && value.length > length.max) {
+        return `Must be at most ${length.max} characters long`;
+    }
+};
 
-export const tooLargeUsername = value => value.length <= 30 ? undefined : 'Username must not be longer than 30 characters'
+export const matches = field => (value, allValues) => field in allValues && value.trim() === allValues[field].trim() ? undefined : 'Does not match';
 
-export const tooSmallPassword = value => value.length >= 8 ? undefined : 'Password must be at least 8 characters long';
-
-export const tooLargePassword = value => value.length <= 72 ? undefined : 'Password must not be longer than 72 characters';
-
-export const passwordsMatch = (value, allValues) => value === allValues.password ? undefined : "Passwords don't match";

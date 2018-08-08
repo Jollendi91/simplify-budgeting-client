@@ -1,9 +1,13 @@
 import React from 'react';
 import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 import Input from './input';
-import {required, notEmpty, noWhitespace, tooSmallUsername, tooLargeUsername, tooSmallPassword, tooLargePassword, passwordsMatch} from '../validators';
+import {required, notEmpty, isTrimmed, length, matches} from '../validators';
 
 import './SignupForm.css';
+
+const passwordLength = length({min: 10, max: 72});
+const usernameLength = length({min: 8, max: 30});
+const matchesPassword = matches('password');
 
 export class SignupForm extends React.Component {
     render() {
@@ -24,7 +28,6 @@ export class SignupForm extends React.Component {
                 </div>
             );
         }
-
 
         return (
             <section>
@@ -49,21 +52,21 @@ export class SignupForm extends React.Component {
                         type="text"
                         component={Input}
                         label="Username"
-                        validate={[required, notEmpty, noWhitespace, tooSmallUsername, tooLargeUsername]}
+                        validate={[required, notEmpty, isTrimmed, usernameLength]}
                     />
                     <Field
                         name="password"
                         type="password"
                         component={Input}
                         label="Password"
-                        validate={[required, notEmpty, noWhitespace, tooSmallPassword, tooLargePassword]}
+                        validate={[required, notEmpty, isTrimmed, passwordLength]}
                     />
                     <Field 
-                        name="verify-password"
+                        name="verifyPassword"
                         type="password"
                         component={Input}
                         label="Verify Password"
-                        validate={[passwordsMatch]}
+                        validate={[required, notEmpty, matchesPassword]}
                     />
                 
                     <button
