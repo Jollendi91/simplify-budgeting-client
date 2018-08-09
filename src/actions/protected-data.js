@@ -23,7 +23,7 @@ export const fetchProtectedUser = () => (dispatch, getState) => {
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then(({user}) => dispatch(fetchProtectedUserSuccess(user)))
+    .then(res => dispatch(fetchProtectedUserSuccess(res)))
     .catch(err => {
         dispatch(fetchProtectedUserError(err));
     });
