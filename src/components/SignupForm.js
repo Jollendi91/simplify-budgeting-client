@@ -1,6 +1,7 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
+import {login} from '../actions/auth';
 import Input from './input';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
 
@@ -17,7 +18,7 @@ export class SignupForm extends React.Component {
         const user = {firstName, lastName, username, password};
 
         return this.props.dispatch(registerUser(user))
-        .then(() => this.props.dispatch(LoginForm(username, password)));
+        .then(() => this.props.dispatch(login(username, password)));
     }
 
     render() {
@@ -41,7 +42,10 @@ export class SignupForm extends React.Component {
 
         return (
             <section>
-                <form className="signup-form">
+                <form 
+                    className="signup-form"
+                    onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
+                    )}>
                     <h2>Ready to get started?</h2>
                     {successMessage}
                     {errorMessage}
