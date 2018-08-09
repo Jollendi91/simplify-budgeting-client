@@ -1,9 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {PieChart} from 'react-easy-chart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';
-import {fetchProtectedUser} from '../actions/protected-data';
 
 import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
@@ -63,6 +62,10 @@ export class Dashboard extends React.Component {
 
     render() {
 
+        if (this.props.step !== null) {
+            return <Redirect to="/account-setup" />
+        }
+
     const categories = this.props.categories.map((category, index) => 
             <Link key={index} to={`category/${category.id}`}>
                 <CategoryModule key={index} {...category} />
@@ -116,10 +119,27 @@ export class Dashboard extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    categories: state.simplify.user.categories,
-    remainingMoney: state.simplify.user.monthlySalary - state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
-    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
-});
+const mapStateToProps = state => {
+    let categoryTotal;
+        if (state.simplify.user.categories) {
+            categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0);
+        } else {
+            categoryTotal = 0;
+        }
+
+    let billTotal;
+        if (state.simplify.user.bills) {
+            billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0);
+        } else {
+            billTotal = 0;
+        }
+
+     return  {
+        categories: state.simplify.user.categories,
+        remainingMoney: state.simplify.user.monthlySalary - categoryTotal - billTotal,
+        billsTotal: billTotal,
+        step: state.simplify.user.setupStep
+    }
+};
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
