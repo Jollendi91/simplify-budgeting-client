@@ -3,9 +3,8 @@ import * as actions from '../actions/protected-data';
 const uuidv4 = require('uuid/v4');
 
 const initialState = {
-    loggedIn: false,
     user: '',
-    error
+    error: null
 };
 
 export const simplifyReducer = (state = initialState, action) => {
@@ -15,7 +14,7 @@ export const simplifyReducer = (state = initialState, action) => {
             user: action.user,
             error: null
         });
-        
+
     } else if (action.type === actions.FETCH_PROTECTED_USER_ERROR) {
 
         return Object.assign({}, state, {

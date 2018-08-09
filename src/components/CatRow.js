@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { deleteCategory, updateCategory } from '../actions';
+import { deleteCategory, updateCategory } from '../actions/protected-data';
 
 export class CatRow extends React.Component {
     constructor(props) {

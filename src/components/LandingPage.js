@@ -1,9 +1,10 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import SignupForm from './SignupForm';
 
 import './LandingPage.css';
-import { connect } from 'http2';
+
 
 export function LandingPage(props) {
 

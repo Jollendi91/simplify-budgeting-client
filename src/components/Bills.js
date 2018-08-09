@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import NavBar from './NavBar';
 import './Bills.css';
 import BillRow from './BillRow';
-import { addBill, deleteBill } from '../actions';
+import { addBill, deleteBill } from '../actions/protected-data';
 
 export function Bills(props) {
 

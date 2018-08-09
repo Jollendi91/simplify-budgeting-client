@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { deleteTransaction, updateTransaction } from '../actions';
+import { deleteTransaction, updateTransaction } from '../actions/protected-data';
 
 export class TransRow extends React.Component {
     constructor(props) {

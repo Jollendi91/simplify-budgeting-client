@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {PieChart} from 'react-easy-chart';
 import {connect} from 'react-redux';
+import requiresLogin from './requiresLogin';
+import {fetchProtectedUser} from '../actions/protected-data';
 
 import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
@@ -21,6 +23,10 @@ export class Dashboard extends React.Component {
             value: '',
             key: ''
         }
+    }
+
+    componentDidMount() {
+        this.props.dispatch(fetchProtectedUser());
     }
 
     mouseOverHandler(d, e) {
@@ -120,4 +126,4 @@ const mapStateToProps = state => ({
     billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default requiresLogin()(connect(mapStateToProps)(Dashboard));

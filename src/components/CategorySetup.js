@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './CategorySetup.css';
-import { addCategory } from '../actions';
+import { addCategory } from '../actions/protected-data';
 import CatRow from './CatRow';
 
 

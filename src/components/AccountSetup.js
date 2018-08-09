@@ -7,7 +7,7 @@ import MonthlyPaySetup from './MonthlyPaySetup';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 import {connect} from 'react-redux';
-import { setupStep } from '../actions';
+import { setupStep } from '../actions/protected-data';
 
 export function AccountSetup(props) {
 

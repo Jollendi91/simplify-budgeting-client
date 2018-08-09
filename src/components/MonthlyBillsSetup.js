@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import BillRow from './BillRow';
-import { addBill, deleteBill } from '../actions';
+import { addBill, deleteBill } from '../actions/protected-data';
 
 export function MonthlyBillsSetup(props) {
 

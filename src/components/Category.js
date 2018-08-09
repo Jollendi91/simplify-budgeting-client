@@ -5,7 +5,7 @@ import {PieChart} from 'react-easy-chart';
 import NavBar from './NavBar';
 
 import './Category.css';
-import { addTransaction } from '../actions';
+import { addTransaction } from '../actions/protected-data';
 import  TransRow  from './TransRow';
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { updateSalary, setupStep } from '../actions';
+import { updateSalary, setupStep } from '../actions/protected-data';
 
 export function MonthlyPaySetup(props) {
     let currentSalary;

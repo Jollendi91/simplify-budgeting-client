@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {deleteBill, updateBill} from '../actions';
+import {deleteBill, updateBill} from '../actions/protected-data';
 
 export class BillRow extends React.Component {
     constructor(props) {

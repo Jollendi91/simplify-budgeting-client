@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import './MonthlyPayEdit.css';
-import { updateSalary } from '../actions';
+import { updateSalary } from '../actions/protected-data';
 
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
