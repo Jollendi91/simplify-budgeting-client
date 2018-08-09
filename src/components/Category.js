@@ -3,10 +3,14 @@ import {connect} from 'react-redux';
 
 import {PieChart} from 'react-easy-chart';
 import NavBar from './NavBar';
+import  TransRow  from './TransRow';
+import RequiresLogin from './requiresLogin';
+
+import { addTransaction } from '../actions/protected-data';
 
 import './Category.css';
-import { addTransaction } from '../actions/protected-data';
-import  TransRow  from './TransRow';
+
+
 
 
 export function Category(props) {
@@ -133,4 +137,4 @@ const mapStateToProps = (state, props) => ({
 });
 
 
-export default connect(mapStateToProps)(Category);
+export default RequiresLogin()(connect(mapStateToProps)(Category));

@@ -9,7 +9,7 @@ import './LandingPage.css';
 export function LandingPage(props) {
 
     if (props.loggedIn) {
-        return <Redirect to="/dashboard" />;
+        return <Redirect to="/account-setup" />;
     }
 
     return (
@@ -49,7 +49,7 @@ export function LandingPage(props) {
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.curentUser !== null
+    loggedIn: state.auth.currentUser !== null
 });
 
 export default connect(mapStateToProps)(LandingPage);

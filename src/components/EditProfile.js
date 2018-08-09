@@ -1,12 +1,14 @@
 import React from 'react';
-
-import './AccountSetup.css';
+import {connect} from 'react-redux';
 
 import MonthlyPayEdit from './MonthlyPayEdit';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
+import RequiresLogin from './requiresLogin'
 
-export default function AccountSetup(props) {
+import './AccountSetup.css';
+
+export function EditProfile(props) {
         return (
         <div>
             <main className="account-setup-container">
@@ -18,3 +20,5 @@ export default function AccountSetup(props) {
         </div>
     )
 };
+
+export default RequiresLogin()(connect()(EditProfile));

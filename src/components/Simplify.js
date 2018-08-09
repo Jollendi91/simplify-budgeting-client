@@ -45,15 +45,11 @@ export class Simplify extends React.Component {
                 
                 <Route exact path="/" component={LandingPage}/>
 
-                <Route exact path="/account-setup" render={() => (
-                this.props.step === null ? ( 
-                    <Redirect to="/dashboard" />
-                ) : (
-                <AccountSetup type={"account-setup"}/>))}/>
+                <Route exact path="/account-setup" component={AccountSetup}/>
 
-                <Route exact path="/edit-profile" component={() => <EditProfile type={"edit-profile"}/>}/>
+                <Route exact path="/edit-profile" component={EditProfile}/>
 
-                <Route exact path="/dashboard" component={() => <Dashboard categories={this.props.categories}/>}/>
+                <Route exact path="/dashboard" component={Dashboard}/>
 
                 <Route exact path="/category/:categoryId" component={Category} />
 
@@ -65,9 +61,7 @@ export class Simplify extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    categories: state.simplify.user.categories,
     pathname: state.router.location.pathname,
-    step: state.simplify.user.setupStep,
     loggedIn: state.auth.currentUser !== null
 });
 

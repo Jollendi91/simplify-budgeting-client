@@ -25,10 +25,6 @@ export class Dashboard extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.props.dispatch(fetchProtectedUser());
-    }
-
     mouseOverHandler(d, e) {
         console.log(e);
         this.setState({
@@ -69,7 +65,7 @@ export class Dashboard extends React.Component {
 
     const categories = this.props.categories.map((category, index) => 
             <Link key={index} to={`category/${category.id}`}>
-            <CategoryModule key={index} {...category} />
+                <CategoryModule key={index} {...category} />
             </Link>
         )
 

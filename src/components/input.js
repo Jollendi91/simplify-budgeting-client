@@ -8,7 +8,6 @@ export default class Input extends React.Component {
     }
 
     render() {
-        console.log(this.props.element);
         const Element = this.props.element || 'input';
 
         let error;
