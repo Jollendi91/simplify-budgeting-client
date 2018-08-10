@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import MonthlyBillsForm from './MonthlyBillsForm';
 import BillRow from './BillRow';
 import { addBill, deleteBill } from '../actions/protected-data';
 
@@ -25,17 +26,7 @@ export function MonthlyBillsSetup(props) {
         <section className="monthly-bills-form-container">
             <h2>Monthly Bills</h2>
             <p>Enter all expenses that recur each month</p>
-            <form className="add-bill-form" onSubmit={(event) => onSubmit(event)}>
-                <div>
-                    <label htmlFor="description">Description</label>
-                    <input type="text" name="description" placeholder="Rent, Utilities, etc." id="description" ref={input => billName = input} required="true"/>
-                </div>
-                <div>
-                    <label htmlFor="amount">Amount</label>
-                    <input type="number" step="0.01" name="amount" id="amount" min="0.01" ref={input => billAmount = input} required="true"/>
-                </div>
-                <button>Add Bill</button>
-            </form>
+            <MonthlyBillsForm />
             <table>
                 <thead>
                     <tr>
