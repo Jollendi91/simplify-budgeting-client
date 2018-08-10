@@ -27,22 +27,28 @@ export class BillRow extends React.Component {
 
     render() {
 
+        console.log(this.props);
+
         if (this.state.editing) {
             return (
                 <tr>
-                    <td>
-                        <input value={this.state.billName} onChange={e => this.setState({
-                            billName: e.target.value
-                        })} />
-                    </td>
-                    <td>
-                        $<input type="number" step="0.01" min="1" value={this.state.billAmount} onChange={e => this.setState({
-                            billAmount: e.target.value
-                        })} />
-                    </td>
-                    <td className="edit-buttons">
-                        <button onClick={() => this.dispatchBillUpdate(this.props.id)}>Update</button>
-                        <button onClick={() => this.setEditing()}>Cancel</button>
+                    <td className="table-form-container" colSpan="3">
+                        <form className="update-bill-form">
+                            <div className="bill-name-input">
+                                <input value={this.state.billName} onChange={e => this.setState({
+                                    billName: e.target.value
+                                })} />
+                            </div>
+                            <div className="bill-amount-input">
+                                $<input type="number" step="0.01" min="1" value={this.state.billAmount} onChange={e => this.setState({
+                                    billAmount: e.target.value
+                                })} />
+                            </div>
+                            <div className="edit-buttons">
+                                <button onClick={() => this.dispatchBillUpdate(this.props.id)}>Update</button>
+                                <button onClick={() => this.setEditing()}>Cancel</button>
+                            </div>
+                        </form>
                     </td>
                 </tr> 
             )
