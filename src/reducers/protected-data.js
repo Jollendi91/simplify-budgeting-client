@@ -52,7 +52,7 @@ export const simplifyReducer = (state = initialState, action) => {
             error: action.error
         });
 
-    } else if (action.type === actions.UPDATE_BILL) {
+    } else if (action.type === actions.UPDATE_BILL_SUCCESS) {
 
         return Object.assign({}, state, {
             user: {
@@ -67,6 +67,11 @@ export const simplifyReducer = (state = initialState, action) => {
             }  
         });
 
+    } else if (action.type === actions.UPDATE_BILL_ERROR) {
+        return Object.assign({}, state, {
+            error: action.error
+        });
+        
     } else if (action.type === actions.DELETE_BILL) {
 
         return Object.assign({}, state, {

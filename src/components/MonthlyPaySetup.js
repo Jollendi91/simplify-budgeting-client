@@ -17,12 +17,14 @@ export class MonthlyPaySetup extends React.Component {
         return (
             <section className="monthly-pay-container">
                 <form className="monthly-pay-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <label for="monthly-pay">What is your monthly take home pay?</label>
+                    <label htmlFor="monthly-salary">What is your monthly take home pay?</label>
                     <Field
                         component={Input}
                         type="number"
                         name="monthlySalary"
                         id="monthly-salary"
+                        step='0.01'
+                        min="0.01"
                         validate={[required, notEmpty]}
                     />
                     <button disabled={this.props.pristine || this.props.submitting}>Next</button>

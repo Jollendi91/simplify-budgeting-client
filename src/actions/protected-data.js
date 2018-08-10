@@ -101,13 +101,39 @@ export const addBill = (bill, amount) => (dispatch, getState) => {
     .catch(err => dispatch(addBillError(err)));
 }
 
-export const UPDATE_BILL = 'UPDATE_BILL';
-export const updateBill = (billName, billAmount, billId) => ({
-    type: UPDATE_BILL,
+export const UPDATE_BILL_SUCCESS = 'UPDATE_BILL_SUCCESS';
+export const updateBillSuccess = ( billId, billName, billAmount) => ({
+    type: UPDATE_BILL_SUCCESS,
+    billId,
     billName,
-    billAmount,
-    billId
+    billAmount
 });
+
+export const UPDATE_BILL_ERROR = 'UPDATE_BILL_ERROR';
+export const updateBillError = error => ({
+    type: UPDATE_BILL_ERROR,
+    error
+});
+
+export const updateBill = (id, bill, amount) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/bills/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            id,
+            bill,
+            amount
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => dispatch(updateBillSuccess(id, bill, amount)))
+    .catch(err => dispatch(updateBillError(err)));
+}
 
 export const DELETE_BILL = 'DELETE_BILL';
 export const deleteBill = (billId) => ({
