@@ -164,7 +164,11 @@ export const simplifyReducer = (state = initialState, action) => {
                 setupStep: action.step
             }
         });
-    } 
+    } else if (action.type === actions.SETUP_USER_SALARY_ERROR) {
+        return Object.assign({}, state, {
+            error: action.error
+        });
+    }
 
     return state;
 }

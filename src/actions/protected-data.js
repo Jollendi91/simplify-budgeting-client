@@ -111,3 +111,34 @@ export const setupStep = (step) => ({
     type: SETUP_STEP,
     step
 });
+
+export const SETUP_USER_SALARY_ERROR = 'SETUP_USER_SALARY_ERROR';
+export const setupUserSalaryError = error => ({
+    type: SETUP_USER_SALARY_ERROR,
+    error
+});
+
+export const setupUserSalary = (salary, step) => (dispatch, getState) => {
+    const currentStep = getState().simplify.user.setupStep;
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/dashboard`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            setupStep: step || currentStep,
+            monthlySalary: salary
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => {
+        dispatch(updateSalary(salary));
+        dispatch(setupStep(step));
+    })
+    .catch(err => {
+        dispatch(setupUserSalaryError(err));
+    });
+}
