@@ -36,6 +36,34 @@ export const updateSalary = salary => ({
     salary
 });
 
+export const SETUP_USER_SALARY_ERROR = 'SETUP_USER_SALARY_ERROR';
+export const setupUserSalaryError = error => ({
+    type: SETUP_USER_SALARY_ERROR,
+    error
+});
+
+export const setupUserSalary = salary => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/dashboard`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            monthlySalary: salary
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => {
+        dispatch(updateSalary(salary));
+    })
+    .catch(err => {
+        dispatch(setupUserSalaryError(err));
+    });
+}
+
 export const ADD_BILL = 'ADD_BILL';
 export const addBill = (billName, billAmount, userId) => ({
     type: ADD_BILL,
@@ -112,16 +140,15 @@ export const setupStep = (step) => ({
     step
 });
 
-export const SETUP_USER_SALARY_ERROR = 'SETUP_USER_SALARY_ERROR';
-export const setupUserSalaryError = error => ({
-    type: SETUP_USER_SALARY_ERROR,
+export const SETUP_STEP_ERROR = 'SETUP_STEP_ERROR';
+export const setupStepError = error => ({
+    type: SETUP_STEP_ERROR,
     error
 });
 
-export const setupUserSalary = (salary, step) => (dispatch, getState) => {
-    const currentStep = getState().simplify.user.setupStep;
+export const updateStep = (step) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-
+    
     fetch(`${API_BASE_URL}/dashboard`, {
         method: 'PUT',
         headers: {
@@ -129,16 +156,10 @@ export const setupUserSalary = (salary, step) => (dispatch, getState) => {
             Authorization: `Bearer ${authToken}`
         },
         body: JSON.stringify({
-            setupStep: step || currentStep,
-            monthlySalary: salary
+            setupStep: step
         })
     })
     .then(res => normalizeResponseErrors(res))
-    .then(() => {
-        dispatch(updateSalary(salary));
-        dispatch(setupStep(step));
-    })
-    .catch(err => {
-        dispatch(setupUserSalaryError(err));
-    });
+    .then(() => dispatch(setupStep(step)))
+    .catch(err => dispatch(setupStepError(err)));
 }

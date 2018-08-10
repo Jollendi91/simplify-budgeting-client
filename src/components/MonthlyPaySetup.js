@@ -3,11 +3,14 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, notEmpty} from '../validators';
-import { setupUserSalary } from '../actions/protected-data';
+import { setupUserSalary, updateStep } from '../actions/protected-data';
 
 export class MonthlyPaySetup extends React.Component {
     onSubmit(values) {
-        return this.props.dispatch(setupUserSalary(values.monthlySalary, 2));
+        return (
+            this.props.dispatch(setupUserSalary(values.monthlySalary)),
+            this.props.dispatch(updateStep(2))
+        )
     }
 
     render() {
