@@ -51,7 +51,7 @@ export class BillRow extends React.Component {
         return (
             <tr>
                 <td>{this.props.bill}</td>
-                <td>${this.props.amount.toFixed(2)}</td>
+                <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                 <td className="edit-buttons">
                     <button onClick={() => this.setEditing()}>Edit</button>
                     <button onClick={() => this.props.dispatch(deleteBill(this.props.id))}>X</button>

@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, notEmpty} from '../validators';
-import { setupUserSalary, updateStep } from '../actions/protected-data';
+import { updateSalary, updateStep } from '../actions/protected-data';
 
 export class MonthlyPaySetup extends React.Component {
     onSubmit(values) {
         return (
-            this.props.dispatch(setupUserSalary(values.monthlySalary)),
+            this.props.dispatch(updateSalary(values.monthlySalary)),
             this.props.dispatch(updateStep(2))
         )
     }
@@ -32,11 +32,7 @@ export class MonthlyPaySetup extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    monthlySalary: state.simplify.user.monthlySalary
-})
-
 export default reduxForm({
     form: 'salary',
     onSubmitFail: (errors, dispatch) => dispatch(focus('monthlySalary', 'monthly-salary'))
-  })(connect(mapStateToProps)(MonthlyPaySetup)); 
+  })(connect()(MonthlyPaySetup)); 

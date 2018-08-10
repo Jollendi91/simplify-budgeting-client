@@ -30,19 +30,19 @@ export const fetchProtectedUser = () => (dispatch, getState) => {
 };
 
 
-export const UPDATE_SALARY = 'UPDATE_SALARY';
-export const updateSalary = salary => ({
-    type: UPDATE_SALARY,
+export const UPDATE_SALARY_SUCCESS = 'UPDATE_SALARY_SUCCESS';
+export const updateSalarySuccess = salary => ({
+    type: UPDATE_SALARY_SUCCESS,
     salary
 });
 
-export const SETUP_USER_SALARY_ERROR = 'SETUP_USER_SALARY_ERROR';
-export const setupUserSalaryError = error => ({
-    type: SETUP_USER_SALARY_ERROR,
+export const UPDATE_SALARY_ERROR = 'UPDATE_SALARY_ERROR';
+export const updateSalaryError = error => ({
+    type: UPDATE_SALARY_ERROR,
     error
 });
 
-export const setupUserSalary = salary => (dispatch, getState) => {
+export const updateSalary = salary => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
     fetch(`${API_BASE_URL}/dashboard`, {
@@ -57,20 +57,49 @@ export const setupUserSalary = salary => (dispatch, getState) => {
     })
     .then(res => normalizeResponseErrors(res))
     .then(() => {
-        dispatch(updateSalary(salary));
+        dispatch(updateSalarySuccess(salary));
     })
     .catch(err => {
-        dispatch(setupUserSalaryError(err));
+        dispatch(updateSalaryError(err));
     });
 }
 
-export const ADD_BILL = 'ADD_BILL';
-export const addBill = (billName, billAmount, userId) => ({
-    type: ADD_BILL,
+export const ADD_BILL_SUCCESS = 'ADD_BILL_SUCCESS';
+export const addBillSuccess = (billId, billName, billAmount) => ({
+    type: ADD_BILL_SUCCESS,
+    billId,
     billName,
-    billAmount,
-    userId
+    billAmount
 });
+
+export const ADD_BILL_ERROR = 'ADD_BILL_ERROR';
+export const addBillError = error => ({
+    type: ADD_BILL_ERROR,
+    error
+});
+
+export const addBill = (bill, amount) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    fetch(`${API_BASE_URL}/bills`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            bill,
+            amount
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(res => {
+       const {id, bill, amount} = res;  
+      return dispatch(addBillSuccess(id, bill, parseFloat(amount)));
+    })
+    .catch(err => dispatch(addBillError(err)));
+}
 
 export const UPDATE_BILL = 'UPDATE_BILL';
 export const updateBill = (billName, billAmount, billId) => ({
@@ -134,9 +163,9 @@ export const deleteTransaction = (transactionId, categoryId) => ({
     categoryId
 });
 
-export const SETUP_STEP = 'SETUP_STEP';
-export const setupStep = (step) => ({
-    type: SETUP_STEP,
+export const SETUP_STEP_SUCCESS = 'SETUP_STEP_SUCCESS';
+export const setupStepSuccess = (step) => ({
+    type: SETUP_STEP_SUCCESS,
     step
 });
 
@@ -160,6 +189,6 @@ export const updateStep = (step) => (dispatch, getState) => {
         })
     })
     .then(res => normalizeResponseErrors(res))
-    .then(() => dispatch(setupStep(step)))
+    .then(() => dispatch(setupStepSuccess(step)))
     .catch(err => dispatch(setupStepError(err)));
 }

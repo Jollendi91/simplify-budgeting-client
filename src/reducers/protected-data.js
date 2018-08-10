@@ -21,7 +21,7 @@ export const simplifyReducer = (state = initialState, action) => {
             error: action.error
         });
 
-    } else if (action.type === actions.UPDATE_SALARY) {
+    } else if (action.type === actions.UPDATE_SALARY_SUCCESS) {
 
         return Object.assign({}, state, {
             user: {
@@ -30,18 +30,26 @@ export const simplifyReducer = (state = initialState, action) => {
             }
         });
 
-    } else if (action.type === actions.ADD_BILL) {
+    } else if (action.type === actions.UPDATE_SALARY_ERROR) {
+        return Object.assign({}, state, {
+            error: action.error
+        });
+    } else if (action.type === actions.ADD_BILL_SUCCESS) {
 
         return Object.assign({}, state, {
             user: {
                 ...state.user,
                 bills: [...state.user.bills, {
-                    id: uuidv4(),
+                    id: action.billId,
                     bill: action.billName,
-                    amount: action.billAmount,
-                    user_id: action.userId
+                    amount: action.billAmount
                 }]
             }
+        });
+
+    } else if (action.type === actions.ADD_BILL_ERROR) {
+        return Object.assign({}, state, {
+            error: action.error
         });
 
     } else if (action.type === actions.UPDATE_BILL) {
@@ -156,7 +164,7 @@ export const simplifyReducer = (state = initialState, action) => {
             } 
         });       	
 
-    } else if (action.type === actions.SETUP_STEP) {
+    } else if (action.type === actions.SETUP_STEP_SUCCESS) {
 
         return Object.assign({}, state, {
             user: {
@@ -164,7 +172,7 @@ export const simplifyReducer = (state = initialState, action) => {
                 setupStep: action.step
             }
         });
-    } else if (action.type === actions.SETUP_USER_SALARY_ERROR) {
+    } else if (action.type === actions.SETUP_STEP_ERROR) {
         return Object.assign({}, state, {
             error: action.error
         });
