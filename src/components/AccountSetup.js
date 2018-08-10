@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { setupStep, fetchProtectedUser } from '../actions/protected-data';
+import { updateStep, fetchProtectedUser } from '../actions/protected-data';
 
 import RequiresLogin from './requiresLogin';
 import MonthlyPaySetup from './MonthlyPaySetup';
@@ -14,10 +14,6 @@ import './AccountSetup.css';
 export class AccountSetup extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProtectedUser());
-    }
-
-   setStep(step) {
-        this.props.dispatch(setupStep(step));
     }
 
     render() {
@@ -39,8 +35,8 @@ export class AccountSetup extends React.Component {
                 <p>Step {this.props.step} / 3</p>
                 <MonthlyBillsSetup />
                 <div className="setup-buttons">
-                    <button onClick={() => this.setStep(1)}>Back</button>
-                    <button onClick={() => this.setStep(3)}>Next</button>
+                    <button onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
+                    <button onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
                 </div>
             </section>)
         } else if (this.props.step === 3) {
@@ -48,9 +44,9 @@ export class AccountSetup extends React.Component {
                 <p>Step {this.props.step} / 3</p>
                 <CategorySetup />
                 <div className="setup-buttons">
-                    <button onClick={() => this.setStep(2)}>Back</button>
+                    <button onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
                     <Link to='/dashboard'>
-                        <button onClick={() => this.setStep(null)}>Finish Setup</button>
+                        <button onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
                     </Link>
                 </div>
             </section>)
