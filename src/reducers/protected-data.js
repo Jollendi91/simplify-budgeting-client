@@ -61,8 +61,7 @@ export const simplifyReducer = (state = initialState, action) => {
                     bill.id === action.billId ? {
                         id: bill.id,
                         bill: action.billName,
-                        amount: action.billAmount,
-                        user_id: bill.user_id
+                        amount: action.billAmount
                     } : bill)
             }  
         });

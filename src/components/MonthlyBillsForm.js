@@ -15,7 +15,7 @@ export class MonthlyBillForm extends React.Component {
 
         return (
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                 <label htmlFor="bill">Description</label>
+                 <label htmlFor="bill">Bill</label>
                 <Field 
                     component={Input}
                     type="text"

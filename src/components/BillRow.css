@@ -1,0 +1,8 @@
+.update-bill-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bill-amount-input .form-input {
+    display: inline-block;
+}
