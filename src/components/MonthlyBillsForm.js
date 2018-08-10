@@ -13,8 +13,6 @@ export class MonthlyBillForm extends React.Component {
  
     render() {
 
-        const lessThan = (value, previousValue) => value > 0 ? value : previousValue;
-
         return (
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                  <label htmlFor="bill">Description</label>
@@ -31,8 +29,8 @@ export class MonthlyBillForm extends React.Component {
                     type="number"
                     name="amount"
                     id="amount"
+                    step="0.01"
                     min="0.01"
-                    normalize={lessThan}
                     validate={[required, notEmpty]}
                 />
                 <button disabled={this.props.pristine || this.props.submitting}>Add Bill</button>
