@@ -13,9 +13,19 @@ export class MonthlyBillForm extends React.Component {
  
     render() {
 
+        let errorMessage;
+        if (this.props.error) {
+            errorMessage = (
+                <div className="message message-error">
+                    {this.props.error}
+                </div>
+            );
+        }
+
         return (
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                  <label htmlFor="bill">Bill</label>
+                 {errorMessage}
                 <Field 
                     component={Input}
                     type="text"

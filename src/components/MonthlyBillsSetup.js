@@ -7,7 +7,7 @@ import BillRow from './BillRow';
 export function MonthlyBillsSetup(props) {
 
     const bills = props.bills.map((bill)=> 
-        <BillRow key={bill.id} {...bill} />
+        <BillRow key={bill.id} form={`bill-${bill.id}-update`}{...bill} />
     );
 
     return (

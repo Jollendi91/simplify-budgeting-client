@@ -24,18 +24,26 @@ export class BillRow extends React.Component {
 
     onSubmit(values) {
         const {bill, amount} = values;
-        this.props.dispatch(updateBill(this.props.id, bill, amount))
-            .then(this.setEditing());      
+        this.props.dispatch(updateBill(this.props.id, bill, amount)).then(() => this.setEditing()); 
     }
-
+    
     render() {
 
-            console.log(this.props);
+        let errorMessage;
+        if (this.props.error) {
+            errorMessage = (
+                <div className="message message-error">
+                    {this.props.error}
+                </div>
+            );
+        }
+
         if (this.state.editing) {
             return (
                 <tr>
                     <td className="table-form-container" colSpan="3">
-                        <form className="update-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                        <form className="update-bill-form" form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                            {errorMessage}
                             <div className="bill-name-input">
                                 <Field 
                                     component={Input}
@@ -85,6 +93,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps)(reduxForm({
-    form: `${this.props}-update-bill`,
-    onSubmitFail: (errors, dispatch) => dispatch(focus('update-bill', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch, submitError, props) => dispatch(focus(props.form, Object.keys(errors)[0]))
   })(BillRow));

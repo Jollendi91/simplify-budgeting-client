@@ -3,10 +3,8 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {login} from '../actions/auth';
 import {required, notEmpty} from '../validators';
-import {Link} from 'react-router-dom';
 
 import './LoginForm.css';
-
 
 export class LoginForm extends React.Component {
   onSubmit(values) {
@@ -25,6 +23,7 @@ export class LoginForm extends React.Component {
 
     return (
       <form className="login-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+        {error}
         <Field 
           component={Input}
           type="text"

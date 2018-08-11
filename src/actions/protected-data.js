@@ -45,7 +45,7 @@ export const updateSalaryError = error => ({
 export const updateSalary = salary => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
-    fetch(`${API_BASE_URL}/dashboard`, {
+   return fetch(`${API_BASE_URL}/dashboard`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export const addBillError = error => ({
 export const addBill = (bill, amount) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
-    fetch(`${API_BASE_URL}/bills`, {
+  return  fetch(`${API_BASE_URL}/bills`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export const updateBillError = error => ({
 export const updateBill = (id, bill, amount) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
-    fetch(`${API_BASE_URL}/bills/${id}`, {
+   return fetch(`${API_BASE_URL}/bills/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ export const setupStepError = error => ({
 export const updateStep = (step) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     
-    fetch(`${API_BASE_URL}/dashboard`, {
+    return fetch(`${API_BASE_URL}/dashboard`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
