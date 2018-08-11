@@ -8,7 +8,7 @@ import {addBill} from '../actions/protected-data';
 export class MonthlyBillForm extends React.Component {
     onSubmit(values) {
         const {bill, amount} = values;
-        return this.props.dispatch(addBill(bill, amount));
+        return this.props.dispatch(addBill(bill, amount)).then(() => this.props.reset());
     }
  
     render() {

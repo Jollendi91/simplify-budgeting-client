@@ -6,7 +6,6 @@ import Input from './input';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
 
 import './SignupForm.css';
-import LoginForm from './LoginForm';
 
 const passwordLength = length({min: 10, max: 72});
 const usernameLength = length({min: 8, max: 30});

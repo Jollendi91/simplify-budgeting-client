@@ -135,11 +135,31 @@ export const updateBill = (id, bill, amount) => (dispatch, getState) => {
     .catch(err => dispatch(updateBillError(err)));
 }
 
-export const DELETE_BILL = 'DELETE_BILL';
-export const deleteBill = (billId) => ({
-    type: DELETE_BILL,
+export const DELETE_BILL_SUCCESS = 'DELETE_BILL_SUCCESS';
+export const deleteBillSuccess = (billId) => ({
+    type: DELETE_BILL_SUCCESS,
     billId
 });
+
+export const DELETE_BILL_ERROR = 'DELETE_BILL_ERROR';
+export const deleteBillError = error => ({
+    type: DELETE_BILL_ERROR,
+    error
+});
+
+export const deleteBill = billId => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/bills/${billId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => dispatch(deleteBillSuccess(billId)))
+    .catch(err => dispatch(deleteBillError(err)));
+}
 
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const addCategory = (categoryName, categoryAmount, userId) => ({
