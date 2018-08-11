@@ -10,8 +10,8 @@ export function CategorySetup(props) {
 
 	let remainingAmount = (props.monthlySalary - props.billsTotal) - props.categoriesTotal;
 
-	let categories = props.categories.map((category, index) => 
-		<CatRow key={index} {...category} remainingAmount={remainingAmount}/>
+	let categories = props.categories.map((category) => 
+		<CatRow key={category.id} {...category} remainingAmount={remainingAmount} form={`category-${category.id}-update`}/>
 			)
 
     return (

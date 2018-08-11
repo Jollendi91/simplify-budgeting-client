@@ -1,0 +1,23 @@
+.update-category-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.update-category-form > div {
+    width: 24%;
+}
+
+.update-category-form .form-input {
+    display: inline-block;
+    width: 100%;
+}
+
+.form-input input {
+    max-width: 169px;
+    width: 100%;
+}
+
+.category-amount-input {
+    display: flex;
+}

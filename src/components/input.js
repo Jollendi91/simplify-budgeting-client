@@ -34,7 +34,7 @@ export default class Input extends React.Component {
                     ref={input => (this.input = input)}
                     step={this.props.step}
                     min={this.props.min}
-                    max={this.props.max}
+                    max={this.props.max} 
                 />
             </div>
         );

@@ -198,13 +198,39 @@ export const addCategory = (category, amount) => (dispatch, getState) => {
     .catch(err => dispatch(addCategoryError(err)))
 }
 
-export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
-export const updateCategory = (categoryName, categoryAmount, categoryId) => ({
-    type: UPDATE_CATEGORY,
+export const UPDATE_CATEGORY_SUCCESS = 'UPDATE_CATEGORY_SUCCESS';
+export const updateCategorySuccess = (categoryId, categoryName, categoryAmount) => ({
+    type: UPDATE_CATEGORY_SUCCESS,
+    categoryId,
     categoryName,
     categoryAmount,
-    categoryId
 });
+
+export const UPDATE_CATEGORY_ERROR = 'UPDATE_CATEGORY_ERROR';
+export const updateCategoryError = error => ({
+    type: UPDATE_CATEGORY_ERROR,
+    error
+});
+
+export const updateCategory = (categoryId, category, amount) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/categories/${categoryId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            id: categoryId,
+            category,
+            amount,
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => dispatch(updateCategorySuccess(categoryId, category, amount)))
+    .catch(err => dispatch(updateCategoryError(err)));
+}
 
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const deleteCategory = (categoryId) => ({
