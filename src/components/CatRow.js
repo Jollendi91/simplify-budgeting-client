@@ -61,7 +61,7 @@ export class CatRow extends React.Component {
             return (
                 <tr key={this.props.index}>
                     <td>{this.props.category}</td>
-                    <td>${this.props.amount.toFixed(2)}</td>
+                    <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                     <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
                     <td className="edit-buttons">
                         <button onClick={() => this.setEditing()}>Edit</button>
@@ -75,7 +75,7 @@ export class CatRow extends React.Component {
 
 const mapStateToProps = state => ({
     monthlySalary: state.simplify.user.monthlySalary,
-    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0)
 });
 
 export default connect(mapStateToProps)(CatRow);

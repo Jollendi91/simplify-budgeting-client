@@ -1,14 +1,10 @@
 import React from 'react';
-
 import {connect} from 'react-redux';
 
 import CategoryForm from './CategoryForm';
 import CatRow from './CatRow';
 
 import './CategorySetup.css';
-
-
-
 
 export function CategorySetup(props) {
 
@@ -48,7 +44,7 @@ export function CategorySetup(props) {
 					<p>${props.categoriesTotal.toFixed(2)}</p>
 				</div>
 			</section>
-            <CategoryForm/>
+            <CategoryForm max={remainingAmount}/>
 			<table className="categories-table">
 				<thead>
 					<tr>
@@ -68,7 +64,7 @@ export function CategorySetup(props) {
 const mapStateToProps = state => {
 	return {
 		categories: state.simplify.user.categories,
-		categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0),
+		categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0),
 		monthlySalary: state.simplify.user.monthlySalary,
 		billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
 		userId: state.simplify.user.id

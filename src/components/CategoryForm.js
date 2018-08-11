@@ -32,12 +32,12 @@ export class CategoryForm extends React.Component {
                         name="amount"
                         id="category-amount"
                         min="0.01"
-                        step="0.01"
                         max={this.props.max}
+                        step="0.01"
                         validate={[required, notEmpty]}
                     />
                 </div>
-                <button disabled={this.props.pristine || this.props.submitting}>Add Category</button>
+                <button disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add Category</button>
             </form>
         )
     }

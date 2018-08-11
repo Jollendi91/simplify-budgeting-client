@@ -161,13 +161,42 @@ export const deleteBill = billId => (dispatch, getState) => {
     .catch(err => dispatch(deleteBillError(err)));
 }
 
-export const ADD_CATEGORY = 'ADD_CATEGORY';
-export const addCategory = (categoryName, categoryAmount, userId) => ({
-    type: ADD_CATEGORY,
+export const ADD_CATEGORY_SUCCESS = 'ADD_CATEGORY_SUCCESS';
+export const addCategorySuccess = (categoryId, categoryName, categoryAmount) => ({
+    type: ADD_CATEGORY_SUCCESS,
+    categoryId, 
     categoryName,
-    categoryAmount,
-    userId
+    categoryAmount
 });
+
+export const ADD_CATEGORY_ERROR = 'ADD_CATEGORY_ERROR';
+export const addCategoryError = error => ({
+    type: ADD_CATEGORY_ERROR,
+    error
+});
+
+export const addCategory = (category, amount) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/categories`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            category,
+            amount
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(res => {
+        const {id, category, amount} = res;
+        return dispatch(addCategorySuccess(id, category, parseFloat(amount)));
+    })
+    .catch(err => dispatch(addCategoryError(err)))
+}
 
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 export const updateCategory = (categoryName, categoryAmount, categoryId) => ({
