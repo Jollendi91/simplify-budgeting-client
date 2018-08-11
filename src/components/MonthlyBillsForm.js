@@ -24,25 +24,29 @@ export class MonthlyBillForm extends React.Component {
 
         return (
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                 <label htmlFor="bill">Bill</label>
-                 {errorMessage}
-                <Field 
-                    component={Input}
-                    type="text"
-                    name="bill"
-                    id="bill"
-                    validate={[required, notEmpty]}
-                />
-                 <label htmlFor="amount">Amount</label>
-                 <Field 
-                    component={Input}
-                    type="number"
-                    name="amount"
-                    id="amount"
-                    step="0.01"
-                    min="0.01"
-                    validate={[required, notEmpty]}
-                />
+                <div>
+                    <label htmlFor="bill">Bill</label>
+                    {errorMessage}
+                    <Field 
+                        component={Input}
+                        type="text"
+                        name="bill"
+                        id="bill"
+                        validate={[required, notEmpty]}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="amount">Amount</label>
+                    <Field 
+                        component={Input}
+                        type="number"
+                        name="amount"
+                        id="amount"
+                        step="0.01"
+                        min="0.01"
+                        validate={[required, notEmpty]}
+                    />
+                </div>
                 <button disabled={this.props.pristine || this.props.submitting}>Add Bill</button>
             </form>
         )
@@ -51,5 +55,5 @@ export class MonthlyBillForm extends React.Component {
 
 export default reduxForm({
     form: 'bills',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('monthlySalary', 'monthly-salary'))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('bills', Object.keys(errors)[0]))
   })(connect()(MonthlyBillForm));

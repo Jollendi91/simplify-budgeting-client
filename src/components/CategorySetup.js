@@ -1,32 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+
 import {connect} from 'react-redux';
-import './CategorySetup.css';
-import { addCategory } from '../actions/protected-data';
+
+import CategoryForm from './CategoryForm';
 import CatRow from './CatRow';
+
+import './CategorySetup.css';
+
+
 
 
 export function CategorySetup(props) {
-	let buttonDisabled;
+
 	let remainingAmount = (props.monthlySalary - props.billsTotal) - props.categoriesTotal;
-
-	if (remainingAmount <= 0) {
-		buttonDisabled = true;
-	} else {
-		buttonDisabled = false;
-	}
-
-
-	let categoryName;
-	let categoryAmount;
-
-	function onSubmit(event) {
-		event.preventDefault();
-		props.dispatch(addCategory(categoryName.value, parseFloat(categoryAmount.value), props.userId));
-
-		categoryName.value = '';
-		categoryAmount.value = '';
-	}
 
 	let categories = props.categories.map((category, index) => 
 		<CatRow key={index} {...category} remainingAmount={remainingAmount}/>
@@ -62,39 +48,31 @@ export function CategorySetup(props) {
 					<p>${props.categoriesTotal.toFixed(2)}</p>
 				</div>
 			</section>
-            <form className="add-category-form" onSubmit={(event) => onSubmit(event)}>
-				<div>
-					<label htmlFor="category-name">Name</label>
-					<input type="text" name="category-name" id="category-name" ref={input => categoryName = input} required="true"/>
-				</div>
-				<div>
-					<label htmlFor="current-total">Amount</label>
-					<input type="number" name="allocation-amount" id="allocation-amount" min="1" step="0.01"  max={remainingAmount} ref={input => categoryAmount = input} required="true"/>
-				</div>
-				<button type="submit" disabled={buttonDisabled}>Add Category</button>
-            </form>
-				<table className="categories-table">
-					<thead>
-						<tr>
-							<th>Name</th>
-                            <th>Amount</th>
-							<th colspan="2">Percentage</th>
-						</tr>
-					</thead>
-					<tbody>
-						{categories}
-					</tbody>
-				</table>
+            <CategoryForm/>
+			<table className="categories-table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Amount</th>
+						<th colSpan="2">Percentage</th>
+					</tr>
+				</thead>
+				<tbody>
+					{categories}
+				</tbody>
+			</table>
 		</section>
     )
 }
 
-const mapStateToProps = state => ({
-	categories: state.simplify.user.categories,
-	categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0),
-	monthlySalary: state.simplify.user.monthlySalary,
-	billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
-	userId: state.simplify.user.id
-})
+const mapStateToProps = state => {
+	return {
+		categories: state.simplify.user.categories,
+		categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0),
+		monthlySalary: state.simplify.user.monthlySalary,
+		billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+		userId: state.simplify.user.id
+	}
+}
 
 export default connect(mapStateToProps)(CategorySetup);
