@@ -7,9 +7,7 @@ import requiresLogin from './requiresLogin';
 import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
 
-
 import './Dashboard.css';
-
 
 export class Dashboard extends React.Component {
     constructor(props) {
@@ -25,7 +23,6 @@ export class Dashboard extends React.Component {
     }
 
     mouseOverHandler(d, e) {
-        console.log(e);
         this.setState({
           showToolTip: true,
           top: e.y,
@@ -36,7 +33,6 @@ export class Dashboard extends React.Component {
       }
     
       mouseMoveHandler( d, e) {
-          console.log(d, e);
         if (this.state.showToolTip) {
           this.setState({top: e.y, left: e.x});
         }
@@ -91,9 +87,6 @@ export class Dashboard extends React.Component {
             });
         }
         
-
-        console.log(this.props.remainingMoney);
-        
         return (
             <div>
                 <div className='dashboard-container'>
@@ -122,14 +115,14 @@ export class Dashboard extends React.Component {
 const mapStateToProps = state => {
     let categoryTotal;
         if (state.simplify.user.categories) {
-            categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0);
+            categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0);
         } else {
             categoryTotal = 0;
         }
 
     let billTotal;
         if (state.simplify.user.bills) {
-            billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0);
+            billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0);
         } else {
             billTotal = 0;
         }

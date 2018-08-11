@@ -232,11 +232,31 @@ export const updateCategory = (categoryId, category, amount) => (dispatch, getSt
     .catch(err => dispatch(updateCategoryError(err)));
 }
 
-export const DELETE_CATEGORY = 'DELETE_CATEGORY';
-export const deleteCategory = (categoryId) => ({
-    type: DELETE_CATEGORY,
+export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
+export const deleteCategorySuccess = categoryId => ({
+    type: DELETE_CATEGORY_SUCCESS,
     categoryId
 });
+
+export const DELETE_CATEGORY_ERROR = 'DELETE_CATEGORY_ERROR';
+export const deleteCategoryError = error => ({
+    type: DELETE_CATEGORY_ERROR,
+    error
+});
+
+export const deleteCategory = categoryId => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/categories/${categoryId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => dispatch(deleteCategorySuccess(categoryId)))
+    .catch(err => dispatch(deleteCategoryError(err)));
+}
 
 export const ADD_TRANSACTION = 'ADD_TRANSACTION';
 export const addTransaction = (transName, transDate, transAmount, categoryId) => ({

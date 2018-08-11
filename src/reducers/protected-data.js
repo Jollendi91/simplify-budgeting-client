@@ -123,13 +123,19 @@ export const simplifyReducer = (state = initialState, action) => {
             error: action.error
         });
 
-    } else if (action.type === actions.DELETE_CATEGORY) {
+    } else if (action.type === actions.DELETE_CATEGORY_SUCCESS) {
 
         return Object.assign({}, state, {
             user: {
                 ...state.user,
                 categories: state.user.categories.filter(category => category.id !== action.categoryId)
             }
+        });
+
+    } else if (action.type === actions.DELETE_CATEGORY_ERROR) {
+
+        return Object.assign({}, state, {
+            error: action.error
         });
 
     } else if (action.type === actions.ADD_TRANSACTION) {

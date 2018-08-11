@@ -37,7 +37,6 @@ export class CatRow extends React.Component {
                 updateAmount = this.props.currentForm.values.amount;
             }
         }
-        console.log(updateAmount)
 
         if (this.state.editing) {
           return  (
@@ -61,7 +60,7 @@ export class CatRow extends React.Component {
                                 id="category-amount-update"
                                 step="0.01"
                                 min="0.01"
-                                //max={this.props.remainingAmount}
+                                max={this.props.remainingAmount}
                                 validate={[required, notEmpty]}
                             />
                         </div>

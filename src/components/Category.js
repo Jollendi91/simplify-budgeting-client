@@ -1,25 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import {PieChart} from 'react-easy-chart';
 import NavBar from './NavBar';
 import  TransRow  from './TransRow';
 import RequiresLogin from './requiresLogin';
 
-import { addTransaction } from '../actions/protected-data';
+import { addTransaction} from '../actions/protected-data';
 
 import './Category.css';
 
+export class Category extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
 
-
-
-export function Category(props) {
-
-    const transactions = props.category.transactions.map((transaction, index) =>
-        <TransRow key={index} categoryId={props.category.id} {...transaction} />
+        if (this.props.category === null) {
+           return <Redirect to="/account-setup"/>
+        }
+        
+        const transactions = this.props.category.transactions.map((transaction, index) =>
+        <TransRow key={index} categoryId={this.props.category.id} {...transaction} />
     );
 
-    const transactionsTotal = props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
+    const transactionsTotal = this.props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
     
     let transactionName;
     let transactionDate;
@@ -27,7 +33,7 @@ export function Category(props) {
 
     function onSubmit(event) {
         event.preventDefault();
-        props.dispatch(addTransaction(transactionName.value, transactionDate.value, parseFloat(transactionAmount.value), props.category.id));
+        this.props.dispatch(addTransaction(transactionName.value, transactionDate.value, parseFloat(transactionAmount.value), this.props.category.id));
 
         transactionName.value = '';
         transactionDate.value = '';
@@ -43,10 +49,10 @@ export function Category(props) {
         });
     };
 
-    if (props.category.amount - transactionsTotal > 0) {
+    if (parseFloat(this.props.category.amount) - transactionsTotal > 0) {
         data.push({
             key: 'Remaining',
-            value: props.category.amount - transactionsTotal
+            value: this.props.category.amount - transactionsTotal
         });
     }
 
@@ -56,9 +62,9 @@ export function Category(props) {
             <div className="category-container">
                 <header>
                     <section>
-                        <h1>{props.category.category}</h1>
+                        <h1>{this.props.category.category}</h1>
                         <div className="category-header">
-                            <h2>${props.category.amount.toFixed(2)}/Month</h2>
+                            <h2>${parseFloat(this.props.category.amount).toFixed(2)}/Month</h2>
                         </div>
                         <div className="filter-transactions">
                             <h3>July</h3>
@@ -88,7 +94,7 @@ export function Category(props) {
                             size={350}
                             innerHoleSize={200}
                             data={data}/>
-                        <p>Spent so far: ${transactionsTotal.toFixed(2)} / ${props.category.amount.toFixed(2)}</p>
+                        <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
                     </section>
                 </header>
                 <main>
@@ -129,12 +135,21 @@ export function Category(props) {
             </div>
         </div>
     );
+    }
+
+    
 };
 
 
-const mapStateToProps = (state, props) => ({
-    category: state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId)
-});
+const mapStateToProps = (state, props) => {
+    let category = null;
+    if (state.simplify.user.categories) {
+        category = state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId)
+    }
+    return {
+    reloaded: state.simplify.user === '',
+    category: category
+}};
 
 
 export default RequiresLogin()(connect(mapStateToProps)(Category));
