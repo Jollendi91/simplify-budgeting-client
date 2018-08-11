@@ -258,14 +258,46 @@ export const deleteCategory = categoryId => (dispatch, getState) => {
     .catch(err => dispatch(deleteCategoryError(err)));
 }
 
-export const ADD_TRANSACTION = 'ADD_TRANSACTION';
-export const addTransaction = (transName, transDate, transAmount, categoryId) => ({
-    type: ADD_TRANSACTION,
+export const ADD_TRANSACTION_SUCCESS = 'ADD_TRANSACTION_SUCCESS';
+export const addTransactionSuccess = (transId, transName, transDate, transAmount, categoryId) => ({
+    type: ADD_TRANSACTION_SUCCESS,
+    transId,
     transName, 
     transDate,
     transAmount,
     categoryId
 });
+
+export const ADD_TRANSACTION_ERROR = 'ADD_TRANSACTION_ERROR';
+export const addTransactionError = error => ({
+    type: ADD_TRANSACTION_ERROR,
+    error
+});
+
+export const addTransaction = (transaction, date, amount, categoryId) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/transactions/category/${categoryId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            transaction,
+            date,
+            amount,
+            category_id: categoryId 
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(res => {
+        const {id, transaction, date, amount} = res;
+      return  dispatch(addTransactionSuccess(id, transaction, date, amount, categoryId));
+    })
+    .catch(err => dispatch(addTransactionError(err)));
+}
 
 export const UPDATE_TRANSACTION = 'UPDATE_TRANSACTION';
 export const updateTransaction = (transName, transDate, transAmount, transactionId, categoryId) => ({

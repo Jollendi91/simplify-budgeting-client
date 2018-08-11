@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 
 import {PieChart} from 'react-easy-chart';
 import NavBar from './NavBar';
+import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
 import RequiresLogin from './requiresLogin';
 
@@ -20,124 +21,95 @@ export class Category extends React.Component {
         if (this.props.category === null) {
            return <Redirect to="/account-setup"/>
         }
-        
-        const transactions = this.props.category.transactions.map((transaction, index) =>
-        <TransRow key={index} categoryId={this.props.category.id} {...transaction} />
-    );
 
-    const transactionsTotal = this.props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
-    
-    let transactionName;
-    let transactionDate;
-    let transactionAmount;
+        const transactions = this.props.category.transactions.map(transaction =>
+        <TransRow key={transaction.id} categoryId={this.props.category.id} {...transaction} />
+        );
 
-    function onSubmit(event) {
-        event.preventDefault();
-        this.props.dispatch(addTransaction(transactionName.value, transactionDate.value, parseFloat(transactionAmount.value), this.props.category.id));
+        const transactionsTotal = this.props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
 
-        transactionName.value = '';
-        transactionDate.value = '';
-        transactionAmount.value = '';
-    };
+        let data = [];
 
-    let data = [];
+        if (transactionsTotal) {
+            data.push({
+                key: 'Spent',
+                value: transactionsTotal
+            });
+        };
 
-    if (transactionsTotal) {
-        data.push({
-            key: 'Spent',
-            value: transactionsTotal
-        });
-    };
+        if (parseFloat(this.props.category.amount) - transactionsTotal > 0) {
+            data.push({
+                key: 'Remaining',
+                value: this.props.category.amount - transactionsTotal
+            });
+        }
 
-    if (parseFloat(this.props.category.amount) - transactionsTotal > 0) {
-        data.push({
-            key: 'Remaining',
-            value: this.props.category.amount - transactionsTotal
-        });
-    }
-
-    return (
-        <div>
-            <NavBar page={'dashboard'}/>
-            <div className="category-container">
-                <header>
-                    <section>
-                        <h1>{this.props.category.category}</h1>
-                        <div className="category-header">
-                            <h2>${parseFloat(this.props.category.amount).toFixed(2)}/Month</h2>
-                        </div>
-                        <div className="filter-transactions">
-                            <h3>July</h3>
-                            <select name="transaction-data-month" defaultValue="july">
-                                <option value="january">January</option>
-                                <option value="february">February</option>
-                                <option value="march">March</option>
-                                <option value="april">April</option>
-                                <option value="may">May</option>
-                                <option value="june">June</option>
-                                <option value="july">July</option>
-                                <option value="august">August</option>
-                                <option value="september">September</option>
-                                <option value="october">October</option>
-                                <option value="november">November</option>
-                                <option value="december">December</option>
-                            </select>
-                            <select name="transaction-data-year">
-                                <option>2017</option>
-                                <option selected>2018</option>
-                            </select>
-                        </div>
-                    </section>
-                    <section className="progress-bar">
-                        <PieChart 
-                            labels
-                            size={350}
-                            innerHoleSize={200}
-                            data={data}/>
-                        <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
-                    </section>
-                </header>
-                <main>
-                    <section>
-                        <form className="add-transaction-form" onSubmit={(event) => onSubmit(event)}>
-                            <div>
-                                <label htmlFor="transaction-description">Description</label>
-                                <input type="type" name="transaction-description" id="transaction-description" ref={input => transactionName = input} required="true"/>
+        return (
+            <div>
+                <NavBar page={'dashboard'}/>
+                <div className="category-container">
+                    <header>
+                        <section>
+                            <h1>{this.props.category.category}</h1>
+                            <div className="category-header">
+                                <h2>${parseFloat(this.props.category.amount).toFixed(2)}/Month</h2>
                             </div>
-                            <div>
-                                <label htmlFor="transaction-date">Transaction Date</label>
-                                <input type="date" name="transaction-date" id="transaction-date" ref={input => transactionDate = input} required="true"/>
+                            <div className="filter-transactions">
+                                <h3>July</h3>
+                                <select name="transaction-data-month" defaultValue="july">
+                                    <option value="january">January</option>
+                                    <option value="february">February</option>
+                                    <option value="march">March</option>
+                                    <option value="april">April</option>
+                                    <option value="may">May</option>
+                                    <option value="june">June</option>
+                                    <option value="july">July</option>
+                                    <option value="august">August</option>
+                                    <option value="september">September</option>
+                                    <option value="october">October</option>
+                                    <option value="november">November</option>
+                                    <option value="december">December</option>
+                                </select>
+                                <select name="transaction-data-year">
+                                    <option>2017</option>
+                                    <option selected>2018</option>
+                                </select>
                             </div>
+                        </section>
+                        <section className="progress-bar">
+                            <PieChart 
+                                labels
+                                size={350}
+                                innerHoleSize={200}
+                                data={data}/>
+                            <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
+                        </section>
+                    </header>
+                    <main>
+                        <section>
+                            <TransactionForm categoryId={this.props.category.id}/>
+                        </section>
+                        <section>
                             <div>
-                                <label htmlFor="account-amount">Amount</label>
-                                <input type="number" step="0.01" min="0" name="account-amount" id="account-amount" ref={input => transactionAmount = input} required="true"/>
+                                <table className="categories-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Date</th>
+                                            <th colSpan="2">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {transactions}
+                                    </tbody>
+                                </table>
                             </div>
-                            <button type="submit">Add Transaction</button>
-                        </form>
-                    </section>
-                    <section>
-                        <div>
-                            <table className="categories-table">
-                                <thead>
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th colSpan="2">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   {transactions}
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                </main>
+                        </section>
+                    </main>
+                </div>
             </div>
-        </div>
-    );
+        );
     }
-
-    
 };
 
 

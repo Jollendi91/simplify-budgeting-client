@@ -13,9 +13,7 @@ export class CatRow extends React.Component {
         super(props);
 
         this.state = {
-            editing: false,
-            categoryName: this.props.category,
-            categoryAmount: this.props.amount
+            editing: false
         }
     }
 
