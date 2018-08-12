@@ -9,6 +9,7 @@ import RequiresLogin from './requiresLogin'
 import './AccountSetup.css';
 
 export function EditProfile(props) {
+    console.log(props);
         return (
         <div>
             <main className="account-setup-container">

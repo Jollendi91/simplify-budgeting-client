@@ -299,15 +299,42 @@ export const addTransaction = (transaction, date, amount, categoryId) => (dispat
     .catch(err => dispatch(addTransactionError(err)));
 }
 
-export const UPDATE_TRANSACTION = 'UPDATE_TRANSACTION';
-export const updateTransaction = (transName, transDate, transAmount, transactionId, categoryId) => ({
-    type: UPDATE_TRANSACTION,
+export const UPDATE_TRANSACTION_SUCCESS = 'UPDATE_TRANSACTION_SUCCESS';
+export const updateTransactionSuccess = (transactionId, transName, transDate, transAmount, categoryId) => ({
+    type: UPDATE_TRANSACTION_SUCCESS,
+    transactionId,
     transName,
     transDate, 
     transAmount,
-    transactionId,
     categoryId
 });
+
+export const UPDATE_TRANSACTION_ERROR = 'UPDATE_TRANSACTION_ERROR';
+export const updateTransactionError = error => ({
+    type: UPDATE_TRANSACTION_ERROR,
+    error
+});
+
+export const updateTransaction = (id, transaction, date, amount, categoryId) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/transactions/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            id, 
+            transaction,
+            date,
+            amount
+        })
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => dispatch(updateTransactionSuccess(id, transaction, date, amount, categoryId)))
+    .catch(err => dispatch(updateTransactionError(err))); 
+}
 
 export const DELETE_TRANSACTION = 'DELETE_TRANSACTION';
 export const deleteTransaction = (transactionId, categoryId) => ({

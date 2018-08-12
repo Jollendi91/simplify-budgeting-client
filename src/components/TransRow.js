@@ -23,6 +23,11 @@ export class TransRow extends React.Component {
         });
     }
 
+    onSubmit(values) {
+        const {transaction, date, amount} = values;
+        return this.props.dispatch(updateTransaction(this.props.id, transaction, date, amount, this.props.categoryId)).then(() => this.setEditing());
+    }
+
     render() {
         if (this.state.editing) {
             return (

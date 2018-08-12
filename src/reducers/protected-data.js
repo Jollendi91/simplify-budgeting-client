@@ -162,7 +162,7 @@ export const simplifyReducer = (state = initialState, action) => {
             error: action.error
         });
 
-    } else if (action.type === actions.UPDATE_TRANSACTION) {
+    } else if (action.type === actions.UPDATE_TRANSACTION_SUCCESS) {
 
         // Find a category that matches the category ID then map over its transactions and update transaction that matches transaction ID
         return Object.assign({}, state, {
@@ -171,14 +171,19 @@ export const simplifyReducer = (state = initialState, action) => {
                 categories: state.user.categories.map(category => category.id === action.categoryId ? {
                     ...category,
                     transactions: category.transactions.map(transaction => transaction.id === action.transactionId ? {
-                        id: transaction.id,
+                        ...transaction,
                         transaction: action.transName,
                         date: action.transDate,
-                        amount: action.transAmount,
-                        category_id: transaction.category_id
+                        amount: action.transAmount
                     } : transaction)
                  } : category)
             } 
+        });
+
+    } else if (action.type === actions.ADD_TRANSACTION_ERROR) {
+
+        return Object.assign({}, state, {
+            error: action.error
         });
 
     } else if (action.type === actions.DELETE_TRANSACTION) {
