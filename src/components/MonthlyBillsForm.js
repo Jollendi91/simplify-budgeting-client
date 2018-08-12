@@ -24,7 +24,7 @@ export class MonthlyBillForm extends React.Component {
 
         return (
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                <div>
+                <div className="form-input-container">
                     <label htmlFor="bill">Bill</label>
                     {errorMessage}
                     <Field 
@@ -35,7 +35,7 @@ export class MonthlyBillForm extends React.Component {
                         validate={[required, notEmpty]}
                     />
                 </div>
-                <div>
+                <div className="form-input-container">
                     <label htmlFor="amount">Amount</label>
                     <Field 
                         component={Input}

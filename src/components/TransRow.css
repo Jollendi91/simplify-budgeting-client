@@ -1,17 +1,18 @@
-.update-bill-form {
+.update-transaction-form {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.update-bill-form  .form-input-container {
+.update-transaction-form .form-input-container {
     width: 24%;
 }
-.update-bill-form .form-input {
+
+.update-transaction-form .form-input {
     display: inline-block;
     width: 100%;
 }
 
-.bill-amount-input {
+.transaction-amount-input {
     display: flex;
 }

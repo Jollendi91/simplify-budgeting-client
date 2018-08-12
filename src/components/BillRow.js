@@ -44,7 +44,7 @@ export class BillRow extends React.Component {
                     <td className="table-form-container" colSpan="3">
                         <form className="update-bill-form" form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             {errorMessage}
-                            <div className="bill-name-input">
+                            <div className="form-input-container">
                                 <Field 
                                     component={Input}
                                     type="text"
@@ -53,7 +53,7 @@ export class BillRow extends React.Component {
                                     validate={[required, notEmpty]}
                                 />
                             </div>
-                            <div className="bill-amount-input">
+                            <div className="form-input-container bill-amount-input">
                                 $<Field
                                     component={Input}
                                     type="number"

@@ -23,7 +23,7 @@ export class Category extends React.Component {
         }
 
         const transactions = this.props.category.transactions.map(transaction =>
-        <TransRow key={transaction.id} categoryId={this.props.category.id} {...transaction} />
+        <TransRow key={transaction.id} categoryId={this.props.category.id} {...transaction} form={`transaction-${transaction.id}-update`}/>
         );
 
         const transactionsTotal = this.props.category.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);

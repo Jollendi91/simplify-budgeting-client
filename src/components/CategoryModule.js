@@ -16,7 +16,7 @@ const mapStateToProps = (state, props) => {
     let currentCategory = state.simplify.user.categories.find(category => category.id === props.id);
     let transactionAmount;
     if (currentCategory.transactions) {
-        transactionAmount = currentCategory.transactions.reduce((accumulator, currentTransaction) => accumulator + currentTransaction.amount, 0);
+        transactionAmount = currentCategory.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
     } else {
         transactionAmount = 0;
     }
