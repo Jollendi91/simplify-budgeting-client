@@ -186,7 +186,7 @@ export const simplifyReducer = (state = initialState, action) => {
             error: action.error
         });
 
-    } else if (action.type === actions.DELETE_TRANSACTION) {
+    } else if (action.type === actions.DELETE_TRANSACTION_SUCCESS) {
 
         return Object.assign({}, state, {
             user: {
@@ -198,6 +198,12 @@ export const simplifyReducer = (state = initialState, action) => {
             } 
         });       	
 
+    } else if (action.type === actions.DELETE_TRANSACTION_ERROR) {
+
+        return Object.assign({}, state, {
+            error: action.error
+        });
+        
     } else if (action.type === actions.SETUP_STEP_SUCCESS) {
 
         return Object.assign({}, state, {

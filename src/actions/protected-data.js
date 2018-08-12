@@ -336,12 +336,32 @@ export const updateTransaction = (id, transaction, date, amount, categoryId) => 
     .catch(err => dispatch(updateTransactionError(err))); 
 }
 
-export const DELETE_TRANSACTION = 'DELETE_TRANSACTION';
-export const deleteTransaction = (transactionId, categoryId) => ({
-    type: DELETE_TRANSACTION,
+export const DELETE_TRANSACTION_SUCCESS = 'DELETE_TRANSACTION_SUCCESS';
+export const deleteTransactionSuccess = (transactionId, categoryId) => ({
+    type: DELETE_TRANSACTION_SUCCESS,
     transactionId,
     categoryId
 });
+
+export const DELETE_TRANSACTION_ERROR = 'DELETE_TRANSACTION_ERROR';
+export const deleteTransactionError = error => ({
+    type: DELETE_TRANSACTION_ERROR,
+    error
+});
+
+export const deleteTransaction = (transactionId, categoryId) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/transactions/${transactionId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(() => dispatch(deleteTransactionSuccess(transactionId, categoryId)))
+    .catch(err => dispatch(deleteTransactionError(err)));
+}
 
 export const SETUP_STEP_SUCCESS = 'SETUP_STEP_SUCCESS';
 export const setupStepSuccess = (step) => ({

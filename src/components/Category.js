@@ -70,9 +70,9 @@ export class Category extends React.Component {
                                     <option value="november">November</option>
                                     <option value="december">December</option>
                                 </select>
-                                <select name="transaction-data-year">
-                                    <option>2017</option>
-                                    <option selected>2018</option>
+                                <select name="transaction-data-year" defaultValue="2018">
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
                                 </select>
                             </div>
                         </section>
