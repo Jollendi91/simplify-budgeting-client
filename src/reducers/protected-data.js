@@ -138,6 +138,28 @@ export const simplifyReducer = (state = initialState, action) => {
             error: action.error
         });
 
+    } else if (action.type === actions.FETCH_TRANSACTIONS_SUCCESS) {
+        const currentCategory = state.user.categories.find(category => category.id === action.categoryId);
+        
+        //Only return transactions that are not already in the state
+        const newTransactions = action.transactions.filter(transaction => !currentCategory.transactions.some(currentTransaction => currentTransaction.id === transaction.id));
+        
+        return Object.assign({}, state, {
+            user: {
+                ...state.user,
+                categories: state.user.categories.map(category => category.id === action.categoryId ? {
+                    ...category,
+                    transactions: [...category.transactions, ...newTransactions]
+                }: category)
+            }
+        });
+
+    } else if (action.type === actions.FETCH_TRANSACTIONS_ERROR) {
+
+        return Object.assign({}, state, {
+            error: action.error
+        });
+
     } else if (action.type === actions.ADD_TRANSACTION_SUCCESS) {
 
         // Find the category that matches category ID and add a transaction

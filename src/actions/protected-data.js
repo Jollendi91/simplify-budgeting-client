@@ -258,6 +258,34 @@ export const deleteCategory = categoryId => (dispatch, getState) => {
     .catch(err => dispatch(deleteCategoryError(err)));
 }
 
+export const FETCH_TRANSACTIONS_SUCCESS = 'FETCH_TRANSACTIONS_SUCCESS';
+export const fetchTransactionsSuccess = (transactions, categoryId) => ({
+    type: FETCH_TRANSACTIONS_SUCCESS,
+    transactions, 
+    categoryId
+});
+
+export const FETCH_TRANSACTIONS_ERROR = 'FETCH_TRANSACTIONS_ERROR';
+export const fetchTransactionsError = error => ({
+    type: FETCH_TRANSACTIONS_ERROR,
+    error
+});
+
+export const fetchTransactions = (month, year, categoryId) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`${API_BASE_URL}/transactions/category/${categoryId}?year=${year}&month=${month}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(res => dispatch(fetchTransactionsSuccess(res.transactions, categoryId)))
+    .catch(err => dispatch(fetchTransactionsError(err)));
+}
+
 export const ADD_TRANSACTION_SUCCESS = 'ADD_TRANSACTION_SUCCESS';
 export const addTransactionSuccess = (transId, transName, transDate, transAmount, categoryId) => ({
     type: ADD_TRANSACTION_SUCCESS,
