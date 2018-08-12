@@ -8,8 +8,8 @@ import {fetchTransactions} from '../actions/protected-data';
 export class FilterForm extends React.Component {
     onSubmit(values) {
         const {filterMonth, filterYear} = values;
-        this.props.updateFilters(filterMonth, filterYear);
-      
+        this.props.updateFilters(parseInt(filterMonth), parseInt(filterYear));
+
        return this.props.dispatch(fetchTransactions(parseInt(filterMonth), parseInt(filterYear), this.props.categoryId));
 
     }

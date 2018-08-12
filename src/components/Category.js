@@ -39,7 +39,7 @@ export class Category extends React.Component {
         
 
         // Set date to filter transacitions from the store
-        const filterDate = moment(new Date(this.state.fitlerYear, this.state.filterMonth));
+        const filterDate = moment(new Date(this.state.filterYear, this.state.filterMonth));
         let firstDayMonth = filterDate.startOf('month').toISOString();
         let lastDayMonth = filterDate.endOf('month').toISOString();
 
