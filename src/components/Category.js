@@ -115,8 +115,8 @@ export class Category extends React.Component {
                                 <table className="categories-table">
                                     <thead>
                                         <tr>
-                                            <th>Description</th>
-                                            <th>Date</th>
+                                            <th colSpan="1">Description</th>
+                                            <th colSpan="1">Date</th>
                                             <th colSpan="2">Amount</th>
                                         </tr>
                                     </thead>

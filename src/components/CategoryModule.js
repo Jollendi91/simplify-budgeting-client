@@ -7,7 +7,7 @@ export function CategoryModule(props) {
     return (
         <section className="module">
             <header><h1>{props.category}</h1></header>
-            <h2>Remaining ${props.amount - props.transactionAmount}</h2>
+            <h2>Remaining ${(props.amount - props.transactionAmount).toFixed(2)}</h2>
         </section>
     )
 }

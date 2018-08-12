@@ -34,9 +34,9 @@ export class CatRow extends React.Component {
             if (this.props.currentForm.values) {
                 updateAmount = this.props.currentForm.values.amount;
             }
-        }
-
-        if (this.state.editing) {
+        };
+           
+         if (this.state.editing) {
           return  (
             <tr>
                 <td className="category-form-container" colSpan="4">
@@ -58,7 +58,7 @@ export class CatRow extends React.Component {
                                 id="category-amount-update"
                                 step="0.01"
                                 min="0.01"
-                                max={this.props.remainingAmount}
+                                max={parseFloat(this.props.amount) + this.props.max}
                                 validate={[required, notEmpty]}
                             />
                         </div>
