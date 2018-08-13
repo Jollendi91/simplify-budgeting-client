@@ -10,15 +10,22 @@ import Category from './Category';
 import Bills from './Bills';
 import NavBar from './NavBar';
 import {refreshAuthToken} from '../actions/auth';
+import {fetchProtectedUser} from '../actions/protected-data';
 
 export class Simplify extends React.Component {
+
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
             this.startPeriodicRefresh();
         } else if (prevProps.loggedIn && !this.props.loggedIn) {
             this.stopPeriodicRefresh();
         }
+
+        if (this.props.loggedIn && this.props.notLoaded) {
+            this.props.dispatch(fetchProtectedUser());
+        }
     }
+
 
     componentWillUnmount() {
         this.stopPeriodicRefresh();
@@ -62,7 +69,8 @@ export class Simplify extends React.Component {
 
 const mapStateToProps = state => ({
     pathname: state.router.location.pathname,
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    notLoaded: state.simplify.user.id === null
 });
 
 export default connect(mapStateToProps)(Simplify);

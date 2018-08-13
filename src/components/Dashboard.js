@@ -58,15 +58,11 @@ export class Dashboard extends React.Component {
 
     render() {
 
-        if (this.props.step !== null) {
-            return <Redirect to="/account-setup" />
-        }
-
-    const categories = this.props.categories.map((category, index) => 
+    	const categories = this.props.categories.map((category, index) => 
             <Link key={index} to={`category/${category.id}`}>
                 <CategoryModule key={category.id} {...category} />
             </Link>
-        )
+        );
 
         const data = this.props.categories.map(category => ({
             key: category.category,

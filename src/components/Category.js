@@ -33,8 +33,8 @@ export class Category extends React.Component {
 
     render() {
 
-        if (this.props.category === null) {
-           return <Redirect to="/account-setup"/>
+        if (this.props.category === undefined) {
+           return <Redirect to="/dashboard"/>
         }
         
 

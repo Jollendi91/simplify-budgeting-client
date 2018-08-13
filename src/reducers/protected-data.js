@@ -3,7 +3,14 @@ import * as actions from '../actions/protected-data';
 const uuidv4 = require('uuid/v4');
 
 const initialState = {
-    user: '',
+    user: {
+        id: null,
+        username: '',
+        setupStep: null,
+        monthlySalary: '0',
+        bills: [],
+        categories: []
+    },
     error: null
 };
 

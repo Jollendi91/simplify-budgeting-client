@@ -12,10 +12,7 @@ import CategorySetup from './CategorySetup';
 import './AccountSetup.css';
 
 export class AccountSetup extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(fetchProtectedUser());
-    }
-
+   
     render() {
         
         if (this.props.step === null) {
