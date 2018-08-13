@@ -140,11 +140,13 @@ const mapStateToProps = (state, props) => {
     if (state.simplify.user.categories) {
         category = state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId)
     }
+
     return {
-    reloaded: state.simplify.user === '',
-    category: category,
-    initialValues: state.filterMonth
-}};
+        reloaded: state.simplify.user === '',
+        category: category,
+        initialValues: state.filterMonth
+    }
+};
 
 
 export default RequiresLogin()(connect(mapStateToProps)(Category));
