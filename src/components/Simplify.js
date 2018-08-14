@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import LandingPage from './LandingPage';
@@ -9,38 +9,68 @@ import Dashboard from './Dashboard';
 import Category from './Category';
 import Bills from './Bills';
 import NavBar from './NavBar';
+import {refreshAuthToken} from '../actions/auth';
+import {fetchProtectedUser} from '../actions/protected-data';
 
-export function Simplify(props) {
+export class Simplify extends React.Component {
 
-    return (
+    componentDidUpdate(prevProps) {
+        if (!prevProps.loggedIn && this.props.loggedIn) {
+            this.startPeriodicRefresh();
+        } else if (prevProps.loggedIn && !this.props.loggedIn) {
+            this.stopPeriodicRefresh();
+        }
+
+        if (this.props.loggedIn && this.props.notLoaded) {
+            this.props.dispatch(fetchProtectedUser());
+        }
+    }
+
+
+    componentWillUnmount() {
+        this.stopPeriodicRefresh();
+    }
+
+    startPeriodicRefresh() {
+        this.refreshInterval = setInterval(
+            () => this.props.dispatch(refreshAuthToken()),
+            60 * 60 * 1000
+        )
+    }
+
+    stopPeriodicRefresh() {
+        if (!this.refreshInterval) {
+            return;
+        }
+        clearInterval(this.refreshInterval);
+    }
+
+    render() {
+        return (
             <div className="app-container">
-                <NavBar page={props.pathname} />
+                <NavBar page={this.props.pathname} />
                 
                 <Route exact path="/" component={LandingPage}/>
 
-                <Route exact path="/account-setup" render={() => (
-                props.step === null ? ( 
-                    <Redirect to="/dashboard" />
-                ) : (
-                <AccountSetup type={"account-setup"}/>))}/>
+                <Route exact path="/account-setup" component={AccountSetup}/>
 
-                <Route exact path="/edit-profile" component={() => <EditProfile type={"edit-profile"}/>}/>
+                <Route exact path="/edit-profile" component={EditProfile}/>
 
-                <Route exact path="/dashboard" component={() => <Dashboard categories={props.categories}/>}/>
+                <Route exact path="/dashboard" component={Dashboard}/>
 
                 <Route exact path="/category/:categoryId" component={Category} />
 
                 <Route exact path='/bills' component={Bills} />
 
             </div>
-    )
+        )
+    }  
 };
 
 const mapStateToProps = state => ({
-    page: state.simplify.page,
-    categories: state.simplify.categories,
     pathname: state.router.location.pathname,
-    step: state.simplify.setupStep
+    loggedIn: state.auth.currentUser !== null,
+    notLoaded: state.simplify.user.id === null
 });
 
 export default connect(mapStateToProps)(Simplify);

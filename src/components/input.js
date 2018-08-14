@@ -8,7 +8,6 @@ export default class Input extends React.Component {
     }
 
     render() {
-        console.log(this.props.element);
         const Element = this.props.element || 'input';
 
         let error;
@@ -33,6 +32,9 @@ export default class Input extends React.Component {
                     id={this.props.input.name}
                     type={this.props.type}
                     ref={input => (this.input = input)}
+                    step={this.props.step}
+                    min={this.props.min}
+                    max={this.props.max} 
                 />
             </div>
         );

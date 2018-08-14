@@ -1,27 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Field, reduxForm, focus} from 'redux-form';
+import Input from './input';
+import {required, notEmpty} from '../validators';
 
 import './MonthlyPayEdit.css';
-import { updateSalary } from '../actions';
+import { updateSalary } from '../actions/protected-data';
 
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state ={
             editing: false
         }
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-        const salary = this.salaryInput.value.trim();
-        if(salary) {
-            this.props.dispatch(updateSalary(salary));
-        }
+    onSubmit(values) {
+        const {monthlySalary} = values;
 
-        this.salaryInput.value = '';
+         return this.props.dispatch(updateSalary(monthlySalary)).then(() => this.setEditing());
     }
 
     setEditing() {
@@ -32,15 +30,21 @@ export class MonthlyPayEdit extends React.Component {
 
     render() {
         let salaryForm;
-
         if (!this.state.editing) {
             salaryForm = <div>
                             <button onClick={() => this.setEditing()}>Edit Pay</button>
                         </div>
         } else {
             salaryForm = 
-            <form className="update-salary-form" onSubmit={this.onSubmit}>
-                <input className="salaryInput" type="number" min="0" step="0.01" ref={input => this.salaryInput = input} require="true"/>
+            <form className="update-salary-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                <Field
+                    component={Input}
+                    type="number"
+                    name="monthlySalary"
+                    id="monthly-salary"
+                    min={this.props.categoriesTotal + this.props.billsTotal}
+                    validate={[required, notEmpty]}
+                />
                 <div>
                     <button type="submit">Update</button>
                     <button onClick={() => this.setEditing()}>Cancel</button>
@@ -64,7 +68,13 @@ export class MonthlyPayEdit extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    monthlySalary: state.simplify.monthlySalary
+    categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0),
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+    monthlySalary: state.simplify.user.monthlySalary
 })
 
-export default connect(mapStateToProps)(MonthlyPayEdit); 
+export default reduxForm({
+    form: 'monthly-salary',
+    onSubmitFail: (errors, dispatch) =>
+    dispatch(focus('monthly-salary', Object.keys(errors)[0]))
+})(connect(mapStateToProps)(MonthlyPayEdit)); 

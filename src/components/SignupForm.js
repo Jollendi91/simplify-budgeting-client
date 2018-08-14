@@ -1,11 +1,25 @@
 import React from 'react';
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
+import {reduxForm, Field, focus} from 'redux-form';
+import {registerUser} from '../actions/users';
+import {login} from '../actions/auth';
 import Input from './input';
-import {required, notEmpty, noWhitespace, tooSmallUsername, tooLargeUsername, tooSmallPassword, tooLargePassword, passwordsMatch} from '../validators';
+import {required, notEmpty, isTrimmed, length, matches} from '../validators';
 
 import './SignupForm.css';
 
+const passwordLength = length({min: 10, max: 72});
+const usernameLength = length({min: 8, max: 30});
+const matchesPassword = matches('password');
+
 export class SignupForm extends React.Component {
+    onSubmit(values) {
+        const {username, password, firstName, lastName} = values;
+        const user = {firstName, lastName, username, password};
+
+        return this.props.dispatch(registerUser(user))
+        .then(() => this.props.dispatch(login(username, password)));
+    }
+
     render() {
         let successMessage;
         if (this.props.submitSucceeded) {
@@ -25,10 +39,12 @@ export class SignupForm extends React.Component {
             );
         }
 
-
         return (
             <section>
-                <form className="signup-form">
+                <form 
+                    className="signup-form"
+                    onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
+                    )}>
                     <h2>Ready to get started?</h2>
                     {successMessage}
                     {errorMessage}
@@ -49,21 +65,21 @@ export class SignupForm extends React.Component {
                         type="text"
                         component={Input}
                         label="Username"
-                        validate={[required, notEmpty, noWhitespace, tooSmallUsername, tooLargeUsername]}
+                        validate={[required, notEmpty, isTrimmed, usernameLength]}
                     />
                     <Field
                         name="password"
                         type="password"
                         component={Input}
                         label="Password"
-                        validate={[required, notEmpty, noWhitespace, tooSmallPassword, tooLargePassword]}
+                        validate={[required, notEmpty, isTrimmed, passwordLength]}
                     />
                     <Field 
-                        name="verify-password"
+                        name="verifyPassword"
                         type="password"
                         component={Input}
                         label="Verify Password"
-                        validate={[passwordsMatch]}
+                        validate={[required, notEmpty, matchesPassword]}
                     />
                 
                     <button

@@ -3,27 +3,17 @@
     margin: 5em auto 0;
   }
   
- .account-setup-container form {
-    margin: 5px auto;
-    padding: 15px 0;
-  }
-  
-  .account-setup-container form div {
-    padding: 5px;
-    display: inline-block;
-  }
-  
   .account-setup-container input {
     display: inline-block;
   }
   
-  .account-setup-container label {
-    display: block;
-    text-align: left;
-  }
-  
   .account-setup-container  input {
     width: 150px;
+  }
+
+  .update-salary-form div {
+    display: inline-block;
+    padding: 5px;
   }
 
   .setup-step {

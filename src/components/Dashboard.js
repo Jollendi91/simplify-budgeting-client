@@ -1,14 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {PieChart} from 'react-easy-chart';
 import {connect} from 'react-redux';
+import requiresLogin from './requiresLogin';
 
 import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
 
-
 import './Dashboard.css';
-
 
 export class Dashboard extends React.Component {
     constructor(props) {
@@ -24,7 +23,6 @@ export class Dashboard extends React.Component {
     }
 
     mouseOverHandler(d, e) {
-        console.log(e);
         this.setState({
           showToolTip: true,
           top: e.y,
@@ -35,7 +33,6 @@ export class Dashboard extends React.Component {
       }
     
       mouseMoveHandler( d, e) {
-          console.log(d, e);
         if (this.state.showToolTip) {
           this.setState({top: e.y, left: e.x});
         }
@@ -61,11 +58,11 @@ export class Dashboard extends React.Component {
 
     render() {
 
-    const categories = this.props.categories.map((category, index) => 
+    	const categories = this.props.categories.map((category, index) => 
             <Link key={index} to={`category/${category.id}`}>
-            <CategoryModule key={index} {...category} />
+                <CategoryModule key={category.id} {...category} />
             </Link>
-        )
+        );
 
         const data = this.props.categories.map(category => ({
             key: category.category,
@@ -85,9 +82,6 @@ export class Dashboard extends React.Component {
                 value: this.props.billsTotal
             });
         }
-        
-
-        console.log(this.props.remainingMoney);
         
         return (
             <div>
@@ -114,10 +108,27 @@ export class Dashboard extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    categories: state.simplify.categories,
-    remainingMoney: state.simplify.monthlySalary - state.simplify.categories.reduce((accumulator, currentCategory) => accumulator + currentCategory.amount, 0) - state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0),
-    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
-});
+const mapStateToProps = state => {
+    let categoryTotal;
+        if (state.simplify.user.categories) {
+            categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0);
+        } else {
+            categoryTotal = 0;
+        }
 
-export default connect(mapStateToProps)(Dashboard);
+    let billTotal;
+        if (state.simplify.user.bills) {
+            billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0);
+        } else {
+            billTotal = 0;
+        }
+
+     return  {
+        categories: state.simplify.user.categories,
+        remainingMoney: state.simplify.user.monthlySalary - categoryTotal - billTotal,
+        billsTotal: billTotal,
+        step: state.simplify.user.setupStep
+    }
+};
+
+export default requiresLogin()(connect(mapStateToProps)(Dashboard));

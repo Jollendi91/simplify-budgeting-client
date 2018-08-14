@@ -1,15 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { deleteCategory, updateCategory } from '../actions';
+import {Field, reduxForm, focus} from 'redux-form';
+import {required, notEmpty} from '../validators';
+import Input from './input';
+
+import { deleteCategory, updateCategory } from '../actions/protected-data';
+
+import './CatRow.css';
 
 export class CatRow extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            editing: false,
-            categoryName: this.props.category,
-            categoryAmount: this.props.amount
+            editing: false
         }
     }
 
@@ -19,49 +23,62 @@ export class CatRow extends React.Component {
         });
     }
 
-    dispatchCategoryUpdate(categoryId) {
-        if ( this.state.categoryAmount >  (this.props.remainingAmount + this.props.amount)) {
-            return
-        }
-
-        this.props.dispatch(updateCategory(this.state.categoryName, parseFloat(this.state.categoryAmount), categoryId));
-        this.setEditing();
+    onSubmit(values) {
+        const {category, amount} = values;
+        this.props.dispatch(updateCategory(this.props.id, category, amount)).then(() => this.setEditing());
     }
-
-
+    
     render() {
-        if (this.state.editing) {
-          return  (<tr key={this.props.index}>
-                <td>
-                    <input 
-                        value={this.state.categoryName}
-                        onChange={e => this.setState({
-                            categoryName: e.target.value
-                    })}/>
-                </td>
-                <td>
-                    $<input 
-                        type="number" 
-                        step="0.01"
-                        min="1" 
-                        max={this.props.amount + this.props.remainingAmount} 
-                        value={this.state.categoryAmount}
-                        onChange={e => this.setState({
-                            categoryAmount: e.target.value
-                    })}/>
-                </td>
-                <td>{Math.round(this.state.categoryAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
-                <td className="edit-buttons">
-                    <button onClick={() => this.dispatchCategoryUpdate(this.props.id)}>Update</button>
-                    <button onClick={() => this.setEditing()}>Cancel</button>
-                </td>
-            </tr>)
+        let updateAmount;
+        if (this.props.currentForm !== undefined) {
+            if (this.props.currentForm.values) {
+                updateAmount = this.props.currentForm.values.amount;
+            }
+        };
+           
+         if (this.state.editing) {
+          return  (
+            <tr>
+                <td className="category-form-container" colSpan="4">
+                    <form className="update-category-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                        <div className="category-name-input">
+                            <Field
+                                component={Input}
+                                type="text"
+                                name="category"
+                                id="category-update"
+                                validate={[required, notEmpty]}
+                            />
+                        </div>
+                        <div className="category-amount-input">
+                            $<Field 
+                                component={Input}
+                                type="number"
+                                name="amount"
+                                id="category-amount-update"
+                                step="0.01"
+                                min="0.01"
+                                max={parseFloat(this.props.amount) + this.props.max}
+                                validate={[required, notEmpty]}
+                            />
+                        </div>
+                        <div>
+                            {Math.round(updateAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%
+                        </div>
+                        <div className="edit-buttons">
+                            <button type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
+                            <button onClick={() => this.setEditing()}>Cancel</button>
+                        </div>
+                    </form>
+                </td> 
+            </tr>
+            )
         } else {
 
             return (
                 <tr key={this.props.index}>
                     <td>{this.props.category}</td>
-                    <td>${this.props.amount.toFixed(2)}</td>
+                    <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                     <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
                     <td className="edit-buttons">
                         <button onClick={() => this.setEditing()}>Edit</button>
@@ -73,9 +90,15 @@ export class CatRow extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    monthlySalary: state.simplify.monthlySalary,
-    billsTotal: state.simplify.bills.reduce((accumulator, currentBill) => accumulator + currentBill.amount, 0)
-});
+const mapStateToProps = (state, props) => {
+   return {
+    monthlySalary: state.simplify.user.monthlySalary,
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+    initialValues: props,
+    currentForm: state.form[props.form]
+}
+};
 
-export default connect(mapStateToProps)(CatRow);
+export default connect(mapStateToProps)(reduxForm({
+    onSubmitFail: (errors, dispatch, submitError, props) => dispatch(focus(props.form, Object.keys(errors)[0]))
+  })(CatRow));

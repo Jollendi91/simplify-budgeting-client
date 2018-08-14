@@ -1,16 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { deleteTransaction, updateTransaction } from '../actions';
+import {Field, reduxForm, focus} from 'redux-form';
+import Input from './input';
+import {required, notEmpty} from '../validators';
+
+import { deleteTransaction, updateTransaction } from '../actions/protected-data';
+
+import './TransRow.css';
 
 export class TransRow extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            editing: false,
-            transName: this.props.description,
-            transDate: this.props.date,
-            transAmount: this.props.amount
+            editing: false
         }
     }
 
@@ -20,46 +23,63 @@ export class TransRow extends React.Component {
         });
     }
 
-    dispatchTransactionUpdate(transactionId) {
-        this.props.dispatch(updateTransaction(this.state.transName, this.state.transDate, parseFloat(this.state.transAmount), transactionId));
-
-        this.setEditing();
+    onSubmit(values) {
+        const {transaction, date, amount} = values;
+        return this.props.dispatch(updateTransaction(this.props.id, transaction, date, amount, this.props.categoryId)).then(() => this.setEditing());
     }
 
     render() {
         if (this.state.editing) {
             return (
                 <tr>
-                    <td>
-                        <input value={this.state.transName} onChange={e => this.setState({
-                            transName: e.target.value
-                        })} />
-                    </td>
-                    <td>
-                        <input type="date" value={this.state.transDate} onChange={e => this.setState({
-                            transDate: e.target.value
-                        })} />
-                    </td>
-                    <td>
-                        $<input type="number" step="0.01" min="1" value={this.state.transAmount} onChange={e => this.setState({
-                            transAmount: e.target.value
-                        })} />
-                    </td>
-                    <td>
-                        <button onClick={() => this.dispatchTransactionUpdate(this.props.id)}>Update</button>
-                        <button onClick={() => this.setEditing()}>Cancel</button>
+                    <td className="transaction-form-container" colSpan="4">
+                        <form className="update-transaction-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                            <div className="form-input-container">
+                                <Field 
+                                    component={Input}
+                                    type="text"
+                                    name="transaction"
+                                    id="transaction-update"
+                                    validate={[required, notEmpty]}
+                                />
+                            </div>
+                            <div className="form-input-container">
+                                <Field
+                                    component={Input}
+                                    type="date"
+                                    name="date"
+                                    id="transaction-date-update"
+                                    validate={[required, notEmpty]}
+                                />
+                            </div>
+                            <div className="form-input-container transaction-amount-input">
+                                $<Field
+                                    component={Input}
+                                    type="number"
+                                    name="amount"
+                                    id="transaction-amount-update"
+                                    min="0.01"
+                                    step="0.01"
+                                    validate={[required, notEmpty]}
+                                />
+                            </div>
+                            <div className="edit-buttons">
+                                <button type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
+                                <button onClick={() => this.setEditing()}>Cancel</button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
             )
         } else {
             return (
                 <tr>
-                    <td>{this.props.description}</td>
+                    <td>{this.props.transaction}</td>
                     <td>{this.props.date}</td>
-                    <td>${this.props.amount.toFixed(2)}</td>
-                    <td>
-                    <button onClick={() => this.setEditing()}>Edit</button>
-                        <button onClick={() => this.props.dispatch(deleteTransaction(this.props.id))}>X</button>
+                    <td>${parseFloat(this.props.amount).toFixed(2)}</td>
+                    <td className="edit-buttons">
+                        <button onClick={() => this.setEditing()}>Edit</button>
+                        <button onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}>X</button>
                     </td>
                 </tr>
             )
@@ -67,4 +87,10 @@ export class TransRow extends React.Component {
     }
 }
 
-export default connect()(TransRow);
+const mapStateToProps = (state, props) => ({
+    initialValues: props
+});
+
+export default connect(mapStateToProps)(reduxForm({
+    onSubmitFail: (errors, dispatch, submitError, props) => dispatch(focus(props.form, Object.keys(errors)[0]))
+  })(TransRow));
