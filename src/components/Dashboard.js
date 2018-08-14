@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {PieChart} from 'react-easy-chart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';

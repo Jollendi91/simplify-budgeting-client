@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import NavBar from './NavBar';
-import './Bills.css';
 import BillRow from './BillRow';
-import { addBill, deleteBill } from '../actions/protected-data';
 import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';
+
+import './Bills.css';
 
 export class Bills extends React.Component {
 

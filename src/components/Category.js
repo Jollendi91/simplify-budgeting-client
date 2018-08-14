@@ -10,8 +10,6 @@ import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
 import RequiresLogin from './requiresLogin';
 
-import { addTransaction} from '../actions/protected-data';
-
 import './Category.css';
 
 export class Category extends React.Component {
@@ -52,7 +50,7 @@ export class Category extends React.Component {
                 currentMonthTransactions.push(transaction);
                 
                 return <TransRow key={transaction.id} categoryId={this.props.category.id} {...transaction} form={`transaction-${transaction.id}-update`}/>
-            }
+            };
         });
 
         const transactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { updateStep, fetchProtectedUser } from '../actions/protected-data';
+import { updateStep} from '../actions/protected-data';
 
 import RequiresLogin from './requiresLogin';
 import MonthlyPaySetup from './MonthlyPaySetup';
