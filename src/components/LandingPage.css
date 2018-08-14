@@ -1,6 +1,11 @@
 .landing-page .main-header {
     margin-top: 75px;
     padding: 40px 15px;
+    background: url(https://source.unsplash.com/pElSkGRA2NU);
+    background-size: contain;
+    height: 100vh;
+    background-position: right;
+    background-repeat: no-repeat;
   }
   
   .landing-page section {
