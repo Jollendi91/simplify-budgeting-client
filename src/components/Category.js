@@ -45,7 +45,7 @@ export class Category extends React.Component {
 
         const currentMonthTransactions = [];
         
-        const transactions = this.props.category.transactions.map(transaction => {
+        const transactions = this.props.category.transactions.sort((a, b) => a.date < b.date ? 1 : -1 ).map(transaction => {
             let transactionDate = moment(transaction.date);
 
             if (transactionDate.isBetween(firstDayMonth, lastDayMonth, null, [])) {
