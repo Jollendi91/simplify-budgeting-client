@@ -47,7 +47,7 @@ export function AccountSetup(props) {
 };
 
 const MapStateToProps = state => ({
-    step: state.setupStep
+    step: state.simplify.setupStep
 });
 
 
