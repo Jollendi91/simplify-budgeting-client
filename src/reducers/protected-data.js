@@ -6,7 +6,7 @@ const initialState = {
     user: {
         id: null,
         username: '',
-        setupStep: null,
+        setupStep: 1,
         monthlySalary: '0',
         bills: [],
         categories: []
