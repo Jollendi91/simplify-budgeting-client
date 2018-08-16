@@ -1,5 +1,7 @@
 import * as actions from '../auth';
 import {API_BASE_URL} from '../../config';
+import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 
 describe('setAuthToken', () => {
     it('Should return the action', () => {
@@ -46,34 +48,39 @@ describe('authError', () => {
 
 describe('login', () => {
     it('Should dispatch authRequest, setAuthToken, and authSuccess', () => {
-        const username = "JohnDoe12";
-        const password = "fakePassword";
-        const authToken = "fakeAuthToken123";
-        
+        const user = {
+           username: 'fakeUser123',
+           password: 'fakePassword'
+        }
+        const authToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
+        console.log(authToken);
+        const decodedToken = jwtDecode(authToken);
+        console.log(decodedToken);
+       
         global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
                 ok: true,
                 json() {
-                    return {}
+                    return {authToken}
                 }
             })
         );
 
         const dispatch = jest.fn();
 
-        return actions.login(username, password)(dispatch).then(() => {
+        return actions.login(user.username, user.password)(dispatch).then(() => {
             expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username,
-                    password
+                    username: user.username,
+                    password: user.password
                 })
             });
             expect(dispatch).toHaveBeenCalledWith(actions.authRequest());
             expect(dispatch).toHaveBeenCalledWith(actions.setAuthToken(authToken));
-            expect(dispatch).toHaveBeenCalledWith(authSuccess());
+            expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(decodedToken.user));
         });
     });
 });
