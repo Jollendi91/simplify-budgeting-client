@@ -10,7 +10,6 @@ import Category from './Category';
 import Bills from './Bills';
 import NavBar from './NavBar';
 import {refreshAuthToken} from '../actions/auth';
-import {fetchProtectedUser} from '../actions/protected-data';
 
 export class App extends React.Component {
 
