@@ -14,15 +14,9 @@ export function CategoryModule(props) {
 
 const mapStateToProps = (state, props) => {
     let currentCategory = state.simplify.user.categories.find(category => category.id === props.id);
-    let transactionAmount;
-    if (currentCategory.transactions) {
-        transactionAmount = currentCategory.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
-    } else {
-        transactionAmount = 0;
-    }
 
     return {
-        transactionAmount: transactionAmount
+        transactionAmount: currentCategory.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0)
     }
 };
 

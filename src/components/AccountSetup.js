@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { updateStep} from '../actions/protected-data';
+import { updateStep, fetchProtectedUser} from '../actions/protected-data';
 
 import RequiresLogin from './requiresLogin';
 import MonthlyPaySetup from './MonthlyPaySetup';
@@ -12,6 +12,12 @@ import CategorySetup from './CategorySetup';
 import './AccountSetup.css';
 
 export class AccountSetup extends React.Component {
+
+    componentDidMount() {
+        if (this.props.notLoaded) {
+            this.props.dispatch(fetchProtectedUser());
+        }
+    }
    
     render() {
         
@@ -53,7 +59,8 @@ export class AccountSetup extends React.Component {
 };
 
 const MapStateToProps = state => ({
-    step: state.simplify.user.setupStep
+    step: state.simplify.user.setupStep,
+    notLoaded: state.simplify.user.id === null
 });
 
 

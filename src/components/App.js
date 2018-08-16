@@ -12,7 +12,7 @@ import NavBar from './NavBar';
 import {refreshAuthToken} from '../actions/auth';
 import {fetchProtectedUser} from '../actions/protected-data';
 
-export class Simplify extends React.Component {
+export class App extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
@@ -20,12 +20,7 @@ export class Simplify extends React.Component {
         } else if (prevProps.loggedIn && !this.props.loggedIn) {
             this.stopPeriodicRefresh();
         }
-
-        if (this.props.loggedIn && this.props.notLoaded) {
-            this.props.dispatch(fetchProtectedUser());
-        }
     }
-
 
     componentWillUnmount() {
         this.stopPeriodicRefresh();
@@ -49,19 +44,12 @@ export class Simplify extends React.Component {
         return (
             <div className="app-container">
                 <NavBar page={this.props.pathname} />
-                
                 <Route exact path="/" component={LandingPage}/>
-
                 <Route exact path="/account-setup" component={AccountSetup}/>
-
                 <Route exact path="/edit-profile" component={EditProfile}/>
-
                 <Route exact path="/dashboard" component={Dashboard}/>
-
                 <Route exact path="/category/:categoryId" component={Category} />
-
                 <Route exact path='/bills' component={Bills} />
-
             </div>
         )
     }  
@@ -73,4 +61,4 @@ const mapStateToProps = state => ({
     notLoaded: state.simplify.user.id === null
 });
 
-export default connect(mapStateToProps)(Simplify);
+export default connect(mapStateToProps)(App);

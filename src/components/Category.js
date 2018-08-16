@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 import {PieChart} from 'react-easy-chart';
 import NavBar from './NavBar';
@@ -9,6 +8,7 @@ import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
 import RequiresLogin from './requiresLogin';
+import {fetchProtectedUser} from '../actions/protected-data';
 
 import './Category.css';
 
@@ -22,6 +22,12 @@ export class Category extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.notLoaded) {
+            this.props.dispatch(fetchProtectedUser());
+        }
+    }
+
     setFilters(month, year) {
         this.setState({
             filterMonth: month,
@@ -30,11 +36,10 @@ export class Category extends React.Component {
     }
 
     render() {
-
-        if (this.props.category === undefined) {
-           return <Redirect to="/dashboard"/>
+        // If user data is not loaded return nothing
+        if (this.props.notLoaded) {
+            return (null);
         }
-        
 
         // Set date to filter transacitions from the store
         const filterDate = moment(new Date(this.state.filterYear, this.state.filterMonth));
@@ -49,7 +54,12 @@ export class Category extends React.Component {
             if (transactionDate.isBetween(firstDayMonth, lastDayMonth, null, [])) {
                 currentMonthTransactions.push(transaction);
                 
-                return <TransRow key={transaction.id} categoryId={this.props.category.id} {...transaction} form={`transaction-${transaction.id}-update`}/>
+                return <TransRow 
+                            key={transaction.id} 
+                            categoryId={this.props.category.id} 
+                            form={`transaction-${transaction.id}-update`}
+                            {...transaction}
+                        />
             };
         });
 
@@ -132,19 +142,11 @@ export class Category extends React.Component {
 };
 
 
-const mapStateToProps = (state, props) => {
-    // Only set categroy if categories exist
-    let category = null;
-    if (state.simplify.user.categories) {
-        category = state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId)
-    }
-
-    return {
-        reloaded: state.simplify.user === '',
-        category: category,
-        initialValues: state.filterMonth
-    }
-};
+const mapStateToProps = (state, props) => ({
+    notLoaded: state.simplify.user.id === null,
+    category: state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId),
+    initialValues: state.filterMonth
+});
 
 
 export default RequiresLogin()(connect(mapStateToProps)(Category));

@@ -90,14 +90,12 @@ export class CatRow extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => {
-   return {
+const mapStateToProps = (state, props) => ({
     monthlySalary: state.simplify.user.monthlySalary,
     billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
     initialValues: props,
     currentForm: state.form[props.form]
-}
-};
+});
 
 export default connect(mapStateToProps)(reduxForm({
     onSubmitFail: (errors, dispatch, submitError, props) => dispatch(focus(props.form, Object.keys(errors)[0]))

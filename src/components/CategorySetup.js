@@ -61,14 +61,12 @@ export function CategorySetup(props) {
     )
 }
 
-const mapStateToProps = state => {
-	return {
-		categories: state.simplify.user.categories,
-		categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0),
-		monthlySalary: state.simplify.user.monthlySalary,
-		billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
-		userId: state.simplify.user.id
-	}
-}
+const mapStateToProps = state => ({
+	categories: state.simplify.user.categories,
+	categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0),
+	monthlySalary: state.simplify.user.monthlySalary,
+	billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+	userId: state.simplify.user.id
+});
 
 export default connect(mapStateToProps)(CategorySetup);
