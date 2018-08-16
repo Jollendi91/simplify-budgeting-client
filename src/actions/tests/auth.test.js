@@ -53,9 +53,7 @@ describe('login', () => {
            password: 'fakePassword'
         }
         const authToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
-        console.log(authToken);
         const decodedToken = jwtDecode(authToken);
-        console.log(decodedToken);
        
         global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
                 ok: true,
@@ -81,6 +79,46 @@ describe('login', () => {
             expect(dispatch).toHaveBeenCalledWith(actions.authRequest());
             expect(dispatch).toHaveBeenCalledWith(actions.setAuthToken(authToken));
             expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(decodedToken.user));
+        });
+    });
+});
+
+describe('refreshAuthToken', () => {
+    it('Should dispatch authRequest', () => {
+        const user = {
+            username: 'fakeUser'
+        };
+        const currentAuthToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
+
+        const authToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
+        const newDecodedToken = jwtDecode(authToken);
+
+        global.fetch = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                ok: true, 
+                json() {
+                    return {authToken}
+                }
+            })
+        });
+
+        const dispatch = jest.fn();
+        const getState = jest.fn().mockImplementation(() => ({
+            auth: {
+                authToken: currentAuthToken
+            }
+        }));
+
+        return actions.refreshAuthToken()(dispatch, getState).then(() => {
+            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/auth/refresh`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${currentAuthToken}`
+                }
+            });
+            expect(dispatch).toHaveBeenCalledWith(actions.authRequest());
+            expect(dispatch).toHaveBeenCalledWith(actions.setAuthToken(authToken));
+            expect(dispatch).toHaveBeenCalledWith(actions.authSuccess(newDecodedToken.user));
         });
     });
 });
