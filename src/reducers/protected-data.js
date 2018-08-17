@@ -98,7 +98,7 @@ export const simplifyReducer = (state = initialState, action) => {
                     id: action.categoryId,
                     category: action.categoryName,
                     amount: action.categoryAmount,
-                    transactions: null
+                    transactions: []
                 }]
             }
         });
