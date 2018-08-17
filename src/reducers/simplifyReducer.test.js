@@ -183,7 +183,7 @@ describe('simplifyReducer', () => {
 
     describe('updateCategorySuccess', () => {
         it('Should update a category by id', () => {
-            const newCategoryName = "newCategory2";
+            const newCategoryName = 'newCategory2';
             const newCategoryAmount = 4000;
             let state = {
                 user: {
@@ -222,4 +222,178 @@ describe('simplifyReducer', () => {
             });
         });
     })
+
+    // Transaction Reducers
+    describe('fetchTransactionsSuccess', () => {
+        it('Should add transactions to a specific category', () => {
+            let newTransactions = [transaction1, transaction2, transaction3];
+            let state = {
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: [transaction2]
+                        },
+                        category2,
+                        category3
+                    ]
+                }
+            };
+
+            state = simplifyReducer(state, actions.fetchTransactionsSuccess(newTransactions, category1.id));
+            state = simplifyReducer(state, actions.fetchTransactionsSuccess(newTransactions, category3.id));
+            expect(state).toEqual({
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: [
+                                transaction2,
+                                transaction1,
+                                transaction3
+                            ]
+                        },
+                        category2,
+                        {
+                            ...category3,
+                            transactions: [
+                                transaction1,
+                                transaction2,
+                                transaction3
+                            ]
+                        }
+                    ]
+                }
+            });
+        });
+    });
+
+    describe('addTransactionSuccess', () => {
+        it('Should add a transaction to correct category', () => {
+            let state = {
+                user: {
+                    categories: [
+                        category1,
+                        category2,
+                        category3
+                    ]
+                }
+            };
+            const {id, transaction, date, amount} = transaction1;
+            state = simplifyReducer(state, actions.addTransactionSuccess(id, transaction, date, amount, category1.id));
+            state = simplifyReducer(state, actions.addTransactionSuccess(id, transaction, date, amount, category3.id));
+            expect(state).toEqual({
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: [transaction1]
+                        },
+                        category2,
+                        {
+                            ...category3,
+                            transactions: [transaction1]
+                        }
+                    ]
+                }
+            });
+        });
+    });
+
+    describe('updateTransactionSuccess', () => {
+        it('Should update a transaction by id', () => {
+            const newTransName = 'newTransaction';
+            const newTransDate = '2018-01-01';
+            const newTransAmount = 500;
+            let state = {
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: [transaction1]
+                        },
+                        {
+                            ...category2,
+                            transactions: [transaction2]
+                        }
+                    ]
+                }
+            };
+
+            state = simplifyReducer(state, actions.updateTransactionSuccess(transaction1.id, newTransName, newTransDate, newTransAmount, category1.id));
+            expect(state).toEqual({
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: [
+                                {
+                                    id: transaction1.id,
+                                    transaction: newTransName,
+                                    date: newTransDate,
+                                    amount: newTransAmount
+                                }
+                            ]
+                        },
+                        {
+                            ...category2,
+                            transactions: [transaction2]
+                        }
+                    ]
+                }
+            });
+        });
+    });
+
+    describe('deleteTransactionSuccess', () => {
+        it('Should remove a transaction by id', () => {
+            let state = {
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: [transaction1]
+                        },
+                        {
+                            ...category2,
+                            transactions: [transaction2]
+                        }
+                    ]
+                }
+            };
+
+            state = simplifyReducer(state, actions.deleteTransactionSuccess(transaction1.id, category1.id));
+            expect(state).toEqual({
+                user: {
+                    categories: [
+                        {
+                            ...category1,
+                            transactions: []
+                        },
+                        {
+                            ...category2,
+                            transactions: [transaction2]
+                        }
+                    ]
+                }
+            });
+        });
+    });
+
+    describe('setupStepSuccess', () => {
+        it('Should update the setup step', () => {
+            let state = {
+                user: {
+                    setupStep: 1
+                }
+            };
+
+            state = simplifyReducer(state, actions.setupStepSuccess(2));
+            expect(state).toEqual({
+                user: {
+                    setupStep: 2
+                }
+            });
+        });
+    });
 });
