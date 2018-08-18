@@ -17,7 +17,7 @@ export class NavBar extends React.Component {
         let logOutButton;
         if (this.props.loggedIn) {
             logOutButton = (
-                <li onClick={() => this.logOut()}>
+                <li className="logout-button" onClick={() => this.logOut()}>
                     Log out
                 </li>
             )
