@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 
 import {EditProfile} from '../EditProfile';
 import { MonthlyPayEdit } from '../MonthlyPayEdit';
