@@ -5,6 +5,7 @@ import {MonthlyPaySetup} from '../MonthlyPaySetup';
 
 describe('<MonthlyPaySetup />', () => {
     it('Renders without crashing', () => {
-        shallow(<MonthlyPaySetup />);
+        const callback = jest.fn();
+        shallow(<MonthlyPaySetup handleSubmit={callback}/>);
     });
 });

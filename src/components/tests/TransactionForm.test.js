@@ -5,6 +5,7 @@ import {TransactionForm} from '../TransactionForm';
 
 describe('<TransactionForm />', () => {
     it('Renders without crashing', () => {
-        shallow(<TransactionForm />);
+        const handleSubmit =jest.fn();
+        shallow(<TransactionForm handleSubmit={handleSubmit}/>);
     });
 });

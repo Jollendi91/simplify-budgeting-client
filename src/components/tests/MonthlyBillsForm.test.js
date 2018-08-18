@@ -5,6 +5,7 @@ import {MonthlyBillForm} from '../MonthlyBillsForm';
 
 describe('<MonthlyBillForm />', () => {
     it('Renders without crashing', () => {
-        shallow(<MonthlyBillForm />);
+        const handleSubmit = jest.fn();
+        shallow(<MonthlyBillForm handleSubmit={handleSubmit}/>);
     });
 });

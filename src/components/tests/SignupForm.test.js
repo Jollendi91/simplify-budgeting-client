@@ -5,6 +5,7 @@ import {SignupForm} from '../SignupForm';
 
 describe('<SignupForm />', () => {
     it('Renders without crashing', () => {
-        shallow(<SignupForm />);
+        const handleSubmit = jest.fn();
+        shallow(<SignupForm handleSubmit={handleSubmit}/>);
     });
 });

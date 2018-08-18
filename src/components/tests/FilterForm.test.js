@@ -5,6 +5,7 @@ import {FilterForm} from '../FilterForm';
 
 describe('<FilterForm />', () => {
     it('Renders without crashing', () => {
-        shallow(<FilterForm />);
+        const handleSubmit =jest.fn();
+        shallow(<FilterForm handleSubmit={handleSubmit}/>);
     });
 });

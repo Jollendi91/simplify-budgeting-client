@@ -5,6 +5,7 @@ import {CategoryForm} from '../CategoryForm';
 
 describe('<CategoryForm />', () => {
     it('Renders without crashing', () => {
-        shallow(<CategoryForm />);
+        const handleSubmit = jest.fn();
+        shallow(<CategoryForm handleSubmit={handleSubmit}/>);
     });
 });
