@@ -10,6 +10,7 @@ const props = {
     bills: [{id: 1}],
     billsTotal: 0
 }
+
 describe('<MonthlyBillsSetup />', () => {
     it('Renders without crashing', () => {
         shallow(<MonthlyBillsSetup {...props}/>);
