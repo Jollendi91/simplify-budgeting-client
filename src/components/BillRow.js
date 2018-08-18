@@ -65,8 +65,8 @@ export class BillRow extends React.Component {
                                 />
                             </div>
                             <div className="edit-buttons">
-                                <button type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                                <button type="button" onClick={() => this.setEditing()}>Cancel</button>
+                                <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
+                                <button className="cancel-button" type="button" onClick={() => this.setEditing()}>Cancel</button>
                             </div>
                         </form>
                     </td>
@@ -79,8 +79,8 @@ export class BillRow extends React.Component {
                 <td>{this.props.bill}</td>
                 <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                 <td className="edit-buttons">
-                    <button onClick={() => this.setEditing()}>Edit</button>
-                    <button onClick={() => this.props.dispatch(deleteBill(this.props.id))}>X</button>
+                    <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
+                    <button className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>X</button>
                 </td>
             </tr>
         )
