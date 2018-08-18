@@ -38,8 +38,8 @@ export class AccountSetup extends React.Component {
                 <p>Step {this.props.step} / 3</p>
                 <MonthlyBillsSetup />
                 <div className="setup-buttons">
-                    <button onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
-                    <button onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
+                    <button className="back-button" onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
+                    <button className="next-button" onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
                 </div>
             </section>)
         } else if (this.props.step === 3) {
@@ -47,9 +47,9 @@ export class AccountSetup extends React.Component {
                 <p>Step {this.props.step} / 3</p>
                 <CategorySetup />
                 <div className="setup-buttons">
-                    <button onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
+                    <button className="back-button" onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
                     <Link to='/dashboard'>
-                        <button onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
+                        <button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
                     </Link>
                 </div>
             </section>)
