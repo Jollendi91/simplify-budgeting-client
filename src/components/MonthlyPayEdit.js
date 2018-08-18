@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, notEmpty} from '../validators';
-
-import './MonthlyPayEdit.css';
 import { updateSalary } from '../actions/protected-data';
+import './MonthlyPayEdit.css';
 
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
@@ -32,7 +31,7 @@ export class MonthlyPayEdit extends React.Component {
         let salaryForm;
         if (!this.state.editing) {
             salaryForm = <div>
-                            <button onClick={() => this.setEditing()}>Edit Pay</button>
+                            <button className="edit-button" onClick={() => this.setEditing()}>Edit Pay</button>
                         </div>
         } else {
             salaryForm = 
@@ -46,8 +45,8 @@ export class MonthlyPayEdit extends React.Component {
                     validate={[required, notEmpty]}
                 />
                 <div>
-                    <button type="submit">Update</button>
-                    <button onClick={() => this.setEditing()}>Cancel</button>
+                    <button className="update-button" type="submit">Update</button>
+                    <button className="cancel-button" onClick={() => this.setEditing()}>Cancel</button>
                 </div>
             </form>
         }
