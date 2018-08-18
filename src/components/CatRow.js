@@ -66,8 +66,8 @@ export class CatRow extends React.Component {
                             {Math.round(updateAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%
                         </div>
                         <div className="edit-buttons">
-                            <button type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                            <button onClick={() => this.setEditing()}>Cancel</button>
+                            <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
+                            <button className="cancel-button" onClick={() => this.setEditing()}>Cancel</button>
                         </div>
                     </form>
                 </td> 
@@ -81,8 +81,8 @@ export class CatRow extends React.Component {
                     <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                     <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
                     <td className="edit-buttons">
-                        <button onClick={() => this.setEditing()}>Edit</button>
-                        <button onClick={() => this.props.dispatch(deleteCategory(this.props.id))}>X</button>
+                        <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
+                        <button className="delete-button" onClick={() => this.props.dispatch(deleteCategory(this.props.id))}>X</button>
                     </td>
                 </tr>
             )
