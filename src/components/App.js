@@ -11,6 +11,11 @@ import Bills from './Bills';
 import NavBar from './NavBar';
 import {refreshAuthToken} from '../actions/auth';
 
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faBars} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBars);
+
 export class App extends React.Component {
 
     componentDidUpdate(prevProps) {
