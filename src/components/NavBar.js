@@ -20,7 +20,7 @@ const NavContainer = styled.nav`
     background-color: #fff;
 `;
 
-const Logo = style.h1`
+const Logo = styled.h1`
     font-size: 30px;
     margin: 10px;
 `;
