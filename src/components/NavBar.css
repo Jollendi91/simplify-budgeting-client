@@ -1,18 +1,7 @@
-nav, footer {
-    background-color: #fff;
-  }
 
-  .hamburger-nav {
-    padding: 15px;
-    cursor: pointer;
-  }
-  
-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 10;
+.hamburger-nav {
+  padding: 15px;
+  cursor: pointer;
 }
 
 nav h1 {
@@ -35,7 +24,8 @@ ul li {
   align-items: center;
   justify-content: center;
   border-top: 1px solid #aaa;
-  padding: 5px;
+  padding: 10px 5px;
+  cursor: pointer;
 }
 
 ul li:hover {
@@ -45,4 +35,22 @@ ul li:hover {
 .log-out {
   padding: 5px 10px;
   margin-right: 10px;
+}
+
+@media screen and (min-width: 545px) {
+
+  .nav-links {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+  }
+
+  #narrow-nav, #narrow-links {
+      display: none;
+  }
+
+  ul li {
+    padding: 10px 10px;
+  }
 }
