@@ -81,8 +81,8 @@ export class BillRow extends React.Component {
                 <td>{this.props.bill}</td>
                 <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                 <td className="edit-buttons">
-                    <button className="edit-button" onClick={() => this.setEditing()}><FontAwesomeIcon icon=""/> </button>
-                    <button className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>X</button>
+                    <FontAwesomeIcon icon={['far','edit']} className="edit-button" onClick={() => this.setEditing()}/>
+                    <FontAwesomeIcon icon={['far','trash-alt']} className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
                 </td>
             </tr>
         )
