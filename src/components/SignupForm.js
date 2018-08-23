@@ -11,12 +11,6 @@ import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 import './SignupForm.css';
 import {StyledInput, FormContainer, CloseButton, Button} from './styled-components/Forms';
 
-const FormError = styled.div`
-    font-size: .8em;
-    color: red;
-    font-weight: bold;
-`;
-
 const passwordLength = length({min: 10, max: 72});
 const usernameLength = length({min: 8, max: 30});
 const matchesPassword = matches('password');
