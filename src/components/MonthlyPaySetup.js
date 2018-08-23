@@ -18,7 +18,7 @@ const SetupInput = StyledInput.extend`
 
 const StyledLabel = styled.label`
     font-size: 1.3em;
-    padding: 0 10px;
+    padding: 10px;
 `;
 
 export class MonthlyPaySetup extends React.Component {

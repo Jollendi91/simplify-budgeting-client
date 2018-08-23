@@ -25,22 +25,20 @@ const SetupStepContainer = styled.div`
 const SectionContainer = FormContainer.withComponent('article');
 
 const SetupStep = SectionContainer.extend`
-    height: 50vh;
+    top: 66px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    min-height: calc(100vh - 66px);
     padding: 0;
-    transform: translate(-50%, -50%);
     background-color: white;
 `;
 
 const Header = styled.h1`
+    font-size: 1.5em;
+    color: white;
     margin: 0;
     padding: .3em 0;
-    color: white;
     background: #20A69A;
 `;
 
@@ -60,18 +58,16 @@ export class AccountSetup extends React.Component {
     
         } else if (this.props.step === 1) {
             return (
-                <SetupStepContainer>
-                    <SetupStep>
-                        <Header>Account Setup</Header>
-                        <MonthlyPaySetup />
-                        <p>Step {this.props.step} / 3</p>
-                    </SetupStep>
-                </SetupStepContainer>
+                <SetupStep>
+                    <Header>Account Setup</Header>
+                    <MonthlyPaySetup />
+                    <p>Step {this.props.step} / 3</p>
+                </SetupStep>
             ) 
         } else if (this.props.step === 2) {
             return (
                 <SetupStep>
-                    <h1>Account Setup</h1>
+                    <Header>Account Setup</Header>
                     <MonthlyBillsSetup />
                     <div className="setup-buttons">
                         <button className="back-button" onClick={() => this.props.dispatch(updateStep(1))}>Back</button>

@@ -5,6 +5,8 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import {deleteBill, updateBill} from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './BillRow.css';
 
 export class BillRow extends React.Component {
@@ -79,7 +81,7 @@ export class BillRow extends React.Component {
                 <td>{this.props.bill}</td>
                 <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                 <td className="edit-buttons">
-                    <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
+                    <button className="edit-button" onClick={() => this.setEditing()}><FontAwesomeIcon icon=""/> </button>
                     <button className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>X</button>
                 </td>
             </tr>

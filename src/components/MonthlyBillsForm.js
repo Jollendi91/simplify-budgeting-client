@@ -5,6 +5,19 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import {addBill} from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {StyledInput, Button} from './styled-components/Forms';
+
+// Styled Components
+const SetupInput = StyledInput.extend`
+    max-width: 150px;
+`;
+
+const Inputs = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+`;
+
 export class MonthlyBillForm extends React.Component {
     onSubmit(values) {
         const {bill, amount} = values;
@@ -24,30 +37,32 @@ export class MonthlyBillForm extends React.Component {
 
         return (
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                <div className="form-input-container">
-                    <label htmlFor="bill">Bill</label>
-                    {errorMessage}
-                    <Field 
-                        component={Input}
-                        type="text"
-                        name="bill"
-                        id="bill"
-                        validate={[required, notEmpty]}
-                    />
-                </div>
-                <div className="form-input-container">
-                    <label htmlFor="amount">Amount</label>
-                    <Field 
-                        component={Input}
-                        type="number"
-                        name="amount"
-                        id="amount"
-                        step="0.01"
-                        min="0.01"
-                        validate={[required, notEmpty]}
-                    />
-                </div>
-                <button disabled={this.props.pristine || this.props.submitting}>Add Bill</button>
+                <Inputs>
+                    <div className="form-input-container">
+                        <label htmlFor="bill">Bill</label>
+                        {errorMessage}
+                        <Field 
+                            component={SetupInput}
+                            type="text"
+                            name="bill"
+                            id="bill"
+                            validate={[required, notEmpty]}
+                        />
+                    </div>
+                    <div className="form-input-container">
+                        <label htmlFor="amount">Amount</label>
+                        <Field 
+                            component={SetupInput}
+                            type="number"
+                            name="amount"
+                            id="amount"
+                            step="0.01"
+                            min="0.01"
+                            validate={[required, notEmpty]}
+                        />
+                    </div>
+                </Inputs>
+                <Button disabled={this.props.pristine || this.props.submitting}>Add Bill</Button>
             </form>
         )
     }
