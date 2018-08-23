@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 import './SignupForm.css';
+import {StyledInput} from './styled-components/Forms';
 
 const FormContainer = styled.article`
     width: 100%;
@@ -31,31 +32,6 @@ const Button = styled.button`
     font-size: .8em;
     margin-top: 1em;
     cursor: pointer;
-`;
-
-const StyledInput = styled(Input)`
-max-width: 350px;
-padding: 5px;
-margin: 0 auto 10px;
-
-label {
-    text-align: left;
-    font-size: 1em;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-input {
-    max-width: 100%;
-    width: 100%;
-    padding: 5px;
-    border: 0;
-    border-bottom: 1px solid #aaa;
-    font-size: 18px;
-    margin-top: 5px;
-}
 `;
 
 const FormError = styled.div`
