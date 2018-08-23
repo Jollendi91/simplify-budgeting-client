@@ -8,6 +8,26 @@ import {deleteBill, updateBill} from '../actions/protected-data';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './BillRow.css';
+import {StyledInput} from './styled-components/Forms';
+
+const UpdateBillForm = styled.form`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .form-input-container {
+        width: 24%;
+    }
+
+    .form-input {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .bill-amount-input {
+        display: flex;
+    }
+`;
 
 export class BillRow extends React.Component {
     constructor(props) {
@@ -44,11 +64,11 @@ export class BillRow extends React.Component {
             return (
                 <tr>
                     <td className="table-form-container" colSpan="3">
-                        <form className="update-bill-form" form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                        <UpdateBillForm form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             {errorMessage}
                             <div className="form-input-container">
                                 <Field 
-                                    component={Input}
+                                    component={StyledInput}
                                     type="text"
                                     name="bill"
                                     id="bill-update"
@@ -57,7 +77,7 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="form-input-container bill-amount-input">
                                 $<Field
-                                    component={Input}
+                                    component={StyledInput}
                                     type="number"
                                     name="amount"
                                     id="amount-update"
@@ -67,10 +87,11 @@ export class BillRow extends React.Component {
                                 />
                             </div>
                             <div className="edit-buttons">
-                                <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                                <button className="cancel-button" type="button" onClick={() => this.setEditing()}>Cancel</button>
+                                
+                                <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><FontAwesomeIcon icon={['far', 'save']} /></button>
+                                <FontAwesomeIcon icon='times' className="cancel-button" onClick={() => this.setEditing()}/>
                             </div>
-                        </form>
+                        </UpdateBillForm>
                     </td>
                 </tr> 
             )

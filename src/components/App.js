@@ -14,10 +14,10 @@ import {refreshAuthToken} from '../actions/auth';
 import {injectGlobal} from 'styled-components';
 import {modernNormalize} from 'styled-modern-normalize';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBars} from '@fortawesome/free-solid-svg-icons';
-import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
+import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
 
-library.add(faBars, faEdit, faTrashAlt);
+library.add(faBars, faEdit, faTrashAlt, faSave, faTimes);
 
 injectGlobal`
     ${modernNormalize};
