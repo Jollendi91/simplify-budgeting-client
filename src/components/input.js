@@ -22,7 +22,7 @@ export default class Input extends React.Component {
         }
 
         return (
-            <div className={`form-input ${this.props.className}`}>
+            <div className={`form-input ${this.props.className ? this.props.className : ''}`}>
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
                     {error}
