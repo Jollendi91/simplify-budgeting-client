@@ -49,9 +49,3 @@ export const Button = styled.button`
     margin-top: 1em;
     cursor: pointer;
 `;
-
-export const FormError = styled.div`
-    font-size: .8em;
-    color: red;
-    font-weight: bold;
-`;
