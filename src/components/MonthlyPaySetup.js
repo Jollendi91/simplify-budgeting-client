@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
 import {required, notEmpty} from '../validators';
 import { updateSalary, updateStep } from '../actions/protected-data';
 
@@ -35,7 +34,7 @@ export class MonthlyPaySetup extends React.Component {
                 <form className="monthly-pay-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                     <StyledLabel htmlFor="monthly-salary">What is your monthly take home pay?</StyledLabel>
                     <Field
-                        component={SetupInput}
+                        component={StyledInput}
                         type="number"
                         name="monthlySalary"
                         id="monthly-salary"
