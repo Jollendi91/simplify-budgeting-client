@@ -10,19 +10,37 @@ import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 
 import styled from 'styled-components';
+import {FormContainer} from './styled-components/Forms';
 import './AccountSetup.css';
 
 // Styled Components
-const SetupStep = styled.section`
-    max-width: 500px;
-    width: 100%;
-    height: 50vh;
+const SetupStepContainer = styled.div`
     position: absolute;
-    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .2);
+`;
+
+const SectionContainer = FormContainer.withComponent('article');
+
+const SetupStep = SectionContainer.extend`
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
     top: 50%;
     left: 50%;
+    padding: 0;
     transform: translate(-50%, -50%);
-    background-color: grey;
+    background-color: white;
+`;
+
+const Header = styled.h1`
+    margin: 0;
+    padding: .3em 0;
+    color: white;
+    background: #20A69A;
 `;
 
 export class AccountSetup extends React.Component {
@@ -41,27 +59,30 @@ export class AccountSetup extends React.Component {
     
         } else if (this.props.step === 1) {
             return (
-                <SetupStep>
-                    <p>Step {this.props.step} / 3</p>
-                    <h1>Let's get setup!</h1>
-                    <MonthlyPaySetup />
-                </SetupStep>
+                <SetupStepContainer>
+                    <SetupStep>
+                        <Header>Account Setup</Header>
+                        <MonthlyPaySetup />
+                        <p>Step {this.props.step} / 3</p>
+                    </SetupStep>
+                </SetupStepContainer>
             ) 
         } else if (this.props.step === 2) {
             return (
                 <SetupStep>
-                    <p>Step {this.props.step} / 3</p>
+                    <h1>Account Setup</h1>
                     <MonthlyBillsSetup />
                     <div className="setup-buttons">
                         <button className="back-button" onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
                         <button className="next-button" onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
                     </div>
+                    <p>Step {this.props.step} / 3</p>
                 </SetupStep>
             );
         } else if (this.props.step === 3) {
             return (
                 <SetupStep>
-                    <p>Step {this.props.step} / 3</p>
+                    <h1>Account Setup</h1>
                     <CategorySetup />
                     <div className="setup-buttons">
                         <button className="back-button" onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
@@ -69,6 +90,7 @@ export class AccountSetup extends React.Component {
                             <button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
                         </Link>
                     </div>
+                    <p>Step {this.props.step} / 3</p>
                 </SetupStep>
             );
         }

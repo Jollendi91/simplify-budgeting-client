@@ -5,6 +5,22 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import { updateSalary, updateStep } from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {StyledInput, Button} from './styled-components/Forms';
+
+const SetupInput = StyledInput.extend`
+    max-width: 300px;
+    input {
+        text-align: center;
+        border-radius: 5px;
+    }
+`;
+
+const StyledLabel = styled.label`
+    font-size: 1.3em;
+    padding: 0 10px;
+`;
+
 export class MonthlyPaySetup extends React.Component {
     onSubmit(values) {
         return (
@@ -17,9 +33,9 @@ export class MonthlyPaySetup extends React.Component {
         return (
             <section className="monthly-pay-container">
                 <form className="monthly-pay-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <label htmlFor="monthly-salary">What is your monthly take home pay?</label>
+                    <StyledLabel htmlFor="monthly-salary">What is your monthly take home pay?</StyledLabel>
                     <Field
-                        component={Input}
+                        component={SetupInput}
                         type="number"
                         name="monthlySalary"
                         id="monthly-salary"
@@ -27,7 +43,7 @@ export class MonthlyPaySetup extends React.Component {
                         min="0.01"
                         validate={[required, notEmpty]}
                     />
-                    <button disabled={this.props.pristine || this.props.submitting}>Next</button>
+                    <Button disabled={this.props.pristine || this.props.submitting}>Next</Button>
                 </form>
             </section>
         )
