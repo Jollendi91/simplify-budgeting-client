@@ -4,11 +4,14 @@ import Input from './input';
 import {login} from '../actions/auth';
 import {required, notEmpty} from '../validators';
 
+import {StyledInput, FormContainer, CloseButton, Button} from './styled-components/Forms';
+
 import './LoginForm.css';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 
 export class LoginForm extends React.Component {
   onSubmit(values) {
-    return this.props.dispatch(login(values.username, values.password));
+    return this.props.dispatch(login(values.username, values.password)).then(() => this.props.hideForm());
   }
 
   render() {
@@ -22,35 +25,35 @@ export class LoginForm extends React.Component {
     }
 
     return (
-      <form className="login-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-        {error}
-        <div className="login-form-input">
-          <label htmlFor="login-username">Username</label>
+      <FormContainer>
+        <CloseButton icon={faTimesCircle} onClick={() => this.props.hideForm()}/>
+        <form 
+          className="login-form" 
+          onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
+        )}>
+          <h2>Let's get logged in!</h2>
+          {error}
           <Field 
-            component={Input}
+            component={StyledInput}
             type="text"
             name="username"
             id="login-username"
+            label="Username"
             validate={[required, notEmpty]}
           />
-        </div>
-        <div className="login-form-input">
-          <label htmlFor="login-password">Password</label>
           <Field 
-            component={Input}
+            component={StyledInput}
             type="password"
             name="password"
             id="login-password"
+            label="Password"
             validate={[required, notEmpty]}
           />
-        </div>
-
-        
-      
-        <button disabled={this.props.pristine || this.props.submitting}>
-          Log in
-        </button>
-      </form>
+          <Button disabled={this.props.pristine || this.props.submitting}>
+            Log in
+          </Button>
+        </form>
+      </FormContainer>
     );
   }
 }

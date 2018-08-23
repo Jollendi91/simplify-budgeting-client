@@ -9,7 +9,21 @@ import MonthlyPaySetup from './MonthlyPaySetup';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 
+import styled from 'styled-components';
 import './AccountSetup.css';
+
+// Styled Components
+const SetupStep = styled.section`
+    max-width: 500px;
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: grey;
+`;
 
 export class AccountSetup extends React.Component {
 
@@ -27,32 +41,36 @@ export class AccountSetup extends React.Component {
     
         } else if (this.props.step === 1) {
             return (
-                <section className="setup-step">
-                    <h1>Let's get setup!</h1>
+                <SetupStep>
                     <p>Step {this.props.step} / 3</p>
+                    <h1>Let's get setup!</h1>
                     <MonthlyPaySetup />
-                </section>
+                </SetupStep>
             ) 
         } else if (this.props.step === 2) {
-            return (<section className="setup-step">
-                <p>Step {this.props.step} / 3</p>
-                <MonthlyBillsSetup />
-                <div className="setup-buttons">
-                    <button className="back-button" onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
-                    <button className="next-button" onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
-                </div>
-            </section>)
+            return (
+                <SetupStep>
+                    <p>Step {this.props.step} / 3</p>
+                    <MonthlyBillsSetup />
+                    <div className="setup-buttons">
+                        <button className="back-button" onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
+                        <button className="next-button" onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
+                    </div>
+                </SetupStep>
+            );
         } else if (this.props.step === 3) {
-            return (<section className="setup-step">
-                <p>Step {this.props.step} / 3</p>
-                <CategorySetup />
-                <div className="setup-buttons">
-                    <button className="back-button" onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
-                    <Link to='/dashboard'>
-                        <button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
-                    </Link>
-                </div>
-            </section>)
+            return (
+                <SetupStep>
+                    <p>Step {this.props.step} / 3</p>
+                    <CategorySetup />
+                    <div className="setup-buttons">
+                        <button className="back-button" onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
+                        <Link to='/dashboard'>
+                            <button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
+                        </Link>
+                    </div>
+                </SetupStep>
+            );
         }
         return null;
     }

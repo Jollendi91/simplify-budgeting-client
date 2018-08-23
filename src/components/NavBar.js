@@ -16,7 +16,6 @@ const NavContainer = styled.nav`
     right: 0;
     top: 0;
     z-index: 10;
-
     background-color: #fff;
 `;
 
@@ -40,7 +39,7 @@ const FormModal = styled.article`
         background-color: rgba(0, 0, 0, 0.4);
     }
 
-    form {
+    article {
         background-color: white;
         z-index: 1;
     }
@@ -143,14 +142,14 @@ export class NavBar extends React.Component {
             activeForm = (
                 <FormModal>
                     <div className="overlay" onClick={() => this.displayForm(null)}></div>
-                    <LoginForm />
+                    <LoginForm hideForm={() => this.displayForm(null)}/>
                 </FormModal>
             );
         } else if (this.state.displayForm === 'signup') {
             activeForm = (
                 <FormModal>
                     <div className="overlay" onClick={() => this.displayForm(null)}></div>
-                    <SignupForm />
+                    <SignupForm hideForm={() => this.displayForm(null)}/>
                 </FormModal>
             );
         }

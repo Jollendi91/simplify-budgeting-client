@@ -39,7 +39,6 @@ export function LandingPage(props) {
                     <p>[Screenshot of use case]</p>
                     <p>Description of section</p>
                 </section>
-                <SignupForm />
             </main>
             <footer>
                 Created by Josh
