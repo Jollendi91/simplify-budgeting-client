@@ -1,5 +1,11 @@
 import React from 'react';
-import {FormError} from './styled-components/Forms';
+import styled from 'styled-components';
+
+const FormError = styled.div`
+    font-size: .8em;
+    color: red;
+    font-weight: bold;
+`;
 
 export default class Input extends React.Component {
     componentDidUpdate(prevProps) {
