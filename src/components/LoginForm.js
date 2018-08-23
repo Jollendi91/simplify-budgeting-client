@@ -6,8 +6,6 @@ import {required, notEmpty} from '../validators';
 
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-
-import './LoginForm.css';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 
 const FormContainer = styled.article`
