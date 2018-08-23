@@ -7,14 +7,7 @@ import {required, notEmpty} from '../validators';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
-import {FormContainer, StyledInput, CloseButton} from './styled-components/Forms';
-
-const Button = styled.button`
-    padding: .6em 5em;
-    font-size: .8em;
-    margin-top: 1em;
-    cursor: pointer;
-`;
+import {FormContainer, StyledInput, CloseButton, Button} from './styled-components/Forms';
 
 export class LoginForm extends React.Component {
   onSubmit(values) {

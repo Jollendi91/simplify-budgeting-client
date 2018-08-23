@@ -9,15 +9,7 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 import './SignupForm.css';
-import {StyledInput, FormContainer, CloseButton} from './styled-components/Forms';
-
-
-const Button = styled.button`
-    padding: .6em 5em;
-    font-size: .8em;
-    margin-top: 1em;
-    cursor: pointer;
-`;
+import {StyledInput, FormContainer, CloseButton, Button} from './styled-components/Forms';
 
 const FormError = styled.div`
     font-size: .8em;
