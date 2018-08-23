@@ -10,18 +10,11 @@ import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 
 import styled from 'styled-components';
+import {FormContainer} from './styled-components/Forms';
 
 import './AccountSetup.css';
 
 // Styled Components
-const FormContainer = styled.article`
-    width: 100%;
-    max-width: 500px;
-    padding: 20px 10px;
-    margin: auto;
-    position: relative;
-`;
-
 const SetupStepContainer = styled.div`
     position: absolute;
     width: 100vw;

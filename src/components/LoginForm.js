@@ -7,14 +7,9 @@ import {required, notEmpty} from '../validators';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import {FormContainer} from './styled-components/Forms';
 
-const FormContainer = styled.article`
-    width: 100%;
-    max-width: 500px;
-    padding: 20px 10px;
-    margin: auto;
-    position: relative;
-`;
+
 
 const CloseButton = styled(FontAwesomeIcon)`
     position: absolute;
