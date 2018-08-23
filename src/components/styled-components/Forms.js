@@ -34,3 +34,11 @@ input {
     margin-top: 5px;
 }
 `;
+
+export const CloseButton = styled(FontAwesomeIcon)`
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+`;

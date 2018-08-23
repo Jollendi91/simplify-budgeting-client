@@ -9,23 +9,8 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 import './SignupForm.css';
-import {StyledInput} from './styled-components/Forms';
+import {StyledInput, FormContainer, CloseButton} from './styled-components/Forms';
 
-const FormContainer = styled.article`
-    width: 100%;
-    max-width: 500px;
-    padding: 20px 10px;
-    margin: auto;
-    position: relative;
-`;
-
-const CloseButton = styled(FontAwesomeIcon)`
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 1.5em;
-    cursor: pointer;
-`;
 
 const Button = styled.button`
     padding: .6em 5em;
