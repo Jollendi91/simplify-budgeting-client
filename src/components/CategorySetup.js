@@ -5,10 +5,30 @@ import CategoryForm from './CategoryForm';
 import CatRow from './CatRow';
 
 import styled from 'styled-components';
-import {StyledTable, StyledTD, StyledTH, StyledTBody} from './styled-components/Tables';
+import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 import './CategorySetup.css';
 
 // Styled Components
+const StatsContainer = styled.div`
+	text-align: center;
+	display: flex;
+    justify-content: center;
+	align-items: flex-end;
+	
+	p {
+		margin: 0;
+	}
+`;
+
+const Title = styled.p`
+	color: white;
+	font-weight: bold;
+	background-color: ${props => props.bgColor ? props.bgColor : 'white'};
+	padding: 2px 15px;
+`;
+
+const Amount = styled.p`
+`;
 
 const CategoryTH = StyledTH.extend`
 	width: 24%;
@@ -25,33 +45,22 @@ export function CategorySetup(props) {
     return (
         <section className="category-container">
             <p>Set up some budgets that you would like to track, such as spending, savings, or debts.</p>
-            <p>How would you like to allocate the remaining amount?</p>
-			<section className="remaining-calc">
+			<p>How would you like to allocate the remaining amount?</p>
+			<CategoryForm max={remainingAmount}/>
+			<StatsContainer>
 				<div>
-					<p className="title">Salary</p>
-					<p>${props.monthlySalary}</p> 
-				</div>
-				<p> - </p>
-				<div>
-					<p className="title">Bills</p>
-					<p>${props.billsTotal.toFixed(2)}</p>
-				</div>
-				<p> = </p>
-				<div>
-					<p> ${props.monthlySalary - props.billsTotal}</p>
-				</div>
-			</section>
-			<section className="remaining-calc">
-				<div>
-					<p className="title">Remaining</p>
-					<p>${remainingAmount.toFixed(2)}</p>
+					<Title bgColor="#043B40">Discretionary</Title>
+					<Amount>${props.monthlySalary - props.billsTotal.toFixed(2)}</Amount> 
 				</div>
 				<div>
-					<p className="title">Budgeted</p>
-					<p>${props.categoriesTotal.toFixed(2)}</p>
+					<Title bgColor="#276A73">Budgeted</Title>
+					<Amount>${props.categoriesTotal.toFixed(2)}</Amount>
 				</div>
-			</section>
-            <CategoryForm max={remainingAmount}/>
+				<div>
+					<Title bgColor="#20A69A">Remaining</Title>
+					<Amount>${remainingAmount.toFixed(2)}</Amount>
+				</div>
+			</StatsContainer>
 			<StyledTable>
 				<thead>
 					<tr>
