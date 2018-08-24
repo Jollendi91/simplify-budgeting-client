@@ -4,7 +4,15 @@ import {connect} from 'react-redux';
 import CategoryForm from './CategoryForm';
 import CatRow from './CatRow';
 
+import styled from 'styled-components';
+import {StyledTable, StyledTD, StyledTH, StyledTBody} from './styled-components/Tables';
 import './CategorySetup.css';
+
+// Styled Components
+
+const CategoryTH = StyledTH.extend`
+	width: 24%;
+`;
 
 export function CategorySetup(props) {
 
@@ -16,9 +24,8 @@ export function CategorySetup(props) {
 
     return (
         <section className="category-container">
-			<h2>Categories</h2>
-            <p>Set up some categories that you would like to budget for, such as spending, savings, or debts.</p>
-            <p>How would you like to budget the remaining amount?</p>
+            <p>Set up some budgets that you would like to track, such as spending, savings, or debts.</p>
+            <p>How would you like to allocate the remaining amount?</p>
 			<section className="remaining-calc">
 				<div>
 					<p className="title">Salary</p>
@@ -45,18 +52,18 @@ export function CategorySetup(props) {
 				</div>
 			</section>
             <CategoryForm max={remainingAmount}/>
-			<table className="categories-table">
+			<StyledTable>
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Amount</th>
-						<th colSpan="2">Percentage</th>
+						<CategoryTH>Name</CategoryTH>
+						<CategoryTH>Amount</CategoryTH>
+						<CategoryTH colSpan="2"></CategoryTH>
 					</tr>
 				</thead>
-				<tbody>
+				<StyledTBody>
 					{categories}
-				</tbody>
-			</table>
+				</StyledTBody>
+			</StyledTable>
 		</section>
     )
 }

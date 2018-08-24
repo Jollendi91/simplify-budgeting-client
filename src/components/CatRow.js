@@ -3,11 +3,66 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, notEmpty} from '../validators';
 import Input from './input';
-
 import { deleteCategory, updateCategory } from '../actions/protected-data';
 
-import './CatRow.css';
+import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {StyledInput} from './styled-components/Forms';
+import {StyledTD} from './styled-components/Tables';
 
+// Styled Components
+const UpdateCategoryForm = styled.form`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .form-input-container {
+        width: 24%;
+        padding: 8px;
+    }
+
+    .form-input {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .category-amount-input {
+        display: flex;
+        align-items: center;
+    }
+`;
+
+const SetupInput = StyledInput.extend`
+    padding: 0;
+
+    input {
+        font-size: 1em;
+        padding: 2px;
+        margin-top: 0;
+    }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+   margin: 0 8px;
+   color: ${props => props.color ? props.color : 'black'};
+`;
+
+const SubmitButton = styled.button`
+   border: none;
+   padding: 2px;
+   background-color: transparent;
+`;
+
+const CategoryTD = StyledTD.extend`
+    width: 24%;
+`;
+
+const FormTD = StyledTD.extend`
+    padding: 0;
+    width: 24%;
+`;
+
+// CatRow Component
 export class CatRow extends React.Component {
     constructor(props) {
         super(props);
@@ -39,20 +94,20 @@ export class CatRow extends React.Component {
          if (this.state.editing) {
           return  (
             <tr>
-                <td className="category-form-container" colSpan="4">
-                    <form className="update-category-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                        <div className="category-name-input">
+                <FormTD colSpan="4">
+                    <UpdateCategoryForm onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                        <div className="form-input-container">
                             <Field
-                                component={Input}
+                                component={SetupInput}
                                 type="text"
                                 name="category"
                                 id="category-update"
                                 validate={[required, notEmpty]}
                             />
                         </div>
-                        <div className="category-amount-input">
+                        <div className="form-input-container category-amount-input">
                             $<Field 
-                                component={Input}
+                                component={SetupInput}
                                 type="number"
                                 name="amount"
                                 id="category-amount-update"
@@ -62,28 +117,28 @@ export class CatRow extends React.Component {
                                 validate={[required, notEmpty]}
                             />
                         </div>
-                        <div>
+                        <div className='form-input-container'>
                             {Math.round(updateAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%
                         </div>
-                        <div className="edit-buttons">
-                            <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                            <button className="cancel-button" onClick={() => this.setEditing()}>Cancel</button>
+                        <div className="edit-buttons form-input-container">
+                            <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#276A73' /></SubmitButton>
+                            <StyledIcon icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
                         </div>
-                    </form>
-                </td> 
+                    </UpdateCategoryForm>
+                </FormTD> 
             </tr>
             )
         } else {
 
             return (
                 <tr key={this.props.index}>
-                    <td>{this.props.category}</td>
-                    <td>${parseFloat(this.props.amount).toFixed(2)}</td>
-                    <td>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</td>
-                    <td className="edit-buttons">
-                        <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
-                        <button className="delete-button" onClick={() => this.props.dispatch(deleteCategory(this.props.id))}>X</button>
-                    </td>
+                    <CategoryTD>{this.props.category}</CategoryTD>
+                    <CategoryTD>${parseFloat(this.props.amount).toFixed(2)}</CategoryTD>
+                    <CategoryTD>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</CategoryTD>
+                    <CategoryTD className="edit-buttons">
+                        <StyledIcon icon={['far', 'edit']} color='#276A73' onClick={() => this.setEditing()}/>
+                        <StyledIcon icon={['far', 'trash-alt']} color='#FF5A5F'  onClick={() => this.props.dispatch(deleteCategory(this.props.id))}/>
+                    </CategoryTD>
                 </tr>
             )
         }

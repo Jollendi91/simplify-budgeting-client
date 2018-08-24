@@ -10,7 +10,7 @@ import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 
 import styled from 'styled-components';
-import {FormContainer} from './styled-components/Forms';
+import {FormContainer, Button} from './styled-components/Forms';
 
 import './AccountSetup.css';
 
@@ -59,7 +59,7 @@ export class AccountSetup extends React.Component {
         } else if (this.props.step === 1) {
             return (
                 <SetupStep>
-                    <Header>Account Setup</Header>
+                    <Header>Account Setup - Salary</Header>
                     <MonthlyPaySetup />
                     <p>Step {this.props.step} / 3</p>
                 </SetupStep>
@@ -67,11 +67,11 @@ export class AccountSetup extends React.Component {
         } else if (this.props.step === 2) {
             return (
                 <SetupStep>
-                    <Header>Account Setup</Header>
+                    <Header>Account Setup - Bills</Header>
                     <MonthlyBillsSetup />
                     <div className="setup-buttons">
-                        <button className="back-button" onClick={() => this.props.dispatch(updateStep(1))}>Back</button>
-                        <button className="next-button" onClick={() => this.props.dispatch(updateStep(3))}>Next</button>
+                        <Button onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
+                        <Button onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
                     </div>
                     <p>Step {this.props.step} / 3</p>
                 </SetupStep>
@@ -79,12 +79,12 @@ export class AccountSetup extends React.Component {
         } else if (this.props.step === 3) {
             return (
                 <SetupStep>
-                    <h1>Account Setup</h1>
+                    <Header>Account Setup - Budgets</Header>
                     <CategorySetup />
                     <div className="setup-buttons">
-                        <button className="back-button" onClick={() => this.props.dispatch(updateStep(2))}>Back</button>
+                        <Button onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
                         <Link to='/dashboard'>
-                            <button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</button>
+                            <Button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</Button>
                         </Link>
                     </div>
                     <p>Step {this.props.step} / 3</p>

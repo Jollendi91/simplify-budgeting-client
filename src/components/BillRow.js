@@ -8,6 +8,10 @@ import {deleteBill, updateBill} from '../actions/protected-data';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {StyledInput} from './styled-components/Forms';
+import {StyledTD} from './styled-components/Tables';
+
+
+// Styled Components
 
 const UpdateBillForm = styled.form`
     display: flex;
@@ -30,14 +34,24 @@ const UpdateBillForm = styled.form`
 `;
 
 const SetupInput = StyledInput.extend`
+    padding: 0;
+
    input {
+       font-size: 1em;
        padding: 2px;
+       margin-top: 0;
    }
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
    color: ${props => props.color ? props.color : 'black'};
+`;
+
+const SubmitButton = styled.button`
+   border: none;
+   padding: 2px;
+   background-color: transparent;
 `;
 
 export class BillRow extends React.Component {
@@ -74,7 +88,7 @@ export class BillRow extends React.Component {
         if (this.state.editing) {
             return (
                 <tr>
-                    <td className="table-form-container" colSpan="3">
+                    <StyledTD className="table-form-container" colSpan="3">
                         <UpdateBillForm form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             {errorMessage}
                             <div className="form-input-container">
@@ -99,23 +113,23 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="edit-buttons">
                                 
-                                <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><FontAwesomeIcon icon={['far', 'save']} /></button>
-                                <FontAwesomeIcon icon='times' className="cancel-button" onClick={() => this.setEditing()}/>
+                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#276A73' /></SubmitButton>
+                                <StyledIcon icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
                             </div>
                         </UpdateBillForm>
-                    </td>
+                    </StyledTD>
                 </tr> 
             )
         } else {
 
         return (
             <tr>
-                <td>{this.props.bill}</td>
-                <td>${parseFloat(this.props.amount).toFixed(2)}</td>
-                <td className="edit-buttons">
-                    <StyledIcon icon={['far','edit']} className="edit-button" onClick={() => this.setEditing()}/>
-                    <StyledIcon icon={['far','trash-alt']} className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
-                </td>
+                <StyledTD>{this.props.bill}</StyledTD>
+                <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
+                <StyledTD className="edit-buttons">
+                    <StyledIcon icon={['far','edit']} color='#276A73' onClick={() => this.setEditing()}/>
+                    <StyledIcon icon={['far','trash-alt']} color='#FF5A5F' onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
+                </StyledTD>
             </tr>
         )
     }

@@ -46,6 +46,7 @@ export const CloseButton = styled(FontAwesomeIcon)`
 export const Button = styled.button`
     padding: .4em 4em;
     font-size: .8em;
-    margin-top: .75em;
+    margin: .75em 5px 0;
+
     cursor: pointer;
 `;
