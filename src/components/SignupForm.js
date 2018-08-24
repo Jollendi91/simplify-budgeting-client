@@ -6,9 +6,7 @@ import {required, notEmpty, isTrimmed, length, matches} from '../validators';
 import Input from './input';
 
 import styled from 'styled-components';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
-import './SignupForm.css';
 import {StyledInput, FormContainer, CloseButton, Button} from './styled-components/Forms';
 
 const passwordLength = length({min: 10, max: 72});

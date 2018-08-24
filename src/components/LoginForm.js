@@ -9,6 +9,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import {FormContainer, StyledInput, CloseButton, Button} from './styled-components/Forms';
 
+const LoginButton = Button.extend`
+  margin-top: 15px;
+`;
+
 export class LoginForm extends React.Component {
   onSubmit(values) {
     return this.props.dispatch(login(values.username, values.password)).then(() => this.props.hideForm());
@@ -49,9 +53,9 @@ export class LoginForm extends React.Component {
             label="Password"
             validate={[required, notEmpty]}
           />
-          <Button disabled={this.props.pristine || this.props.submitting}>
+          <LoginButton disabled={this.props.pristine || this.props.submitting}>
             Log in
-          </Button>
+          </LoginButton>
         </form>
       </FormContainer>
     );

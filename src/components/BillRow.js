@@ -7,7 +7,6 @@ import {deleteBill, updateBill} from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import './BillRow.css';
 import {StyledInput} from './styled-components/Forms';
 
 const UpdateBillForm = styled.form`
@@ -26,7 +25,19 @@ const UpdateBillForm = styled.form`
 
     .bill-amount-input {
         display: flex;
+        align-items: center;
     }
+`;
+
+const SetupInput = StyledInput.extend`
+   input {
+       padding: 2px;
+   }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+   margin: 0 8px;
+   color: ${props => props.color ? props.color : 'black'};
 `;
 
 export class BillRow extends React.Component {
@@ -68,7 +79,7 @@ export class BillRow extends React.Component {
                             {errorMessage}
                             <div className="form-input-container">
                                 <Field 
-                                    component={StyledInput}
+                                    component={SetupInput}
                                     type="text"
                                     name="bill"
                                     id="bill-update"
@@ -77,7 +88,7 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="form-input-container bill-amount-input">
                                 $<Field
-                                    component={StyledInput}
+                                    component={SetupInput}
                                     type="number"
                                     name="amount"
                                     id="amount-update"
@@ -102,8 +113,8 @@ export class BillRow extends React.Component {
                 <td>{this.props.bill}</td>
                 <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                 <td className="edit-buttons">
-                    <FontAwesomeIcon icon={['far','edit']} className="edit-button" onClick={() => this.setEditing()}/>
-                    <FontAwesomeIcon icon={['far','trash-alt']} className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
+                    <StyledIcon icon={['far','edit']} className="edit-button" onClick={() => this.setEditing()}/>
+                    <StyledIcon icon={['far','trash-alt']} className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
                 </td>
             </tr>
         )

@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import MonthlyBillsForm from './MonthlyBillsForm';
 import BillRow from './BillRow';
 
+import {StyledTable} from './styled-components/Tables';
+
 export function MonthlyBillsSetup(props) {
 
     const bills = props.bills.map((bill)=> 
@@ -15,7 +17,7 @@ export function MonthlyBillsSetup(props) {
             <h2>Monthly Bills</h2>
             <p>Enter all expenses that recur each month</p>
             <MonthlyBillsForm />
-            <table>
+            <StyledTable>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -31,7 +33,7 @@ export function MonthlyBillsSetup(props) {
                         <td colSpan="2">${props.billsTotal.toFixed(2)}</td>
                     </tr>
                 </tfoot>
-			</table>
+			</StyledTable>
 		</section>
     )
 }
