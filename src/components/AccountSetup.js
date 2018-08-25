@@ -25,6 +25,8 @@ const SetupStepContainer = styled.div`
 const SectionContainer = FormContainer.withComponent('article');
 
 const SetupStep = SectionContainer.extend`
+    display: flex;
+    flex-direction: column;
     top: 66px;
     min-height: calc(100vh - 66px);
     padding: 0;
@@ -32,8 +34,6 @@ const SetupStep = SectionContainer.extend`
 `;
 
 const PayStep = SetupStep.extend`
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
 `;
 
@@ -46,8 +46,6 @@ const Header = styled.h1`
 `;
 
 const ButtonContainer = styled.div`
-    position: absolute;
-    bottom: 0;
     width: 100%;
 `;
 

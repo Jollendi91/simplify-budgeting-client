@@ -51,10 +51,7 @@ export const Button = styled.button`
     cursor: pointer;
 `;
 
-
-
 // Setup Forms
-
 export const SetupInput = StyledInput.extend`
     max-width: 150px;
     padding: 0;

@@ -96,7 +96,7 @@ export const addBill = (bill, amount) => (dispatch, getState) => {
     .then(res => res.json())
     .then(res => {
        const {id, bill, amount} = res;  
-      return dispatch(addBillSuccess(id, bill, parseFloat(amount)));
+      return dispatch(addBillSuccess(id, bill, amount));
     })
     .catch(err => dispatch(addBillError(err)));
 }
