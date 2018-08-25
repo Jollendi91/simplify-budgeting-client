@@ -41,6 +41,11 @@ injectGlobal`
         line-height: 1.5;
     }
 
+    .app-container {
+        min-height: 100vh;
+        background-color: #DEDCE3;
+    }
+
     h1, h2, h3, h4, h5, h6, th, button {
         font-family: 'Roboto Condensed';
     }

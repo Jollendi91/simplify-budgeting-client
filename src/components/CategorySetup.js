@@ -89,7 +89,7 @@ export function CategorySetup(props) {
 				<AmountRemaining>{`$${remainingAmount.toFixed(2)} Left`}</AmountRemaining>
 				<Bar
 					progress={props.categoriesTotal.toFixed(2) / (props.monthlySalary - props.billsTotal.toFixed(2))}
-					text={`$${props.categoriesTotal.toFixed()} of $${props.monthlySalary - props.billsTotal.toFixed(2)}`}
+					text={`$${props.categoriesTotal.toFixed()} of $${(props.monthlySalary - props.billsTotal).toFixed(2)}`}
 					options={options}
 					initialAnimate={true}
 					containerStyle={containerStyle}

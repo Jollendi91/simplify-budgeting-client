@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {PieChart} from 'react-easy-chart';
+import {PieChart, Legend} from 'react-easy-chart';
+import {ResponsivePieChart} from './ResponsivePieChart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';
 
@@ -8,7 +9,22 @@ import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
 import {fetchProtectedUser} from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {FormContainer} from './styled-components/Forms';
 import './Dashboard.css';
+
+// Styled Components
+
+const DashboardContainer = FormContainer.extend`
+    top: 66px;
+`;
+
+const PortfolioData = styled.section`
+    background-color: white;
+    display: flex;
+    padding: 15px;
+    border-radius: 5px;
+`;
 
 export class Dashboard extends React.Component {
     constructor(props) {
@@ -56,7 +72,7 @@ export class Dashboard extends React.Component {
               top={this.state.top}
               left={this.state.left}
             >
-              {this.state.key} budget: ${this.state.value}/month
+              {this.state.key} budget: ${this.state.value.toFixed(2)}/month
             </ToolTip>
           );
         }
@@ -76,6 +92,13 @@ export class Dashboard extends React.Component {
             value: category.amount
         }));
 
+        if (this.props.billsTotal) {
+            data.push({
+                key: 'Bills',
+                value: this.props.billsTotal
+            });
+        }
+
         if (this.props.remainingMoney) {
             data.push({
                 key: 'Remaining',
@@ -83,33 +106,25 @@ export class Dashboard extends React.Component {
             });
         }
 
-        if (this.props.billsTotal) {
-            data.push({
-                key: 'Bills',
-                value: this.props.billsTotal
-            });
-        }
-        
         return (
             <div>
-                <div className='dashboard-container'>
+                <DashboardContainer>
                     <header className="main-header">
-                        <section className="portfolio-data">
-                            <PieChart 
-                                innerHoleSize={200}
-                                labels 
+                        <PortfolioData>
+                            <ResponsivePieChart 
                                 data={data} 
                                 mouseOverHandler={this.mouseOverHandler.bind(this)}
                                 mouseOutHandler={this.mouseOutHandler.bind(this)}
                                 mouseMoveHandler={this.mouseMoveHandler.bind(this)}
                             />
+                            <Legend data={data} dataId={'key'} horizontal/>
                             {this.createTooltip()}
-                        </section>
+                        </PortfolioData>
                     </header>
                     <main className="category-modules">
                         {categories}
                     </main>
-                </div>
+                </DashboardContainer>
             </div>
         )
     }
