@@ -9,6 +9,10 @@ import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 import './CategorySetup.css';
 
 // Styled Components
+const CategoryFormContainer = styled.section`
+	flex-grow: 1;
+`;
+
 const Amount = styled.p`
 `;
 
@@ -68,6 +72,8 @@ const containerStyle = {
 	margin: 'auto'
 };
 
+
+// Category Setup Component
 export function CategorySetup(props) {
 
 	let remainingAmount = (props.monthlySalary - props.billsTotal) - props.categoriesTotal;
@@ -77,7 +83,7 @@ export function CategorySetup(props) {
 			)
 
     return (
-        <section className="category-container">
+        <CategoryFormContainer>
             <p>Set up some budgets that you would like to track, such as spending, savings, or debts.</p>
 			<ProgressContainer>
 				<AmountRemaining>{`$${remainingAmount.toFixed(2)} Left`}</AmountRemaining>
@@ -102,7 +108,7 @@ export function CategorySetup(props) {
 					{categories}
 				</StyledTBody>
 			</StyledTable>
-		</section>
+		</CategoryFormContainer>
     )
 }
 

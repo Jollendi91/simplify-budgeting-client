@@ -4,8 +4,15 @@ import {connect} from 'react-redux';
 import MonthlyBillsForm from './MonthlyBillsForm';
 import BillRow from './BillRow';
 
+import styled from 'styled-components';
 import {StyledTable, StyledTD, StyledTH, StyledTBody} from './styled-components/Tables';
 
+// Styled Components
+const BillsFormContainer = styled.section`
+    flex-grow: 1;
+`;
+
+// Monthly Bill Setup Component
 export function MonthlyBillsSetup(props) {
 
     const bills = props.bills.map((bill)=> 
@@ -13,7 +20,7 @@ export function MonthlyBillsSetup(props) {
     );
 
     return (
-        <section className="monthly-bills-form-container">
+        <BillsFormContainer>
             <p>Enter all expenses that recur each month</p>
             <MonthlyBillsForm />
             <StyledTable>
@@ -33,7 +40,7 @@ export function MonthlyBillsSetup(props) {
                     </tr>
                 </tfoot>
 			</StyledTable>
-		</section>
+		</BillsFormContainer>
     )
 }
 
