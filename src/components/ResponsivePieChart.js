@@ -25,7 +25,7 @@ export class ResponsivePieChart extends React.Component {
     render() {
 
         let chartSize;
-        if (this.state.windowWidth > 585) {
+        if (this.state.windowWidth > 685) {
             chartSize = 400;
         } else if (this.state.windowWidth > 200) {
             chartSize =  this.state.windowWidth / 2;
@@ -34,14 +34,16 @@ export class ResponsivePieChart extends React.Component {
         }
     
         return (
-            <PieChart 
-                size={chartSize}
-                innerHoleSize={chartSize/ 1.5} 
-                data={this.props.data} 
-                mouseOverHandler={this.props.mouseOverHandler.bind(this)}
-                mouseOutHandler={this.props.mouseOutHandler.bind(this)}
-                mouseMoveHandler={this.props.mouseMoveHandler.bind(this)}
-            />
+            <div className={this.props.className}>
+                <PieChart 
+                    size={chartSize}
+                    innerHoleSize={chartSize/ 1.5} 
+                    data={this.props.data} 
+                    mouseOverHandler={this.props.mouseOverHandler.bind(this)}
+                    mouseOutHandler={this.props.mouseOutHandler.bind(this)}
+                    mouseMoveHandler={this.props.mouseMoveHandler.bind(this)}
+                />
+            </div>
         )
     }
 }

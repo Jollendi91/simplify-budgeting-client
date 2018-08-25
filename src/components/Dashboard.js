@@ -22,8 +22,14 @@ const DashboardContainer = FormContainer.extend`
 const PortfolioData = styled.section`
     background-color: white;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
     padding: 15px;
     border-radius: 5px;
+`;
+
+const StyledPieChart = styled(ResponsivePieChart)`
+    padding-right: 10px;
 `;
 
 export class Dashboard extends React.Component {
@@ -106,18 +112,29 @@ export class Dashboard extends React.Component {
             });
         }
 
+        const customStyle = {
+            '.legend': {
+                margin: 'auto',
+                textAlign: 'left'        
+            },
+            '.legend li': {
+                paddingLeft: '18px',
+                fontSize: '.8em'
+            }
+          };
+
         return (
             <div>
                 <DashboardContainer>
                     <header className="main-header">
                         <PortfolioData>
-                            <ResponsivePieChart 
+                            <StyledPieChart
                                 data={data} 
                                 mouseOverHandler={this.mouseOverHandler.bind(this)}
                                 mouseOutHandler={this.mouseOutHandler.bind(this)}
                                 mouseMoveHandler={this.mouseMoveHandler.bind(this)}
                             />
-                            <Legend data={data} dataId={'key'} horizontal/>
+                            <Legend horizontal data={data} dataId={'key'} styles={customStyle}/>
                             {this.createTooltip()}
                         </PortfolioData>
                     </header>
