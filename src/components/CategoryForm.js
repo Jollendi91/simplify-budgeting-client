@@ -6,17 +6,7 @@ import {required, notEmpty} from '../validators';
 import {addCategory} from '../actions/protected-data';
 
 import styled from 'styled-components';
-import {StyledInput, Button} from './styled-components/Forms';
-
-// Styled Components
-const SetupInput = StyledInput.extend`
-    max-width: 150px;
-`;
-
-const Inputs = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-`;
+import {SetupInput, Inputs, Button} from './styled-components/Forms';
 
 export class CategoryForm extends React.Component {
     onSubmit(values) {
@@ -42,6 +32,7 @@ export class CategoryForm extends React.Component {
                     <label htmlFor="category-amount">Amount</label>
                         <Field 
                             component={SetupInput}
+                            amount
                             type="number"
                             name="amount"
                             id="category-amount"
@@ -51,8 +42,8 @@ export class CategoryForm extends React.Component {
                             validate={[required, notEmpty]}
                         />
                     </div>
-                </Inputs>
-                <Button disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add Category</Button>
+                    <Button disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add</Button>
+                </Inputs>    
             </form>
         )
     }

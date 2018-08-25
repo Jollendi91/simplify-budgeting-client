@@ -26,9 +26,6 @@ const SectionContainer = FormContainer.withComponent('article');
 
 const SetupStep = SectionContainer.extend`
     top: 66px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     min-height: calc(100vh - 66px);
     padding: 0;
     background-color: white;
@@ -40,6 +37,12 @@ const Header = styled.h1`
     margin: 0;
     padding: .3em 0;
     background: #20A69A;
+`;
+
+const ButtonContainer = styled.div`
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 `;
 
 export class AccountSetup extends React.Component {
@@ -69,11 +72,11 @@ export class AccountSetup extends React.Component {
                 <SetupStep>
                     <Header>Account Setup - Bills</Header>
                     <MonthlyBillsSetup />
-                    <div className="setup-buttons">
+                    <ButtonContainer>
                         <Button onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
                         <Button onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
-                    </div>
-                    <p>Step {this.props.step} / 3</p>
+                        <p>Step {this.props.step} / 3</p>
+                    </ButtonContainer>
                 </SetupStep>
             );
         } else if (this.props.step === 3) {
@@ -81,13 +84,13 @@ export class AccountSetup extends React.Component {
                 <SetupStep>
                     <Header>Account Setup - Budgets</Header>
                     <CategorySetup />
-                    <div className="setup-buttons">
+                    <ButtonContainer>
                         <Button onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
                         <Link to='/dashboard'>
                             <Button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</Button>
                         </Link>
-                    </div>
-                    <p>Step {this.props.step} / 3</p>
+                        <p>Step {this.props.step} / 3</p>
+                    </ButtonContainer>
                 </SetupStep>
             );
         }

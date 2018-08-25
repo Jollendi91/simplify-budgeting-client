@@ -56,6 +56,7 @@ export class SignupForm extends React.Component {
                         name="username"
                         type="text"
                         component={StyledInput}
+                        signup
                         label="Username"
                         validate={[required, notEmpty, isTrimmed, usernameLength]}
                     />
@@ -63,6 +64,7 @@ export class SignupForm extends React.Component {
                         name="password"
                         type="password"
                         component={StyledInput}
+                        signup
                         label="Password"
                         validate={[required, notEmpty, isTrimmed, passwordLength]}
                     />
@@ -70,12 +72,14 @@ export class SignupForm extends React.Component {
                         name="verifyPassword"
                         type="password"
                         component={StyledInput}
+                        signup
                         label="Verify Password"
                         validate={[required, notEmpty, matchesPassword]}
                     />
                 
                     <Button
                         type="submit"
+                        signup
                         disabled={this.props.pristine || this.props.submitting}>
                         Sign up
                     </Button>

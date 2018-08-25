@@ -27,7 +27,7 @@ export const StyledInput = styled(Input)`
     input {
         max-width: 100%;
         width: 100%;
-        padding: 5px;
+        padding:  ${props => props.signup ? '5px' : '3px'};
         border: 0;
         border-bottom: 1px solid #aaa;
         font-size: 18px;
@@ -44,9 +44,39 @@ export const CloseButton = styled(FontAwesomeIcon)`
 `;
 
 export const Button = styled.button`
-    padding: .4em 4em;
+    padding: .4em ${props => props.signup ? '4em' : '2em'};
     font-size: .8em;
     margin: .75em 5px 0;
 
     cursor: pointer;
+`;
+
+
+
+// Setup Forms
+
+export const SetupInput = StyledInput.extend`
+    max-width: 150px;
+    padding: 0;
+    position: relative;
+
+    label {
+        position: absolute;
+        bottom: -20px;
+    }
+
+    input {
+        width: ${props => props.amount ? '95px' : "100%"};
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f4f4f4;
+    }
+`;
+
+export const Inputs = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    margin: 15px 0;
+    padding-bottom: 10px;
 `;

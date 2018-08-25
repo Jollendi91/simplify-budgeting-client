@@ -6,17 +6,7 @@ import {required, notEmpty} from '../validators';
 import {addBill} from '../actions/protected-data';
 
 import styled from 'styled-components';
-import {StyledInput, Button} from './styled-components/Forms';
-
-// Styled Components
-const SetupInput = StyledInput.extend`
-    max-width: 150px;
-`;
-
-const Inputs = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-`;
+import {SetupInput, Inputs, Button} from './styled-components/Forms';
 
 export class MonthlyBillForm extends React.Component {
     onSubmit(values) {
@@ -53,6 +43,7 @@ export class MonthlyBillForm extends React.Component {
                         <label htmlFor="amount">Amount</label>
                         <Field 
                             component={SetupInput}
+                            amount
                             type="number"
                             name="amount"
                             id="amount"
@@ -61,8 +52,8 @@ export class MonthlyBillForm extends React.Component {
                             validate={[required, notEmpty]}
                         />
                     </div>
+                    <Button disabled={this.props.pristine || this.props.submitting}>Add</Button>
                 </Inputs>
-                <Button disabled={this.props.pristine || this.props.submitting}>Add Bill</Button>
             </form>
         )
     }
