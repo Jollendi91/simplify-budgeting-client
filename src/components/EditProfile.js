@@ -5,15 +5,15 @@ import MonthlyPayEdit from './MonthlyPayEdit';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 import RequiresLogin from './requiresLogin'
+import { fetchProtectedUser } from '../actions/protected-data';
 
 import './AccountSetup.css';
-import { fetchProtectedUser } from '../actions/protected-data';
 
 export class EditProfile extends React.Component {
     
     componentDidMount() {
         if (this.props.notLoaded) {
-            this.props.dispatch(fetchProtectedUser);
+            this.props.dispatch(fetchProtectedUser());
         }
     }
 
@@ -32,7 +32,7 @@ export class EditProfile extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    notLoaded: state.simplify.user === ""
+    notLoaded: state.simplify.user.id === null
 });
 
 export default RequiresLogin()(connect(mapStateToProps)(EditProfile));

@@ -1,11 +1,12 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {PieChart} from 'react-easy-chart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';
 
 import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
+import {fetchProtectedUser} from '../actions/protected-data';
 
 import './Dashboard.css';
 
@@ -19,6 +20,12 @@ export class Dashboard extends React.Component {
             left: '',
             value: '',
             key: ''
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.notLoaded) {
+            this.props.dispatch(fetchProtectedUser());
         }
     }
 
@@ -109,25 +116,15 @@ export class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => {
-    let categoryTotal;
-        if (state.simplify.user.categories) {
-            categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0);
-        } else {
-            categoryTotal = 0;
-        }
-
-    let billTotal;
-        if (state.simplify.user.bills) {
-            billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0);
-        } else {
-            billTotal = 0;
-        }
-
-     return  {
+    let categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0);
+    let billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0);
+     
+    return  {
         categories: state.simplify.user.categories,
         remainingMoney: state.simplify.user.monthlySalary - categoryTotal - billTotal,
         billsTotal: billTotal,
-        step: state.simplify.user.setupStep
+        step: state.simplify.user.setupStep,
+        notLoaded: state.simplify.user.id === null
     }
 };
 

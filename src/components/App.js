@@ -10,9 +10,36 @@ import Category from './Category';
 import Bills from './Bills';
 import NavBar from './NavBar';
 import {refreshAuthToken} from '../actions/auth';
-import {fetchProtectedUser} from '../actions/protected-data';
 
-export class Simplify extends React.Component {
+import {injectGlobal} from 'styled-components';
+import {modernNormalize} from 'styled-modern-normalize';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
+
+library.add(faBars, faEdit, faTrashAlt, faSave, faTimes);
+
+injectGlobal`
+    ${modernNormalize};
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        font-family: sans-serif;
+        font-size: 1em;
+        text-align: center;
+        line-height: 1.5;
+    }
+`;
+
+export class App extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!prevProps.loggedIn && this.props.loggedIn) {
@@ -20,12 +47,7 @@ export class Simplify extends React.Component {
         } else if (prevProps.loggedIn && !this.props.loggedIn) {
             this.stopPeriodicRefresh();
         }
-
-        if (this.props.loggedIn && this.props.notLoaded) {
-            this.props.dispatch(fetchProtectedUser());
-        }
     }
-
 
     componentWillUnmount() {
         this.stopPeriodicRefresh();
@@ -49,19 +71,12 @@ export class Simplify extends React.Component {
         return (
             <div className="app-container">
                 <NavBar page={this.props.pathname} />
-                
                 <Route exact path="/" component={LandingPage}/>
-
                 <Route exact path="/account-setup" component={AccountSetup}/>
-
                 <Route exact path="/edit-profile" component={EditProfile}/>
-
                 <Route exact path="/dashboard" component={Dashboard}/>
-
                 <Route exact path="/category/:categoryId" component={Category} />
-
                 <Route exact path='/bills' component={Bills} />
-
             </div>
         )
     }  
@@ -73,4 +88,4 @@ const mapStateToProps = state => ({
     notLoaded: state.simplify.user.id === null
 });
 
-export default connect(mapStateToProps)(Simplify);
+export default connect(mapStateToProps)(App);

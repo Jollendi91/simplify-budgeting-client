@@ -1,7 +1,5 @@
 import * as actions from '../actions/protected-data';
 
-const uuidv4 = require('uuid/v4');
-
 const initialState = {
     user: {
         id: null,
@@ -100,7 +98,7 @@ export const simplifyReducer = (state = initialState, action) => {
                     id: action.categoryId,
                     category: action.categoryName,
                     amount: action.categoryAmount,
-                    transactions: null
+                    transactions: []
                 }]
             }
         });

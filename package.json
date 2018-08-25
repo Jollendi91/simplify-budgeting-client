@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0-11",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "0.1.0-11",
     "connected-react-router": "^4.3.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-easy-chart": "^1.0.0",
+    "react-progress-bar.js": "^0.2.3",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
@@ -16,6 +21,8 @@
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
     "store": "^2.0.12",
+    "styled-components": "^3.4.2",
+    "styled-modern-normalize": "^0.1.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
@@ -23,5 +30,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "enzyme": "^3.4.1",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "jsonwebtoken": "^8.3.0"
   }
 }

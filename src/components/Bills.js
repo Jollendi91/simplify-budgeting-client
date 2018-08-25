@@ -2,13 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import NavBar from './NavBar';
-import './Bills.css';
 import BillRow from './BillRow';
-import { addBill, deleteBill } from '../actions/protected-data';
 import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';
+import {fetchProtectedUser} from '../actions/protected-data';
+
+import './Bills.css';
 
 export class Bills extends React.Component {
+    componentDidMount() {
+        if (this.props.notLoaded) {
+            this.props.dispatch(fetchProtectedUser());
+        }
+    }
 
     render() {
         const bills = this.props.bills.map(bill => 
@@ -51,7 +57,8 @@ export class Bills extends React.Component {
 const mapStateToProps = state => ({
     bills: state.simplify.user.bills,
     billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0), 
-    userId: state.simplify.user.id
+    userId: state.simplify.user.id,
+    notLoaded: state.simplify.user.id === null
 });
 
 export default requiresLogin()(connect(mapStateToProps)(Bills));

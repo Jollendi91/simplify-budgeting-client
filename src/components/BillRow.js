@@ -5,7 +5,55 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import {deleteBill, updateBill} from '../actions/protected-data';
 
-import './BillRow.css';
+import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {StyledInput} from './styled-components/Forms';
+import {StyledTD} from './styled-components/Tables';
+
+
+// Styled Components
+
+const UpdateBillForm = styled.form`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .form-input-container {
+        width: 24%;
+    }
+
+    .form-input {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .bill-amount-input {
+        display: flex;
+        align-items: center;
+    }
+`;
+UpdateBillForm.displayName='UpdateBillForm';
+
+const SetupInput = StyledInput.extend`
+    padding: 0;
+
+   input {
+       font-size: 1em;
+       padding: 2px;
+       margin-top: 0;
+   }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+   margin: 0 8px;
+   color: ${props => props.color ? props.color : 'black'};
+`;
+
+const SubmitButton = styled.button`
+   border: none;
+   padding: 2px;
+   background-color: transparent;
+`;
 
 export class BillRow extends React.Component {
     constructor(props) {
@@ -41,12 +89,12 @@ export class BillRow extends React.Component {
         if (this.state.editing) {
             return (
                 <tr>
-                    <td className="table-form-container" colSpan="3">
-                        <form className="update-bill-form" form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                    <StyledTD className="table-form-container" colSpan="3">
+                        <UpdateBillForm form={this.props.form} onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             {errorMessage}
                             <div className="form-input-container">
                                 <Field 
-                                    component={Input}
+                                    component={SetupInput}
                                     type="text"
                                     name="bill"
                                     id="bill-update"
@@ -55,7 +103,7 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="form-input-container bill-amount-input">
                                 $<Field
-                                    component={Input}
+                                    component={SetupInput}
                                     type="number"
                                     name="amount"
                                     id="amount-update"
@@ -65,23 +113,24 @@ export class BillRow extends React.Component {
                                 />
                             </div>
                             <div className="edit-buttons">
-                                <button type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                                <button type="button" onClick={() => this.setEditing()}>Cancel</button>
+                                
+                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#276A73' /></SubmitButton>
+                                <StyledIcon className='cancel-button' icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
                             </div>
-                        </form>
-                    </td>
+                        </UpdateBillForm>
+                    </StyledTD>
                 </tr> 
             )
         } else {
 
         return (
             <tr>
-                <td>{this.props.bill}</td>
-                <td>${parseFloat(this.props.amount).toFixed(2)}</td>
-                <td className="edit-buttons">
-                    <button onClick={() => this.setEditing()}>Edit</button>
-                    <button onClick={() => this.props.dispatch(deleteBill(this.props.id))}>X</button>
-                </td>
+                <StyledTD>{this.props.bill}</StyledTD>
+                <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
+                <StyledTD className="edit-buttons">
+                    <StyledIcon className='edit-button' icon={['far','edit']} color='#276A73' onClick={() => this.setEditing()}/>
+                    <StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FF5A5F' onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
+                </StyledTD>
             </tr>
         )
     }

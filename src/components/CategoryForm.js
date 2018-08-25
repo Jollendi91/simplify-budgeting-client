@@ -5,6 +5,9 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import {addCategory} from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {SetupInput, Inputs, Button} from './styled-components/Forms';
+
 export class CategoryForm extends React.Component {
     onSubmit(values) {
         const {category, amount} = values;
@@ -14,30 +17,33 @@ export class CategoryForm extends React.Component {
     render() {
         return (
             <form className="add-category-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                <div className="form-input-container">
-                    <label htmlFor="category-name">Category</label>
-                    <Field 
-                        component={Input}
-                        type="text"
-                        name="category"
-                        id="category-name"
-                        validate={[required, notEmpty]}
-                    />
-                </div>
-                <div className="form-input-container">
-                 <label htmlFor="category-amount">Amount</label>
-                    <Field 
-                        component={Input}
-                        type="number"
-                        name="amount"
-                        id="category-amount"
-                        min="0.01"
-                        max={this.props.max}
-                        step="0.01"
-                        validate={[required, notEmpty]}
-                    />
-                </div>
-                <button disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add Category</button>
+                <Inputs>
+                    <div className="form-input-container">
+                        <label htmlFor="category-name">Category</label>
+                        <Field 
+                            component={SetupInput}
+                            type="text"
+                            name="category"
+                            id="category-name"
+                            validate={[required, notEmpty]}
+                        />
+                    </div>
+                    <div className="form-input-container">
+                    <label htmlFor="category-amount">Amount</label>
+                        <Field 
+                            component={SetupInput}
+                            amount
+                            type="number"
+                            name="amount"
+                            id="category-amount"
+                            min="0.01"
+                            max={this.props.max}
+                            step="0.01"
+                            validate={[required, notEmpty]}
+                        />
+                    </div>
+                    <Button disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add</Button>
+                </Inputs>    
             </form>
         )
     }
