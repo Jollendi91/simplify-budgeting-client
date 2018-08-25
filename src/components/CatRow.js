@@ -31,6 +31,7 @@ const UpdateCategoryForm = styled.form`
         align-items: center;
     }
 `;
+UpdateCategoryForm.displayName='UpdateCategoryForm';
 
 const SetupInput = StyledInput.extend`
     padding: 0;

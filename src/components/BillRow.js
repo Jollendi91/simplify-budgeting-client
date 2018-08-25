@@ -32,6 +32,7 @@ const UpdateBillForm = styled.form`
         align-items: center;
     }
 `;
+UpdateBillForm.displayName='UpdateBillForm';
 
 const SetupInput = StyledInput.extend`
     padding: 0;
@@ -113,8 +114,8 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="edit-buttons">
                                 
-                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon className='cancel-button' icon={['far', 'save']} color='#276A73' /></SubmitButton>
-                                <StyledIcon icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
+                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#276A73' /></SubmitButton>
+                                <StyledIcon className='cancel-button' icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
                             </div>
                         </UpdateBillForm>
                     </StyledTD>

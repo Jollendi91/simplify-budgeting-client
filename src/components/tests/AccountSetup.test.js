@@ -37,7 +37,7 @@ describe('<AccountSetup />', () => {
         it('Should dispatch updateStep on back click', () => {
             const dispatch = jest.fn();
             const wrapper = shallow(<AccountSetup step={2} dispatch={dispatch}/>);
-            const backButton = wrapper.find('button[className="back-button"]');
+            const backButton = wrapper.find('.back-button');
             backButton.simulate('click');
             expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
         });
@@ -45,7 +45,7 @@ describe('<AccountSetup />', () => {
         it('Should dispatch updateStep on next click', () => {
             const dispatch = jest.fn();
             const wrapper = shallow(<AccountSetup step={2} dispatch={dispatch}/>);
-            const nextButton = wrapper.find('button[className="next-button"]');
+            const nextButton = wrapper.find('.next-button');
             nextButton.simulate('click');
             expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
         });
@@ -60,7 +60,7 @@ describe('<AccountSetup />', () => {
         it('Should dispatch updateStep on back click', () => {
             const dispatch = jest.fn();
             const wrapper = shallow(<AccountSetup step={3} dispatch={dispatch}/>);
-            const backButton = wrapper.find('button[className="back-button"]');
+            const backButton = wrapper.find('.back-button');
             backButton.simulate('click');
             expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
         });
@@ -68,7 +68,7 @@ describe('<AccountSetup />', () => {
         it('Should dispatch updateStep on finish click', () => {
             const dispatch = jest.fn();
             const wrapper = shallow(<AccountSetup step={3} dispatch={dispatch}/>);
-            const finishButton = wrapper.find('button[className="finish-button"]');
+            const finishButton = wrapper.find('.finish-button');
             finishButton.simulate('click');
             expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
         });

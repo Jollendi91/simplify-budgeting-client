@@ -79,8 +79,8 @@ export class AccountSetup extends React.Component {
                     <Header>Account Setup - Bills</Header>
                     <MonthlyBillsSetup />
                     <ButtonContainer>
-                        <Button onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
-                        <Button onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
+                        <Button className='back-button' onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
+                        <Button className='next-button' onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
                         <p>Step {this.props.step} / 3</p>
                     </ButtonContainer>
                 </SetupStep>
@@ -91,7 +91,7 @@ export class AccountSetup extends React.Component {
                     <Header>Account Setup - Budgets</Header>
                     <CategorySetup />
                     <ButtonContainer>
-                        <Button onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
+                        <Button className='back-button' onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
                         <Link to='/dashboard'>
                             <Button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</Button>
                         </Link>
