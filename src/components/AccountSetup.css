@@ -20,27 +20,3 @@
     margin-top: 80px;
   }
   
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0;
-  }
-  
-  table, th {
-    border: 1px solid #ccc;
-  }
-  
-  td {
-    border-bottom: 1px solid #ccc;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 8px;
-    width: 33%;
-  }
-  
-  tbody tr:nth-child(odd) {
-    background-color: #ddd;
-  }
-  

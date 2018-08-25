@@ -27,7 +27,7 @@ describe('<NavBar />', () => {
     it('Should dispatch clearAuth on logOut', () => {
         const dispatch = jest.fn();
         const wrapper = shallow(<NavBar dispatch={dispatch} loggedIn={true}/>);
-        const logOutButton = wrapper.find('li[className="logout-button"]');
+        const logOutButton = wrapper.find('li[className="logout-button"]').first();
         logOutButton.simulate('click');
         expect(dispatch).toHaveBeenCalledWith(clearAuth());
     });

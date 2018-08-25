@@ -11,10 +11,33 @@ import Bills from './Bills';
 import NavBar from './NavBar';
 import {refreshAuthToken} from '../actions/auth';
 
+import {injectGlobal} from 'styled-components';
+import {modernNormalize} from 'styled-modern-normalize';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBars} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
 
-library.add(faBars);
+library.add(faBars, faEdit, faTrashAlt, faSave, faTimes);
+
+injectGlobal`
+    ${modernNormalize};
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        font-family: sans-serif;
+        font-size: 1em;
+        text-align: center;
+        line-height: 1.5;
+    }
+`;
 
 export class App extends React.Component {
 

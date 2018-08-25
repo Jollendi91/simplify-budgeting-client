@@ -1,19 +1,4 @@
-* {
-  box-sizing: border-box;
-}
 
-body, html {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  font-family: sans-serif;
-  font-size: 20px;
-  text-align: center;
-  line-height: 1.5;
-  background: linear-gradient(135deg, rgba(242,242,240,1) 0%,rgba(252,252,254,1) 55%);
-}
 
 .edit-buttons {
   text-align: center;

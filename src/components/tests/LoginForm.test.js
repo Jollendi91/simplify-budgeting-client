@@ -18,7 +18,7 @@ describe('<LoginForm />', () => {
     });
 
     it('Should dispatch login on onSubmit', () => {
-        const dispatch = jest.fn();
+        const dispatch = jest.fn().mockImplementation(() => Promise.resolve());
         const handleSubmit = jest.fn();
         const wrapper = shallow(<LoginForm handleSubmit={handleSubmit} dispatch={dispatch}/>);
         wrapper.instance().onSubmit({username: 'username', password: 'password'});

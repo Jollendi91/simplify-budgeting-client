@@ -2,10 +2,12 @@ import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
-import Input from './input';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
+import Input from './input';
 
-import './SignupForm.css';
+import styled from 'styled-components';
+import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
+import {StyledInput, FormContainer, CloseButton, Button} from './styled-components/Forms';
 
 const passwordLength = length({min: 10, max: 72});
 const usernameLength = length({min: 8, max: 30});
@@ -13,11 +15,12 @@ const matchesPassword = matches('password');
 
 export class SignupForm extends React.Component {
     onSubmit(values) {
-        const {username, password, firstName, lastName} = values;
-        const user = {firstName, lastName, username, password};
+        const {username, password} = values;
+        const user = {username, password};
 
         return this.props.dispatch(registerUser(user))
-        .then(() => this.props.dispatch(login(username, password)));
+        .then(() => this.props.dispatch(login(username, password)))
+        .then(() => this.props.hideForm());
     }
 
     render() {
@@ -40,55 +43,48 @@ export class SignupForm extends React.Component {
         }
 
         return (
-            <section>
+            <FormContainer>
+                <CloseButton icon={faTimesCircle} onClick={() => this.props.hideForm()}/>
                 <form 
                     className="signup-form"
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
-                    )}>
+                )}>
                     <h2>Ready to get started?</h2>
                     {successMessage}
                     {errorMessage}
                     <Field 
-                        name="firstName"
-                        type="text"
-                        component={Input}
-                        label="First Name"
-                    />
-                    <Field 
-                        name="lastName"
-                        type="text"
-                        component={Input}
-                        label="Last Name"
-                    />
-                    <Field 
                         name="username"
                         type="text"
-                        component={Input}
+                        component={StyledInput}
+                        signup
                         label="Username"
                         validate={[required, notEmpty, isTrimmed, usernameLength]}
                     />
                     <Field
                         name="password"
                         type="password"
-                        component={Input}
+                        component={StyledInput}
+                        signup
                         label="Password"
                         validate={[required, notEmpty, isTrimmed, passwordLength]}
                     />
                     <Field 
                         name="verifyPassword"
                         type="password"
-                        component={Input}
+                        component={StyledInput}
+                        signup
                         label="Verify Password"
                         validate={[required, notEmpty, matchesPassword]}
                     />
                 
-                    <button
+                    <Button
                         type="submit"
+                        signup
                         disabled={this.props.pristine || this.props.submitting}>
                         Sign up
-                    </button>
+                    </Button>
                 </form>
-            </section>
+            </FormContainer>
         );
     }
 }
