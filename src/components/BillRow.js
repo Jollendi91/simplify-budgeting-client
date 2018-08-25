@@ -102,8 +102,8 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="edit-buttons">
                                 
-                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#276A73' /></SubmitButton>
-                                <StyledIcon className='cancel-button' icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
+                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></SubmitButton>
+                                <StyledIcon className='cancel-button' icon='times' color='#FC4A1A' onClick={() => this.setEditing()}/>
                             </div>
                         </UpdateBillForm>
                     </StyledTD>
@@ -116,8 +116,8 @@ export class BillRow extends React.Component {
                 <StyledTD>{this.props.bill}</StyledTD>
                 <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
                 <StyledTD className="edit-buttons">
-                    <StyledIcon className='edit-button' icon={['far','edit']} color='#276A73' onClick={() => this.setEditing()}/>
-                    <StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FF5A5F' onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
+                    <StyledIcon className='edit-button' icon={['far','edit']} color='#4ABDAC' onClick={() => this.setEditing()}/>
+                    <StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
                 </StyledTD>
             </tr>
         )

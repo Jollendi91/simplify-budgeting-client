@@ -40,8 +40,8 @@ const Bar = ProgressBar.Line;
 
 const options = {
 	strokeWidth: 1,
-	color: '#276A73',
-	trailColor: '#ddd',
+	color: '#F7B733',
+	trailColor: '#DEDCE3',
 	easing: 'easeOut',
 	svgStyle: {
 		display: 'block',
@@ -63,12 +63,7 @@ const options = {
 				value: 'translate(-50%, -50%)'
 			}
 		}
-	},
-	from: {color: '#043B40'},
-	to: {color: '#A1BEB4'},
-	step: (state, Bar) => {
-    Bar.path.setAttribute('stroke', state.color);
-  }
+	}
 };
 
 const containerStyle = {

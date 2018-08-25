@@ -42,7 +42,7 @@ const Header = styled.h1`
     color: white;
     margin: 0;
     padding: .3em 0;
-    background: #20A69A;
+    background: #4ABDAC;
 `;
 
 const ButtonContainer = styled.div`
@@ -77,8 +77,8 @@ export class AccountSetup extends React.Component {
                     <Header>Account Setup - Bills</Header>
                     <MonthlyBillsSetup />
                     <ButtonContainer>
-                        <Button className='back-button' onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
-                        <Button className='next-button' onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
+                        <Button primary color="#276A73" className='back-button' onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
+                        <Button color="#276A73" className='next-button' onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
                         <p>Step {this.props.step} / 3</p>
                     </ButtonContainer>
                 </SetupStep>
@@ -89,9 +89,9 @@ export class AccountSetup extends React.Component {
                     <Header>Account Setup - Budgets</Header>
                     <CategorySetup />
                     <ButtonContainer>
-                        <Button className='back-button' onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
+                        <Button primary color="#276A73" className='back-button' onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
                         <Link to='/dashboard'>
-                            <Button className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</Button>
+                            <Button color="#276A73" className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</Button>
                         </Link>
                         <p>Step {this.props.step} / 3</p>
                     </ButtonContainer>

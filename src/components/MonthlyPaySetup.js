@@ -38,7 +38,7 @@ export class MonthlyPaySetup extends React.Component {
                         min="0.01"
                         validate={[required, notEmpty]}
                     />
-                    <Button disabled={this.props.pristine || this.props.submitting}>Next</Button>
+                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Next</Button>
                 </form>
             </section>
         )
