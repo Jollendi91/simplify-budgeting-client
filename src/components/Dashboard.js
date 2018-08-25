@@ -109,22 +109,36 @@ export class Dashboard extends React.Component {
             </StyledLink>
         );
 
+        let currentColor;
+        let colorNumber = 0;
+        const colorArray = ['#276A73', '#4ABDAC', '#FC4A1A', '#F7B733', '#DEDCE3'];
+        
+
+        function getColor(i) {
+            currentColor = colorArray[i];
+            colorNumber++;
+            return currentColor
+        };
+
         const data = this.props.categories.map(category => ({
             key: category.category,
-            value: category.amount
+            value: category.amount,
+            color: getColor(colorNumber)
         }));
 
         if (this.props.billsTotal) {
             data.push({
                 key: 'Bills',
-                value: this.props.billsTotal
+                value: this.props.billsTotal,
+                color: getColor(colorNumber)
             });
         }
 
         if (this.props.remainingMoney) {
             data.push({
                 key: 'Remaining',
-                value: this.props.remainingMoney
+                value: this.props.remainingMoney,
+                color: getColor(colorNumber)
             });
         }
 
@@ -140,6 +154,14 @@ export class Dashboard extends React.Component {
             }
           };
 
+          const config = [
+              {color: '#276A73'},
+              {color: '#4ABDAC'},
+              {color: '#FC4A1A'},
+              {color: '#F7B733'},
+              {color: '#DEDCE3'} 
+          ];
+
         return (
             <div>
                 <DashboardContainer>
@@ -152,7 +174,7 @@ export class Dashboard extends React.Component {
                                 mouseOutHandler={this.mouseOutHandler.bind(this)}
                                 mouseMoveHandler={this.mouseMoveHandler.bind(this)}
                             />
-                            <Legend horizontal data={data} dataId={'key'} styles={customStyle}/>
+                            <Legend horizontal data={data} dataId={'key'} config={config} styles={customStyle}/>
                             {this.createTooltip()}
                         </PortfolioData>
                     </DashboardCard>

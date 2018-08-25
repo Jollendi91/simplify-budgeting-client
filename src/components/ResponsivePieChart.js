@@ -37,7 +37,7 @@ export class ResponsivePieChart extends React.Component {
             <div className={this.props.className}>
                 <PieChart 
                     size={chartSize}
-                    innerHoleSize={chartSize/ 1.5} 
+                    innerHoleSize={chartSize/ 1.75} 
                     data={this.props.data} 
                     mouseOverHandler={this.props.mouseOverHandler.bind(this)}
                     mouseOutHandler={this.props.mouseOutHandler.bind(this)}

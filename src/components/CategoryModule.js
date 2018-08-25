@@ -10,7 +10,7 @@ const BudgetContainer = styled.section`
     display: grid;
     grid-template-columns: 95%;
     grid-template-rows: 1fr 1fr;
-    padding: 10px 10px 15px;
+    padding: 5px 10px 10px;
     border-bottom: 1px solid #ccc;
     position: relative;
 `;
@@ -71,7 +71,7 @@ const options = {
 };
 
 const containerStyle = {
-	height: '30px'
+	height: '24px'
 };
 
 export function CategoryModule(props) {
