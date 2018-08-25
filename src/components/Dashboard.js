@@ -43,6 +43,11 @@ const Header = styled.h2`
     border-radius: 5px 5px 0 0;
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: #000;
+`;
+
 export class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -99,9 +104,9 @@ export class Dashboard extends React.Component {
     render() {
 
     	const categories = this.props.categories.map((category, index) => 
-            <Link key={index} to={`category/${category.id}`}>
+            <StyledLink key={index} to={`category/${category.id}`}>
                 <CategoryModule key={category.id} {...category} />
-            </Link>
+            </StyledLink>
         );
 
         const data = this.props.categories.map(category => ({
