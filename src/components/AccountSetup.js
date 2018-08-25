@@ -31,6 +31,12 @@ const SetupStep = SectionContainer.extend`
     background-color: white;
 `;
 
+const PayStep = SetupStep.extend`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
 const Header = styled.h1`
     font-size: 1.5em;
     color: white;
@@ -61,11 +67,11 @@ export class AccountSetup extends React.Component {
     
         } else if (this.props.step === 1) {
             return (
-                <SetupStep>
+                <PayStep>
                     <Header>Account Setup - Salary</Header>
                     <MonthlyPaySetup />
                     <p>Step {this.props.step} / 3</p>
-                </SetupStep>
+                </PayStep>
             ) 
         } else if (this.props.step === 2) {
             return (
