@@ -23,7 +23,7 @@ const CategoryTH = StyledTH.extend`
 `;
 
 const ProgressContainer = styled.div`
-	margin: 15px 0;
+	margin: 25px 0;
 `;
 
 //Progress Bar

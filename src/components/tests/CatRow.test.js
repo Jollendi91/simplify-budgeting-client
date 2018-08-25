@@ -11,7 +11,7 @@ describe('<CatRow />', () => {
     it('Should dispatch deleteCategory on delete button click', () => {
         const dispatch = jest.fn();
         const wrapper = shallow(<CatRow dispatch={dispatch}/>);
-        const deleteButton = wrapper.find('button[className="delete-button"]');
+        const deleteButton = wrapper.find('svg[className="delete-button"]');
         deleteButton.simulate('click');
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
@@ -20,7 +20,7 @@ describe('<CatRow />', () => {
     it('Should display update form on edit button click', () => {
         const handleSubmit = jest.fn();
         const wrapper = shallow(<CatRow handleSubmit={handleSubmit}/>);
-        const editButton = wrapper.find('button[className="edit-button"]');
+        const editButton = wrapper.find('svg[className="edit-button"]');
         editButton.simulate('click');
         expect(wrapper.find('form').exists()).toEqual(true);
     });
@@ -29,7 +29,7 @@ describe('<CatRow />', () => {
         const handleSubmit = jest.fn();
         const wrapper = shallow(<CatRow handleSubmit={handleSubmit} />);
         wrapper.instance().setEditing();
-        const cancelButton = wrapper.find('button[className="cancel-button"]');
+        const cancelButton = wrapper.find('svg[className="cancel-button"]');
         cancelButton.simulate('click');
         expect(wrapper.find('button[className="edit-button"]').exists()).toEqual(true);
     });

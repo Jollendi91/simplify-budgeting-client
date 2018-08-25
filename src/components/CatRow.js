@@ -122,7 +122,7 @@ export class CatRow extends React.Component {
                         </div>
                         <div className="edit-buttons form-input-container">
                             <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#276A73' /></SubmitButton>
-                            <StyledIcon icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
+                            <StyledIcon className='cancel-button' icon='times' color='#FF5A5F' onClick={() => this.setEditing()}/>
                         </div>
                     </UpdateCategoryForm>
                 </FormTD> 
@@ -136,8 +136,8 @@ export class CatRow extends React.Component {
                     <CategoryTD>${parseFloat(this.props.amount).toFixed(2)}</CategoryTD>
                     <CategoryTD>{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</CategoryTD>
                     <CategoryTD className="edit-buttons">
-                        <StyledIcon icon={['far', 'edit']} color='#276A73' onClick={() => this.setEditing()}/>
-                        <StyledIcon icon={['far', 'trash-alt']} color='#FF5A5F'  onClick={() => this.props.dispatch(deleteCategory(this.props.id))}/>
+                        <StyledIcon className='edit-button' icon={['far', 'edit']} color='#276A73' onClick={() => this.setEditing()}/>
+                        <StyledIcon className='delete-button' icon={['far', 'trash-alt']} color='#FF5A5F'  onClick={() => this.props.dispatch(deleteCategory(this.props.id))}/>
                     </CategoryTD>
                 </tr>
             )
