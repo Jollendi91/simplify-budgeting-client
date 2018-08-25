@@ -10,6 +10,11 @@ export const FormContainer = styled.article`
     position: relative;
 `;
 
+export const StyledLabel = styled.label`
+    font-size: 1.3em;
+    padding: 10px;
+`;
+
 export const StyledInput = styled(Input)`
     max-width: 350px;
     padding: 5px;

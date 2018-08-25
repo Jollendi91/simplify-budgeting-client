@@ -6,11 +6,16 @@ import CatRow from './CatRow';
 
 import styled from 'styled-components';
 import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
-import './CategorySetup.css';
 
 // Styled Components
 const CategoryFormContainer = styled.section`
 	flex-grow: 1;
+`;
+
+const Description = styled.p`
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 0 10px;
 `;
 
 const Amount = styled.p`
@@ -84,7 +89,7 @@ export function CategorySetup(props) {
 
     return (
         <CategoryFormContainer>
-            <p>Set up some budgets that you would like to track, such as spending, savings, or debts.</p>
+            <Description>Set up some budgets that you would like to track, such as spending, savings, or debts.</Description>
 			<ProgressContainer>
 				<AmountRemaining>{`$${remainingAmount.toFixed(2)} Left`}</AmountRemaining>
 				<Bar
