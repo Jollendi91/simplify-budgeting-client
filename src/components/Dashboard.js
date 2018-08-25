@@ -20,16 +20,27 @@ const DashboardContainer = FormContainer.extend`
 `;
 
 const PortfolioData = styled.section`
-    background-color: white;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 15px;
-    border-radius: 5px;
 `;
 
 const StyledPieChart = styled(ResponsivePieChart)`
-    padding-right: 10px;
+    padding-right: 18px;
+`;
+
+const DashboardCard = styled.section`
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+`;
+
+const Header = styled.h2`
+    color: white;
+    background-color: #276A73;
+    margin: 0;
+    border-radius: 5px 5px 0 0;
 `;
 
 export class Dashboard extends React.Component {
@@ -118,15 +129,17 @@ export class Dashboard extends React.Component {
                 textAlign: 'left'        
             },
             '.legend li': {
+                marginRight: '16px',
                 paddingLeft: '18px',
-                fontSize: '.8em'
+                fontSize: '.9em'
             }
           };
 
         return (
             <div>
                 <DashboardContainer>
-                    <header className="main-header">
+                    <DashboardCard>
+                        <Header>Summary</Header>
                         <PortfolioData>
                             <StyledPieChart
                                 data={data} 
@@ -137,10 +150,11 @@ export class Dashboard extends React.Component {
                             <Legend horizontal data={data} dataId={'key'} styles={customStyle}/>
                             {this.createTooltip()}
                         </PortfolioData>
-                    </header>
-                    <main className="category-modules">
+                    </DashboardCard>
+                    <DashboardCard>
+                        <Header>Budgets</Header>
                         {categories}
-                    </main>
+                    </DashboardCard>
                 </DashboardContainer>
             </div>
         )
