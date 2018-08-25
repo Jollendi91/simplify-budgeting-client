@@ -22,7 +22,10 @@ export const StyledTD = StyledTH.extend`
 `;
 
 export const StyledTBody = styled.tbody`
+    tr:nth-child(even) {
+        background-color: #eee;
+    }
     tr:nth-child(odd) {
-        background-color: #ddd;
+        background-color: #ccc;
     }
 `;

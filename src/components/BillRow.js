@@ -7,7 +7,7 @@ import {deleteBill, updateBill} from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {StyledInput} from './styled-components/Forms';
+import {StyledInput, UpdateInput} from './styled-components/Forms';
 import {StyledTD} from './styled-components/Tables';
 
 
@@ -33,16 +33,6 @@ const UpdateBillForm = styled.form`
     }
 `;
 UpdateBillForm.displayName='UpdateBillForm';
-
-const SetupInput = StyledInput.extend`
-    padding: 0;
-
-   input {
-       font-size: 1em;
-       padding: 2px;
-       margin-top: 0;
-   }
-`;
 
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
@@ -94,7 +84,7 @@ export class BillRow extends React.Component {
                             {errorMessage}
                             <div className="form-input-container">
                                 <Field 
-                                    component={SetupInput}
+                                    component={UpdateInput}
                                     type="text"
                                     name="bill"
                                     id="bill-update"
@@ -103,7 +93,7 @@ export class BillRow extends React.Component {
                             </div>
                             <div className="form-input-container bill-amount-input">
                                 $<Field
-                                    component={SetupInput}
+                                    component={UpdateInput}
                                     type="number"
                                     name="amount"
                                     id="amount-update"

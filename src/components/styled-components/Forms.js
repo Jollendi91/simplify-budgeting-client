@@ -70,6 +70,17 @@ export const SetupInput = StyledInput.extend`
     }
 `;
 
+export const UpdateInput = StyledInput.extend`
+    padding: 0;
+
+    input {
+        font-size: 1em;
+        padding: 2px;
+        margin-top: 0;
+        border: 1px solid #aaa;
+    }
+`;
+
 export const Inputs = styled.div`
     display: flex;
     justify-content: space-evenly;

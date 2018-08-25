@@ -21,7 +21,7 @@ export function MonthlyBillsSetup(props) {
 
     return (
         <BillsFormContainer>
-            <p>Enter all expenses that recur each month</p>
+            <p>Enter all recurring monthly bills and expenses</p>
             <MonthlyBillsForm />
             <StyledTable>
                 <thead>

@@ -193,7 +193,7 @@ export const addCategory = (category, amount) => (dispatch, getState) => {
     .then(res => res.json())
     .then(res => {
         const {id, category, amount} = res;
-        return dispatch(addCategorySuccess(id, category, parseFloat(amount)));
+        return dispatch(addCategorySuccess(id, category, amount));
     })
     .catch(err => dispatch(addCategoryError(err)))
 }
