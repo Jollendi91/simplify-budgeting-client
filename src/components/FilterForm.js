@@ -47,9 +47,9 @@ export class FilterForm extends React.Component {
     render() {
         return (
             <FilterContainer>
-                <StyledIcon icon="angle-left" onClick={() => this.onDateChange('back')}/>
+                <StyledIcon className="back-button" icon="angle-left" onClick={() => this.onDateChange('back')}/>
                 <h3>{currentMonthName[this.props.filterMonth]} {this.props.filterYear}</h3>
-                <StyledIcon icon="angle-right" onClick={() => this.onDateChange('next')}/>
+                <StyledIcon className="next-button" icon="angle-right" onClick={() => this.onDateChange('next')}/>
             </FilterContainer>
         )
     }

@@ -9,22 +9,24 @@ describe('<FilterForm />', () => {
         shallow(<FilterForm handleSubmit={handleSubmit}/>);
     });
 
-    it('Should run handleSubmit on form submit', () => {
-        const handleSubmit = jest.fn();
-        const wrapper = shallow(<FilterForm handleSubmit={handleSubmit} />);
-        wrapper.simulate('submit');
-        expect(handleSubmit).toHaveBeenCalledTimes(1);
-        expect(handleSubmit).toHaveBeenCalledWith(expect.any(Function));
+    it('Should run updateFilters and dispatch fetchTransactions on back click', () => {
+        const dispatch = jest.fn();
+        const updateFilters = jest.fn();
+        const wrapper = shallow(<FilterForm dispatch={dispatch} updateFilters={updateFilters}/>);
+        const backButton = wrapper.find('.back-button');
+        backButton.simulate('click');
+        expect(updateFilters).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
     });
 
-    it('Should run updateFilters and dispatch fetchTransactions on onSumbit', () => {
+    it('Should run updateFilters and dispatch fetchTransactions on next click', () => {
         const dispatch = jest.fn();
-        const handleSubmit = jest.fn();
         const updateFilters = jest.fn();
-        const wrapper = shallow(<FilterForm dispatch={dispatch} handleSubmit={handleSubmit} updateFilters={updateFilters}/>);
-        wrapper.instance().onSubmit({filterMonth: 7, filterYear: 2018});
+        const wrapper = shallow(<FilterForm dispatch={dispatch} updateFilters={updateFilters}/>);
+        const nextButton = wrapper.find('.next-button');
+        nextButton.simulate('click');
         expect(updateFilters).toHaveBeenCalledTimes(1);
-        expect(updateFilters).toHaveBeenCalledWith(7, 2018);
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
     });

@@ -123,8 +123,8 @@ export class TransRow extends React.Component {
                     <TransTD>{moment(this.props.date).format('D/M/YY')}</TransTD>
                     <TransTD>${parseFloat(this.props.amount).toFixed(2)}</TransTD>
                     <EditButtons>
-                        <IconButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon className='edit-button' icon={['far','edit']} color='#4ABDAC'/></IconButton>
-                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
+                        <IconButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon icon={['far','edit']} color='#4ABDAC'/></IconButton>
+                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
                     </EditButtons>
                 </tr>
             )

@@ -12,6 +12,7 @@ describe('<TransactionForm />', () => {
     it('Should run handleSubmit on form submit', () => {
         const handleSubmit =jest.fn();
         const wrapper = shallow(<TransactionForm handleSubmit={handleSubmit}/>);
+        wrapper.instance().setDisplayForm();
         wrapper.simulate('submit');
         expect(handleSubmit).toHaveBeenCalledTimes(1);
         expect(handleSubmit).toHaveBeenCalledWith(expect.any(Function));
@@ -22,6 +23,7 @@ describe('<TransactionForm />', () => {
         const dispatch = jest.fn(() => Promise.resolve());
         const reset = jest.fn();
         const wrapper = shallow(<TransactionForm handleSubmit={handleSubmit} dispatch={dispatch} reset={reset}/>);
+        wrapper.instance().setDisplayForm();
         wrapper.instance().onSubmit({
             transaction: 'transaction',
             date: '2018-08-12',
