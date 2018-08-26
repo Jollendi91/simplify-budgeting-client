@@ -85,6 +85,12 @@ export const SetupInput = StyledInput.extend`
 
 export const UpdateInput = StyledInput.extend`
     padding: 0;
+    position: relative;
+
+    label {
+        position: absolute;
+        bottom: -20px;
+    }
 
     input {
         font-size: 1em;

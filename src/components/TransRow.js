@@ -16,22 +16,18 @@ import './TransRow.css';
 // Styled Components
 
 const UpdateTransactionForm = styled.form`
-    display: flex;
+    display: grid;
+    grid-template-columns: 30% 30% 20% 10%;
     justify-content: space-between;
     align-items: center;
-
-    .form-input-container {
-        width: 24%;
-    }
 
     .form-input {
         display: inline-block;
         width: 100%;
     }
 
-    .bill-amount-input {
-        display: flex;
-        align-items: center;
+    #date {
+        font-size: .8em;
     }
 `;
 UpdateTransactionForm.displayName='UpdateTransactionForm';
@@ -47,6 +43,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 
 const EditButtons = styled.div`
     width: 10%;
+    padding: 5px 0;
 `;
 
 const IconButton = styled.button`
@@ -91,7 +88,7 @@ export class TransRow extends React.Component {
                                     validate={[required, notEmpty]}
                                 />
                             </div>
-                            <div className="form-input-container">
+                            <div className="form-input-container transcation-date-input">
                                 <Field
                                     component={UpdateInput}
                                     type="date"

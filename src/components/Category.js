@@ -39,6 +39,13 @@ const ProgressContainer = styled.section`
     }
 `;
 
+const AddFormContainer = styled.section`
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+`;
+
 // Progress Bar
 const RemainingBar = ProgressBar.Line;
 
@@ -139,9 +146,9 @@ export class Category extends React.Component {
                         <p>${parseFloat(this.props.category.amount).toFixed(2)}</p>
                     </ProgressContainer>
                     <main>
-                        <section>
+                        <AddFormContainer>
                             <TransactionForm categoryId={this.props.category.id}/>
-                        </section>
+                        </AddFormContainer>
                         <section>
                             <div>
                                 <StyledTable>
