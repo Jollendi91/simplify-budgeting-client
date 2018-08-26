@@ -19,14 +19,12 @@ export const StyledInput = styled(Input)`
     max-width: 350px;
     padding: 5px;
     margin: 0 auto;
+    position: relative;
 
     label {
-        text-align: left;
-        font-size: 1em;
-        text-transform: uppercase;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        position: absolute;
+        top: -10px;
+        font-size: 1.1em;
     }
 
     input {
@@ -69,6 +67,7 @@ export const SetupInput = StyledInput.extend`
 
     label {
         position: absolute;
+        top: initial;
         bottom: -20px;
     }
 
@@ -89,6 +88,7 @@ export const UpdateInput = StyledInput.extend`
 
     label {
         position: absolute;
+        top: initial;
         bottom: -20px;
     }
 

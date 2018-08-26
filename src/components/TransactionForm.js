@@ -5,66 +5,104 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import {addTransaction} from '../actions/protected-data';
 
-import {SetupInput, Inputs, Button} from './styled-components/Forms';
+import {StyledInput, Button} from './styled-components/Forms';
+import styled from 'styled-components';
+
+// Styled Components
+const HeaderContainer = styled.header`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #276A73;
+    color: white;
+`;
+
+const AddTransactionForm = styled.form`
+    height: calc(100vh - 85px);
+    background-color: white;
+`;
+
+const InputContainer = styled.div`
+    padding: 10px 0;
+`;
+
+const StyledLabel = styled.label`
+    font-size: 1.2em;
+`;
+
+const ButtonContainer = styled.div`
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+`;
 
 export class TransactionForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            displayTransForm: false
+            displayTransactionForm: false
         }
     }
 
     onSubmit(values) {
         const {transaction, date, amount} = values;
-        this.props.dispatch(addTransaction(transaction, date, amount, this.props.categoryId)).then(() => this.props.reset());
+        this.props.dispatch(addTransaction(transaction, date, amount, this.props.categoryId)).then(() => this.props.reset()).then(() => this.setDisplayForm());
     } 
 
     setDisplayForm() {
         this.setState({
-            displayTransForm: !this.state.displayTransForm
+            displayTransactionForm: !this.state.displayTransactionForm
         });
     }
 
     render() {
-        if (this.state.displayTransForm) {
+        if (this.state.displayTransactionForm) {
             return (
-                <form className="add-transaction-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <div className="form-input-container">
-                        <label htmlFor="transaction-name">Description</label>
-                        <Field
-                            component={SetupInput}
-                            type="text"
-                            name="transaction"
-                            id="transaction-name"
-                            validate={[required, notEmpty]}
-                        />
+                <AddTransactionForm onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                    <HeaderContainer>
+                        <h2>Add a Transaction</h2>
+                    </HeaderContainer>
+                    <div className="form-inputs">
+                        <InputContainer>
+                            <StyledLabel htmlFor="transaction-name">Description</StyledLabel>
+                            <Field
+                                component={StyledInput}
+                                type="text"
+                                name="transaction"
+                                id="transaction-name"
+                                validate={[required, notEmpty]}
+                            />
+                        </InputContainer>
+                        <InputContainer>
+                            <StyledLabel htmlFor="transaction-date">Date</StyledLabel>
+                            <Field 
+                                component={StyledInput}
+                                type="date"
+                                name="date"
+                                id="transaction-date"
+                                validate={[required, notEmpty]}
+                            />
+                        </InputContainer>
+                        <InputContainer>
+                            <StyledLabel htmlFor="transaction-amount">Amount</StyledLabel>
+                            <Field
+                                component={StyledInput}
+                                type="number"
+                                name="amount"
+                                id="transaction-amount"
+                                min="0.01"
+                                step="0.01"
+                                validate={[required, notEmpty]}
+                            />
+                        </InputContainer>
                     </div>
-                    <div className="form-input-container">
-                        <label htmlFor="transaction-date">Date</label>
-                        <Field 
-                            component={SetupInput}
-                            type="date"
-                            name="date"
-                            id="transaction-date"
-                            validate={[required, notEmpty]}
-                        />
-                    </div>
-                    <div className="form-input-container">
-                        <label htmlFor="transaction-amount">Amount</label>
-                        <Field
-                            component={SetupInput}
-                            type="number"
-                            name="amount"
-                            id="transaction-amount"
-                            min="0.01"
-                            step="0.01"
-                            validate={[required, notEmpty]}
-                        />
-                    </div>
-                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Add</Button>
-                </form>
+                    <ButtonContainer>
+                        <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Submit</Button>
+                        <Button primary color="#276A73" onClick={() => this.setDisplayForm()}>Cancel</Button>
+                    </ButtonContainer>
+                </AddTransactionForm>
             )
         } else {
             return (
