@@ -36,7 +36,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 `;
 
 const FilterFormContainer = styled.div`
-    display: ${props => props.displayFilter ? 'block' : 'none'};
+
 `;
 
 export class Category extends React.Component {
@@ -45,8 +45,7 @@ export class Category extends React.Component {
 
         this.state = {
             filterMonth: new Date().getMonth(),
-            filterYear: new Date().getFullYear(),
-            displayFilter: false,
+            filterYear: new Date().getFullYear()
         }
     }
 
@@ -60,12 +59,6 @@ export class Category extends React.Component {
         this.setState({
             filterMonth: month,
             filterYear: year
-        });
-    }
-
-    setDisplayFilters() {
-        this.setState({
-            displayFilter: !this.state.displayFilter
         });
     }
 
@@ -99,19 +92,15 @@ export class Category extends React.Component {
 
         const transactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
 
-        // To display current filtered month
-        const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
         return (
             <div>
                 <NavBar page={'dashboard'}/>
                 <CategoryContainer>
                     <section>
                         <HeaderContainer>
-                        <h2>{this.props.category.category} - {currentMonthName[this.state.filterMonth]} {this.state.filterYear}</h2>
-                        <StyledIcon icon="filter" onClick={() => this.setDisplayFilters()}/>
+                        <h2>{this.props.category.category}</h2>
                         </HeaderContainer>
-                        <FilterFormContainer displayFilter={this.state.displayFilter}>
+                        <FilterFormContainer>
                             <FilterForm 
                                 filterMonth={this.state.filterMonth} 
                                 filterYear={this.state.filterYear}
