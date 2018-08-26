@@ -35,6 +35,7 @@ const ButtonContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
+    padding-bottom: 44px;
 `;
 
 export class TransactionForm extends React.Component {
@@ -106,7 +107,9 @@ export class TransactionForm extends React.Component {
             )
         } else {
             return (
-                <Button color="#276A73" onClick={() => this.setDisplayForm()}>Add Transaction</Button>
+                <ButtonContainer>
+                    <Button color="#276A73" onClick={() => this.setDisplayForm()}>Add Transaction</Button>
+                </ButtonContainer>
             )
         }
     }

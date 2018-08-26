@@ -29,7 +29,7 @@ const AddFormContainer = styled.section`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 20px;
+    bottom: 0;
 `;
 
 // Progress Bar
