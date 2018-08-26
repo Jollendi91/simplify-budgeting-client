@@ -1,4 +1,4 @@
-import styled from 'styled-components';  
+import styled, {css} from 'styled-components';  
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Input from '../input';
 
@@ -46,13 +46,25 @@ export const CloseButton = styled(FontAwesomeIcon)`
     cursor: pointer;
 `;
 
+const complexBackground = css`
+    ${props => props.primary && props.color ? props.color : 'white'}
+`;
+
+const complexBorder = css`
+    ${props => props.color ? props.color : 'white'}
+`;
+
+const complexFontColor = css`
+    ${props => props.primary && props.color ? 'white' : props.color}
+`;
+
 export const Button = styled.button`
     padding: .2em ${props => props.signup ? '4em' : '2em'};
     font-size: 1em;
     margin: .75em 5px 0;
-    background-color: ${props => props.primary && props.color ? props.color : 'white'};
-    border: 2px solid ${props => props.color ? props.color : 'white'};
-    color: ${props => props.primary && props.color ?  'white' : props.color};
+    background-color: ${props => props.disabled ? '#bbb' : complexBackground};
+    border: 2px solid ${props => props.disabled ? "#bbb" : complexBorder};
+    color: ${props => props.disabled ?  'white' : complexFontColor};
     font-weight: bold;
     border-radius: 5px;
 }

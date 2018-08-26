@@ -4,7 +4,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, notEmpty} from '../validators';
 import { updateSalary } from '../actions/protected-data';
-import './MonthlyPayEdit.css';
+import {SetupInput, Button} from './styled-components/Forms';
 
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
@@ -31,22 +31,23 @@ export class MonthlyPayEdit extends React.Component {
         let salaryForm;
         if (!this.state.editing) {
             salaryForm = <div>
-                            <button className="edit-button" onClick={() => this.setEditing()}>Edit Pay</button>
+                            <Button color="#276A73" className="edit-button" onClick={() => this.setEditing()}>Edit Pay</Button>
                         </div>
         } else {
             salaryForm = 
             <form className="update-salary-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <Field
-                    component={Input}
+                    component={SetupInput}
                     type="number"
                     name="monthlySalary"
                     id="monthly-salary"
+                    step="0.01"
                     min={this.props.categoriesTotal + this.props.billsTotal}
                     validate={[required, notEmpty]}
                 />
                 <div>
-                    <button className="update-button" type="submit">Update</button>
-                    <button className="cancel-button" onClick={() => this.setEditing()}>Cancel</button>
+                    <Button color="#276A73" className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</Button>
+                    <Button primary color="#276A73" className="cancel-button" onClick={() => this.setEditing()}>Cancel</Button>
                 </div>
             </form>
         }

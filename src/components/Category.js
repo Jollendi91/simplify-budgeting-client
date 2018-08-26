@@ -11,24 +11,10 @@ import {fetchProtectedUser} from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
+import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
 import './Category.css';
 
 // Styled Components
-const CategoryContainer = styled.section`
-    position: relative;
-    top: 66px;
-    min-height: calc(100vh - 66px);
-    background-color: white;
-`;
-
-const HeaderContainer = styled.header`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #276A73;
-    color: white;
-`;
-
 const ProgressContainer = styled.section`
     display: flex;
     align-items: center;
@@ -123,7 +109,7 @@ export class Category extends React.Component {
         return (
             <div>
                 <NavBar page={'dashboard'}/>
-                <CategoryContainer>
+                <ComponentContainer>
                     <section>
                         <HeaderContainer>
                         <h2>{this.props.category.category}</h2>
@@ -166,7 +152,7 @@ export class Category extends React.Component {
                             </div>
                         </section>
                     </main>
-                </CategoryContainer>
+                </ComponentContainer>
             </div>
         );
     }
