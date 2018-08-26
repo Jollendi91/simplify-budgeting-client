@@ -3,6 +3,18 @@ import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import {fetchTransactions} from '../actions/protected-data';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
+
+const FilterContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+    font-size: 1.25em;
+    cursor: pointer;
+`;
 
 // To display current filtered month
 const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -34,13 +46,13 @@ export class FilterForm extends React.Component {
 
     render() {
         return (
-            <div className="filter-transaction-form">
-                <FontAwesomeIcon icon="angle-left" onClick={() => this.onDateChange('back')}/>
+            <FilterContainer>
+                <StyledIcon icon="angle-left" onClick={() => this.onDateChange('back')}/>
                 <h3>{currentMonthName[this.props.filterMonth]} {this.props.filterYear}</h3>
-                <FontAwesomeIcon icon="angle-right" onClick={() => this.onDateChange('next')}/>
-            </div>
+                <StyledIcon icon="angle-right" onClick={() => this.onDateChange('next')}/>
+            </FilterContainer>
         )
     }
 }
 
-export default connect()(reduxForm({form: 'filter'})(FilterForm));
+export default connect()(FilterForm);

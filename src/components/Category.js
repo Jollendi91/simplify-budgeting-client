@@ -1,12 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {Legend} from 'react-easy-chart';
 import NavBar from './NavBar';
 import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
-import {ResponsivePieChart} from './ResponsivePieChart';
+import ProgressBar from 'react-progress-bar.js';
 import RequiresLogin from './requiresLogin';
 import {fetchProtectedUser} from '../actions/protected-data';
 
@@ -14,6 +13,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import './Category.css';
 
+// Styled Components
 const CategoryContainer = styled.section`
     position: relative;
     top: 66px;
@@ -35,10 +35,37 @@ const StyledIcon = styled(FontAwesomeIcon)`
     color: #F7B733;
 `;
 
-const FilterFormContainer = styled.div`
+const ProgressContainer = styled.section`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 
+    p {
+        padding: 0 15px;
+    }
 `;
 
+// Progress Bar
+const RemainingBar = ProgressBar.Line;
+
+const options = {
+    strokeWidth: 1,
+    color: '#F7B733',
+	trailColor: '#DEDCE3',
+    easing: 'easeOut',
+    svgStyle: {
+		display: 'block',
+		width: '100%',
+		height: '100%',
+		borderRadius: '5px'
+	}
+};
+
+const containerStyle = {
+    height: '5px'
+};
+
+// Category Component
 export class Category extends React.Component {
     constructor(props) {
         super(props);
@@ -100,18 +127,23 @@ export class Category extends React.Component {
                         <HeaderContainer>
                         <h2>{this.props.category.category}</h2>
                         </HeaderContainer>
-                        <FilterFormContainer>
-                            <FilterForm 
-                                filterMonth={this.state.filterMonth} 
-                                filterYear={this.state.filterYear}
-                                updateFilters={this.setFilters.bind(this)}
-                                categoryId={this.props.category.id}
-                            />
-                        </FilterFormContainer>
+                        <FilterForm 
+                            filterMonth={this.state.filterMonth} 
+                            filterYear={this.state.filterYear}
+                            updateFilters={this.setFilters.bind(this)}
+                            categoryId={this.props.category.id}
+                        />
                     </section>
-                    <section className="progress-bar">
-                        <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
-                    </section>
+                    <ProgressContainer>
+                        <p>${parseFloat(transactionsTotal).toFixed(2)}</p>
+                        <RemainingBar 
+                            progress={(this.props.category.amount / parseFloat(transactionsTotal)).toFixed(2)}
+                            options={options}
+                            containerStyle={containerStyle}
+                            intialAnimate={true}
+                        />
+                        <p>${parseFloat(this.props.category.amount).toFixed(2)}</p>
+                    </ProgressContainer>
                     <main>
                         <section>
                             <TransactionForm categoryId={this.props.category.id}/>

@@ -76,7 +76,7 @@ export class TransRow extends React.Component {
             return (
                 <tr>
                     <td>{this.props.transaction}</td>
-                    <td>{moment(this.props.date).format('l')}</td>
+                    <td>{moment(this.props.date).format('D/M/YY')}</td>
                     <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                     <td className="edit-buttons">
                         <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
