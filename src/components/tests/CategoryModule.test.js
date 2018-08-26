@@ -5,6 +5,6 @@ import {CategoryModule} from '../CategoryModule';
 
 describe('<CategoryModule />', () => {
     it('Renders without crashing', () => {
-        shallow(<CategoryModule />);
+        shallow(<CategoryModule amount={0} transactionAmount={0}/>);
     });
 });
