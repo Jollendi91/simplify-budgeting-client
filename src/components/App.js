@@ -14,10 +14,10 @@ import {refreshAuthToken} from '../actions/auth';
 import {injectGlobal} from 'styled-components';
 import {modernNormalize} from 'styled-modern-normalize';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBars, faTimes, faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import {faBars, faTimes, faAngleRight, faFilter} from '@fortawesome/free-solid-svg-icons';
 import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
 
-library.add(faBars, faEdit, faTrashAlt, faSave, faTimes, faAngleRight);
+library.add(faBars, faEdit, faTrashAlt, faSave, faTimes, faAngleRight, faFilter);
 
 injectGlobal`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Roboto+Condensed:700');
@@ -41,6 +41,10 @@ injectGlobal`
         text-align: center;
         line-height: 1.5;
         background-color: #DEDCE3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 10px 0;
     }
 
     h1, h2, h3, h4, h5, h6, th, button {

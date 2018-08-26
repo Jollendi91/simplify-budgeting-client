@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, notEmpty} from '../validators';
@@ -75,7 +76,7 @@ export class TransRow extends React.Component {
             return (
                 <tr>
                     <td>{this.props.transaction}</td>
-                    <td>{this.props.date}</td>
+                    <td>{moment(this.props.date).format('l')}</td>
                     <td>${parseFloat(this.props.amount).toFixed(2)}</td>
                     <td className="edit-buttons">
                         <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>

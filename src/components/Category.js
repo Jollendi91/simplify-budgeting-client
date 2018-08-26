@@ -1,16 +1,43 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-
-import {PieChart} from 'react-easy-chart';
+import {Legend} from 'react-easy-chart';
 import NavBar from './NavBar';
 import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
+import {ResponsivePieChart} from './ResponsivePieChart';
 import RequiresLogin from './requiresLogin';
 import {fetchProtectedUser} from '../actions/protected-data';
 
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
 import './Category.css';
+
+const CategoryContainer = styled.section`
+    position: relative;
+    top: 66px;
+    min-height: calc(100vh - 66px);
+    background-color: white;
+`;
+
+const HeaderContainer = styled.header`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #276A73;
+    color: white;
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+    margin-left: 10px;
+    font-size: .9em;
+    color: #F7B733;
+`;
+
+const FilterFormContainer = styled.div`
+    display: ${props => props.displayFilter ? 'block' : 'none'};
+`;
 
 export class Category extends React.Component {
     constructor(props) {
@@ -18,7 +45,8 @@ export class Category extends React.Component {
 
         this.state = {
             filterMonth: new Date().getMonth(),
-            fitlerYear: new Date().getFullYear()
+            filterYear: new Date().getFullYear(),
+            displayFilter: false,
         }
     }
 
@@ -32,6 +60,12 @@ export class Category extends React.Component {
         this.setState({
             filterMonth: month,
             filterYear: year
+        });
+    }
+
+    setDisplayFilters() {
+        this.setState({
+            displayFilter: !this.state.displayFilter
         });
     }
 
@@ -68,52 +102,27 @@ export class Category extends React.Component {
         // To display current filtered month
         const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        // Data to push to the Pie Chart
-        let data = [];
-
-        if (transactionsTotal) {
-            data.push({
-                key: 'Spent',
-                value: transactionsTotal
-            });
-        };
-
-        if (parseFloat(this.props.category.amount) - transactionsTotal > 0) {
-            data.push({
-                key: 'Remaining',
-                value: this.props.category.amount - transactionsTotal
-            });
-        }
-
         return (
             <div>
                 <NavBar page={'dashboard'}/>
-                <div className="category-container">
-                    <header>
-                        <section>
-                            <h1>{this.props.category.category}</h1>
-                            <div className="category-header">
-                                <h2>${parseFloat(this.props.category.amount).toFixed(2)}/Month</h2>
-                            </div>
-                            <div className="filter-transactions">
-                                <h3>{currentMonthName[this.state.filterMonth]}</h3>
-                                <FilterForm 
-                                    filterMonth={this.state.filterMonth} 
-                                    filterYear={this.state.fitlerYear}
-                                    updateFilters={this.setFilters.bind(this)}
-                                    categoryId={this.props.category.id}
-                                />
-                            </div>
-                        </section>
-                        <section className="progress-bar">
-                            <PieChart 
-                                labels
-                                size={350}
-                                innerHoleSize={200}
-                                data={data}/>
-                            <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
-                        </section>
-                    </header>
+                <CategoryContainer>
+                    <section>
+                        <HeaderContainer>
+                        <h2>{this.props.category.category} - {currentMonthName[this.state.filterMonth]} {this.state.filterYear}</h2>
+                        <StyledIcon icon="filter" onClick={() => this.setDisplayFilters()}/>
+                        </HeaderContainer>
+                        <FilterFormContainer displayFilter={this.state.displayFilter}>
+                            <FilterForm 
+                                filterMonth={this.state.filterMonth} 
+                                filterYear={this.state.filterYear}
+                                updateFilters={this.setFilters.bind(this)}
+                                categoryId={this.props.category.id}
+                            />
+                        </FilterFormContainer>
+                    </section>
+                    <section className="progress-bar">
+                        <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
+                    </section>
                     <main>
                         <section>
                             <TransactionForm categoryId={this.props.category.id}/>
@@ -135,7 +144,7 @@ export class Category extends React.Component {
                             </div>
                         </section>
                     </main>
-                </div>
+                </CategoryContainer>
             </div>
         );
     }
