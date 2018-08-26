@@ -2,53 +2,57 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import {fetchTransactions} from '../actions/protected-data';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
 
+const FilterContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+`;
 
+const StyledIcon = styled(FontAwesomeIcon)`
+    font-size: 1.25em;
+    cursor: pointer;
+`;
+
+// To display current filtered month
+const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export class FilterForm extends React.Component {
-    onSubmit(values) {
-        const {filterMonth, filterYear} = values;
-        this.props.updateFilters(parseInt(filterMonth), parseInt(filterYear));
+    constructor(props) {
+        super(props);
+    }
 
-       return this.props.dispatch(fetchTransactions(parseInt(filterMonth), parseInt(filterYear), this.props.categoryId));
-
+    onDateChange(direction) {
+        let nextMonth;
+        let nextYear = this.props.filterYear;
+        if (direction === "back") {
+            nextMonth = this.props.filterMonth - 1;
+            if (nextMonth === -1) {
+                nextMonth = 11;
+                nextYear = this.props.filterYear - 1;
+            } 
+        } else if (direction === "next") {
+            nextMonth = this.props.filterMonth + 1;
+            if (nextMonth === 12) {
+                nextMonth = 0;
+                nextYear = this.props.filterYear + 1;
+            }
+        }
+        this.props.updateFilters(nextMonth, nextYear);
+        return this.props.dispatch(fetchTransactions(nextMonth, nextYear, this.props.categoryId));
     }
 
     render() {
         return (
-            <form className="filter-transaction-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                <Field 
-                    component="select"
-                    name="filterMonth"
-                    id="filter-month">
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
-                </Field>
-                <Field
-                    component="select"
-                    name="filterYear"
-                    id="filter-year">
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                </Field>
-                <button>Filter</button>
-            </form>
+            <FilterContainer>
+                <StyledIcon className="back-button" icon="angle-left" onClick={() => this.onDateChange('back')}/>
+                <h3>{currentMonthName[this.props.filterMonth]} {this.props.filterYear}</h3>
+                <StyledIcon className="next-button" icon="angle-right" onClick={() => this.onDateChange('next')}/>
+            </FilterContainer>
         )
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    initialValues: props
-});
-
-export default connect(mapStateToProps)(reduxForm({form: 'filter'})(FilterForm));
+export default connect()(FilterForm);

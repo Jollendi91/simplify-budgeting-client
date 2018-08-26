@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import ProgressBar from 'react-progress-bar.js';
 import styled from 'styled-components';
@@ -75,17 +76,31 @@ const containerStyle = {
 };
 
 export function CategoryModule(props) {
- 
+    // filter transacitions from the store for only the current month
+    const filterDate = moment();
+    let firstDayMonth = filterDate.startOf('month').toISOString();
+    let lastDayMonth = filterDate.endOf('month').toISOString();
+
+    const currentMonthTransactions = [];
+    props.currentCategory.transactions.map(transaction => {
+        let transactionDate = moment(transaction.date);
+
+        if (transactionDate.isBetween(firstDayMonth, lastDayMonth, null, [])) {
+            currentMonthTransactions.push(transaction);
+        };
+    });
+
+    let currentTransactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
 
     return (
         <BudgetContainer>
             <HeaderContainer>
                 <Header>{props.category}</Header>
-                <AmountRemaining>${(props.amount - props.transactionAmount).toFixed(2)} Left</AmountRemaining>
+                <AmountRemaining>${(props.amount - currentTransactionsTotal).toFixed(2)} Left</AmountRemaining>
             </HeaderContainer>
             <BudgetBar
-                progress={props.amount / props.transactionAmount}
-                text={`$${props.transactionAmount.toFixed()} of $${props.amount}`}
+                progress={currentTransactionsTotal / props.amount}
+                text={`$${currentTransactionsTotal.toFixed()} of $${props.amount}`}
                 options={options}
                 initialAnimate={true}
                 containerStyle={containerStyle}
@@ -96,12 +111,8 @@ export function CategoryModule(props) {
     )
 }
 
-const mapStateToProps = (state, props) => {
-    let currentCategory = state.simplify.user.categories.find(category => category.id === props.id);
-
-    return {
-        transactionAmount: currentCategory.transactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0)
-    }
-};
+const mapStateToProps = (state, props) => ({
+    currentCategory: state.simplify.user.categories.find(category => category.id === props.id),
+});
 
 export default connect(mapStateToProps)(CategoryModule);

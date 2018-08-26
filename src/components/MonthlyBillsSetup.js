@@ -42,8 +42,8 @@ export function MonthlyBillsSetup(props) {
                 </StyledTBody>
                 <tfoot>
                     <tr>
-                        <StyledTD>Total</StyledTD>
-                        <StyledTD colSpan="2">${props.billsTotal.toFixed(2)}</StyledTD>
+                        <StyledTH>Total</StyledTH>
+                        <StyledTH colSpan="2">${props.billsTotal.toFixed(2)}</StyledTH>
                     </tr>
                 </tfoot>
 			</StyledTable>

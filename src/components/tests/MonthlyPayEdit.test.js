@@ -11,7 +11,7 @@ describe('<MonthlyPayEdit />', () => {
     it('Should display form on edit button click', () => {
         const handleSubmit = jest.fn();
         const wrapper = shallow(<MonthlyPayEdit handleSubmit={handleSubmit}/>);
-        const editButton = wrapper.find('button[className="edit-button"]');
+        const editButton = wrapper.find('.edit-button');
         editButton.simulate('click');
         expect(wrapper.find('form[className="update-salary-form"]').exists()).toEqual(true);
     });
@@ -20,7 +20,7 @@ describe('<MonthlyPayEdit />', () => {
         const handleSubmit = jest.fn();
         const wrapper = shallow(<MonthlyPayEdit handleSubmit={handleSubmit}/>);
         wrapper.instance().setEditing();
-        const cancelButton = wrapper.find('button[className="cancel-button"]');
+        const cancelButton = wrapper.find('.cancel-button');
         cancelButton.simulate('click');
         expect(wrapper.find('form[className="update-salary-form"]').exists()).toEqual(false);
     });

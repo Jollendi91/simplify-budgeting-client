@@ -1,4 +1,4 @@
-import styled from 'styled-components';  
+import styled, {css} from 'styled-components';  
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Input from '../input';
 
@@ -19,14 +19,12 @@ export const StyledInput = styled(Input)`
     max-width: 350px;
     padding: 5px;
     margin: 0 auto;
+    position: relative;
 
     label {
-        text-align: left;
-        font-size: 1em;
-        text-transform: uppercase;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        position: absolute;
+        top: -10px;
+        font-size: 1.1em;
     }
 
     input {
@@ -48,13 +46,25 @@ export const CloseButton = styled(FontAwesomeIcon)`
     cursor: pointer;
 `;
 
+const complexBackground = css`
+    ${props => props.primary && props.color ? props.color : 'white'}
+`;
+
+const complexBorder = css`
+    ${props => props.color ? props.color : 'white'}
+`;
+
+const complexFontColor = css`
+    ${props => props.primary && props.color ? 'white' : props.color}
+`;
+
 export const Button = styled.button`
     padding: .2em ${props => props.signup ? '4em' : '2em'};
     font-size: 1em;
     margin: .75em 5px 0;
-    background-color: ${props => props.primary && props.color ? props.color : 'white'};
-    border: 2px solid ${props => props.color ? props.color : 'white'};
-    color: ${props => props.primary && props.color ?  'white' : props.color};
+    background-color: ${props => props.disabled ? '#bbb' : complexBackground};
+    border: 2px solid ${props => props.disabled ? "#bbb" : complexBorder};
+    color: ${props => props.disabled ?  'white' : complexFontColor};
     font-weight: bold;
     border-radius: 5px;
 }
@@ -69,6 +79,7 @@ export const SetupInput = StyledInput.extend`
 
     label {
         position: absolute;
+        top: initial;
         bottom: -20px;
     }
 
@@ -85,6 +96,13 @@ export const SetupInput = StyledInput.extend`
 
 export const UpdateInput = StyledInput.extend`
     padding: 0;
+    position: relative;
+
+    label {
+        position: absolute;
+        top: initial;
+        bottom: -20px;
+    }
 
     input {
         font-size: 1em;

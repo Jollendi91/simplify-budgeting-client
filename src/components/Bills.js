@@ -7,7 +7,8 @@ import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';
 import {fetchProtectedUser} from '../actions/protected-data';
 
-import './Bills.css';
+import {StyledTable, StyledTBody, StyledTH, StyledTD} from './styled-components/Tables';
+import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
 
 export class Bills extends React.Component {
     componentDidMount() {
@@ -22,33 +23,31 @@ export class Bills extends React.Component {
         );
 
         return (
-            <div>
-                <NavBar page={'dashboard'} />
-                <main className='bills-container'>
-                    <header>
-                        <h1>Monthly Bills</h1>
-                        <h2>${parseFloat(this.props.billsTotal).toFixed(2)}/Month</h2>
-                    </header>
-                    <section class="monthly-bills-form-container">
-                        <MonthlyBillForm />
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th colspan="2">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {bills}
-                            </tbody>
-                            <tfoot>
-                                <td>Total</td>
-                                <td colspan="2">${parseFloat(this.props.billsTotal).toFixed(2)}</td>
-                            </tfoot>
-                        </table>
-                    </section>
-                </main>
-            </div>
+            <ComponentContainer>
+                <HeaderContainer>
+                    <h2>Monthly Bills</h2>
+                </HeaderContainer>
+                <section class="monthly-bills-form-container">
+                    <MonthlyBillForm />
+                    <StyledTable>
+                        <thead>
+                            <tr>
+                                <StyledTH>Name</StyledTH>
+                                <StyledTH colSpan="2">Amount</StyledTH>
+                            </tr>
+                        </thead>
+                        <StyledTBody>
+                            {bills}
+                        </StyledTBody>
+                        <tfoot>
+                            <tr>
+                                <StyledTH>Total</StyledTH>
+                                <StyledTH colSpan="2">${this.props.billsTotal.toFixed(2)}</StyledTH>
+                            </tr>
+                        </tfoot>
+                    </StyledTable>
+                </section>
+            </ComponentContainer>
         )
     }
 };

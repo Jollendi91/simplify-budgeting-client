@@ -7,7 +7,19 @@ import CategorySetup from './CategorySetup';
 import RequiresLogin from './requiresLogin'
 import { fetchProtectedUser } from '../actions/protected-data';
 
-import './AccountSetup.css';
+import styled from 'styled-components';
+import {ComponentContainer, HeaderContainer} from './styled-components/Elements';
+
+// Styled Components
+const EditContainer = ComponentContainer.extend`
+    background-color: transparent;
+`;
+
+const SectionContainer = styled.section`
+    margin: 15px 0 15px;
+    padding: 10px 0 30px;
+    background-color: white;
+`;
 
 export class EditProfile extends React.Component {
     
@@ -19,14 +31,22 @@ export class EditProfile extends React.Component {
 
      render()  { 
         return (
-            <div>
-                <main className="account-setup-container">
-                    <h1>Edit your profile</h1>
+            <EditContainer>
+                <HeaderContainer>
+                    <h2>Edit your profile</h2>
+                </HeaderContainer>
+                <SectionContainer>
                     <MonthlyPayEdit />
+                </SectionContainer>
+                <SectionContainer>
+                    <h2>Bills</h2>
                     <MonthlyBillsSetup />
+                </SectionContainer>
+                <SectionContainer>
+                    <h2>Budgets</h2>
                     <CategorySetup />
-                </main>
-            </div>
+                </SectionContainer>
+            </EditContainer>
          )
     }
 };

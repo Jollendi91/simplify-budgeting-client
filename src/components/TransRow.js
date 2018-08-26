@@ -1,12 +1,57 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, notEmpty} from '../validators';
 
 import { deleteTransaction, updateTransaction } from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {UpdateInput} from './styled-components/Forms';
+import {StyledTD} from './styled-components/Tables';
+
 import './TransRow.css';
+// Styled Components
+
+const UpdateTransactionForm = styled.form`
+    display: grid;
+    grid-template-columns: 30% 30% 20% 10%;
+    justify-content: space-between;
+    align-items: center;
+
+    .form-input {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #date {
+        font-size: .8em;
+    }
+`;
+UpdateTransactionForm.displayName='UpdateTransactionForm';
+
+const TransTD = StyledTD.extend`
+    width: 24%;
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+   margin: 0 8px;
+   color: ${props => props.color ? props.color : 'black'};
+`;
+
+const EditButtons = styled.div`
+    width: 10%;
+    padding: 5px 0;
+`;
+
+const IconButton = styled.button`
+   border: none;
+   background-color: transparent;
+`;
+
+
 
 export class TransRow extends React.Component {
     constructor(props) {
@@ -32,20 +77,20 @@ export class TransRow extends React.Component {
         if (this.state.editing) {
             return (
                 <tr>
-                    <td className="transaction-form-container" colSpan="4">
-                        <form className="update-transaction-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                    <TransTD className="transaction-form-container" colSpan="4">
+                        <UpdateTransactionForm onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             <div className="form-input-container">
                                 <Field 
-                                    component={Input}
+                                    component={UpdateInput}
                                     type="text"
                                     name="transaction"
                                     id="transaction-update"
                                     validate={[required, notEmpty]}
                                 />
                             </div>
-                            <div className="form-input-container">
+                            <div className="form-input-container transcation-date-input">
                                 <Field
-                                    component={Input}
+                                    component={UpdateInput}
                                     type="date"
                                     name="date"
                                     id="transaction-date-update"
@@ -54,7 +99,7 @@ export class TransRow extends React.Component {
                             </div>
                             <div className="form-input-container transaction-amount-input">
                                 $<Field
-                                    component={Input}
+                                    component={UpdateInput}
                                     type="number"
                                     name="amount"
                                     id="transaction-amount-update"
@@ -63,24 +108,24 @@ export class TransRow extends React.Component {
                                     validate={[required, notEmpty]}
                                 />
                             </div>
-                            <div className="edit-buttons">
-                                <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                                <button className="cancel-button" onClick={() => this.setEditing()}>Cancel</button>
-                            </div>
-                        </form>
-                    </td>
+                            <EditButtons>
+                                <IconButton type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></IconButton>
+                                <IconButton className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></IconButton>
+                            </EditButtons>
+                        </UpdateTransactionForm>
+                    </TransTD>
                 </tr>
             )
         } else {
             return (
                 <tr>
-                    <td>{this.props.transaction}</td>
-                    <td>{this.props.date}</td>
-                    <td>${parseFloat(this.props.amount).toFixed(2)}</td>
-                    <td className="edit-buttons">
-                        <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
-                        <button className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}>X</button>
-                    </td>
+                    <TransTD>{this.props.transaction}</TransTD>
+                    <TransTD>{moment(this.props.date).format('D/M/YY')}</TransTD>
+                    <TransTD>${parseFloat(this.props.amount).toFixed(2)}</TransTD>
+                    <EditButtons>
+                        <IconButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon icon={['far','edit']} color='#4ABDAC'/></IconButton>
+                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
+                    </EditButtons>
                 </tr>
             )
         }

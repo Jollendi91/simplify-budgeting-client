@@ -1,24 +1,65 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-
-import {PieChart} from 'react-easy-chart';
 import NavBar from './NavBar';
 import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
+import ProgressBar from 'react-progress-bar.js';
 import RequiresLogin from './requiresLogin';
 import {fetchProtectedUser} from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
+import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
 import './Category.css';
 
+// Styled Components
+const ProgressContainer = styled.section`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    p {
+        padding: 0 15px;
+    }
+`;
+
+const AddFormContainer = styled.section`
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+`;
+
+// Progress Bar
+const RemainingBar = ProgressBar.Line;
+
+const options = {
+    strokeWidth: 1,
+    color: '#F7B733',
+	trailColor: '#DEDCE3',
+    easing: 'easeOut',
+    svgStyle: {
+		display: 'block',
+		width: '100%',
+		height: '100%',
+		borderRadius: '5px'
+	}
+};
+
+const containerStyle = {
+    height: '5px'
+};
+
+// Category Component
 export class Category extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             filterMonth: new Date().getMonth(),
-            fitlerYear: new Date().getFullYear()
+            filterYear: new Date().getFullYear()
         }
     }
 
@@ -65,77 +106,53 @@ export class Category extends React.Component {
 
         const transactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
 
-        // To display current filtered month
-        const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-        // Data to push to the Pie Chart
-        let data = [];
-
-        if (transactionsTotal) {
-            data.push({
-                key: 'Spent',
-                value: transactionsTotal
-            });
-        };
-
-        if (parseFloat(this.props.category.amount) - transactionsTotal > 0) {
-            data.push({
-                key: 'Remaining',
-                value: this.props.category.amount - transactionsTotal
-            });
-        }
-
         return (
             <div>
                 <NavBar page={'dashboard'}/>
-                <div className="category-container">
-                    <header>
-                        <section>
-                            <h1>{this.props.category.category}</h1>
-                            <div className="category-header">
-                                <h2>${parseFloat(this.props.category.amount).toFixed(2)}/Month</h2>
-                            </div>
-                            <div className="filter-transactions">
-                                <h3>{currentMonthName[this.state.filterMonth]}</h3>
-                                <FilterForm 
-                                    filterMonth={this.state.filterMonth} 
-                                    filterYear={this.state.fitlerYear}
-                                    updateFilters={this.setFilters.bind(this)}
-                                    categoryId={this.props.category.id}
-                                />
-                            </div>
-                        </section>
-                        <section className="progress-bar">
-                            <PieChart 
-                                labels
-                                size={350}
-                                innerHoleSize={200}
-                                data={data}/>
-                            <p>Spent so far: ${parseFloat(transactionsTotal).toFixed(2)} / ${parseFloat(this.props.category.amount).toFixed(2)}</p>
-                        </section>
-                    </header>
+                <ComponentContainer>
+                    <section>
+                        <HeaderContainer>
+                        <h2>{this.props.category.category}</h2>
+                        </HeaderContainer>
+                        <FilterForm 
+                            filterMonth={this.state.filterMonth} 
+                            filterYear={this.state.filterYear}
+                            updateFilters={this.setFilters.bind(this)}
+                            categoryId={this.props.category.id}
+                        />
+                    </section>
+                    <ProgressContainer>
+                        <p>${parseFloat(transactionsTotal).toFixed(2)}</p>
+                        <RemainingBar 
+                            progress={parseFloat(transactionsTotal)/ this.props.category.amount }
+                            options={options}
+                            containerStyle={containerStyle}
+                            intialAnimate={true}
+                        />
+                        <p>${parseFloat(this.props.category.amount).toFixed(2)}</p>
+                    </ProgressContainer>
                     <main>
-                        <section>
+                        <AddFormContainer>
                             <TransactionForm categoryId={this.props.category.id}/>
-                        </section>
+                        </AddFormContainer>
                         <section>
                             <div>
-                                <table className="categories-table">
+                                <StyledTable>
                                     <thead>
                                         <tr>
-                                            <th colSpan="1">Description</th>
-                                            <th colSpan="1">Date</th>
-                                            <th colSpan="2">Amount</th>
+                                            <StyledTH colSpan="1">Description</StyledTH>
+                                            <StyledTH colSpan="1">Date</StyledTH>
+                                            <StyledTH colSpan="2">Amount</StyledTH>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <StyledTBody>
                                     {transactions}
-                                    </tbody>
-                                </table>
+                                    </StyledTBody>
+                                </StyledTable>
                             </div>
                         </section>
                     </main>
-                </div>
+                </ComponentContainer>
             </div>
         );
     }
