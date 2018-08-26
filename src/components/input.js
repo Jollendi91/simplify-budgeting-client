@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const FormError = styled.div`
     font-size: .8em;
-    color: red;
+    color: #FC4A1A;
     font-weight: bold;
 `;
 

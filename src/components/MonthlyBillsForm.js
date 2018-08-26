@@ -52,7 +52,7 @@ export class MonthlyBillForm extends React.Component {
                             validate={[required, notEmpty]}
                         />
                     </div>
-                    <Button disabled={this.props.pristine || this.props.submitting}>Add</Button>
+                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Add</Button>
                 </Inputs>
             </form>
         )

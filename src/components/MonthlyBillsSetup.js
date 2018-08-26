@@ -5,11 +5,18 @@ import MonthlyBillsForm from './MonthlyBillsForm';
 import BillRow from './BillRow';
 
 import styled from 'styled-components';
+
 import {StyledTable, StyledTD, StyledTH, StyledTBody} from './styled-components/Tables';
 
 // Styled Components
 const BillsFormContainer = styled.section`
     flex-grow: 1;
+`;
+
+const Description = styled.p`
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 0 10px;
 `;
 
 // Monthly Bill Setup Component
@@ -21,7 +28,7 @@ export function MonthlyBillsSetup(props) {
 
     return (
         <BillsFormContainer>
-            <p>Enter all expenses that recur each month</p>
+            <Description>Enter all recurring monthly bills and expenses</Description>
             <MonthlyBillsForm />
             <StyledTable>
                 <thead>

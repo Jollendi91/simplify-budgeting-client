@@ -5,20 +5,15 @@ import {required, notEmpty} from '../validators';
 import { updateSalary, updateStep } from '../actions/protected-data';
 import Input from './input';
 import styled from 'styled-components';
-import {StyledInput, Button} from './styled-components/Forms';
+import {StyledInput, Button, StyledLabel} from './styled-components/Forms';
 
-
+// Styled Components
 const SetupInput = StyledInput.extend`
     max-width: 300px;
     input {
         text-align: center;
         border-radius: 5px;
     }
-`;
-
-const StyledLabel = styled.label`
-    font-size: 1.3em;
-    padding: 10px;
 `;
 
 export class MonthlyPaySetup extends React.Component {
@@ -43,7 +38,7 @@ export class MonthlyPaySetup extends React.Component {
                         min="0.01"
                         validate={[required, notEmpty]}
                     />
-                    <Button disabled={this.props.pristine || this.props.submitting}>Next</Button>
+                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Next</Button>
                 </form>
             </section>
         )

@@ -10,6 +10,11 @@ export const FormContainer = styled.article`
     position: relative;
 `;
 
+export const StyledLabel = styled.label`
+    font-size: 1.3em;
+    padding: 10px;
+`;
+
 export const StyledInput = styled(Input)`
     max-width: 350px;
     padding: 5px;
@@ -44,10 +49,15 @@ export const CloseButton = styled(FontAwesomeIcon)`
 `;
 
 export const Button = styled.button`
-    padding: .4em ${props => props.signup ? '4em' : '2em'};
-    font-size: .8em;
+    padding: .2em ${props => props.signup ? '4em' : '2em'};
+    font-size: 1em;
     margin: .75em 5px 0;
-
+    background-color: ${props => props.primary && props.color ? props.color : 'white'};
+    border: 2px solid ${props => props.color ? props.color : 'white'};
+    color: ${props => props.primary && props.color ?  'white' : props.color};
+    font-weight: bold;
+    border-radius: 5px;
+}
     cursor: pointer;
 `;
 
@@ -67,6 +77,20 @@ export const SetupInput = StyledInput.extend`
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f4f4f4;
+        &:focus {
+            border-color: #F7B733;
+        }
+    }
+`;
+
+export const UpdateInput = StyledInput.extend`
+    padding: 0;
+
+    input {
+        font-size: 1em;
+        padding: 2px;
+        margin-top: 0;
+        border: 1px solid #aaa;
     }
 `;
 
@@ -76,4 +100,8 @@ export const Inputs = styled.div`
     align-items: flex-end;
     margin: 15px 0;
     padding-bottom: 10px;
+
+    label {
+        font-size: 1.1em;
+    }
 `;

@@ -15,14 +15,17 @@ export const StyledTH = styled.th`
     width: 33%;
 `;
 
-export const StyledTD = StyledTH.extend`
+export const StyledTD = StyledTH.withComponent('td').extend`
     border-top: 0;
     font-weight: normal;
     padding: 6px 8px;
 `;
 
 export const StyledTBody = styled.tbody`
+    tr:nth-child(even) {
+        background-color: #eee;
+    }
     tr:nth-child(odd) {
-        background-color: #ddd;
+        background-color: #ccc;
     }
 `;

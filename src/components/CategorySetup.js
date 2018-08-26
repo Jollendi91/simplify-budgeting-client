@@ -6,11 +6,16 @@ import CatRow from './CatRow';
 
 import styled from 'styled-components';
 import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
-import './CategorySetup.css';
 
 // Styled Components
 const CategoryFormContainer = styled.section`
 	flex-grow: 1;
+`;
+
+const Description = styled.p`
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 0 10px;
 `;
 
 const Amount = styled.p`
@@ -35,8 +40,8 @@ const Bar = ProgressBar.Line;
 
 const options = {
 	strokeWidth: 1,
-	color: '#276A73',
-	trailColor: '#ddd',
+	color: '#F7B733',
+	trailColor: '#DEDCE3',
 	easing: 'easeOut',
 	svgStyle: {
 		display: 'block',
@@ -58,12 +63,7 @@ const options = {
 				value: 'translate(-50%, -50%)'
 			}
 		}
-	},
-	from: {color: '#043B40'},
-	to: {color: '#A1BEB4'},
-	step: (state, Bar) => {
-    Bar.path.setAttribute('stroke', state.color);
-  }
+	}
 };
 
 const containerStyle = {
@@ -84,12 +84,12 @@ export function CategorySetup(props) {
 
     return (
         <CategoryFormContainer>
-            <p>Set up some budgets that you would like to track, such as spending, savings, or debts.</p>
+            <Description>Set up some budgets that you would like to track, such as spending, savings, or debts.</Description>
 			<ProgressContainer>
 				<AmountRemaining>{`$${remainingAmount.toFixed(2)} Left`}</AmountRemaining>
 				<Bar
 					progress={props.categoriesTotal.toFixed(2) / (props.monthlySalary - props.billsTotal.toFixed(2))}
-					text={`$${props.categoriesTotal.toFixed()} of $${props.monthlySalary - props.billsTotal.toFixed(2)}`}
+					text={`$${props.categoriesTotal.toFixed()} of $${(props.monthlySalary - props.billsTotal).toFixed(2)}`}
 					options={options}
 					initialAnimate={true}
 					containerStyle={containerStyle}

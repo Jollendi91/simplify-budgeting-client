@@ -14,16 +14,19 @@ import {refreshAuthToken} from '../actions/auth';
 import {injectGlobal} from 'styled-components';
 import {modernNormalize} from 'styled-modern-normalize';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faBars, faTimes, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
 
-library.add(faBars, faEdit, faTrashAlt, faSave, faTimes);
+library.add(faBars, faEdit, faTrashAlt, faSave, faTimes, faAngleRight);
 
 injectGlobal`
+    @import url('https://fonts.googleapis.com/css?family=Cabin|Roboto+Condensed:700');
+
     ${modernNormalize};
 
     * {
         box-sizing: border-box;
+        font-family: 'Cabin'
     }
 
     body, html {
@@ -32,10 +35,16 @@ injectGlobal`
     }
 
     body {
+        min-height: 100vh;
         font-family: sans-serif;
         font-size: 1em;
         text-align: center;
         line-height: 1.5;
+        background-color: #DEDCE3;
+    }
+
+    h1, h2, h3, h4, h5, h6, th, button {
+        font-family: 'Roboto Condensed';
     }
 `;
 
