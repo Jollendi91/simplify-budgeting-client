@@ -36,16 +36,25 @@ const UpdateTransactionForm = styled.form`
 `;
 UpdateTransactionForm.displayName='UpdateTransactionForm';
 
+const TransTD = StyledTD.extend`
+    width: 24%;
+`;
+
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
    color: ${props => props.color ? props.color : 'black'};
 `;
 
-const SubmitButton = styled.button`
+const EditButtons = styled.div`
+    width: 10%;
+`;
+
+const IconButton = styled.button`
    border: none;
-   padding: 2px;
    background-color: transparent;
 `;
+
+
 
 export class TransRow extends React.Component {
     constructor(props) {
@@ -71,7 +80,7 @@ export class TransRow extends React.Component {
         if (this.state.editing) {
             return (
                 <tr>
-                    <StyledTD className="transaction-form-container" colSpan="4">
+                    <TransTD className="transaction-form-container" colSpan="4">
                         <UpdateTransactionForm onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             <div className="form-input-container">
                                 <Field 
@@ -102,24 +111,24 @@ export class TransRow extends React.Component {
                                     validate={[required, notEmpty]}
                                 />
                             </div>
-                            <div className="edit-buttons">
-                                <SubmitButton type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></SubmitButton>
-                                <SubmitButton className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></SubmitButton>
-                            </div>
+                            <EditButtons>
+                                <IconButton type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></IconButton>
+                                <IconButton className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></IconButton>
+                            </EditButtons>
                         </UpdateTransactionForm>
-                    </StyledTD>
+                    </TransTD>
                 </tr>
             )
         } else {
             return (
                 <tr>
-                    <StyledTD>{this.props.transaction}</StyledTD>
-                    <StyledTD>{moment(this.props.date).format('D/M/YY')}</StyledTD>
-                    <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
-                    <StyledTD className="edit-buttons">
-                        <SubmitButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon className='edit-button' icon={['far','edit']} color='#4ABDAC'/></SubmitButton>
-                        <SubmitButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' /></SubmitButton>
-                    </StyledTD>
+                    <TransTD>{this.props.transaction}</TransTD>
+                    <TransTD>{moment(this.props.date).format('D/M/YY')}</TransTD>
+                    <TransTD>${parseFloat(this.props.amount).toFixed(2)}</TransTD>
+                    <EditButtons>
+                        <IconButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon className='edit-button' icon={['far','edit']} color='#4ABDAC'/></IconButton>
+                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
+                    </EditButtons>
                 </tr>
             )
         }

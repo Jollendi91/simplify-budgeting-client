@@ -9,8 +9,8 @@ import ProgressBar from 'react-progress-bar.js';
 import RequiresLogin from './requiresLogin';
 import {fetchProtectedUser} from '../actions/protected-data';
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
+import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 import './Category.css';
 
 // Styled Components
@@ -27,12 +27,6 @@ const HeaderContainer = styled.header`
     align-items: center;
     background-color: #276A73;
     color: white;
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-    margin-left: 10px;
-    font-size: .9em;
-    color: #F7B733;
 `;
 
 const ProgressContainer = styled.section`
@@ -137,7 +131,7 @@ export class Category extends React.Component {
                     <ProgressContainer>
                         <p>${parseFloat(transactionsTotal).toFixed(2)}</p>
                         <RemainingBar 
-                            progress={(this.props.category.amount / parseFloat(transactionsTotal)).toFixed(2)}
+                            progress={parseFloat(transactionsTotal)/ this.props.category.amount }
                             options={options}
                             containerStyle={containerStyle}
                             intialAnimate={true}
@@ -150,18 +144,18 @@ export class Category extends React.Component {
                         </section>
                         <section>
                             <div>
-                                <table className="categories-table">
+                                <StyledTable>
                                     <thead>
                                         <tr>
-                                            <th colSpan="1">Description</th>
-                                            <th colSpan="1">Date</th>
-                                            <th colSpan="2">Amount</th>
+                                            <StyledTH colSpan="1">Description</StyledTH>
+                                            <StyledTH colSpan="1">Date</StyledTH>
+                                            <StyledTH colSpan="2">Amount</StyledTH>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <StyledTBody>
                                     {transactions}
-                                    </tbody>
-                                </table>
+                                    </StyledTBody>
+                                </StyledTable>
                             </div>
                         </section>
                     </main>
