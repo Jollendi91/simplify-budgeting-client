@@ -7,7 +7,45 @@ import {required, notEmpty} from '../validators';
 
 import { deleteTransaction, updateTransaction } from '../actions/protected-data';
 
+import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {UpdateInput} from './styled-components/Forms';
+import {StyledTD} from './styled-components/Tables';
+
 import './TransRow.css';
+// Styled Components
+
+const UpdateTransactionForm = styled.form`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .form-input-container {
+        width: 24%;
+    }
+
+    .form-input {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .bill-amount-input {
+        display: flex;
+        align-items: center;
+    }
+`;
+UpdateTransactionForm.displayName='UpdateTransactionForm';
+
+const StyledIcon = styled(FontAwesomeIcon)`
+   margin: 0 8px;
+   color: ${props => props.color ? props.color : 'black'};
+`;
+
+const SubmitButton = styled.button`
+   border: none;
+   padding: 2px;
+   background-color: transparent;
+`;
 
 export class TransRow extends React.Component {
     constructor(props) {
@@ -33,11 +71,11 @@ export class TransRow extends React.Component {
         if (this.state.editing) {
             return (
                 <tr>
-                    <td className="transaction-form-container" colSpan="4">
-                        <form className="update-transaction-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                    <StyledTD className="transaction-form-container" colSpan="4">
+                        <UpdateTransactionForm onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                             <div className="form-input-container">
                                 <Field 
-                                    component={Input}
+                                    component={UpdateInput}
                                     type="text"
                                     name="transaction"
                                     id="transaction-update"
@@ -46,7 +84,7 @@ export class TransRow extends React.Component {
                             </div>
                             <div className="form-input-container">
                                 <Field
-                                    component={Input}
+                                    component={UpdateInput}
                                     type="date"
                                     name="date"
                                     id="transaction-date-update"
@@ -55,7 +93,7 @@ export class TransRow extends React.Component {
                             </div>
                             <div className="form-input-container transaction-amount-input">
                                 $<Field
-                                    component={Input}
+                                    component={UpdateInput}
                                     type="number"
                                     name="amount"
                                     id="transaction-amount-update"
@@ -65,23 +103,23 @@ export class TransRow extends React.Component {
                                 />
                             </div>
                             <div className="edit-buttons">
-                                <button className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</button>
-                                <button className="cancel-button" onClick={() => this.setEditing()}>Cancel</button>
+                                <SubmitButton type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></SubmitButton>
+                                <SubmitButton className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></SubmitButton>
                             </div>
-                        </form>
-                    </td>
+                        </UpdateTransactionForm>
+                    </StyledTD>
                 </tr>
             )
         } else {
             return (
                 <tr>
-                    <td>{this.props.transaction}</td>
-                    <td>{moment(this.props.date).format('D/M/YY')}</td>
-                    <td>${parseFloat(this.props.amount).toFixed(2)}</td>
-                    <td className="edit-buttons">
-                        <button className="edit-button" onClick={() => this.setEditing()}>Edit</button>
-                        <button className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}>X</button>
-                    </td>
+                    <StyledTD>{this.props.transaction}</StyledTD>
+                    <StyledTD>{moment(this.props.date).format('D/M/YY')}</StyledTD>
+                    <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
+                    <StyledTD className="edit-buttons">
+                        <SubmitButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon className='edit-button' icon={['far','edit']} color='#4ABDAC'/></SubmitButton>
+                        <SubmitButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' /></SubmitButton>
+                    </StyledTD>
                 </tr>
             )
         }
