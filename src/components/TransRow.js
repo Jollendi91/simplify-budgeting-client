@@ -12,9 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {UpdateInput} from './styled-components/Forms';
 import {StyledTD} from './styled-components/Tables';
 
-import './TransRow.css';
 // Styled Components
-
 const UpdateTransactionForm = styled.form`
     display: grid;
     grid-template-columns: 30% 30% 20% 10%;
@@ -41,7 +39,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
    color: ${props => props.color ? props.color : 'black'};
 `;
 
-const EditButtons = styled.div`
+const EditButtons = styled.td`
     width: 10%;
     padding: 5px 0;
 `;
@@ -120,7 +118,7 @@ export class TransRow extends React.Component {
             return (
                 <tr>
                     <TransTD>{this.props.transaction}</TransTD>
-                    <TransTD>{moment(this.props.date).format('D/M/YY')}</TransTD>
+                    <TransTD>{moment(this.props.date).format('M/D/YY')}</TransTD>
                     <TransTD>${parseFloat(this.props.amount).toFixed(2)}</TransTD>
                     <EditButtons>
                         <IconButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon icon={['far','edit']} color='#4ABDAC'/></IconButton>

@@ -4,14 +4,9 @@ import Input from './input';
 import {login} from '../actions/auth';
 import {required, notEmpty} from '../validators';
 
-import styled from 'styled-components';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
-import {FormContainer, StyledInput, CloseButton, Button} from './styled-components/Forms';
-
-const LoginButton = Button.extend`
-  margin-top: 15px;
-`;
+import {FormContainer, StyledInput, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
+import {HeaderContainer} from './styled-components/Elements';
 
 export class LoginForm extends React.Component {
   onSubmit(values) {
@@ -35,27 +30,37 @@ export class LoginForm extends React.Component {
           className="login-form" 
           onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
         )}>
-          <h2>Let's get logged in!</h2>
+          <HeaderContainer>
+            <h2>Let's get logged in!</h2>
+          </HeaderContainer>
           {error}
-          <Field 
-            component={StyledInput}
-            type="text"
-            name="username"
-            id="login-username"
-            label="Username"
-            validate={[required, notEmpty]}
-          />
-          <Field 
-            component={StyledInput}
-            type="password"
-            name="password"
-            id="login-password"
-            label="Password"
-            validate={[required, notEmpty]}
-          />
-          <LoginButton disabled={this.props.pristine || this.props.submitting}>
-            Log in
-          </LoginButton>
+          <HorizontalInputs>
+            <div className="form-input-container">
+              <StyledLabel htmlFor="login-username">Username</StyledLabel>
+              <Field 
+                component={StyledInput}
+                type="text"
+                name="username"
+                id="login-username"
+                validate={[required, notEmpty]}
+              />
+            </div>
+            <div className="form-input-container">
+              <StyledLabel htmlFor="login-password">Password</StyledLabel>
+              <Field 
+                component={StyledInput}
+                type="password"
+                name="password"
+                id="login-password"
+                validate={[required, notEmpty]}
+              />
+            </div>
+          </HorizontalInputs>
+          <ButtonContainer>
+            <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>
+              Log in
+            </Button>
+          </ButtonContainer>
         </form>
       </FormContainer>
     );

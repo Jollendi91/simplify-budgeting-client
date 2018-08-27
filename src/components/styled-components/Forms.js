@@ -15,7 +15,7 @@ export const StyledLabel = styled.label`
 `;
 
 export const HorizontalInputs = styled.div`
-    padding: 15px 10px;
+    padding: 20px 10px;
 `;
 
 export const StyledInput = styled(Input)`
@@ -50,6 +50,11 @@ export const CloseButton = styled(FontAwesomeIcon)`
     cursor: pointer;
 `;
 
+export const ButtonContainer = styled.div`
+    padding-bottom: 20px;
+`;
+
+// Implement Disabled Button Style
 const complexBackground = css`
     ${props => props.primary && props.color ? props.color : 'white'}
 `;

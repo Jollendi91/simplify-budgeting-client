@@ -5,7 +5,7 @@ import Input from './input';
 import {required, notEmpty} from '../validators';
 import {addTransaction} from '../actions/protected-data';
 
-import {StyledInput, Button} from './styled-components/Forms';
+import {StyledInput, Button, HorizontalInputs} from './styled-components/Forms';
 import styled from 'styled-components';
 
 // Styled Components
@@ -18,12 +18,8 @@ const HeaderContainer = styled.header`
 `;
 
 const AddTransactionForm = styled.form`
-    height: calc(100vh - 85px);
+    height: calc(100vh - 66px);
     background-color: white;
-`;
-
-const InputContainer = styled.div`
-    padding: 10px 0;
 `;
 
 const StyledLabel = styled.label`
@@ -65,8 +61,8 @@ export class TransactionForm extends React.Component {
                     <HeaderContainer>
                         <h2>Add a Transaction</h2>
                     </HeaderContainer>
-                    <div className="form-inputs">
-                        <InputContainer>
+                    <HorizontalInputs>
+                        <div className="form-input-container">
                             <StyledLabel htmlFor="transaction-name">Description</StyledLabel>
                             <Field
                                 component={StyledInput}
@@ -75,8 +71,8 @@ export class TransactionForm extends React.Component {
                                 id="transaction-name"
                                 validate={[required, notEmpty]}
                             />
-                        </InputContainer>
-                        <InputContainer>
+                        </div>
+                        <div className="form-input-container">
                             <StyledLabel htmlFor="transaction-date">Date</StyledLabel>
                             <Field 
                                 component={StyledInput}
@@ -85,8 +81,8 @@ export class TransactionForm extends React.Component {
                                 id="transaction-date"
                                 validate={[required, notEmpty]}
                             />
-                        </InputContainer>
-                        <InputContainer>
+                        </div>
+                        <div className="form-input-container">
                             <StyledLabel htmlFor="transaction-amount">Amount</StyledLabel>
                             <Field
                                 component={StyledInput}
@@ -97,8 +93,8 @@ export class TransactionForm extends React.Component {
                                 step="0.01"
                                 validate={[required, notEmpty]}
                             />
-                        </InputContainer>
-                    </div>
+                        </div>
+                    </HorizontalInputs>
                     <ButtonContainer>
                         <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Submit</Button>
                         <Button primary color="#276A73" onClick={() => this.setDisplayForm()}>Cancel</Button>

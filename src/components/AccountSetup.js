@@ -12,8 +12,6 @@ import CategorySetup from './CategorySetup';
 import styled from 'styled-components';
 import {FormContainer, Button} from './styled-components/Forms';
 
-import './AccountSetup.css';
-
 // Styled Components
 const SetupStepContainer = styled.div`
     position: absolute;

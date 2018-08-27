@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import NavBar from './NavBar';
 import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
@@ -10,9 +11,9 @@ import RequiresLogin from './requiresLogin';
 import {fetchProtectedUser} from '../actions/protected-data';
 
 import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
-import './Category.css';
 
 // Styled Components
 const ProgressContainer = styled.section`
@@ -30,6 +31,16 @@ const AddFormContainer = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
+`;
+
+const IconButton = styled(Link)`
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 2.2em;
+    text-decoration: none;
+    position: absolute;
+    left: 15px;
 `;
 
 // Progress Bar
@@ -112,7 +123,10 @@ export class Category extends React.Component {
                 <ComponentContainer>
                     <section>
                         <HeaderContainer>
-                        <h2>{this.props.category.category}</h2>
+                            <IconButton to='/dashboard'>
+                                <FontAwesomeIcon icon="caret-left"/>
+                            </IconButton>
+                            <h2>{this.props.category.category}</h2>
                         </HeaderContainer>
                         <FilterForm 
                             filterMonth={this.state.filterMonth} 

@@ -3,17 +3,11 @@ import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
-import Input from './input';
 
-import styled from 'styled-components';
 import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
-import {StyledInput, FormContainer, CloseButton, Button, HorizontalInputs, StyledLabel} from './styled-components/Forms';
+import {StyledInput, FormContainer, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
 import {HeaderContainer} from './styled-components/Elements';
 
-// Styled Components
-const ButtonContainer = styled.div`
-    padding-bottom: 20px;
-`;
 
 const passwordLength = length({min: 10, max: 72});
 const usernameLength = length({min: 8, max: 30});

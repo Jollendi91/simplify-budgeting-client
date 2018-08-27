@@ -14,4 +14,5 @@ export const HeaderContainer = styled.header`
     align-items: center;
     background-color: #276A73;
     color: white;
+    position: relative;
 `;
