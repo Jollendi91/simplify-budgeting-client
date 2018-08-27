@@ -128,7 +128,9 @@ export class NavBar extends React.Component {
     }
 
     displayForm(form) {
-        this.setDisplayLinks();
+        if (form !== null) {
+            this.setDisplayLinks();
+        }
         this.setState({
             displayForm: form
         });
