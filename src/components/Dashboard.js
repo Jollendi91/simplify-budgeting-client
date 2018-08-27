@@ -10,6 +10,7 @@ import {fetchProtectedUser} from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {FormContainer} from './styled-components/Forms';
+import { MainLoadingSpinner } from './MainLoadingSpinner';
 
 // Styled Components
 
@@ -30,12 +31,13 @@ const StyledPieChart = styled(ResponsivePieChart)`
 
 const GraphText = styled.p`
     padding: 10px;
+    margin: 0;
 `;
 
 const DashboardCard = styled.section`
     background-color: white;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin: 10px;
 `;
 
 const Header = styled.h2`
@@ -130,35 +132,41 @@ export class Dashboard extends React.Component {
               {color: '#F7B733'},
               {color: '#DEDCE3'} 
           ];
-
-        return (
-            <div>
-                <DashboardContainer>
-                    <DashboardCard>
-                        <Header>Summary</Header>
-                        <PortfolioData>
-                            <StyledPieChart
-                                data={data} 
-                                clickHandler={
-                                    (d) => this.setState({
-                                      dataDisplay:
-                                      `${d.data.key} Budget: $${d.value.toFixed(2)}/Month`
-                                    })
-                                  }
-                            />
-                            <Legend horizontal data={data} dataId={'key'} config={config} styles={customStyle}/>
-                        </PortfolioData>
-                        <GraphText>
-                        {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
-                        </GraphText>
-                    </DashboardCard>
-                    <DashboardCard>
-                        <Header>Budgets</Header>
-                        {categories}
-                    </DashboardCard>
-                </DashboardContainer>
-            </div>
-        )
+        
+        if (this.props.loading) {
+            return (
+                <MainLoadingSpinner/>
+            )
+        } else {
+            return (
+                <div>
+                    <DashboardContainer>
+                        <DashboardCard>
+                            <Header>Summary</Header>
+                            <PortfolioData>
+                                <StyledPieChart
+                                    data={data} 
+                                    clickHandler={
+                                        (d) => this.setState({
+                                        dataDisplay:
+                                        `${d.data.key} Budget: $${d.value.toFixed(2)}/Month`
+                                        })
+                                    }
+                                />
+                                <Legend horizontal data={data} dataId={'key'} config={config} styles={customStyle}/>
+                            </PortfolioData>
+                            <GraphText>
+                            {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
+                            </GraphText>
+                        </DashboardCard>
+                        <DashboardCard>
+                            <Header>Budgets</Header>
+                            {categories}
+                        </DashboardCard>
+                    </DashboardContainer>
+                </div>
+            )
+        }
     }
 }
 
@@ -167,6 +175,7 @@ const mapStateToProps = state => {
     let billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0);
      
     return  {
+        loading: state.simplify.loading,
         categories: state.simplify.user.categories,
         remainingMoney: state.simplify.user.monthlySalary - categoryTotal - billTotal,
         billsTotal: billTotal,

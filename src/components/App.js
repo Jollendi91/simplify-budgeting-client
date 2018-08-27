@@ -14,10 +14,10 @@ import {refreshAuthToken} from '../actions/auth';
 import {injectGlobal} from 'styled-components';
 import {modernNormalize} from 'styled-modern-normalize';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBars, faTimes, faAngleRight, faAngleLeft, faCaretLeft} from '@fortawesome/free-solid-svg-icons';
+import {faBars, faTimes, faAngleRight, faAngleLeft, faCaretLeft, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
 
-library.add(faBars, faEdit, faTrashAlt, faSave, faTimes, faAngleRight, faAngleLeft, faCaretLeft);
+library.add(faBars, faEdit, faTrashAlt, faSave, faTimes, faAngleRight, faAngleLeft, faCaretLeft, faSpinner);
 
 injectGlobal`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Roboto+Condensed:700');

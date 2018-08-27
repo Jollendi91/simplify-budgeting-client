@@ -42,6 +42,7 @@ const FormModal = styled.article`
     article {
         background-color: white;
         z-index: 1;
+        margin: 0 10px;
     }
 `;
 
@@ -193,7 +194,7 @@ export class NavBar extends React.Component {
                     <Link to="/bills" onClick={() => this.setDisplayLinks()}>
                         <li>Bills</li>
                     </Link>
-                    <li className="logout-button" onClick={() => this.logOut()}>
+                    <li className="logout-button" onClick={() => {this.logOut(); this.setDisplayLinks();}}>
                         Log out
                     </li>
                 </NavLinks>

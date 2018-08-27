@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import MainLoadingSpinner from './MainLoadingSpinner';
 import BillRow from './BillRow';
 import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';
@@ -17,6 +17,12 @@ export class Bills extends React.Component {
     }
 
     render() {
+        if (this.props.notLoaded) {
+            return (
+                <MainLoadingSpinner />
+            );
+        }
+
         const bills = this.props.bills.map(bill => 
             <BillRow key={bill.id} {...bill} form={`bill-${bill.id}-update`}/>
         );

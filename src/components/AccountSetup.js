@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { updateStep, fetchProtectedUser} from '../actions/protected-data';
-
+import MainLoadingSpinner from './MainLoadingSpinner';
 import RequiresLogin from './requiresLogin';
 import MonthlyPaySetup from './MonthlyPaySetup';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
@@ -11,6 +11,7 @@ import CategorySetup from './CategorySetup';
 
 import styled from 'styled-components';
 import {FormContainer, Button} from './styled-components/Forms';
+
 
 // Styled Components
 const SetupStepContainer = styled.div`
@@ -57,7 +58,11 @@ export class AccountSetup extends React.Component {
    
     render() {
         
-        if (this.props.step === null) {
+        if (this.props.loading) {
+            return (
+                <MainLoadingSpinner />
+            );
+        } else if (this.props.step === null) {
 
             return <Redirect to="/dashboard"/>
     
@@ -68,7 +73,7 @@ export class AccountSetup extends React.Component {
                     <MonthlyPaySetup />
                     <p>Step {this.props.step} / 3</p>
                 </PayStep>
-            ) 
+            );
         } else if (this.props.step === 2) {
             return (
                 <SetupStep>
@@ -101,6 +106,7 @@ export class AccountSetup extends React.Component {
 };
 
 const MapStateToProps = state => ({
+    loading: state.simplify.loading,
     step: state.simplify.user.setupStep,
     notLoaded: state.simplify.user.id === null
 });

@@ -6,6 +6,7 @@ export const FormContainer = styled.article`
     width: 100%;
     max-width: 500px;
     margin: auto;
+    border-radius: 5px;
     position: relative;
 `;
 
@@ -48,6 +49,7 @@ export const CloseButton = styled(FontAwesomeIcon)`
     font-size: 1.5em;
     color: white;
     cursor: pointer;
+    z-index: 1;
 `;
 
 export const ButtonContainer = styled.div`

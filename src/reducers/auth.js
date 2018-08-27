@@ -6,6 +6,10 @@ import {
     AUTH_ERROR
 } from '../actions/auth';
 
+import {
+    REGISTER_REQUEST
+} from '../actions/users';
+
 const initialState = {
     authToken: null,
     currentUser: null,
@@ -22,6 +26,11 @@ export const authReducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             authToken: null,
             currentUser: null
+        });
+    } else if (action.type === REGISTER_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+            error: null
         });
     } else if (action.type === AUTH_REQUEST) {
         return Object.assign({}, state, {

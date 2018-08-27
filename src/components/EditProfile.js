@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import MainLoadingSpinner from './MainLoadingSpinner';
 import MonthlyPayEdit from './MonthlyPayEdit';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
@@ -9,6 +9,7 @@ import { fetchProtectedUser } from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {ComponentContainer, HeaderContainer} from './styled-components/Elements';
+
 
 // Styled Components
 const EditContainer = ComponentContainer.extend`
@@ -30,6 +31,11 @@ export class EditProfile extends React.Component {
     }
 
      render()  { 
+        if (this.props.notLoaded) {
+            return (
+                <MainLoadingSpinner />
+            )
+        }
         return (
             <EditContainer>
                 <HeaderContainer>

@@ -1,6 +1,11 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+export const FETCH_PROTECTED_USER_REQUEST = 'FETCH_PROTECTED_USER_REQUEST';
+export const fetchProtectedUserRequest = () => ({
+    type: FETCH_PROTECTED_USER_REQUEST
+});
+
 export const FETCH_PROTECTED_USER_SUCCESS = 'FETCH_PROTECTED_USER_SUCCESS';
 export const fetchProtectedUserSuccess = user => ({
     type: FETCH_PROTECTED_USER_SUCCESS,
@@ -14,6 +19,7 @@ export const fetchProtectedUserError = error => ({
 });
 
 export const fetchProtectedUser = () => (dispatch, getState) => {
+    dispatch(fetchProtectedUserRequest());
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/dashboard`, {
         method: 'GET',

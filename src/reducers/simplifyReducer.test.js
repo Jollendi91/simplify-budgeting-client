@@ -23,7 +23,8 @@ describe('simplifyReducer', () => {
             bills: [bill1, bill2],
             categories: [category1, category2]
         },
-        error: null
+        error: null,
+        loading: false
     };
 
 
@@ -38,7 +39,8 @@ describe('simplifyReducer', () => {
                 bills: [],
                 categories: []
             },
-            error: null
+            error: null,
+            loading: false
         });
     });
 
@@ -48,13 +50,33 @@ describe('simplifyReducer', () => {
         expect(state).toBe(currentState);
     });
 
+    describe('fetchProtectedUserRequest', () => {
+        it('Should set loading', () => {
+            let state;
+            state = simplifyReducer(state, actions.fetchProtectedUserRequest());
+            expect(state).toEqual({
+                user: {
+                    id: null,
+                    username: '',
+                    setupStep: 1,
+                    monthlySalary: '0',
+                    bills: [],
+                    categories: []
+                },
+                error: null,
+                loading: true
+            });
+        });
+    });
+
     describe('fetchProtectedUserSuccess', () => {
         it('Should set the user', () => {
             let state;
             state = simplifyReducer(state, actions.fetchProtectedUserSuccess(user));
             expect(state).toEqual({
                 user: user,
-                error: null
+                error: null,
+                loading: false
             });
         });
     });
@@ -73,7 +95,8 @@ describe('simplifyReducer', () => {
                     bills: [],
                     categories: []
                 },
-                error: error
+                error: error,
+                loading: false
             });
         });
     });
@@ -92,6 +115,7 @@ describe('simplifyReducer', () => {
                     bills: [],
                     categories: []
                 },
+                loading: false,
                 error: null
             });
         });
@@ -113,6 +137,7 @@ describe('simplifyReducer', () => {
                     bills: [bill1],
                     categories: []
                 },
+                loading: false,
                 error: null
             })
         });
@@ -176,6 +201,7 @@ describe('simplifyReducer', () => {
                     bills: [],
                     categories: [category1, category2]
                 },
+                loading: false,
                 error: null
             });
         });

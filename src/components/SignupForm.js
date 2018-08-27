@@ -1,12 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
 
-import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 import {StyledInput, FormContainer, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
-import {HeaderContainer} from './styled-components/Elements';
+import {HeaderContainer, LoadingSpinner} from './styled-components/Elements';
 
 
 const passwordLength = length({min: 10, max: 72});
@@ -44,7 +44,7 @@ export class SignupForm extends React.Component {
 
         return (
             <FormContainer>
-                <CloseButton icon={faTimesCircle} onClick={() => this.props.hideForm()}/>
+                <CloseButton icon="times" onClick={() => this.props.hideForm()}/>
                 <form 
                     className="signup-form"
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
@@ -95,7 +95,7 @@ export class SignupForm extends React.Component {
                             type="submit"
                             signup
                             disabled={this.props.pristine || this.props.submitting}>
-                            Sign up
+                            {this.props.loading ? <LoadingSpinner icon="spinner"/> : 'Sign up'}
                         </Button>
                     </ButtonContainer>
                 </form>
@@ -104,8 +104,12 @@ export class SignupForm extends React.Component {
     }
 }
 
-export default reduxForm({
+const mapStateToProps = state => ({
+    loading: state.auth.loading
+});
+
+export default connect(mapStateToProps)(reduxForm({
     form: 'signup',
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('signup', Object.keys(errors)[0]))
-})(SignupForm);
+})(SignupForm));
