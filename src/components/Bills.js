@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import NavBar from './NavBar';
 import BillRow from './BillRow';
 import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';

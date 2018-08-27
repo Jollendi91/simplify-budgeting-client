@@ -3,11 +3,11 @@ import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
-import Input from './input';
 
-import styled from 'styled-components';
 import {faTimesCircle} from '@fortawesome/free-regular-svg-icons';
-import {StyledInput, FormContainer, CloseButton, Button} from './styled-components/Forms';
+import {StyledInput, FormContainer, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
+import {HeaderContainer} from './styled-components/Elements';
+
 
 const passwordLength = length({min: 10, max: 72});
 const usernameLength = length({min: 8, max: 30});
@@ -49,40 +49,55 @@ export class SignupForm extends React.Component {
                     className="signup-form"
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
                 )}>
-                    <h2>Ready to get started?</h2>
+                    <HeaderContainer>
+                        <h2>Ready to get started?</h2>
+                    </HeaderContainer>
                     {successMessage}
                     {errorMessage}
-                    <Field 
-                        name="username"
-                        type="text"
-                        component={StyledInput}
-                        signup
-                        label="Username"
-                        validate={[required, notEmpty, isTrimmed, usernameLength]}
-                    />
-                    <Field
-                        name="password"
-                        type="password"
-                        component={StyledInput}
-                        signup
-                        label="Password"
-                        validate={[required, notEmpty, isTrimmed, passwordLength]}
-                    />
-                    <Field 
-                        name="verifyPassword"
-                        type="password"
-                        component={StyledInput}
-                        signup
-                        label="Verify Password"
-                        validate={[required, notEmpty, matchesPassword]}
-                    />
-                
-                    <Button
-                        type="submit"
-                        signup
-                        disabled={this.props.pristine || this.props.submitting}>
-                        Sign up
-                    </Button>
+                    <HorizontalInputs>
+                        <div className="form-input-container">
+                            <StyledLabel htmlFor="username">Username</StyledLabel>
+                            <Field 
+                                name="username"
+                                type="text"
+                                component={StyledInput}
+                                signup
+                                id="username"
+                                validate={[required, notEmpty, isTrimmed, usernameLength]}
+                            />
+                        </div>
+                        <div className="form-input-container">
+                            <StyledLabel htmlFor="password">Password</StyledLabel>
+                            <Field
+                                name="password"
+                                type="password"
+                                component={StyledInput}
+                                signup
+                                id="password"
+                                validate={[required, notEmpty, isTrimmed, passwordLength]}
+                            />
+                        </div>
+                        <div className="form-input-container">
+                            <StyledLabel htmlFor="verify-password">Verify Password</StyledLabel>
+                            <Field 
+                                name="verifyPassword"
+                                type="password"
+                                component={StyledInput}
+                                signup
+                                id="verify-password"
+                                validate={[required, notEmpty, matchesPassword]}
+                            />
+                        </div>
+                    </HorizontalInputs>
+                    <ButtonContainer>
+                        <Button
+                            color="#276A73"
+                            type="submit"
+                            signup
+                            disabled={this.props.pristine || this.props.submitting}>
+                            Sign up
+                        </Button>
+                    </ButtonContainer>
                 </form>
             </FormContainer>
         );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {PieChart, Legend} from 'react-easy-chart';
+import {Legend} from 'react-easy-chart';
 import {ResponsivePieChart} from './ResponsivePieChart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';
@@ -10,7 +10,6 @@ import {fetchProtectedUser} from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {FormContainer} from './styled-components/Forms';
-import './Dashboard.css';
 
 // Styled Components
 

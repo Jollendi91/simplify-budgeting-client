@@ -5,7 +5,6 @@ import Input from '../input';
 export const FormContainer = styled.article`
     width: 100%;
     max-width: 500px;
-    padding: 20px 10px;
     margin: auto;
     position: relative;
 `;
@@ -13,6 +12,10 @@ export const FormContainer = styled.article`
 export const StyledLabel = styled.label`
     font-size: 1.3em;
     padding: 10px;
+`;
+
+export const HorizontalInputs = styled.div`
+    padding: 20px 10px;
 `;
 
 export const StyledInput = styled(Input)`
@@ -40,12 +43,18 @@ export const StyledInput = styled(Input)`
 
 export const CloseButton = styled(FontAwesomeIcon)`
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     font-size: 1.5em;
+    color: white;
     cursor: pointer;
 `;
 
+export const ButtonContainer = styled.div`
+    padding-bottom: 20px;
+`;
+
+// Implement Disabled Button Style
 const complexBackground = css`
     ${props => props.primary && props.color ? props.color : 'white'}
 `;
