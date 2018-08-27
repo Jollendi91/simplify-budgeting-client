@@ -42,6 +42,7 @@ const FormModal = styled.article`
     article {
         background-color: white;
         z-index: 1;
+        margin: 0 10px;
     }
 `;
 

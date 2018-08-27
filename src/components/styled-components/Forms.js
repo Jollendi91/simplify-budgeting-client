@@ -5,7 +5,7 @@ import Input from '../input';
 export const FormContainer = styled.article`
     width: 100%;
     max-width: 500px;
-    margin: 0 10px;
+    margin: auto;
     border-radius: 5px;
     position: relative;
 `;
