@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import MainLoadingSpinner from './MainLoadingSpinner';
 import NavBar from './NavBar';
 import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
@@ -90,7 +91,7 @@ export class Category extends React.Component {
     render() {
         // If user data is not loaded return nothing
         if (this.props.notLoaded) {
-            return (null);
+            return (<MainLoadingSpinner />);
         }
 
         // Set date to filter transacitions from the store

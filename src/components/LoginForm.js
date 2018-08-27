@@ -1,11 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
 import {login} from '../actions/auth';
 import {required, notEmpty} from '../validators';
 
 import {FormContainer, StyledInput, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
-import {HeaderContainer} from './styled-components/Elements';
+import {HeaderContainer, LoadingSpinner} from './styled-components/Elements';
 
 export class LoginForm extends React.Component {
   onSubmit(values) {
@@ -57,7 +57,7 @@ export class LoginForm extends React.Component {
           </HorizontalInputs>
           <ButtonContainer>
             <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>
-              Log in
+              {this.props.loading ? <LoadingSpinner icon="spinner"/> : 'Log in'}
             </Button>
           </ButtonContainer>
         </form>
@@ -66,7 +66,11 @@ export class LoginForm extends React.Component {
   }
 }
 
-export default reduxForm({
+const mapStateToProps = state => ({
+  loading: state.auth.loading
+});
+
+export default connect(mapStateToProps)(reduxForm({
   form: 'login',
   onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
-})(LoginForm);
+})(LoginForm));

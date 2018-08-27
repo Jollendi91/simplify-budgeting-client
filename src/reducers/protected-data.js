@@ -9,21 +9,29 @@ const initialState = {
         bills: [],
         categories: []
     },
+    loading: false,
     error: null
 };
 
 export const simplifyReducer = (state = initialState, action) => {
-    if (action.type === actions.FETCH_PROTECTED_USER_SUCCESS) {
+    if (action.type === actions.FETCH_PROTECTED_USER_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+            error: null
+        });
+    } else if (action.type === actions.FETCH_PROTECTED_USER_SUCCESS) {
 
         return Object.assign({}, state, {
             user: action.user,
-            error: null
+            error: null,
+            loading: false
         });
 
     } else if (action.type === actions.FETCH_PROTECTED_USER_ERROR) {
 
         return Object.assign({}, state, {
-            error: action.error
+            error: action.error,
+            loading: false
         });
 
     } else if (action.type === actions.UPDATE_SALARY_SUCCESS) {
