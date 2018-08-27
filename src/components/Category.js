@@ -44,6 +44,11 @@ const IconButton = styled(Link)`
     left: 15px;
 `;
 
+const NoTransactionRow = styled.td`
+    padding: 30px 0;
+    text-align: center;
+`;
+
 // Progress Bar
 const RemainingBar = ProgressBar.Line;
 
@@ -161,7 +166,7 @@ export class Category extends React.Component {
                                         </tr>
                                     </thead>
                                     <StyledTBody>
-                                    {transactions}
+                                    {transactions.length > 0 ? transactions : <tr> <NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
                                     </StyledTBody>
                                 </StyledTable>
                             </div>
