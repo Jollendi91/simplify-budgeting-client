@@ -67,6 +67,11 @@ const LinksContainer = styled.div`
 const NavLinks = styled.ul`
     margin: 0;
     padding: 0;
+
+    &:last-child {
+        border-bottom: 2px solid #aaa;
+    }
+
     li, a {
         height: 100%;
     }
@@ -94,6 +99,10 @@ const NavLinks = styled.ul`
         display: flex;
         align-items: center;
         align-self: stretch;
+
+        &:last-child {
+            border-bottom: 0;
+        }
 
         li {
             border-top: 0;

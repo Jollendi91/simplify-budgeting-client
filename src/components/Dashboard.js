@@ -5,7 +5,6 @@ import {ResponsivePieChart} from './ResponsivePieChart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';
 
-import ToolTip from './ToolTip';
 import CategoryModule from './CategoryModule';
 import {fetchProtectedUser} from '../actions/protected-data';
 
@@ -28,6 +27,10 @@ const PortfolioData = styled.section`
 
 const StyledPieChart = styled(ResponsivePieChart)`
     padding-right: 18px;
+`;
+
+const GraphText = styled.p`
+    padding: 10px;
 `;
 
 const DashboardCard = styled.section`
@@ -57,7 +60,8 @@ export class Dashboard extends React.Component {
             top: '',
             left: '',
             value: '',
-            key: ''
+            key: '',
+            dataDisplay: ''
         }
     }
 
@@ -66,40 +70,6 @@ export class Dashboard extends React.Component {
             this.props.dispatch(fetchProtectedUser());
         }
     }
-
-    mouseOverHandler(d, e) {
-        this.setState({
-          showToolTip: true,
-          top: e.y,
-          left: e.x,
-          value: d.value,
-          key: d.data.key
-        });
-      }
-    
-      mouseMoveHandler( d, e) {
-        if (this.state.showToolTip) {
-          this.setState({top: e.y, left: e.x});
-        }
-      }
-    
-      mouseOutHandler() {
-        this.setState({showToolTip: false});
-      }
-    
-      createTooltip() {
-        if (this.state.showToolTip) {
-          return (
-            <ToolTip
-              top={this.state.top}
-              left={this.state.left}
-            >
-              {this.state.key} budget: ${this.state.value.toFixed(2)}/month
-            </ToolTip>
-          );
-        }
-        return false;
-      }
 
     render() {
 
@@ -170,13 +140,18 @@ export class Dashboard extends React.Component {
                         <PortfolioData>
                             <StyledPieChart
                                 data={data} 
-                                mouseOverHandler={this.mouseOverHandler.bind(this)}
-                                mouseOutHandler={this.mouseOutHandler.bind(this)}
-                                mouseMoveHandler={this.mouseMoveHandler.bind(this)}
+                                clickHandler={
+                                    (d) => this.setState({
+                                      dataDisplay:
+                                      `${d.data.key} Budget: $${d.value.toFixed(2)}/Month`
+                                    })
+                                  }
                             />
                             <Legend horizontal data={data} dataId={'key'} config={config} styles={customStyle}/>
-                            {this.createTooltip()}
                         </PortfolioData>
+                        <GraphText>
+                        {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
+                        </GraphText>
                     </DashboardCard>
                     <DashboardCard>
                         <Header>Budgets</Header>
