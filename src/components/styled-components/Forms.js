@@ -48,6 +48,7 @@ export const CloseButton = styled(FontAwesomeIcon)`
     font-size: 1.5em;
     color: white;
     cursor: pointer;
+    z-index: 1;
 `;
 
 export const ButtonContainer = styled.div`

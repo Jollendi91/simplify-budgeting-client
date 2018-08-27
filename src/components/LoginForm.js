@@ -4,7 +4,6 @@ import Input from './input';
 import {login} from '../actions/auth';
 import {required, notEmpty} from '../validators';
 
-import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import {FormContainer, StyledInput, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
 import {HeaderContainer} from './styled-components/Elements';
 
@@ -25,7 +24,7 @@ export class LoginForm extends React.Component {
 
     return (
       <FormContainer>
-        <CloseButton icon={faTimesCircle} onClick={() => this.props.hideForm()}/>
+        <CloseButton icon="times" onClick={() => this.props.hideForm()}/>
         <form 
           className="login-form" 
           onSubmit={this.props.handleSubmit(values => this.onSubmit(values)
