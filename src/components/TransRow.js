@@ -27,6 +27,10 @@ const UpdateTransactionForm = styled.form`
     #date {
         font-size: .8em;
     }
+
+    .transaction-amount-input {
+        display: flex;
+    }
 `;
 UpdateTransactionForm.displayName='UpdateTransactionForm';
 
