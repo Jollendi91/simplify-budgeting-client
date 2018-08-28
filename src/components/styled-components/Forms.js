@@ -17,6 +17,10 @@ export const StyledLabel = styled.label`
 
 export const HorizontalInputs = styled.div`
     padding: 20px 10px;
+
+    .form-input-container {
+        margin: 10px 0;
+    }
 `;
 
 export const StyledInput = styled(Input)`
@@ -127,7 +131,8 @@ export const Inputs = styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
-    margin: 15px 0;
+    max-width: 400px;
+    margin: 15px auto;
     padding-bottom: 10px;
 
     label {

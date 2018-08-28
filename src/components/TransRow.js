@@ -46,6 +46,10 @@ const StyledIcon = styled(FontAwesomeIcon)`
 const EditButtons = styled.td`
     width: 10%;
     padding: 5px 0;
+
+    @media screen and (min-width: 800px) {
+        display: flex;
+    }
 `;
 
 const IconButton = styled.button`

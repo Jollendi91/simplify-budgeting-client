@@ -6,8 +6,16 @@ import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';
 import {fetchProtectedUser} from '../actions/protected-data';
 
+import styled from 'styled-components';
 import {StyledTable, StyledTBody, StyledTH, StyledTD} from './styled-components/Tables';
 import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
+
+// Styled Component
+
+const BillsTotal = styled.div`
+    padding: 15px;
+    font-size: 2em;
+`;
 
 export class Bills extends React.Component {
     componentDidMount() {
@@ -32,6 +40,9 @@ export class Bills extends React.Component {
                 <HeaderContainer>
                     <h2>Monthly Bills</h2>
                 </HeaderContainer>
+                <BillsTotal>
+                    <h3>Total Bills: ${this.props.billsTotal.toFixed(2)}</h3>
+                </BillsTotal>
                 <section class="monthly-bills-form-container">
                     <MonthlyBillForm />
                     <StyledTable>
@@ -44,12 +55,6 @@ export class Bills extends React.Component {
                         <StyledTBody>
                             {bills}
                         </StyledTBody>
-                        <tfoot>
-                            <tr>
-                                <StyledTH>Total</StyledTH>
-                                <StyledTH colSpan="2">${this.props.billsTotal.toFixed(2)}</StyledTH>
-                            </tr>
-                        </tfoot>
                     </StyledTable>
                 </section>
             </ComponentContainer>

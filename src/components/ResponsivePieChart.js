@@ -25,8 +25,8 @@ export class ResponsivePieChart extends React.Component {
     render() {
 
         let chartSize;
-        if (this.state.windowWidth > 685) {
-            chartSize = 400;
+        if (this.state.windowWidth > 700) {
+            chartSize = 350;
         } else if (this.state.windowWidth > 200) {
             chartSize =  this.state.windowWidth / 2;
         } else {

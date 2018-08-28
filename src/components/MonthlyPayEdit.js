@@ -5,6 +5,15 @@ import {required, notEmpty} from '../validators';
 import { updateSalary } from '../actions/protected-data';
 import {SetupInput, Button} from './styled-components/Forms';
 
+import styled from 'styled-components';
+
+const InputLabelTop = SetupInput.extend`
+    label {
+        bottom: initial;
+        top: -15px;
+    }
+`;
+
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
         super(props);
@@ -36,7 +45,7 @@ export class MonthlyPayEdit extends React.Component {
             salaryForm = 
             <form className="update-salary-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <Field
-                    component={SetupInput}
+                    component={InputLabelTop}
                     type="number"
                     name="monthlySalary"
                     id="monthly-salary"

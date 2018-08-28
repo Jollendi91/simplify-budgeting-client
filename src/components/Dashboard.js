@@ -16,6 +16,13 @@ import { MainLoadingSpinner } from './MainLoadingSpinner';
 
 const DashboardContainer = FormContainer.extend`
     top: 66px;
+
+    @media screen and (min-width: 800px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 1000px;
+        padding: 0 10px;
+    }
 `;
 
 const PortfolioData = styled.section`

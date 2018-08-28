@@ -51,6 +51,7 @@ const options = {
 	},
 	text: {
 		style: {
+			width: '100%',
 			color: '#000',
 			fontWeight: 'bold',
 			position: 'absolute',

@@ -25,6 +25,11 @@ const ProgressContainer = styled.section`
     p {
         padding: 0 15px;
     }
+
+    @media screen and (min-width: 800px) {
+        max-width: 500px;
+        margin: auto;
+    }
 `;
 
 const AddFormContainer = styled.section`
@@ -32,6 +37,11 @@ const AddFormContainer = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
+    top: 0;
+
+    @media screen and (min-width: 800px) {
+        position: initial;
+    }
 `;
 
 const IconButton = styled(Link)`
@@ -140,38 +150,32 @@ export class Category extends React.Component {
                             updateFilters={this.setFilters.bind(this)}
                             categoryId={this.props.category.id}
                         />
+                        <ProgressContainer>
+                            <p>${parseFloat(transactionsTotal).toFixed(2)}</p>
+                            <RemainingBar 
+                                progress={parseFloat(transactionsTotal)/ this.props.category.amount }
+                                options={options}
+                                containerStyle={containerStyle}
+                                intialAnimate={true}
+                            />
+                            <p>${parseFloat(this.props.category.amount).toFixed(2)}</p>
+                        </ProgressContainer>
                     </section>
-                    <ProgressContainer>
-                        <p>${parseFloat(transactionsTotal).toFixed(2)}</p>
-                        <RemainingBar 
-                            progress={parseFloat(transactionsTotal)/ this.props.category.amount }
-                            options={options}
-                            containerStyle={containerStyle}
-                            intialAnimate={true}
-                        />
-                        <p>${parseFloat(this.props.category.amount).toFixed(2)}</p>
-                    </ProgressContainer>
-                    <main>
-                        <AddFormContainer>
-                            <TransactionForm categoryId={this.props.category.id}/>
-                        </AddFormContainer>
-                        <section>
-                            <div>
-                                <StyledTable>
-                                    <thead>
-                                        <tr>
-                                            <StyledTH colSpan="1">Description</StyledTH>
-                                            <StyledTH colSpan="1">Date</StyledTH>
-                                            <StyledTH colSpan="2">Amount</StyledTH>
-                                        </tr>
-                                    </thead>
-                                    <StyledTBody>
-                                    {transactions.length > 0 ? transactions : <tr> <NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
-                                    </StyledTBody>
-                                </StyledTable>
-                            </div>
-                        </section>
-                    </main>
+                    <AddFormContainer>
+                        <TransactionForm categoryId={this.props.category.id}/>
+                    </AddFormContainer>
+                    <StyledTable>
+                        <thead>
+                            <tr>
+                                <StyledTH colSpan="1">Description</StyledTH>
+                                <StyledTH colSpan="1">Date</StyledTH>
+                                <StyledTH colSpan="2">Amount</StyledTH>
+                            </tr>
+                        </thead>
+                        <StyledTBody>
+                        {transactions.length > 0 ? transactions : <tr> <NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
+                        </StyledTBody>
+                    </StyledTable>
                 </ComponentContainer>
             </div>
         );
