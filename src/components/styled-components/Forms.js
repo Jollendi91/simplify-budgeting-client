@@ -17,6 +17,10 @@ export const StyledLabel = styled.label`
 
 export const HorizontalInputs = styled.div`
     padding: 20px 10px;
+
+    .form-input-container {
+        margin: 10px 0;
+    }
 `;
 
 export const StyledInput = styled(Input)`
