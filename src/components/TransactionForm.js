@@ -15,11 +15,36 @@ const HeaderContainer = styled.header`
     align-items: center;
     background-color: #276A73;
     color: white;
+
+    @media screen and (min-width: 800px) {
+        display: none;
+    }
 `;
 
 const AddTransactionForm = styled.form`
     height: calc(100vh - 66px);
     background-color: white;
+
+    @media screen and (min-width: 800px) {
+        height: auto;
+        width: 90%;
+        margin: auto;
+        display: flex;
+
+        .inputs {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            input {
+                padding: 4px;
+            }
+
+            #date {
+                padding: 0;
+            }
+        }
+    }
 `;
 
 const StyledLabel = styled.label`
@@ -32,6 +57,15 @@ const ButtonContainer = styled.div`
     right: 0;
     bottom: 0;
     padding-bottom: 44px;
+
+    @media screen and (min-width: 800px) {
+        position: initial;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 0;
+        margin-top: 15px;
+    }
 `;
 
 export class TransactionForm extends React.Component {
@@ -61,7 +95,7 @@ export class TransactionForm extends React.Component {
                     <HeaderContainer>
                         <h2>Add a Transaction</h2>
                     </HeaderContainer>
-                    <HorizontalInputs>
+                    <HorizontalInputs className="inputs">
                         <div className="form-input-container">
                             <StyledLabel htmlFor="transaction-name">Description</StyledLabel>
                             <Field
