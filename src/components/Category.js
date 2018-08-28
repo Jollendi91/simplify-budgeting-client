@@ -25,6 +25,11 @@ const ProgressContainer = styled.section`
     p {
         padding: 0 15px;
     }
+
+     @media screen and (min-width: 800px) {
+        max-width: 500px;
+        margin: auto;
+    }
 `;
 
 const AddFormContainer = styled.section`

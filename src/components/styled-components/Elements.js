@@ -6,6 +6,13 @@ export const ComponentContainer = styled.section`
     top: 66px;
     min-height: calc(100vh - 66px);
     background-color: white;
+
+    @media screen and (min-width: 800px) {
+      max-width: 800px;
+      margin: 15px auto;  
+      min-height: auto;
+      padding-bottom: 15px;
+    }
 `;
 
 

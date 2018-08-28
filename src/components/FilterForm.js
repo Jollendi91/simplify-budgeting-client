@@ -9,6 +9,11 @@ const FilterContainer = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    @media screen and (min-width: 800px) {
+        max-width: 500px;
+        margin: auto;
+    }
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
