@@ -71,6 +71,58 @@ const LandingSection = styled.section`
     margin: 0 15px;
 `;
 
+const StepsContainer = styled.section`
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 1200px;
+    margin: auto;
+
+    @media screen and (min-width: 800px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+`;
+
+const StepsList = styled.ol`
+    counter-reset: counter;
+    list-style: none;
+    padding: 0;
+
+    li {
+        counter-increment: counter;
+        position: relative;
+    }
+
+    section:nth-child(1) {
+        color: rgba(39,106,115,0.3);
+    }
+
+    section:nth-child(2) {
+        color: rgba(252, 74, 26, 0.3);
+    }
+
+    section:nth-child(3) {
+        
+        color: rgba(247, 183, 51, 0.3);
+    }
+
+    li::before {
+        content: counter(counter);
+        font-size: 12em;
+        font-weight: bold;
+        position: absolute;
+        left: 13%;
+        top: -93px;
+        text-align: center;
+        z-index: 0;
+    }
+
+    h3, p {
+        position: relative;
+        color: black;
+    }
+`;
+
 const StyledIcon = styled(FontAwesomeIcon)`
     font-size: ${props => props.fontSize ? props.fontSize : '2.25em'};
     color: ${props => props.color ? props.color : 'black'};
@@ -108,7 +160,7 @@ export function LandingPage(props) {
                         <StyledIcon color="#F7B733" icon="chart-line" />
                         <h2>Track your Progress</h2>
                     </header>
-                    <p>Spent too much on groceries? Like to cut back on eating out? Simplify can help. Setup flexbile budgets so you know exactly how much you are spending in each category</p>
+                    <p>Spent too much on groceries? Like to cut back on eating out? Simplify can help. Setup flexible budgets so you know exactly how much you are spending in each category each month</p>
                 </LandingSection>
                 <LandingSection>
                     <header>
@@ -118,6 +170,29 @@ export function LandingPage(props) {
                     <p>Simplify was inspired by a Zero-Based Budgeting system. While this form of budgeting is extremely helpful, it may not be for everyone. Simplify is flexible enough to be used how you see fit</p>
                 </LandingSection>
             </MainSection>
+            <section>
+                <h2>As Simple as <span>1</span><span>2</span><span>3</span>...</h2>
+                <StepsList>
+                    <LandingSection>
+                        <li>
+                            <h3>Take Home Pay</h3>
+                            <p>Enter the amount of money you take home after taxes each month. This gives us our starting point</p>
+                        </li>
+                    </LandingSection>
+                    <LandingSection>
+                        <li>
+                            <h3>Monthly Bills</h3>
+                            <p>Add all your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with</p>
+                        </li>
+                    </LandingSection>
+                    <LandingSection>
+                        <li>
+                            <h3>Create Budgets</h3>
+                            <p>Creat budgets to track your money in areas of your choosing. This can be as vague or as specific as you like. When a money is transfered or a purchase is made, enter the transaction into your budget</p>
+                        </li>
+                    </LandingSection>
+                </StepsList>
+            </section>
             <footer>
                 Created by Josh
             </footer>
