@@ -67,26 +67,29 @@ const MainSection = styled.section`
 
 const LandingSection = styled.section`
     min-height: 200px;
+    max-width: 400px;
     padding: 40px 20px;  
-    margin: 0 15px;
+    margin: auto;
+
+    @media screen and (min-width: 800px) {
+        margin: 0 15px;
+    }
 `;
 
 const StepsContainer = styled.section`
+    background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to top, rgba(0,0,0,0.85) 0%,rgba(0,0,0,.25) 100%), url(https://source.unsplash.com/yw7mV9JeND4);
+    background-size: cover;
+    background-position: center center;
+`;
+
+const StepsList = styled.ol`
     display: grid;
     grid-template-columns: 1fr;
     max-width: 1200px;
     margin: auto;
-
-    @media screen and (min-width: 800px) {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-    }
-`;
-
-const StepsList = styled.ol`
+    padding: 0;
     counter-reset: counter;
     list-style: none;
-    padding: 0;
 
     li {
         counter-increment: counter;
@@ -94,16 +97,16 @@ const StepsList = styled.ol`
     }
 
     section:nth-child(1) {
-        color: rgba(39,106,115,0.3);
+        color: rgba(39,106,115,0.5);
     }
 
     section:nth-child(2) {
-        color: rgba(252, 74, 26, 0.3);
+        color: rgba(252, 74, 26, 0.5);
     }
 
     section:nth-child(3) {
         
-        color: rgba(247, 183, 51, 0.3);
+        color: rgba(247, 183, 51, 0.5);
     }
 
     li::before {
@@ -117,9 +120,33 @@ const StepsList = styled.ol`
         z-index: 0;
     }
 
-    h3, p {
+    h2, p {
         position: relative;
-        color: black;
+        color: #DEDCE3;
+    }
+
+    @media screen and (min-width: 800px) {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: repeat(7, 75px);
+
+        h1 {
+            grid-column: 1 / 4;
+        }
+        .step-1 {
+            grid-column: 1;
+            grid-row: 2 / 5;
+        }
+
+        .step-2 {
+            grid-column: 2;
+            grid-row: 3 / 6;
+        }
+
+        .step-3 {
+            grid-column: 3;
+            grid-row: 4 / 7
+        }
+
     }
 `;
 
@@ -170,29 +197,29 @@ export function LandingPage(props) {
                     <p>Simplify was inspired by a Zero-Based Budgeting system. While this form of budgeting is extremely helpful, it may not be for everyone. Simplify is flexible enough to be used how you see fit</p>
                 </LandingSection>
             </MainSection>
-            <section>
-                <h2>As Simple as <span>1</span><span>2</span><span>3</span>...</h2>
+            <StepsContainer>
+                <h1>As Simple as 123...</h1>
                 <StepsList>
-                    <LandingSection>
+                    <LandingSection className="step-1">
                         <li>
-                            <h3>Take Home Pay</h3>
+                            <h2>Take Home Pay</h2>
                             <p>Enter the amount of money you take home after taxes each month. This gives us our starting point</p>
                         </li>
                     </LandingSection>
-                    <LandingSection>
+                    <LandingSection className="step-2">
                         <li>
-                            <h3>Monthly Bills</h3>
+                            <h2>Monthly Bills</h2>
                             <p>Add all your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with</p>
                         </li>
                     </LandingSection>
-                    <LandingSection>
+                    <LandingSection className="step-3">
                         <li>
-                            <h3>Create Budgets</h3>
+                            <h2>Create Budgets</h2>
                             <p>Creat budgets to track your money in areas of your choosing. This can be as vague or as specific as you like. When a money is transfered or a purchase is made, enter the transaction into your budget</p>
                         </li>
                     </LandingSection>
                 </StepsList>
-            </section>
+            </StepsContainer>
             <footer>
                 Created by Josh
             </footer>
