@@ -7,7 +7,7 @@ import MonthlyBillForm from './MonthlyBillsForm';
 import {fetchProtectedUser} from '../actions/protected-data';
 
 import styled from 'styled-components';
-import {StyledTable, StyledTBody, StyledTH, StyledTD} from './styled-components/Tables';
+import {StyledTable, StyledTBody, StyledTH} from './styled-components/Tables';
 import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
 
 // Styled Component
