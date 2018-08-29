@@ -19,9 +19,22 @@ const NavContainer = styled.nav`
     background-color: #fff;
 `;
 
-const Logo = styled.h1`
+const LogoContainer = styled.div`
     font-size: 30px;
-    margin: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    #logo {
+        width: 40px;
+        margin-right: 3px;
+    }
+`;
+
+const Logo = styled(FontAwesomeIcon)`
+    height: 40px;
+    border: 2px solid;
+    color: #4ABDAC;
+    background-color: #276A73;
 `;
 
 const FormModal = styled.article`
@@ -48,6 +61,8 @@ const FormModal = styled.article`
 
 const Nav = styled.div`
     width: 100%;
+    padding: 0 15px;
+    border-bottom: 1px solid #DDD;
     justify-content: space-between;
     align-items: center;
     display:${props => props.narrow ? 'flex' : 'none'};
@@ -205,13 +220,13 @@ export class NavBar extends React.Component {
             <NavContainer>
                 {activeForm}
                 <Nav>
-                    <Logo>Simplify</Logo>
+                    <LogoContainer><span><Logo id="logo" color="#F7B733" icon="dollar-sign"/></span>implify</LogoContainer>
                     <LinksContainer displayLinks={this.state.displayLinks}>
                         {navButtons}
                     </LinksContainer>
                 </Nav>
                 <Nav narrow>
-                    <Logo>Simplify</Logo>
+                    <LogoContainer><Logo id="logo" color="#F7B733" icon="dollar-sign"/></LogoContainer>
                     <HamburgerNav onClick={() => this.setDisplayLinks()} >
                         <FontAwesomeIcon icon="bars" />
                     </HamburgerNav>

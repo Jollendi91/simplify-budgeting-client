@@ -36,6 +36,7 @@ UpdateCategoryForm.displayName='UpdateCategoryForm';
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
    color: ${props => props.color ? props.color : 'black'};
+   cursor: pointer;
 `;
 
 const SubmitButton = styled.button`

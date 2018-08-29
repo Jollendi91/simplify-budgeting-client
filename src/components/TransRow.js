@@ -55,6 +55,7 @@ const EditButtons = styled.td`
 const IconButton = styled.button`
    border: none;
    background-color: transparent;
+   cursor: pointer;
 `;
 
 

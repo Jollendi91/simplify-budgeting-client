@@ -35,6 +35,8 @@ UpdateBillForm.displayName='UpdateBillForm';
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
    color: ${props => props.color ? props.color : 'black'};
+   cursor: pointer;
+   font-size: 1.1em;
 `;
 
 const SubmitButton = styled.button`
