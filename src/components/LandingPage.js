@@ -20,12 +20,12 @@ const HeroContainer = styled.header`
     background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%),  url(https://source.unsplash.com/pElSkGRA2NU);
     background-size: cover;
     height: calc(100vh - 66px);
-    background-position: center center;
+    background-position: center 75%;
     background-repeat: no-repeat;
     position: relative;
 
     @media screen and (min-width: 545px) {
-        background: url(https://source.unsplash.com/yw7mV9JeND4);
+        padding: 15px;
     }
 `;
 
@@ -36,6 +36,10 @@ const Header = styled.h2`
     text-transform: uppercase;
     display: flex;
     align-items: flex-end;
+    @media screen and (min-width: 545px) {
+        font-size: 5.5em;
+        margin-left: 14%;
+    }
 `;
 
 const LearnMore = styled.div`
@@ -50,9 +54,21 @@ const LearnMore = styled.div`
     }
 `;
 
+const MainSection = styled.section`
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 1200px;
+    margin: auto;
+
+    @media screen and (min-width: 800px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+`;
+
 const LandingSection = styled.section`
     min-height: 200px;
-    padding: 30px 15px;  
+    padding: 40px 20px;  
+    margin: 0 15px;
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -79,7 +95,7 @@ export function LandingPage(props) {
                     <FontAwesomeIcon icon="chevron-down"/>
                 </LearnMore>
             </HeroContainer>
-             <main>
+             <MainSection>
                 <LandingSection>
                     <header>
                         <StyledIcon color="#276A73" icon="money-bill-wave" />
@@ -101,7 +117,7 @@ export function LandingPage(props) {
                     </header>
                     <p>Simplify was inspired by a Zero-Based Budgeting system. While this form of budgeting is extremely helpful, it may not be for everyone. Simplify is flexible enough to be used how you see fit</p>
                 </LandingSection>
-            </main>
+            </MainSection>
             <footer>
                 Created by Josh
             </footer>

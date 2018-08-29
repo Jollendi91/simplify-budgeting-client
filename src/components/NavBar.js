@@ -26,6 +26,7 @@ const LogoContainer = styled.div`
     margin-left: 15px;
     #logo {
         width: 40px;
+        margin-right: 3px;
     }
 `;
 
@@ -60,6 +61,8 @@ const FormModal = styled.article`
 
 const Nav = styled.div`
     width: 100%;
+    padding: 0 15px;
+    border-bottom: 1px solid #DDD;
     justify-content: space-between;
     align-items: center;
     display:${props => props.narrow ? 'flex' : 'none'};
@@ -217,7 +220,7 @@ export class NavBar extends React.Component {
             <NavContainer>
                 {activeForm}
                 <Nav>
-                    <LogoContainer>Simplify</LogoContainer>
+                    <LogoContainer><span><Logo id="logo" color="#F7B733" icon="dollar-sign"/></span>implify</LogoContainer>
                     <LinksContainer displayLinks={this.state.displayLinks}>
                         {navButtons}
                     </LinksContainer>
