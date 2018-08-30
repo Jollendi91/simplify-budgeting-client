@@ -36,11 +36,14 @@ injectGlobal`
 
     body {
         min-height: 100vh;
+        height: 100%;
         font-family: sans-serif;
         font-size: 1em;
         text-align: center;
         line-height: 1.5;
-        background-color: #DEDCE3;
+        background: linear-gradient(to bottom, rgba(242,242,242,1) 0%, rgba(184,184,184,1) 60%, rgba(122,122,122,1) 100%);
+        background-size: cover;
+        background-attachment: fixed;
     }
 
     h1, h2, h3, h4, h5, h6 {

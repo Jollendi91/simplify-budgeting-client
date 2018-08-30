@@ -12,13 +12,10 @@ import {StyledTD} from './styled-components/Tables';
 
 // Styled Components
 const UpdateBillForm = styled.form`
-    display: flex;
+    display: grid;
+    grid-template-columns: 30% 30% 20%;
     justify-content: space-between;
     align-items: center;
-
-    .form-input-container {
-        width: 24%;
-    }
 
     .form-input {
         display: inline-block;
@@ -39,7 +36,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
    font-size: 1.1em;
 `;
 
-const SubmitButton = styled.button`
+const IconButton = styled.button`
    border: none;
    padding: 2px;
    background-color: transparent;
@@ -103,9 +100,10 @@ export class BillRow extends React.Component {
                                 />
                             </div>
                             <div className="edit-buttons">
-                                
-                                <SubmitButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></SubmitButton>
-                                <StyledIcon className='cancel-button' icon='times' color='#FC4A1A' onClick={() => this.setEditing()}/>
+                                <IconButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></IconButton>
+                                <IconButton className="cancel-button" onClick={() => this.setEditing()}>
+                                    <StyledIcon icon='times' color='#FC4A1A' />
+                                </IconButton>
                             </div>
                         </UpdateBillForm>
                     </StyledTD>
@@ -113,17 +111,21 @@ export class BillRow extends React.Component {
             )
         } else {
 
-        return (
-            <tr>
-                <StyledTD>{this.props.bill}</StyledTD>
-                <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
-                <StyledTD className="edit-buttons">
-                    <StyledIcon className='edit-button' icon={['far','edit']} color='#4ABDAC' onClick={() => this.setEditing()}/>
-                    <StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' onClick={() => this.props.dispatch(deleteBill(this.props.id))}/>
-                </StyledTD>
-            </tr>
-        )
-    }
+            return (
+                <tr>
+                    <StyledTD>{this.props.bill}</StyledTD>
+                    <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
+                    <StyledTD className="edit-buttons">
+                        <IconButton className="edit-button" onClick={() => this.setEditing()}>
+                            <StyledIcon icon={['far','edit']} color='#4ABDAC'/>
+                        </IconButton>
+                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>
+                            <StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' />
+                        </IconButton>
+                    </StyledTD>
+                </tr>
+            )
+        }
     }
 }
 

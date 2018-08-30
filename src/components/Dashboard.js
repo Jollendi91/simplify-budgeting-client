@@ -15,7 +15,7 @@ import { MainLoadingSpinner } from './MainLoadingSpinner';
 // Styled Components
 
 const DashboardContainer = FormContainer.extend`
-    top: 66px;
+    top: 70px;
 
     @media screen and (min-width: 800px) {
         display: grid;

@@ -11,14 +11,22 @@ export const StyledTH = styled.th`
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     text-align: left;
-    padding: 4px 8px;
+    padding: 4px 12px;
     width: 33%;
 `;
 
 export const StyledTD = StyledTH.withComponent('td').extend`
     border-top: 0;
     font-weight: normal;
-    padding: 6px 8px;
+    padding: 6px 10px;
+
+    &.percentage {
+        width: 20%;
+    }
+
+    &.edit-buttons {
+        width: 20%;
+    }
 `;
 
 export const StyledTBody = styled.tbody`

@@ -60,9 +60,6 @@ const ButtonContainer = styled.div`
 
     @media screen and (min-width: 800px) {
         position: initial;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding-bottom: 0;
         margin-top: 15px;
     }

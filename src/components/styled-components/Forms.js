@@ -31,7 +31,7 @@ export const StyledInput = styled(Input)`
 
     label {
         position: absolute;
-        top: -10px;
+        bottom: -20px;
         font-size: 1.1em;
     }
 

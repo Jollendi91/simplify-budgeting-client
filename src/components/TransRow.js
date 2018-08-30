@@ -30,6 +30,7 @@ const UpdateTransactionForm = styled.form`
 
     .transaction-amount-input {
         display: flex;
+        align-items: center;
     }
 `;
 UpdateTransactionForm.displayName='UpdateTransactionForm';
