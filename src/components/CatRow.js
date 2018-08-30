@@ -134,7 +134,7 @@ export class CatRow extends React.Component {
                             <StyledIcon icon={['far', 'edit']} color='#4ABDAC' />
                         </IconButton>
                         <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteCategory(this.props.id))}>
-                            <StyledIcon className='delete-button' icon={['far', 'trash-alt']} color='#FC4A1A' />
+                            <StyledIcon icon={['far', 'trash-alt']} color='#FC4A1A' />
                         </IconButton>
                     </CategoryTD>
                 </tr>

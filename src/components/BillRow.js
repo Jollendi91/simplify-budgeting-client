@@ -119,7 +119,7 @@ export class BillRow extends React.Component {
                             <StyledIcon icon={['far','edit']} color='#4ABDAC'/>
                         </IconButton>
                         <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>
-                            <StyledIcon className='delete-button' icon={['far','trash-alt']} color='#FC4A1A' />
+                            <StyledIcon icon={['far','trash-alt']} color='#FC4A1A' />
                         </IconButton>
                     </StyledTD>
                 </tr>

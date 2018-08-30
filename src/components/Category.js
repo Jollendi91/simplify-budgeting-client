@@ -115,6 +115,7 @@ export class Category extends React.Component {
 
         const currentMonthTransactions = [];
         
+        // Filter, sort, and return transactions for the filter month and year
         const transactions = this.props.category.transactions.filter(transaction => moment(transaction.date).isBetween(firstDayMonth, lastDayMonth, null, [])).sort((a, b) => a.date < b.date ? 1 : -1 ).map(transaction => {
 
             currentMonthTransactions.push(transaction);
