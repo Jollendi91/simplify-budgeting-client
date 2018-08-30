@@ -76,7 +76,7 @@ export class EditProfile extends React.Component {
         return (
             <EditContainer>
                 <HeaderContainer>
-                    <h2>Edit your profile</h2>
+                    <h2>Edit Profile</h2>
                 </HeaderContainer>
                 <SectionContainer className="monthly-pay-edit">
                     <MonthlyPayEdit />

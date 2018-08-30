@@ -23,6 +23,10 @@ export const HeaderContainer = styled.header`
     background-color: #276A73;
     color: white;
     position: relative;
+
+    @media screen and (min-width: 800px) {
+      border-radius: 5px 5px 0 0;
+    }
 `;
 
 
