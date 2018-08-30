@@ -50,6 +50,12 @@ injectGlobal`
     h1, h2, h3, h4, h5, h6, th, button {
         font-family: 'Roboto Condensed';
     }
+
+    @media screen and (min-width: 800px) {
+        body {
+            font-size: 18px;
+        }
+    }
 `;
 
 export class App extends React.Component {

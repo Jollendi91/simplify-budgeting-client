@@ -35,6 +35,11 @@ const ProgressContainer = styled.div`
 	margin: 25px 0;
 `;
 
+const NoCategoryRow = styled.td`
+    padding: 30px 0;
+    text-align: center;
+`;
+
 //Progress Bar
 const Bar = ProgressBar.Line;
 
@@ -106,7 +111,7 @@ export function CategorySetup(props) {
 					</tr>
 				</thead>
 				<StyledTBody>
-					{categories}
+					{categories.length > 0 ? categories : <tr> <NoCategoryRow colSpan="3"> You have not added any budgets</NoCategoryRow></tr>}
 				</StyledTBody>
 			</StyledTable>
 		</CategoryFormContainer>

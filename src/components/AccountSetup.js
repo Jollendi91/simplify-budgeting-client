@@ -30,6 +30,11 @@ const SetupStep = SectionContainer.extend`
     min-height: calc(100vh - 66px);
     padding: 0;
     background-color: white;
+
+    @media screen and (min-width: 800px) {
+        min-height: 600px;
+        margin: 15px auto;
+    }
 `;
 
 const PayStep = SetupStep.extend`
@@ -41,7 +46,7 @@ const Header = styled.h1`
     color: white;
     margin: 0;
     padding: .3em 0;
-    background: #4ABDAC;
+    background: #276A73;
 `;
 
 const ButtonContainer = styled.div`

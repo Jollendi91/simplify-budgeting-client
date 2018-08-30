@@ -19,6 +19,11 @@ const Description = styled.p`
     padding: 0 10px;
 `;
 
+const NoBillRow = styled.td`
+    padding: 30px 0;
+    text-align: center;
+`;
+
 // Monthly Bill Setup Component
 export function MonthlyBillsSetup(props) {
 
@@ -38,7 +43,7 @@ export function MonthlyBillsSetup(props) {
                     </tr>
                 </thead>
                 <StyledTBody>
-                    {bills}
+                    {bills.length > 0 ? bills : <tr> <NoBillRow colSpan="3"> You have not added any bills</NoBillRow></tr>}
                 </StyledTBody>
                 <tfoot>
                     <tr>
