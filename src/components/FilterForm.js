@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
 import {fetchTransactions} from '../actions/protected-data';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
@@ -25,9 +24,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
 const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export class FilterForm extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     onDateChange(direction) {
         let nextMonth;

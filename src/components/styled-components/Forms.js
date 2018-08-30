@@ -4,7 +4,7 @@ import Input from '../input';
 
 export const FormContainer = styled.article`
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     margin: auto;
     border-radius: 5px;
     position: relative;
@@ -31,7 +31,7 @@ export const StyledInput = styled(Input)`
 
     label {
         position: absolute;
-        top: -10px;
+        bottom: -20px;
         font-size: 1.1em;
     }
 

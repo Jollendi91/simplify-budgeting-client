@@ -1,12 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import MonthlyBillsForm from './MonthlyBillsForm';
 import BillRow from './BillRow';
-
 import styled from 'styled-components';
-
-import {StyledTable, StyledTD, StyledTH, StyledTBody} from './styled-components/Tables';
+import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 
 // Styled Components
 const BillsFormContainer = styled.section`
@@ -17,6 +14,11 @@ const Description = styled.p`
     font-size: 1.1em;
     margin: 10px 0;
     padding: 0 10px;
+`;
+
+const NoBillRow = styled.td`
+    padding: 30px 0;
+    text-align: center;
 `;
 
 // Monthly Bill Setup Component
@@ -38,7 +40,7 @@ export function MonthlyBillsSetup(props) {
                     </tr>
                 </thead>
                 <StyledTBody>
-                    {bills}
+                    {bills.length > 0 ? bills : <tr> <NoBillRow colSpan="3"> You have not added any bills</NoBillRow></tr>}
                 </StyledTBody>
                 <tfoot>
                     <tr>

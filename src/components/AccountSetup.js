@@ -12,15 +12,7 @@ import CategorySetup from './CategorySetup';
 import styled from 'styled-components';
 import {FormContainer, Button} from './styled-components/Forms';
 
-
 // Styled Components
-const SetupStepContainer = styled.div`
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, .2);
-`;
-
 const SectionContainer = FormContainer.withComponent('article');
 
 const SetupStep = SectionContainer.extend`
@@ -30,6 +22,11 @@ const SetupStep = SectionContainer.extend`
     min-height: calc(100vh - 66px);
     padding: 0;
     background-color: white;
+
+    @media screen and (min-width: 800px) {
+        min-height: 600px;
+        margin: 15px auto;
+    }
 `;
 
 const PayStep = SetupStep.extend`
@@ -41,7 +38,7 @@ const Header = styled.h1`
     color: white;
     margin: 0;
     padding: .3em 0;
-    background: #4ABDAC;
+    background: #276A73;
 `;
 
 const ButtonContainer = styled.div`

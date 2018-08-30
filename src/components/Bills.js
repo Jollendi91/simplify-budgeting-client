@@ -17,6 +17,11 @@ const BillsTotal = styled.div`
     font-size: 2em;
 `;
 
+const NoBillRow = styled.td`
+    padding: 30px 0;
+    text-align: center;
+`;
+
 export class Bills extends React.Component {
     componentDidMount() {
         if (this.props.notLoaded) {
@@ -43,7 +48,7 @@ export class Bills extends React.Component {
                 <BillsTotal>
                     <h3>Total Bills: ${this.props.billsTotal.toFixed(2)}</h3>
                 </BillsTotal>
-                <section class="monthly-bills-form-container">
+                <section className="monthly-bills-form-container">
                     <MonthlyBillForm />
                     <StyledTable>
                         <thead>
@@ -53,7 +58,7 @@ export class Bills extends React.Component {
                             </tr>
                         </thead>
                         <StyledTBody>
-                            {bills}
+                            {bills.length > 0 ? bills : <tr> <NoBillRow colSpan="3"> You have not added any Bills</NoBillRow></tr>}
                         </StyledTBody>
                     </StyledTable>
                 </section>

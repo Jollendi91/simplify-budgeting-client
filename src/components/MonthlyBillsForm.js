@@ -1,11 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
 import {required, notEmpty} from '../validators';
 import {addBill} from '../actions/protected-data';
-
-import styled from 'styled-components';
 import {SetupInput, Inputs, Button} from './styled-components/Forms';
 
 export class MonthlyBillForm extends React.Component {

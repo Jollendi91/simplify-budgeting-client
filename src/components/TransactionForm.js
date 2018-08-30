@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
 import {required, notEmpty} from '../validators';
 import {addTransaction} from '../actions/protected-data';
 
@@ -60,9 +59,6 @@ const ButtonContainer = styled.div`
 
     @media screen and (min-width: 800px) {
         position: initial;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding-bottom: 0;
         margin-top: 15px;
     }
