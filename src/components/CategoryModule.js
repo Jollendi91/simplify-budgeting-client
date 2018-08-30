@@ -82,12 +82,9 @@ export function CategoryModule(props) {
     let lastDayMonth = filterDate.endOf('month').toISOString();
 
     const currentMonthTransactions = [];
-    props.currentCategory.transactions.map(transaction => {
-        let transactionDate = moment(transaction.date);
+    props.currentCategory.transactions.filter(transaction => moment(transaction.date).isBetween(firstDayMonth, lastDayMonth, null, [])).forEach(transaction => {
 
-        if (transactionDate.isBetween(firstDayMonth, lastDayMonth, null, [])) {
-            currentMonthTransactions.push(transaction);
-        };
+        currentMonthTransactions.push(transaction);
     });
 
     let currentTransactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);

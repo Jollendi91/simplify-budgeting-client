@@ -12,15 +12,7 @@ import CategorySetup from './CategorySetup';
 import styled from 'styled-components';
 import {FormContainer, Button} from './styled-components/Forms';
 
-
 // Styled Components
-const SetupStepContainer = styled.div`
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, .2);
-`;
-
 const SectionContainer = FormContainer.withComponent('article');
 
 const SetupStep = SectionContainer.extend`

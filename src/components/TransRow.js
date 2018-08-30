@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import moment from 'moment';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
 import {required, notEmpty} from '../validators';
 
 import { deleteTransaction, updateTransaction } from '../actions/protected-data';

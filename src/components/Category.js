@@ -115,19 +115,16 @@ export class Category extends React.Component {
 
         const currentMonthTransactions = [];
         
-        const transactions = this.props.category.transactions.sort((a, b) => a.date < b.date ? 1 : -1 ).map(transaction => {
-            let transactionDate = moment(transaction.date);
+        const transactions = this.props.category.transactions.filter(transaction => moment(transaction.date).isBetween(firstDayMonth, lastDayMonth, null, [])).sort((a, b) => a.date < b.date ? 1 : -1 ).map(transaction => {
 
-            if (transactionDate.isBetween(firstDayMonth, lastDayMonth, null, [])) {
-                currentMonthTransactions.push(transaction);
-                
-                return <TransRow 
-                            key={transaction.id} 
-                            categoryId={this.props.category.id} 
-                            form={`transaction-${transaction.id}-update`}
-                            {...transaction}
-                        />
-            };
+            currentMonthTransactions.push(transaction);
+            
+            return <TransRow 
+                        key={transaction.id} 
+                        categoryId={this.props.category.id} 
+                        form={`transaction-${transaction.id}-update`}
+                        {...transaction}
+                    />
         });
 
         const transactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);

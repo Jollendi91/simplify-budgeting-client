@@ -5,8 +5,7 @@ import {required, notEmpty} from '../validators';
 import { updateSalary } from '../actions/protected-data';
 import {SetupInput, Button} from './styled-components/Forms';
 
-import styled from 'styled-components';
-
+// Styled Components
 const InputLabelTop = SetupInput.extend`
     label {
         bottom: initial;

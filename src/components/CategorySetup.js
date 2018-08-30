@@ -18,9 +18,6 @@ const Description = styled.p`
     padding: 0 10px;
 `;
 
-const Amount = styled.p`
-`;
-
 const AmountRemaining = styled.p`
 	width: 80%;
 	text-align: right;

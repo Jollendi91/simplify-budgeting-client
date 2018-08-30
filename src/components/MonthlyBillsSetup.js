@@ -1,12 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import MonthlyBillsForm from './MonthlyBillsForm';
 import BillRow from './BillRow';
-
 import styled from 'styled-components';
-
-import {StyledTable, StyledTD, StyledTH, StyledTBody} from './styled-components/Tables';
+import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 
 // Styled Components
 const BillsFormContainer = styled.section`

@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, notEmpty} from '../validators';
 import { updateSalary, updateStep } from '../actions/protected-data';
-import Input from './input';
-import styled from 'styled-components';
 import {StyledInput, Button, StyledLabel} from './styled-components/Forms';
 
 // Styled Components

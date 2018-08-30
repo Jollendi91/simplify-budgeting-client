@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
 import {required, notEmpty} from '../validators';
 import {deleteBill, updateBill} from '../actions/protected-data';
 
