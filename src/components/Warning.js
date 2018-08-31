@@ -20,6 +20,7 @@ const WarningContainer = styled.td`
         margin: 10px;
     }
 `;
+WarningContainer.displayName = "WarningContainer";
 
 export function Warning(props) {
     return (
@@ -28,7 +29,7 @@ export function Warning(props) {
                 <h3>Are you sure?</h3>
             </HeaderContainer>
             <p>Deleting this category ({props.categoryName}) will also remove all of its associated transactions. Delete anyway?</p>
-            <Button primary color="#4ABDAC" onClick={() => props.dispatch(deleteCategory(props.id))}>Yes</Button>
+            <Button className="confirm-delete" primary color="#4ABDAC" onClick={() => props.dispatch(deleteCategory(props.id))}>Yes</Button>
             <Button color="#FC4A1A" onClick={() => props.cancelDelete()}>No</Button>
         </WarningContainer> 
     )

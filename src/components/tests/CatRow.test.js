@@ -1,20 +1,20 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import {connect} from 'react-redux';
 
 import {CatRow} from '../CatRow';
+import Warning from '../Warning';
 
 describe('<CatRow />', () => {
     it('Renders without crashing', () => {
         shallow(<CatRow />);
     });
 
-    it('Should dispatch deleteCategory on delete button click', () => {
-        const dispatch = jest.fn();
-        const wrapper = shallow(<CatRow dispatch={dispatch}/>);
+    it('Should display Warning on delete button click', () => {
+        const wrapper = shallow(<CatRow />);
         const deleteButton = wrapper.find('.delete-button');
         deleteButton.simulate('click');
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
+        expect(wrapper.find(Warning).exists()).toEqual(true);
     });
 
     it('Should display update form on edit button click', () => {
