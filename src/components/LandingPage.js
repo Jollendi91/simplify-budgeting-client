@@ -217,7 +217,7 @@ export function LandingPage(props) {
                 </StepsList>
             </StepsContainer>
             <footer>
-                Created by Josh
+                <p>2018 &copy; Created by Joshua Ollendick</p>
             </footer>
         </LandingPageContainer>
     )
