@@ -201,19 +201,19 @@ export function LandingPage(props) {
                     <StepSection className="step-1">
                         <div>
                             <h2>Take Home Pay</h2>
-                            <p>Enter the amount of money you take home after taxes each month. This gives us our starting point</p>
+                            <p>Enter the amount of money you take home after taxes each month. This gives you your starting point.</p>
                         </div>
                     </StepSection>
                     <StepSection className="step-2">
                         <div>
                             <h2>Monthly Bills</h2>
-                            <p>Add all your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with</p>
+                            <p>Add all of your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with.</p>
                         </div>
                     </StepSection>
                     <StepSection className="step-3">
                         <div>
                             <h2>Create Budgets</h2>
-                            <p>Creat budgets to track your money in areas of your choosing. This can be as vague or as specific as you divke. When a money is transfered or a purchase is made, enter the transaction into your budget</p>
+                            <p>Creat budgets to track your money in areas of your choosing. These can be as general or as specific as you would like. When money is transfered or a purchase is made, enter the transaction into your budget.</p>
                         </div>
                     </StepSection>
                 </StepsList>
