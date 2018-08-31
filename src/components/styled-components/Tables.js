@@ -34,6 +34,6 @@ export const StyledTBody = styled.tbody`
         background-color: #eee;
     }
     tr:nth-child(odd) {
-        background-color: #ccc;
+        background-color: #ddd;
     }
 `;

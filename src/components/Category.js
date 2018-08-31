@@ -136,7 +136,7 @@ export class Category extends React.Component {
                 <ComponentContainer>
                     <section>
                         <HeaderContainer>
-                            <IconButton to='/dashboard'>
+                            <IconButton aria-label="back to dashboard" to='/dashboard'>
                                 <FontAwesomeIcon icon="caret-left"/>
                             </IconButton>
                             <h2>{this.props.category.category}</h2>
@@ -170,7 +170,7 @@ export class Category extends React.Component {
                             </tr>
                         </thead>
                         <StyledTBody>
-                        {transactions.length > 0 ? transactions : <tr> <NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
+                        {transactions.length > 0 ? transactions : <tr><NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
                         </StyledTBody>
                     </StyledTable>
                 </ComponentContainer>

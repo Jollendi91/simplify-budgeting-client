@@ -35,6 +35,7 @@ export class MonthlyPaySetup extends React.Component {
                         step='0.01'
                         min="0.01"
                         validate={[required, notEmpty]}
+                        ariaLabel="What is your monthly take home pay?"
                     />
                     <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Next</Button>
                 </form>

@@ -30,7 +30,7 @@ UpdateBillForm.displayName='UpdateBillForm';
 
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
-   color: ${props => props.color ? props.color : 'black'};
+   color: ${props => props.disabled === true ? "#999" : props.color};
    cursor: pointer;
    font-size: 1.1em;
 `;
@@ -85,6 +85,7 @@ export class BillRow extends React.Component {
                                     name="bill"
                                     id="bill-update"
                                     validate={[required, notEmpty]}
+                                    ariaLabel="update bill name"
                                 />
                             </div>
                             <div className="form-input-container bill-amount-input">
@@ -96,11 +97,12 @@ export class BillRow extends React.Component {
                                     step="0.01"
                                     min="0.01"
                                     validate={[required, notEmpty]}
+                                    ariaLabel="update bill amount"
                                 />
                             </div>
                             <div className="edit-buttons">
-                                <IconButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></IconButton>
-                                <IconButton className="cancel-button" onClick={() => this.setEditing()}>
+                                <IconButton aria-label="update bill" className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' disabled={this.props.pristine || this.props.submitting}/></IconButton>
+                                <IconButton aria-label="cancel bill updates" className="cancel-button" onClick={() => this.setEditing()}>
                                     <StyledIcon icon='times' color='#FC4A1A' />
                                 </IconButton>
                             </div>
@@ -115,10 +117,10 @@ export class BillRow extends React.Component {
                     <StyledTD>{this.props.bill}</StyledTD>
                     <StyledTD>${parseFloat(this.props.amount).toFixed(2)}</StyledTD>
                     <StyledTD className="edit-buttons">
-                        <IconButton className="edit-button" onClick={() => this.setEditing()}>
+                        <IconButton aria-label="edit bill" className="edit-button" onClick={() => this.setEditing()}>
                             <StyledIcon icon={['far','edit']} color='#4ABDAC'/>
                         </IconButton>
-                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>
+                        <IconButton aria-label="delete bill" className="delete-button" onClick={() => this.props.dispatch(deleteBill(this.props.id))}>
                             <StyledIcon icon={['far','trash-alt']} color='#FC4A1A' />
                         </IconButton>
                     </StyledTD>

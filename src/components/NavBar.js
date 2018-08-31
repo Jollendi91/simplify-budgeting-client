@@ -19,12 +19,12 @@ const NavContainer = styled.nav`
     background-color: #fff;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled.h1`
     font-size: 30px;
     margin-top: 15px;
     margin-bottom: 5px;
     margin-left: 15px;
-    #logo {
+    .logo {
         width: 40px;
         margin-right: 3px;
     }
@@ -92,21 +92,21 @@ const NavLinks = styled.ul`
         height: 100%;
     }
 
-    a {
+    a, .link {
+        font-size: 18px;
         text-decoration: none;
         color: black;
+        padding: 10px 5px;
+        cursor: pointer;
     }
 
     li {
-        font-size: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-top: 1px solid #aaa;
-        padding: 10px 5px;
-        cursor: pointer;
 
-        &:hover {
+         &:hover {
             background-color: #ddd;
         }
     }
@@ -120,9 +120,13 @@ const NavLinks = styled.ul`
             border-bottom: 0;
         }
 
-        li {
+        a, .link {
             border-top: 0;
             padding: 20px 10px;
+        }
+
+        li {
+            border-top: 0;
         }
     }  
 `;
@@ -185,8 +189,8 @@ export class NavBar extends React.Component {
         if (this.props.page === '/') {
             navButtons = (
                 <NavLinks>
-                    <li onClick={() => this.displayForm('signup')}>Sign up</li>
-                    <li onClick={() => this.displayForm('login')}>Log in</li>
+                    <li className="link" onClick={() => this.displayForm('signup')}>Sign up</li>
+                    <li className="link" onClick={() => this.displayForm('login')}>Log in</li>
                 </NavLinks>
             );
         } else if (this.props.page === '/account-setup') {
@@ -200,16 +204,22 @@ export class NavBar extends React.Component {
         } else {
             navButtons = (
                 <NavLinks>
-                    <Link to="/dashboard" onClick={() => this.setDisplayLinks()}>
-                        <li>Dashboard</li>
-                    </Link>
-                    <Link to="/edit-profile" onClick={() => this.setDisplayLinks()}>
-                        <li>Edit Profile</li>
-                    </Link>
-                    <Link to="/bills" onClick={() => this.setDisplayLinks()}>
-                        <li>Bills</li>
-                    </Link>
-                    <li className="logout-button" onClick={() => {this.logOut(); this.setDisplayLinks();}}>
+                    <li className="dashboard-link">
+                        <Link to="/dashboard" onClick={() => this.setDisplayLinks()}>
+                            Dashboard
+                        </Link>
+                    </li>
+                    <li className="edit-profile-link">
+                        <Link to="/edit-profile" onClick={() => this.setDisplayLinks()}>
+                            Edit Profile
+                        </Link>
+                    </li>
+                    <li className="bills-link">
+                        <Link to="/bills" onClick={() => this.setDisplayLinks()}>
+                            Bills
+                        </Link>
+                    </li>
+                    <li className="logout-button link" onClick={() => {this.logOut(); this.setDisplayLinks();}}>
                         Log out
                     </li>
                 </NavLinks>
@@ -220,13 +230,13 @@ export class NavBar extends React.Component {
             <NavContainer>
                 {activeForm}
                 <Nav>
-                    <LogoContainer><span><Logo id="logo" color="#F7B733" icon="dollar-sign"/></span>implify</LogoContainer>
+                    <LogoContainer><span><Logo className="logo" color="#F7B733" icon="dollar-sign"/></span>implify</LogoContainer>
                     <LinksContainer displayLinks={this.state.displayLinks}>
                         {navButtons}
                     </LinksContainer>
                 </Nav>
                 <Nav narrow>
-                    <LogoContainer><Logo id="logo" color="#F7B733" icon="dollar-sign"/></LogoContainer>
+                    <LogoContainer><Logo className="logo" color="#F7B733" icon="dollar-sign"/></LogoContainer>
                     <HamburgerNav onClick={() => this.setDisplayLinks()} >
                         <FontAwesomeIcon icon="bars" />
                     </HamburgerNav>

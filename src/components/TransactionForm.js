@@ -100,6 +100,7 @@ export class TransactionForm extends React.Component {
                                 name="transaction"
                                 id="transaction-name"
                                 validate={[required, notEmpty]}
+                                ariaLabel="transaction description"
                             />
                         </div>
                         <div className="form-input-container">
@@ -110,6 +111,7 @@ export class TransactionForm extends React.Component {
                                 name="date"
                                 id="transaction-date"
                                 validate={[required, notEmpty]}
+                                ariaLabel="transaction date"
                             />
                         </div>
                         <div className="form-input-container">
@@ -122,6 +124,7 @@ export class TransactionForm extends React.Component {
                                 min="0.01"
                                 step="0.01"
                                 validate={[required, notEmpty]}
+                                ariaLabel="transaction amount"
                             />
                         </div>
                     </HorizontalInputs>

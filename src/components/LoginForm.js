@@ -35,13 +35,14 @@ export class LoginForm extends React.Component {
           {error}
           <HorizontalInputs>
             <div className="form-input-container">
-              <StyledLabel htmlFor="login-username">Username</StyledLabel>
+              <StyledLabel className="login-username">Username</StyledLabel>
               <Field 
                 component={StyledInput}
                 type="text"
                 name="username"
                 id="login-username"
                 validate={[required, notEmpty]}
+                ariaLabel="Login Username"
               />
             </div>
             <div className="form-input-container">
@@ -52,6 +53,7 @@ export class LoginForm extends React.Component {
                 name="password"
                 id="login-password"
                 validate={[required, notEmpty]}
+                ariaLabel="Login password"
               />
             </div>
           </HorizontalInputs>

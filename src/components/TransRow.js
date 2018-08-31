@@ -25,6 +25,7 @@ const UpdateTransactionForm = styled.form`
 
     #date {
         font-size: .8em;
+        background-color: white;
     }
 
     .transaction-amount-input {
@@ -40,7 +41,8 @@ const TransTD = StyledTD.extend`
 
 const StyledIcon = styled(FontAwesomeIcon)`
    margin: 0 8px;
-   color: ${props => props.color ? props.color : 'black'};
+   color: ${props => props.disabled === true ? "#999" : props.color};
+   cursor: pointer;
 `;
 
 const EditButtons = styled.td`
@@ -93,6 +95,7 @@ export class TransRow extends React.Component {
                                     name="transaction"
                                     id="transaction-update"
                                     validate={[required, notEmpty]}
+                                    ariaLabel="update transaction name"
                                 />
                             </div>
                             <div className="form-input-container transcation-date-input">
@@ -102,6 +105,7 @@ export class TransRow extends React.Component {
                                     name="date"
                                     id="transaction-date-update"
                                     validate={[required, notEmpty]}
+                                    ariaLabel="update transaction date"
                                 />
                             </div>
                             <div className="form-input-container transaction-amount-input">
@@ -113,11 +117,12 @@ export class TransRow extends React.Component {
                                     min="0.01"
                                     step="0.01"
                                     validate={[required, notEmpty]}
+                                    ariaLabel="update transaction amount"
                                 />
                             </div>
                             <EditButtons>
-                                <IconButton type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' /></IconButton>
-                                <IconButton className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></IconButton>
+                                <IconButton type="submit" aria-label="save updates" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' disabled={this.props.pristine || this.props.submitting}/></IconButton>
+                                <IconButton aria-label="cancel transaction updates" className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></IconButton>
                             </EditButtons>
                         </UpdateTransactionForm>
                     </TransTD>
@@ -130,8 +135,8 @@ export class TransRow extends React.Component {
                     <TransTD>{moment(this.props.date).format('M/D/YY')}</TransTD>
                     <TransTD>${parseFloat(this.props.amount).toFixed(2)}</TransTD>
                     <EditButtons>
-                        <IconButton className="edit-button" onClick={() => this.setEditing()}><StyledIcon icon={['far','edit']} color='#4ABDAC'/></IconButton>
-                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
+                        <IconButton aria-label="edit transaction" className="edit-button" onClick={() => this.setEditing()}><StyledIcon icon={['far','edit']} color='#4ABDAC'/></IconButton>
+                        <IconButton aria-label="delete transaction" className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
                     </EditButtons>
                 </tr>
             )

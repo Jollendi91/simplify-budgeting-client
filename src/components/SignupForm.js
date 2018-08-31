@@ -55,25 +55,27 @@ export class SignupForm extends React.Component {
                     {errorMessage}
                     <HorizontalInputs>
                         <div className="form-input-container">
-                            <StyledLabel htmlFor="username">Username</StyledLabel>
+                            <StyledLabel htmlFor="signup-username">Username</StyledLabel>
                             <Field 
                                 name="username"
                                 type="text"
                                 component={StyledInput}
                                 signup
-                                id="username"
+                                id="signup-username"
                                 validate={[required, notEmpty, isTrimmed, usernameLength]}
+                                ariaLabel="signup username"
                             />
                         </div>
                         <div className="form-input-container">
-                            <StyledLabel htmlFor="password">Password</StyledLabel>
+                            <StyledLabel htmlFor="signup-password">Password</StyledLabel>
                             <Field
                                 name="password"
                                 type="password"
                                 component={StyledInput}
                                 signup
-                                id="password"
+                                id="signup-password"
                                 validate={[required, notEmpty, isTrimmed, passwordLength]}
+                                ariaLabel="signup password"
                             />
                         </div>
                         <div className="form-input-container">
@@ -85,6 +87,7 @@ export class SignupForm extends React.Component {
                                 signup
                                 id="verify-password"
                                 validate={[required, notEmpty, matchesPassword]}
+                                ariaLabel="verify password"
                             />
                         </div>
                     </HorizontalInputs>
