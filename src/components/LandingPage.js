@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import firstBackground from '../images/piggy-bank-compressor.jpg';
+import secondBackground from '../images/simplify-compressor.jpg';
 
 // Styled Components
 const LandingPageContainer = styled.main`
@@ -13,7 +15,7 @@ const LandingPageContainer = styled.main`
 
 const HeroContainer = styled.header`
     padding: 40px 15px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%),  url(https://source.unsplash.com/pElSkGRA2NU);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%), url(${firstBackground});
     background-size: cover;
     height: calc(100vh - 66px);
     background-position: center 75%;
@@ -75,7 +77,7 @@ const LandingSection = styled.section`
 const StepSection = LandingSection.withComponent('li');
 
 const StepsContainer = styled.section`
-    background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to top, rgba(0,0,0,0.85) 0%,rgba(0,0,0,.25) 100%), url(https://source.unsplash.com/yw7mV9JeND4);
+    background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to top, rgba(0,0,0,0.85) 0%,rgba(0,0,0,.25) 100%), url(${secondBackground});
     background-size: cover;
     background-position: center center;
 `;
