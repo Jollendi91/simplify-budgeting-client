@@ -204,17 +204,17 @@ export class NavBar extends React.Component {
         } else {
             navButtons = (
                 <NavLinks>
-                    <li>
+                    <li className="dashboard-link">
                         <Link to="/dashboard" onClick={() => this.setDisplayLinks()}>
                             Dashboard
                         </Link>
                     </li>
-                    <li>
+                    <li className="edit-profile-link">
                         <Link to="/edit-profile" onClick={() => this.setDisplayLinks()}>
                             Edit Profile
                         </Link>
                     </li>
-                    <li>
+                    <li className="bills-link">
                         <Link to="/bills" onClick={() => this.setDisplayLinks()}>
                             Bills
                         </Link>

@@ -16,18 +16,21 @@ describe('<NavBar />', () => {
 
     it('Should render correct buttons on account-setup page', () => {
         const wrapper = shallow(<NavBar loggedIn={true} page="/account-setup"/>);
-        expect(wrapper.find('li[className="logout-button"]').exists()).toEqual(true);
+        expect(wrapper.find('.logout-button').exists()).toEqual(true);
     });
 
     it('Should render correct buttons on any other page', () => {
         const wrapper = shallow(<NavBar loggedIn={true}/>);
-        expect(wrapper.containsAllMatchingElements([<li>Dashboard</li>, <li>Edit Profile</li>, <li>Bills</li>, <li className="logout-button">Log out</li>])).toEqual(true);
+        expect(wrapper.find('.dashboard-link').exists()).toEqual(true);
+        expect(wrapper.find('.edit-profile-link').exists()).toEqual(true);
+        expect(wrapper.find('.bills-link').exists()).toEqual(true);
+        expect(wrapper.find('.logout-button').exists()).toEqual(true);
     });
 
     it('Should dispatch clearAuth on logOut', () => {
         const dispatch = jest.fn();
         const wrapper = shallow(<NavBar dispatch={dispatch} loggedIn={true}/>);
-        const logOutButton = wrapper.find('li[className="logout-button"]').first();
+        const logOutButton = wrapper.find('.logout-button').first();
         logOutButton.simulate('click');
         expect(dispatch).toHaveBeenCalledWith(clearAuth());
     });

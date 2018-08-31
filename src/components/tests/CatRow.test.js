@@ -34,8 +34,9 @@ describe('<CatRow />', () => {
 
     it('Should dispatch updateBill on form submit', () => {
         const dispatch = jest.fn().mockImplementation(() => Promise.resolve());
+        const hideForm = jest.fn();
         const handleSubmit = jest.fn().mockImplementation(() => wrapper.instance().onSubmit({category: 'category', amount: 200}));
-        const wrapper = shallow(<CatRow handleSubmit={handleSubmit} dispatch={dispatch} />);
+        const wrapper = shallow(<CatRow handleSubmit={handleSubmit} dispatch={dispatch}  hideForm={hideForm}/>);
         wrapper.instance().setEditing();
         wrapper.simulate('submit');
         expect(handleSubmit).toHaveBeenCalledTimes(1);
