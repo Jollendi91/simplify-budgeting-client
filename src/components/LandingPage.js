@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import './LandingPage.css';
 
 // Styled Components
-
 const LandingPageContainer = styled.div`
     background-color: white;
     position: relative;
@@ -41,8 +39,8 @@ const Header = styled.h2`
 `;
 
 const LearnMore = styled.div`
-    position: absolute;
-    bottom: 5px;
+    position: relative;
+    top: 60px;
     left: 0;
     right: 0;
     font-size: 1.5em;

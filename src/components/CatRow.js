@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Warning from './Warning';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, notEmpty} from '../validators';
-import { deleteCategory, updateCategory } from '../actions/protected-data';
+import {updateCategory } from '../actions/protected-data';
 
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -54,19 +55,38 @@ const FormTD = StyledTD.extend`
     width: 24%;
 `;
 
+const WarningOverlay = styled.div`
+    position: fixed;
+    left: 0;
+    top: 66px;
+    height: calc(100% - 66px);
+    width: 100%;
+    display: flex;
+    background-color: rgba(0,0,0, .5);
+    justify-content: center;
+    align-items: center;
+`;
+
 // CatRow Component
 export class CatRow extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            editing: false
+            editing: false,
+            warning: false
         }
     }
 
     setEditing() {
         this.setState({
             editing: !this.state.editing
+        });
+    }
+
+    setWarning() {
+        this.setState({
+            warning: !this.state.warning
         });
     }
 
@@ -82,6 +102,14 @@ export class CatRow extends React.Component {
                 updateAmount = this.props.currentForm.values.amount;
             }
         };
+        let warning;
+        if (this.state.warning) {
+            warning = (
+                <WarningOverlay>
+                    <Warning cancelDelete={this.setWarning.bind(this)} categoryName={this.props.category} id={this.props.id} />
+                </WarningOverlay>
+            )
+        } 
            
          if (this.state.editing) {
           return  (
@@ -133,9 +161,10 @@ export class CatRow extends React.Component {
                         <IconButton className="edit-button" onClick={() => this.setEditing()}>
                             <StyledIcon icon={['far', 'edit']} color='#4ABDAC' />
                         </IconButton>
-                        <IconButton className="delete-button" onClick={() => this.props.dispatch(deleteCategory(this.props.id))}>
+                        <IconButton className="delete-button" onClick={() => this.setWarning()}>
                             <StyledIcon icon={['far', 'trash-alt']} color='#FC4A1A' />
                         </IconButton>
+                        {warning}
                     </CategoryTD>
                 </tr>
             )
