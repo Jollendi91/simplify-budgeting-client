@@ -25,6 +25,7 @@ const UpdateTransactionForm = styled.form`
 
     #date {
         font-size: .8em;
+        background-color: white;
     }
 
     .transaction-amount-input {

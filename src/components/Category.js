@@ -170,7 +170,7 @@ export class Category extends React.Component {
                             </tr>
                         </thead>
                         <StyledTBody>
-                        {transactions.length > 0 ? transactions : <tr> <NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
+                        {transactions.length > 0 ? transactions : <tr><NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
                         </StyledTBody>
                     </StyledTable>
                 </ComponentContainer>
