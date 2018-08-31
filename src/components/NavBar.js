@@ -97,6 +97,7 @@ const NavLinks = styled.ul`
         text-decoration: none;
         color: black;
         padding: 10px 5px;
+        width: 100%;
         cursor: pointer;
     }
 
@@ -105,6 +106,7 @@ const NavLinks = styled.ul`
         align-items: center;
         justify-content: center;
         border-top: 1px solid #aaa;
+        cursor: pointer;
 
          &:hover {
             background-color: #ddd;
@@ -123,6 +125,8 @@ const NavLinks = styled.ul`
         a, .link {
             border-top: 0;
             padding: 20px 10px;
+            min-width: 75px;
+            width: auto;
         }
 
         li {

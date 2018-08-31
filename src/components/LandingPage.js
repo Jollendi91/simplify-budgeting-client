@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import firstBackground from '../images/piggy-bank-compressor.jpg';
+import secondBackground from '../images/simplify-compressor.jpg';
 
 // Styled Components
 const LandingPageContainer = styled.main`
@@ -13,7 +15,7 @@ const LandingPageContainer = styled.main`
 
 const HeroContainer = styled.header`
     padding: 40px 15px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%),  url(https://source.unsplash.com/pElSkGRA2NU);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%), url(${firstBackground});
     background-size: cover;
     height: calc(100vh - 66px);
     background-position: center 75%;
@@ -75,7 +77,7 @@ const LandingSection = styled.section`
 const StepSection = LandingSection.withComponent('li');
 
 const StepsContainer = styled.section`
-    background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to top, rgba(0,0,0,0.85) 0%,rgba(0,0,0,.25) 100%), url(https://source.unsplash.com/yw7mV9JeND4);
+    background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to top, rgba(0,0,0,0.85) 0%,rgba(0,0,0,.25) 100%), url(${secondBackground});
     background-size: cover;
     background-position: center center;
 `;
@@ -201,19 +203,19 @@ export function LandingPage(props) {
                     <StepSection className="step-1">
                         <div>
                             <h2>Take Home Pay</h2>
-                            <p>Enter the amount of money you take home after taxes each month. This gives us our starting point</p>
+                            <p>Enter the amount of money you take home after taxes each month. This gives you your starting point.</p>
                         </div>
                     </StepSection>
                     <StepSection className="step-2">
                         <div>
                             <h2>Monthly Bills</h2>
-                            <p>Add all your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with</p>
+                            <p>Add all of your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with.</p>
                         </div>
                     </StepSection>
                     <StepSection className="step-3">
                         <div>
                             <h2>Create Budgets</h2>
-                            <p>Creat budgets to track your money in areas of your choosing. This can be as vague or as specific as you divke. When a money is transfered or a purchase is made, enter the transaction into your budget</p>
+                            <p>Creat budgets to track your money in areas of your choosing. These can be as general or as specific as you would like. When money is transfered or a purchase is made, enter the transaction into your budget.</p>
                         </div>
                     </StepSection>
                 </StepsList>
