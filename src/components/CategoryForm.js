@@ -23,6 +23,7 @@ export class CategoryForm extends React.Component {
                             name="category"
                             id="category-name"
                             validate={[required, notEmpty]}
+                            ariaLabel="budget name"
                         />
                     </div>
                     <div className="form-input-container">
@@ -37,6 +38,7 @@ export class CategoryForm extends React.Component {
                             max={this.props.max}
                             step="0.01"
                             validate={[required, notEmpty]}
+                            ariaLabel="budget amount"
                         />
                     </div>
                     <Button color="#276A73" disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add</Button>

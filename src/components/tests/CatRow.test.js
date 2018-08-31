@@ -1,7 +1,5 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {connect} from 'react-redux';
-
 import {CatRow} from '../CatRow';
 import Warning from '../Warning';
 

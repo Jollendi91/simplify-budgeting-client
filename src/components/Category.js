@@ -136,7 +136,7 @@ export class Category extends React.Component {
                 <ComponentContainer>
                     <section>
                         <HeaderContainer>
-                            <IconButton to='/dashboard'>
+                            <IconButton aria-label="back to dashboard" to='/dashboard'>
                                 <FontAwesomeIcon icon="caret-left"/>
                             </IconButton>
                             <h2>{this.props.category.category}</h2>

@@ -141,8 +141,8 @@ export class CatRow extends React.Component {
                             {Math.round(updateAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%
                         </div>
                         <div className="edit-buttons form-input-container">
-                            <IconButton className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' disabled={this.props.pristine || this.props.submitting}/></IconButton>
-                            <IconButton className="cancel-button" onClick={() => this.setEditing()}>
+                            <IconButton aria-label="update budget" className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' disabled={this.props.pristine || this.props.submitting}/></IconButton>
+                            <IconButton aria-label="cancel budget updates" className="cancel-button" onClick={() => this.setEditing()}>
                                 <StyledIcon icon='times' color='#FC4A1A' />
                             </IconButton>
                         </div>
@@ -158,10 +158,10 @@ export class CatRow extends React.Component {
                     <CategoryTD>${parseFloat(this.props.amount).toFixed(2)}</CategoryTD>
                     <CategoryTD className="percentage">{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</CategoryTD>
                     <CategoryTD className="edit-buttons">
-                        <IconButton className="edit-button" onClick={() => this.setEditing()}>
+                        <IconButton aria-label="edit budget" className="edit-button" onClick={() => this.setEditing()}>
                             <StyledIcon icon={['far', 'edit']} color='#4ABDAC' />
                         </IconButton>
-                        <IconButton className="delete-button" onClick={() => this.setWarning()}>
+                        <IconButton aria-label="delete budget" className="delete-button" onClick={() => this.setWarning()}>
                             <StyledIcon icon={['far', 'trash-alt']} color='#FC4A1A' />
                         </IconButton>
                         {warning}

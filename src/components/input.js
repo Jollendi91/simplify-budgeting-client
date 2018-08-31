@@ -42,6 +42,7 @@ export default class Input extends React.Component {
                     step={this.props.step}
                     min={this.props.min}
                     max={this.props.max} 
+                    aria-label={this.props.ariaLabel}
                 />
             </div>
         );

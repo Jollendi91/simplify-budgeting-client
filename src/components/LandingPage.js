@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 // Styled Components
-const LandingPageContainer = styled.div`
+const LandingPageContainer = styled.main`
     background-color: white;
     position: relative;
     top: 66px;
@@ -72,6 +72,8 @@ const LandingSection = styled.section`
     }
 `;
 
+const StepSection = LandingSection.withComponent('li');
+
 const StepsContainer = styled.section`
     background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to top, rgba(0,0,0,0.85) 0%,rgba(0,0,0,.25) 100%), url(https://source.unsplash.com/yw7mV9JeND4);
     background-size: cover;
@@ -92,15 +94,15 @@ const StepsList = styled.ol`
         position: relative;
     }
 
-    section:nth-child(1) {
+    li:nth-child(1) {
         color: rgba(39,106,115,0.5);
     }
 
-    section:nth-child(2) {
+    li:nth-child(2) {
         color: rgba(252, 74, 26, 0.5);
     }
 
-    section:nth-child(3) {
+    li:nth-child(3) {
         
         color: rgba(247, 183, 51, 0.5);
     }
@@ -196,24 +198,24 @@ export function LandingPage(props) {
             <StepsContainer>
                 <h1>As Simple as 123...</h1>
                 <StepsList>
-                    <LandingSection className="step-1">
-                        <li>
+                    <StepSection className="step-1">
+                        <div>
                             <h2>Take Home Pay</h2>
                             <p>Enter the amount of money you take home after taxes each month. This gives us our starting point</p>
-                        </li>
-                    </LandingSection>
-                    <LandingSection className="step-2">
-                        <li>
+                        </div>
+                    </StepSection>
+                    <StepSection className="step-2">
+                        <div>
                             <h2>Monthly Bills</h2>
                             <p>Add all your monthly bills and expenses. This gives you an overview of how much money you have going out and helps us figure out how much you have left to work with</p>
-                        </li>
-                    </LandingSection>
-                    <LandingSection className="step-3">
-                        <li>
+                        </div>
+                    </StepSection>
+                    <StepSection className="step-3">
+                        <div>
                             <h2>Create Budgets</h2>
-                            <p>Creat budgets to track your money in areas of your choosing. This can be as vague or as specific as you like. When a money is transfered or a purchase is made, enter the transaction into your budget</p>
-                        </li>
-                    </LandingSection>
+                            <p>Creat budgets to track your money in areas of your choosing. This can be as vague or as specific as you divke. When a money is transfered or a purchase is made, enter the transaction into your budget</p>
+                        </div>
+                    </StepSection>
                 </StepsList>
             </StepsContainer>
             <footer>

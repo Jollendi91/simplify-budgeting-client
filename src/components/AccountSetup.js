@@ -13,9 +13,7 @@ import styled from 'styled-components';
 import {FormContainer, Button} from './styled-components/Forms';
 
 // Styled Components
-const SectionContainer = FormContainer.withComponent('article');
-
-const SetupStep = SectionContainer.extend`
+const SetupStep = FormContainer.withComponent('article').extend`
     display: flex;
     flex-direction: column;
     top: 66px;

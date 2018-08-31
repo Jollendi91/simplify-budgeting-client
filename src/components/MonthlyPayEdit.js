@@ -51,6 +51,7 @@ export class MonthlyPayEdit extends React.Component {
                     step="0.01"
                     min={this.props.categoriesTotal + this.props.billsTotal}
                     validate={[required, notEmpty]}
+                    ariaLabel="update take home pay"
                 />
                 <div>
                     <Button color="#276A73" className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</Button>

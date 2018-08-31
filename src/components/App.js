@@ -91,7 +91,7 @@ export class App extends React.Component {
 
     render() {
         return (
-            <div className="app-container">
+            <main role="main" className="app-container">
                 <NavBar page={this.props.pathname} />
                 <Route exact path="/" component={LandingPage}/>
                 <Route exact path="/account-setup" component={AccountSetup}/>
@@ -99,7 +99,7 @@ export class App extends React.Component {
                 <Route exact path="/dashboard" component={Dashboard}/>
                 <Route exact path="/category/:categoryId" component={Category} />
                 <Route exact path='/bills' component={Bills} />
-            </div>
+            </main>
         )
     }  
 };

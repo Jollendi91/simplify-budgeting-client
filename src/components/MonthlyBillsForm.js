@@ -26,7 +26,7 @@ export class MonthlyBillForm extends React.Component {
             <form className="add-bill-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <Inputs>
                     <div className="form-input-container">
-                        <label htmlFor="bill">Bill</label>
+                        <label>Bill</label>
                         {errorMessage}
                         <Field 
                             component={SetupInput}
@@ -34,10 +34,11 @@ export class MonthlyBillForm extends React.Component {
                             name="bill"
                             id="bill"
                             validate={[required, notEmpty]}
+                            ariaLabel="bill name"
                         />
                     </div>
                     <div className="form-input-container">
-                        <label htmlFor="amount">Amount</label>
+                        <label>Amount</label>
                         <Field 
                             component={SetupInput}
                             amount
@@ -47,6 +48,7 @@ export class MonthlyBillForm extends React.Component {
                             step="0.01"
                             min="0.01"
                             validate={[required, notEmpty]}
+                            ariaLabel="bill amount"
                         />
                     </div>
                     <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Add</Button>

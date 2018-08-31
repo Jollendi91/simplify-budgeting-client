@@ -26,7 +26,7 @@ export function Warning(props) {
     return (
         <WarningContainer>
             <HeaderContainer>
-                <h3>Are you sure?</h3>
+                <h2>Are you sure?</h2>
             </HeaderContainer>
             <p>Deleting this category ({props.categoryName}) will also remove all of its associated transactions. Delete anyway?</p>
             <Button className="confirm-delete" primary color="#4ABDAC" onClick={() => props.dispatch(deleteCategory(props.id))}>Yes</Button>
