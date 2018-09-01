@@ -7,7 +7,9 @@ import {
 } from '../actions/auth';
 
 import {
-    REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_ERROR
+    REGISTER_REQUEST,
+    REGISTER_SUCCESS,
+    REGISTER_ERROR
 } from '../actions/users';
 
 const initialState = {
@@ -17,12 +19,12 @@ const initialState = {
     error: null
 };
 
-export const authReducer = (state=initialState, action) => {
+export const authReducer = (state = initialState, action) => {
     if (action.type === SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
             authToken: action.authToken
         });
-    } else if ( action.type === CLEAR_AUTH) {
+    } else if (action.type === CLEAR_AUTH) {
         return Object.assign({}, state, {
             authToken: null,
             currentUser: null
