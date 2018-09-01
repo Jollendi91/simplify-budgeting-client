@@ -41,21 +41,21 @@ describe('updateSalary', () => {
 
         return actions.updateSalary(salary)(dispatch, getState).then(() => {
             expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/dashboard`, {
-                method: 'PUT', 
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                     Authorization: `Bearer ${getState().auth.authToken}`
                 },
                 body: JSON.stringify({
                     monthlySalary: salary
-                })});
+                })
+            });
             expect(dispatch).toHaveBeenCalledWith(actions.updateSalarySuccess(salary));
         });
     });
 });
 
 // Update Setup Step Action
-
 describe('setupStepSuccess', () => {
     it('Should return the action', () => {
         const step = 2;
@@ -94,14 +94,15 @@ describe('updateStep', () => {
 
         return actions.updateStep(step)(dispatch, getState).then(() => {
             expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/dashboard`, {
-                method: 'PUT', 
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                     Authorization: `Bearer ${getState().auth.authToken}`
                 },
                 body: JSON.stringify({
                     setupStep: step
-                })});
+                })
+            });
             expect(dispatch).toHaveBeenCalledWith(actions.setupStepSuccess(step));
         });
     });

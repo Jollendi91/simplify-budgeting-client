@@ -49,19 +49,24 @@ describe('authError', () => {
 describe('login', () => {
     it('Should dispatch authRequest, setAuthToken, and authSuccess', () => {
         const user = {
-           username: 'fakeUser123',
-           password: 'fakePassword'
+            username: 'fakeUser123',
+            password: 'fakePassword'
         }
-        const authToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
+        const authToken = jwt.sign({
+            user
+        }, 'secret', {
+            expiresIn: '6000ms'
+        });
         const decodedToken = jwtDecode(authToken);
-       
+
         global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-                ok: true,
-                json() {
-                    return {authToken}
+            ok: true,
+            json() {
+                return {
+                    authToken
                 }
-            })
-        );
+            }
+        }));
 
         const dispatch = jest.fn();
 
@@ -88,16 +93,26 @@ describe('refreshAuthToken', () => {
         const user = {
             username: 'fakeUser'
         };
-        const currentAuthToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
+        const currentAuthToken = jwt.sign({
+            user
+        }, 'secret', {
+            expiresIn: '6000ms'
+        });
 
-        const authToken = jwt.sign({user}, 'secret', {expiresIn: '6000ms'});
+        const authToken = jwt.sign({
+            user
+        }, 'secret', {
+            expiresIn: '6000ms'
+        });
         const newDecodedToken = jwtDecode(authToken);
 
         global.fetch = jest.fn().mockImplementation(() => {
             return Promise.resolve({
-                ok: true, 
+                ok: true,
                 json() {
-                    return {authToken}
+                    return {
+                        authToken
+                    }
                 }
             })
         });

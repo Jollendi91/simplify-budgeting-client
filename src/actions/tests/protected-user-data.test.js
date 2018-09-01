@@ -24,7 +24,7 @@ describe('registerUser', () => {
 
         const dispatch = jest.fn();
 
-        return registerUser(user)(dispatch).then(()=> {
+        return registerUser(user)(dispatch).then(() => {
             expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/users`, {
                 method: 'POST',
                 headers: {
@@ -63,12 +63,11 @@ describe('fetchProtectedUser', () => {
         };
 
         global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-                ok: true,
-                json() {
-                    return user;
-                }
-            })
-        );
+            ok: true,
+            json() {
+                return user;
+            }
+        }));
 
         const dispatch = jest.fn();
         const getState = jest.fn().mockImplementation(() => ({
@@ -76,9 +75,14 @@ describe('fetchProtectedUser', () => {
                 authToken: 1234
             }
         }));
-        
+
         return fetchProtectedUser()(dispatch, getState).then(() => {
-            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/dashboard`, {method: 'GET', headers: {Authorization: `Bearer ${getState().auth.authToken}`}});
+            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/dashboard`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${getState().auth.authToken}`
+                }
+            });
             expect(dispatch).toHaveBeenCalledWith(fetchProtectedUserSuccess(user));
         });
     });
@@ -86,8 +90,7 @@ describe('fetchProtectedUser', () => {
     it('Should dispatch fetchProtectedUserError', () => {
         const error = 'error';
 
-        global.fetch = jest.fn().mockImplementation(() => Promise.reject(error)
-        );
+        global.fetch = jest.fn().mockImplementation(() => Promise.reject(error));
 
         const dispatch = jest.fn();
         const getState = jest.fn().mockImplementation(() => ({
@@ -97,7 +100,12 @@ describe('fetchProtectedUser', () => {
         }));
 
         return fetchProtectedUser()(dispatch, getState).then(() => {
-            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/dashboard`, {method: 'GET', headers: {Authorization: `Bearer ${getState().auth.authToken}`}});
+            expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/dashboard`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${getState().auth.authToken}`
+                }
+            });
             expect(dispatch).toHaveBeenCalledWith(fetchProtectedUserError(error));
         });
     });

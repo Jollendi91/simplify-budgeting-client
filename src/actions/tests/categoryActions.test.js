@@ -18,7 +18,7 @@ describe('addCategorySuccess', () => {
     });
 });
 
-describe( 'addCategoryError', () => {
+describe('addCategoryError', () => {
     it('Should return the action', () => {
         const error = 'error';
         const action = actions.addCategoryError(error);
@@ -27,10 +27,10 @@ describe( 'addCategoryError', () => {
     });
 });
 
-describe( 'addCategory', () => {
+describe('addCategory', () => {
     it('Should dispatch addCategorySuccess', () => {
         const category = {
-            id: 1, 
+            id: 1,
             category: 'Spending',
             amount: 400
         };
@@ -69,11 +69,10 @@ describe( 'addCategory', () => {
 });
 
 // Update Category Actions
-
 describe('updateCategorySuccess', () => {
     it('Return the action', () => {
         const category = {
-            id: 2, 
+            id: 2,
             category: 'Debt',
             amount: 350
         };
@@ -138,7 +137,6 @@ describe('updateCategory', () => {
 
 
 // Delete Category Actions
-
 describe('deleteCategorySuccess', () => {
     it('Should return the action', () => {
         const categoryId = 1;
