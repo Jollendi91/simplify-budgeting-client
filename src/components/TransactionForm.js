@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, notEmpty} from '../validators';
 import {addTransaction} from '../actions/protected-data';
-
 import {StyledInput, Button, HorizontalInputs} from './styled-components/Forms';
 import styled from 'styled-components';
 
@@ -64,6 +63,7 @@ const ButtonContainer = styled.div`
     }
 `;
 
+// Transaction Form Component
 export class TransactionForm extends React.Component {
     constructor(props) {
         super(props);
@@ -129,19 +129,35 @@ export class TransactionForm extends React.Component {
                         </div>
                     </HorizontalInputs>
                     <ButtonContainer>
-                        <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Submit</Button>
-                        <Button primary color="#276A73" onClick={() => this.setDisplayForm()}>Cancel</Button>
+                        <Button 
+                            color="#276A73" 
+                            disabled={this.props.pristine || this.props.submitting}
+                        >
+                            Submit
+                        </Button>
+                        <Button 
+                            primary 
+                            color="#276A73" 
+                            onClick={() => this.setDisplayForm()}
+                        >
+                            Cancel
+                        </Button>
                     </ButtonContainer>
                 </AddTransactionForm>
-            )
+            );
         } else {
             return (
                 <ButtonContainer>
-                    <Button color="#276A73" onClick={() => this.setDisplayForm()}>Add Transaction</Button>
+                    <Button 
+                        color="#276A73" 
+                        onClick={() => this.setDisplayForm()}
+                    >
+                        Add Transaction
+                    </Button>
                 </ButtonContainer>
-            )
+            );
         }
-    }
+    };
 }
 
 export default reduxForm({

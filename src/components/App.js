@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-
 import LandingPage from './LandingPage';
 import AccountSetup from './AccountSetup';
 import EditProfile from './EditProfile';
@@ -19,6 +18,7 @@ import {faEdit, faTrashAlt, faSave} from '@fortawesome/free-regular-svg-icons';
 
 library.add(faBars, faEdit, faTrashAlt, faSave, faTimes, faAngleRight, faAngleLeft, faCaretLeft, faSpinner, faDollarSign, faChevronDown, faMoneyBillWave, faChartLine, faCalculator);
 
+// Styled Components - Gobal Styles
 injectGlobal`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Roboto+Condensed:700');
 
@@ -61,6 +61,7 @@ injectGlobal`
     }
 `;
 
+// Root App Component
 export class App extends React.Component {
 
     componentDidUpdate(prevProps) {

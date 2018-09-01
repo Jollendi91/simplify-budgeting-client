@@ -25,7 +25,11 @@ const NoBillRow = styled.td`
 export function MonthlyBillsSetup(props) {
 
     const bills = props.bills.map((bill)=> 
-        <BillRow key={bill.id} form={`bill-${bill.id}-update`}{...bill} />
+        <BillRow 
+            key={bill.id} 
+            form={`bill-${bill.id}-update`}
+            {...bill} 
+        />
     );
 
     return (
@@ -50,13 +54,15 @@ export function MonthlyBillsSetup(props) {
                 </tfoot>
 			</StyledTable>
 		</BillsFormContainer>
-    )
-}
+    );
+};
 
 const mapStateToProps = state => ({
     monthlySalary: state.simplify.user.monthlySalary,
     bills: state.simplify.user.bills,
-    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => 
+        accumulator + parseFloat(currentBill.amount), 0
+    ),
     userId: state.simplify.user.id
 });
 

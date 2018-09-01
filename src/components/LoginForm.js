@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Field, reduxForm, focus} from 'redux-form';
 import {login} from '../actions/auth';
 import {required, notEmpty} from '../validators';
-
 import {FormContainer, StyledInput, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
 import {HeaderContainer, LoadingSpinner} from './styled-components/Elements';
 
@@ -58,7 +57,10 @@ export class LoginForm extends React.Component {
             </div>
           </HorizontalInputs>
           <ButtonContainer>
-            <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>
+            <Button 
+              color="#276A73" 
+              disabled={this.props.pristine || this.props.submitting}
+            >
               {this.props.loading ? <LoadingSpinner icon="spinner"/> : 'Log in'}
             </Button>
           </ButtonContainer>
@@ -66,7 +68,7 @@ export class LoginForm extends React.Component {
       </FormContainer>
     );
   }
-}
+};
 
 const mapStateToProps = state => ({
   loading: state.auth.loading

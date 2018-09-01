@@ -4,7 +4,6 @@ import Warning from './Warning';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, notEmpty} from '../validators';
 import {updateCategory } from '../actions/protected-data';
-
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {UpdateInput} from './styled-components/Forms';
@@ -102,11 +101,16 @@ export class CatRow extends React.Component {
                 updateAmount = this.props.currentForm.values.amount;
             }
         };
+
         let warning;
         if (this.state.warning) {
             warning = (
                 <WarningOverlay>
-                    <Warning cancelDelete={this.setWarning.bind(this)} categoryName={this.props.category} id={this.props.id} />
+                    <Warning 
+                        cancelDelete={this.setWarning.bind(this)} 
+                        categoryName={this.props.category} 
+                        id={this.props.id}
+                    />
                 </WarningOverlay>
             )
         } 
@@ -141,40 +145,64 @@ export class CatRow extends React.Component {
                             {Math.round(updateAmount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%
                         </div>
                         <div className="edit-buttons form-input-container">
-                            <IconButton aria-label="update budget" className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' disabled={this.props.pristine || this.props.submitting}/></IconButton>
-                            <IconButton aria-label="cancel budget updates" className="cancel-button" onClick={() => this.setEditing()}>
-                                <StyledIcon icon='times' color='#FC4A1A' />
+                            <IconButton 
+                                aria-label="update budget" 
+                                className="update-button" 
+                                type="submit" 
+                                disabled={this.props.pristine || this.props.submitting}
+                            >
+                                <StyledIcon 
+                                    icon={['far', 'save']} 
+                                    color='#4ABDAC' 
+                                    disabled={this.props.pristine || this.props.submitting}
+                                />
+                            </IconButton>
+                            <IconButton 
+                                aria-label="cancel budget updates" 
+                                className="cancel-button" 
+                                onClick={() => this.setEditing()}
+                            >
+                                <StyledIcon icon='times' color='#FC4A1A'/>
                             </IconButton>
                         </div>
                     </UpdateCategoryForm>
                 </FormTD> 
             </tr>
-            )
+            );
         } else {
-
             return (
                 <tr key={this.props.index}>
                     <CategoryTD>{this.props.category}</CategoryTD>
                     <CategoryTD>${parseFloat(this.props.amount).toFixed(2)}</CategoryTD>
                     <CategoryTD className="percentage">{Math.round(this.props.amount / (this.props.monthlySalary - this.props.billsTotal)* 10000)/100}%</CategoryTD>
                     <CategoryTD className="edit-buttons">
-                        <IconButton aria-label="edit budget" className="edit-button" onClick={() => this.setEditing()}>
+                        <IconButton 
+                            aria-label="edit budget" 
+                            className="edit-button" 
+                            onClick={() => this.setEditing()}
+                        >
                             <StyledIcon icon={['far', 'edit']} color='#4ABDAC' />
                         </IconButton>
-                        <IconButton aria-label="delete budget" className="delete-button" onClick={() => this.setWarning()}>
+                        <IconButton 
+                            aria-label="delete budget" 
+                            className="delete-button" 
+                            onClick={() => this.setWarning()}
+                        >
                             <StyledIcon icon={['far', 'trash-alt']} color='#FC4A1A' />
                         </IconButton>
                         {warning}
                     </CategoryTD>
                 </tr>
-            )
+            );
         }
-    }
+    };
 }
 
 const mapStateToProps = (state, props) => ({
     monthlySalary: state.simplify.user.monthlySalary,
-    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => 
+        accumulator + parseFloat(currentBill.amount), 0
+    ),
     initialValues: props,
     currentForm: state.form[props.form]
 });

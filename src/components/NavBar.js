@@ -5,7 +5,6 @@ import { clearAuth } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
-
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'; 
 
@@ -234,13 +233,21 @@ export class NavBar extends React.Component {
             <NavContainer>
                 {activeForm}
                 <Nav>
-                    <LogoContainer><span><Logo className="logo" color="#F7B733" icon="dollar-sign"/></span>implify</LogoContainer>
+                    <LogoContainer>
+                        <span><Logo className="logo" color="#F7B733" icon="dollar-sign"/></span>implify
+                    </LogoContainer>
                     <LinksContainer displayLinks={this.state.displayLinks}>
                         {navButtons}
                     </LinksContainer>
                 </Nav>
                 <Nav narrow>
-                    <LogoContainer><Logo className="logo" color="#F7B733" icon="dollar-sign"/></LogoContainer>
+                    <LogoContainer>
+                        <Logo 
+                            className="logo" 
+                            color="#F7B733" 
+                            icon="dollar-sign"
+                        />
+                    </LogoContainer>
                     <HamburgerNav onClick={() => this.setDisplayLinks()} >
                         <FontAwesomeIcon icon="bars" />
                     </HamburgerNav>
@@ -251,7 +258,7 @@ export class NavBar extends React.Component {
             </NavContainer>
         );
     }
-}
+};
 
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null

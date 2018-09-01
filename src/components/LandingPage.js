@@ -15,7 +15,7 @@ const LandingPageContainer = styled.main`
 
 const HeroContainer = styled.header`
     padding: 40px 15px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 90%,rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%), url(${firstBackground});
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 90%, rgba(255,255,255,1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%), url(${firstBackground});
     background-size: cover;
     height: calc(100vh - 66px);
     background-position: center 75%;
@@ -155,6 +155,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
     color: ${props => props.color ? props.color : 'black'};
 `;
 
+// Landing Page Component
 export function LandingPage(props) {
 
     if (props.loggedIn) {
@@ -224,8 +225,8 @@ export function LandingPage(props) {
                 <p>2018 &copy; Created by Joshua Ollendick</p>
             </footer>
         </LandingPageContainer>
-    )
-}
+    );
+};
 
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null

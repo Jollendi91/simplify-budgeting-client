@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import ProgressBar from 'react-progress-bar.js';
 import CategoryForm from './CategoryForm';
 import CatRow from './CatRow';
-
 import styled from 'styled-components';
 import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
 
@@ -37,7 +36,7 @@ const NoCategoryRow = styled.td`
     text-align: center;
 `;
 
-//Progress Bar
+//Progress Bar configuration
 const Bar = ProgressBar.Line;
 
 const options = {
@@ -75,15 +74,19 @@ const containerStyle = {
 	margin: 'auto'
 };
 
-
 // Category Setup Component
 export function CategorySetup(props) {
 
 	let remainingAmount = (props.monthlySalary - props.billsTotal) - props.categoriesTotal;
 
 	let categories = props.categories.map((category) => 
-		<CatRow key={category.id} {...category} max={remainingAmount} form={`category-${category.id}-update`}/>
-			)
+		<CatRow 
+			key={category.id} 
+			max={remainingAmount} 
+			form={`category-${category.id}-update`}
+			{...category}
+		/>
+	);
 
     return (
         <CategoryFormContainer>
@@ -96,7 +99,8 @@ export function CategorySetup(props) {
 					options={options}
 					initialAnimate={true}
 					containerStyle={containerStyle}
-					containerClassName={'.progressbar'} />
+					containerClassName={'.progressbar'}
+				/>
 			</ProgressContainer>
 			<CategoryForm max={remainingAmount}/>
 			<StyledTable>
@@ -112,14 +116,18 @@ export function CategorySetup(props) {
 				</StyledTBody>
 			</StyledTable>
 		</CategoryFormContainer>
-    )
-}
+    );
+};
 
 const mapStateToProps = state => ({
 	categories: state.simplify.user.categories,
-	categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0),
+	categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => 
+		accumulator + parseFloat(currentCategory.amount), 0
+	),
 	monthlySalary: state.simplify.user.monthlySalary,
-	billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+	billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => 
+		accumulator + parseFloat(currentBill.amount), 0
+	),
 	userId: state.simplify.user.id
 });
 

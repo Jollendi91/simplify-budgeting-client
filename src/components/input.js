@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Styled Components
 const FormError = styled.div`
     font-size: .8em;
     color: #FC4A1A;
     font-weight: bold;
 `;
 
+// Input Component
 export default class Input extends React.Component {
     componentDidUpdate(prevProps) {
         if(!prevProps.meta.active && this.props.meta.active) {
@@ -47,4 +49,4 @@ export default class Input extends React.Component {
             </div>
         );
     }
-}
+};

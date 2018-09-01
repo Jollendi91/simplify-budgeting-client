@@ -8,7 +8,6 @@ import RequiresLogin from './requiresLogin';
 import MonthlyPaySetup from './MonthlyPaySetup';
 import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
-
 import styled from 'styled-components';
 import {FormContainer, Button} from './styled-components/Forms';
 
@@ -43,8 +42,10 @@ const ButtonContainer = styled.div`
     width: 100%;
 `;
 
+// Account Setup Component
 export class AccountSetup extends React.Component {
 
+    // Load user data if it does not exist
     componentDidMount() {
         if (this.props.notLoaded) {
             this.props.dispatch(fetchProtectedUser());
@@ -52,13 +53,14 @@ export class AccountSetup extends React.Component {
     }
    
     render() {
-        
+        //Show spinner if loading data
         if (this.props.loading) {
             return (
                 <MainLoadingSpinner />
             );
         } else if (this.props.step === null) {
 
+            // If setup has been completed redirect to dashboard
             return <Redirect to="/dashboard"/>
     
         } else if (this.props.step === 1) {
@@ -75,8 +77,21 @@ export class AccountSetup extends React.Component {
                     <Header>Account Setup - Bills</Header>
                     <MonthlyBillsSetup />
                     <ButtonContainer>
-                        <Button primary color="#276A73" className='back-button' onClick={() => this.props.dispatch(updateStep(1))}>Back</Button>
-                        <Button color="#276A73" className='next-button' onClick={() => this.props.dispatch(updateStep(3))}>Next</Button>
+                        <Button 
+                            primary 
+                            color="#276A73" 
+                            className='back-button' 
+                            onClick={() => this.props.dispatch(updateStep(1))}
+                        >
+                            Back
+                        </Button>
+                        <Button 
+                            color="#276A73" 
+                            className='next-button' 
+                            onClick={() => this.props.dispatch(updateStep(3))}
+                        >
+                            Next
+                        </Button>
                         <p>Step {this.props.step} / 3</p>
                     </ButtonContainer>
                 </SetupStep>
@@ -87,9 +102,22 @@ export class AccountSetup extends React.Component {
                     <Header>Account Setup - Budgets</Header>
                     <CategorySetup />
                     <ButtonContainer>
-                        <Button primary color="#276A73" className='back-button' onClick={() => this.props.dispatch(updateStep(2))}>Back</Button>
+                        <Button 
+                            primary 
+                            color="#276A73" 
+                            className='back-button' 
+                            onClick={() => this.props.dispatch(updateStep(2))}
+                        >
+                            Back
+                        </Button>
                         <Link to='/dashboard'>
-                            <Button color="#276A73" className="finish-button" onClick={() => this.props.dispatch(updateStep(null))}>Finish Setup</Button>
+                            <Button 
+                                color="#276A73" 
+                                className="finish-button" 
+                                onClick={() => this.props.dispatch(updateStep(null))}
+                            >
+                                Finish Setup
+                            </Button>
                         </Link>
                         <p>Step {this.props.step} / 3</p>
                     </ButtonContainer>
@@ -105,6 +133,5 @@ const MapStateToProps = state => ({
     step: state.simplify.user.setupStep,
     notLoaded: state.simplify.user.id === null
 });
-
 
 export default RequiresLogin()(connect(MapStateToProps)(AccountSetup));
