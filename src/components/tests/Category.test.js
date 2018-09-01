@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {Category} from '../Category';
 import TransRow from '../TransRow';
-import NavBar from '../NavBar';
 import FilterForm from '../FilterForm';
 import TransactionForm from '../TransactionForm';
 
@@ -27,7 +26,6 @@ describe('<Category />', () => {
         const wrapper = shallow(<Category {...props}/>);
         expect(wrapper.containsAllMatchingElements([
             <TransRow />,
-            <NavBar />,
             <FilterForm />,
             <TransactionForm />
         ])).toEqual(true);
