@@ -1,11 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
 import {Dashboard} from '../Dashboard';
-import { CategoryModule } from '../CategoryModule';
+import CategoryModule from '../CategoryModule';
 
 const props = {
-    categories: [],
+    categories: [{id: 1}],
     billsTotal: 0,
     remainingMoney: 0
 }
@@ -24,6 +23,6 @@ describe('<Dashboard />', () => {
 
     it('Should render the correct elements', () => {
         const wrapper = shallow(<Dashboard {...props}/>);
-        expect(wrapper.containsMatchingElement(<CategoryModule />));
+        expect(wrapper.containsMatchingElement(<CategoryModule />)).toEqual(true);
     });
 });

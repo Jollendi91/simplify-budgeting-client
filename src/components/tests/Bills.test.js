@@ -1,10 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
 import {Bills} from '../Bills';
-import { BillRow } from '../BillRow';
-import { NavBar } from '../NavBar';
-import { MonthlyBillForm } from '../MonthlyBillsForm';
+import BillRow from '../BillRow';
+import MonthlyBillForm from '../MonthlyBillsForm';
 
 const props = {
     bills: [{id: 1}],
@@ -24,6 +22,9 @@ describe('<Bills />', () => {
 
     it('Should render correct elements', () => {
         const wrapper = shallow(<Bills {...props}/>);
-        expect(wrapper.containsAllMatchingElements([<BillRow />,<NavBar />, <MonthlyBillForm />, ]));
+        expect(wrapper.containsAllMatchingElements([
+            <BillRow />,
+            <MonthlyBillForm />
+         ])).toEqual(true);
     });
 });

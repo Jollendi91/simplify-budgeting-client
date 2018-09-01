@@ -1,7 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {Redirect} from 'react-router-dom';
-
 import {AccountSetup} from '../AccountSetup';
 import MonthlyPaySetup from '../MonthlyPaySetup';
 import MonthlyBillsSetup from '../MonthlyBillsSetup';

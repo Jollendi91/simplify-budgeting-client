@@ -1,9 +1,8 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-
+import {shallow} from 'enzyme';
 import {CategorySetup} from '../CategorySetup';
-import { CatRow } from '../CatRow';
-import { CategoryForm } from '../CategoryForm';
+import CatRow from '../CatRow';
+import CategoryForm from '../CategoryForm';
 
 const props = {
     categories: [{id: 1}],
@@ -19,6 +18,9 @@ describe('<CategorySetup />', () => {
 
     it('Renders the correct elements', () => {
         const wrapper = shallow(<CategorySetup {...props}/>);
-        expect(wrapper.containsAllMatchingElements([<CatRow />, <CategoryForm />]));
+        expect(wrapper.containsAllMatchingElements([
+        <CatRow />,
+         <CategoryForm />
+        ])).toEqual(true);
     });
 });

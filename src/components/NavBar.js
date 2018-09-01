@@ -193,8 +193,8 @@ export class NavBar extends React.Component {
         if (this.props.page === '/') {
             navButtons = (
                 <NavLinks>
-                    <li className="link" onClick={() => this.displayForm('signup')}>Sign up</li>
-                    <li className="link" onClick={() => this.displayForm('login')}>Log in</li>
+                    <li className="link signup" onClick={() => this.displayForm('signup')}>Sign up</li>
+                    <li className="link login" onClick={() => this.displayForm('login')}>Log in</li>
                 </NavLinks>
             );
         } else if (this.props.page === '/account-setup') {

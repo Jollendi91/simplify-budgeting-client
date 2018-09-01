@@ -1,7 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {NavBar} from '../NavBar';
-import { LoginForm } from '../LoginForm';
+import LoginForm from '../LoginForm';
+import SignupForm from '../SignupForm';
 import { clearAuth } from '../../actions/auth';
 
 describe('<NavBar />', () => {
@@ -9,9 +10,18 @@ describe('<NavBar />', () => {
         shallow(<NavBar />);
     });
 
-    it('Should render login form on root path', () => {
+    it('Should render login form on login click', () => {
         const wrapper = shallow(<NavBar page="/" />);
-        expect(wrapper.containsMatchingElement(<LoginForm/>));
+        const loginButton = wrapper.find('.login').first();
+        loginButton.simulate('click');
+        expect(wrapper.containsMatchingElement(<LoginForm/>)).toEqual(true);
+    });
+    
+    it('Should render signup form on signup click', () => {
+        const wrapper = shallow(<NavBar page="/" />);
+        const loginButton = wrapper.find('.signup').first();
+        loginButton.simulate('click');
+        expect(wrapper.containsMatchingElement(<SignupForm />)).toEqual(true);
     });
 
     it('Should render correct buttons on account-setup page', () => {

@@ -15,7 +15,6 @@ export const ComponentContainer = styled.section`
     }
 `;
 
-
 export const HeaderContainer = styled.header`
     display: flex;
     justify-content: center;
@@ -28,7 +27,6 @@ export const HeaderContainer = styled.header`
       border-radius: 5px 5px 0 0;
     }
 `;
-
 
 const rotate360 = keyframes`
   from {
