@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import { clearAuth } from '../actions/auth';
+import { clearAuth, login } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
@@ -192,6 +192,7 @@ export class NavBar extends React.Component {
         if (this.props.page === '/') {
             navButtons = (
                 <NavLinks>
+                    <li className="link demo-account" onClick={() => this.props.dispatch(login('Test-User', 'test-password'))}>Demo Account</li>
                     <li className="link signup" onClick={() => this.displayForm('signup')}>Sign up</li>
                     <li className="link login" onClick={() => this.displayForm('login')}>Log in</li>
                 </NavLinks>
