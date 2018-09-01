@@ -1,7 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {Warning} from '../Warning';
-import { isTrimmed } from '../../validators';
 
 describe('<Warning />', () => {
     it('Renders without crashing', () => {

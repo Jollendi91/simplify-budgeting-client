@@ -4,15 +4,15 @@ import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import {required, notEmpty, isTrimmed, length, matches} from '../validators';
-
 import {StyledInput, FormContainer, CloseButton, Button, HorizontalInputs, StyledLabel, ButtonContainer} from './styled-components/Forms';
 import {HeaderContainer, LoadingSpinner} from './styled-components/Elements';
 
-
+// Form Validators
 const passwordLength = length({min: 10, max: 72});
 const usernameLength = length({min: 8, max: 30});
 const matchesPassword = matches('password');
 
+// Signup Form Component
 export class SignupForm extends React.Component {
     onSubmit(values) {
         const {username, password} = values;
@@ -104,7 +104,7 @@ export class SignupForm extends React.Component {
             </FormContainer>
         );
     }
-}
+};
 
 const mapStateToProps = state => ({
     loading: state.auth.loading

@@ -3,14 +3,12 @@ import moment from 'moment';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import MainLoadingSpinner from './MainLoadingSpinner';
-import NavBar from './NavBar';
 import FilterForm from './FilterForm';
 import TransactionForm from './TransactionForm';
 import  TransRow  from './TransRow';
 import ProgressBar from 'react-progress-bar.js';
 import RequiresLogin from './requiresLogin';
 import {fetchProtectedUser} from '../actions/protected-data';
-
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {StyledTable, StyledTH, StyledTBody} from './styled-components/Tables';
@@ -58,7 +56,7 @@ const NoTransactionRow = styled.td`
     text-align: center;
 `;
 
-// Progress Bar
+// Progress Bar Component configuration
 const RemainingBar = ProgressBar.Line;
 
 const options = {
@@ -88,7 +86,7 @@ export class Category extends React.Component {
             filterYear: new Date().getFullYear()
         }
     }
-
+    // Load user data if it has not been loaded
     componentDidMount() {
         if (this.props.notLoaded) {
             this.props.dispatch(fetchProtectedUser());
@@ -103,12 +101,12 @@ export class Category extends React.Component {
     }
 
     render() {
-        // If user data is not loaded return nothing
+        // If user data is not loaded show loading spinner while data is being fetched
         if (this.props.notLoaded) {
             return (<MainLoadingSpinner />);
         }
 
-        // Set date to filter transacitions from the store
+        // Set the date to filter transacitions from the store
         const filterDate = moment(new Date(this.state.filterYear, this.state.filterMonth));
         let firstDayMonth = filterDate.startOf('month').toISOString();
         let lastDayMonth = filterDate.endOf('month').toISOString();
@@ -116,7 +114,12 @@ export class Category extends React.Component {
         const currentMonthTransactions = [];
         
         // Filter, sort, and return transactions for the filter month and year
-        const transactions = this.props.category.transactions.filter(transaction => moment(transaction.date).isBetween(firstDayMonth, lastDayMonth, null, [])).sort((a, b) => a.date < b.date ? 1 : -1 ).map(transaction => {
+        const transactions = this.props.category.transactions.filter(transaction => 
+            moment(transaction.date)
+            .isBetween(firstDayMonth, lastDayMonth, null, []))
+            .sort((a, b) => 
+                a.date < b.date ? 1 : -1 
+            ).map(transaction => {
 
             currentMonthTransactions.push(transaction);
             
@@ -128,11 +131,12 @@ export class Category extends React.Component {
                     />
         });
 
-        const transactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
+        const transactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => 
+            accumulator + parseFloat(currentTransaction.amount), 0
+        );
 
         return (
-            <div>
-                <NavBar page={'dashboard'}/>
+            <div>     
                 <ComponentContainer>
                     <section>
                         <HeaderContainer>
@@ -170,7 +174,7 @@ export class Category extends React.Component {
                             </tr>
                         </thead>
                         <StyledTBody>
-                        {transactions.length > 0 ? transactions : <tr><NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
+                            {transactions.length > 0 ? transactions : <tr><NoTransactionRow colSpan="4">You have not added any Transactions</NoTransactionRow></tr> }
                         </StyledTBody>
                     </StyledTable>
                 </ComponentContainer>
@@ -179,12 +183,12 @@ export class Category extends React.Component {
     }
 };
 
-
 const mapStateToProps = (state, props) => ({
     notLoaded: state.simplify.user.id === null,
-    category: state.simplify.user.categories.find(category => category.id.toString() === props.match.params.categoryId),
+    category: state.simplify.user.categories.find(category => 
+        category.id.toString() === props.match.params.categoryId
+    ),
     initialValues: state.filterMonth
 });
-
 
 export default RequiresLogin()(connect(mapStateToProps)(Category));

@@ -1,10 +1,9 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
 import {EditProfile} from '../EditProfile';
-import { MonthlyPayEdit } from '../MonthlyPayEdit';
-import { MonthlyBillsSetup } from '../MonthlyBillsSetup';
-import { CategorySetup } from '../CategorySetup';
+import MonthlyPayEdit from '../MonthlyPayEdit';
+import MonthlyBillsSetup from '../MonthlyBillsSetup';
+import CategorySetup from '../CategorySetup';
 
 describe('<EditProfile />', () => {
     it('Renders without crashing', () => {
@@ -13,7 +12,11 @@ describe('<EditProfile />', () => {
 
     it('Should render the correct elements', () => {
         const wrapper = shallow(<EditProfile />);
-        expect(wrapper.containsAllMatchingElements([<MonthlyPayEdit />, <MonthlyBillsSetup />, <CategorySetup/>]));
+        expect(wrapper.containsAllMatchingElements([
+            <MonthlyPayEdit />,
+            <MonthlyBillsSetup />,
+            <CategorySetup/>
+        ])).toEqual(true);
     });
 
     it('Should dispatch fetchProtectedUser if not loaded', () => {

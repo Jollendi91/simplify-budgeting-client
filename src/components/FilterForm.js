@@ -4,6 +4,7 @@ import {fetchTransactions} from '../actions/protected-data';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
+// Styled Components
 const FilterContainer = styled.div`
     display: flex;
     justify-content: space-around;
@@ -20,9 +21,11 @@ const StyledIcon = styled(FontAwesomeIcon)`
     cursor: pointer;
 `;
 
-// To display current filtered month
+// To display the current filtered month
 const currentMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+
+// Filter Form Component
 export class FilterForm extends React.Component {
 
     onDateChange(direction) {
@@ -48,12 +51,20 @@ export class FilterForm extends React.Component {
     render() {
         return (
             <FilterContainer>
-                <StyledIcon className="back-button" icon="angle-left" onClick={() => this.onDateChange('back')}/>
+                <StyledIcon 
+                    className="back-button" 
+                    icon="angle-left" 
+                    onClick={() => this.onDateChange('back')}
+                />
                 <h3>{currentMonthName[this.props.filterMonth]} {this.props.filterYear}</h3>
-                <StyledIcon className="next-button" icon="angle-right" onClick={() => this.onDateChange('next')}/>
+                <StyledIcon 
+                    className="next-button" 
+                    icon="angle-right" 
+                    onClick={() => this.onDateChange('next')}
+                />
             </FilterContainer>
-        )
+        );
     }
-}
+};
 
 export default connect()(FilterForm);

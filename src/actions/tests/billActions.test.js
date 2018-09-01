@@ -3,7 +3,6 @@ import {API_BASE_URL} from '../../config';
 
 
 // Add Bill Action
-
 describe('addBillSuccess', () => {
     it('Should return the action', () => {
         const id = 1;
@@ -66,12 +65,11 @@ describe('addBill', () => {
     });
 });
 
-// Update BIll Action 
-
+// Update Bill Action 
 describe('updateBillSuccess', () => {
     it('Should return the action', () => {
         const bill = {
-            id: 1, 
+            id: 1,
             bill: 'rent',
             amount: 200
         };
@@ -134,7 +132,6 @@ describe('updateBill', () => {
 
 
 // Delete Bill Action
-
 describe('deleteBillSuccess', () => {
     it('Should return the action', () => {
         const billId = 1;

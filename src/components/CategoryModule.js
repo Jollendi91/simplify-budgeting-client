@@ -6,7 +6,6 @@ import ProgressBar from 'react-progress-bar.js';
 import styled from 'styled-components';
 
 // Styled Components
-
 const BudgetContainer = styled.section`
     display: grid;
     grid-template-columns: 95%;
@@ -40,7 +39,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
     color: #FC4A1A;
 `;
 
-// Budget Progress Bar
+// Budget Progress Bar configuration
 const BudgetBar = ProgressBar.Line;
 
 const options = {
@@ -75,6 +74,8 @@ const containerStyle = {
 	height: '24px'
 };
 
+
+//Category Module Component
 export function CategoryModule(props) {
     // filter transacitions from the store for only the current month
     const filterDate = moment();
@@ -82,12 +83,17 @@ export function CategoryModule(props) {
     let lastDayMonth = filterDate.endOf('month').toISOString();
 
     const currentMonthTransactions = [];
-    props.currentCategory.transactions.filter(transaction => moment(transaction.date).isBetween(firstDayMonth, lastDayMonth, null, [])).forEach(transaction => {
+    
+    props.currentCategory.transactions.filter(transaction => 
+        moment(transaction.date)
+        .isBetween(firstDayMonth, lastDayMonth, null, []))
+        .forEach(transaction => {
+            currentMonthTransactions.push(transaction);
+        });
 
-        currentMonthTransactions.push(transaction);
-    });
-
-    let currentTransactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => accumulator + parseFloat(currentTransaction.amount), 0);
+    let currentTransactionsTotal = currentMonthTransactions.reduce((accumulator, currentTransaction) => 
+        accumulator + parseFloat(currentTransaction.amount), 0
+    );
 
     return (
         <BudgetContainer>
@@ -105,11 +111,11 @@ export function CategoryModule(props) {
             />
             <StyledIcon icon="angle-right"/>
         </BudgetContainer>
-    )
-}
+    );
+};
 
 const mapStateToProps = (state, props) => ({
-    currentCategory: state.simplify.user.categories.find(category => category.id === props.id),
+    currentCategory: state.simplify.user.categories.find(category => category.id === props.id)
 });
 
 export default connect(mapStateToProps)(CategoryModule);

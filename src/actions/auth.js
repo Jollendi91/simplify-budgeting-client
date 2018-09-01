@@ -1,6 +1,5 @@
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
-
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
@@ -27,7 +26,7 @@ export const authSuccess = currentUser => ({
     currentUser
 });
 
-export const AUTH_ERROR= 'AUTH_ERROR';
+export const AUTH_ERROR = 'AUTH_ERROR';
 export const authError = error => ({
     type: AUTH_ERROR,
     error
@@ -55,18 +54,20 @@ export const login = (username, password) => dispatch => {
         })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        .then(({
+            authToken
+        }) => storeAuthInfo(authToken, dispatch))
         .catch(err => {
             const {code} = err;
             const message =
                 code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
-                dispatch(authError(err));
+            dispatch(authError(err));
 
-                return Promise.reject(
-                    new SubmissionError({
-                        _error: message
-                    })
-                );
+            return Promise.reject(
+                new SubmissionError({
+                    _error: message
+                })
+            );
         })
     );
 };
@@ -75,17 +76,19 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/auth/refresh`, {
-        method: 'POST',
-        headers: {
-            Authorization: `Bearer ${authToken}`
-        }
-    })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .then(({authToken}) => storeAuthInfo(authToken, dispatch))
-    .catch(err => {
-        dispatch(authError(err));
-        dispatch(clearAuth());
-        clearAuthToken(authToken);
-    });
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(({
+            authToken
+        }) => storeAuthInfo(authToken, dispatch))
+        .catch(err => {
+            dispatch(authError(err));
+            dispatch(clearAuth());
+            clearAuthToken(authToken);
+        });
 };

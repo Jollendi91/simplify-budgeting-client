@@ -23,7 +23,6 @@ export class ResponsivePieChart extends React.Component {
     }
 
     render() {
-
         let chartSize;
         if (this.state.windowWidth > 700) {
             chartSize = 350;
@@ -42,6 +41,6 @@ export class ResponsivePieChart extends React.Component {
                     clickHandler={this.props.clickHandler}
                 />
             </div>
-        )
+        );
     }
-}
+};

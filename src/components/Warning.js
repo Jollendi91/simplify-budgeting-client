@@ -5,6 +5,7 @@ import {Button} from './styled-components/Forms';
 import {HeaderContainer} from './styled-components/Elements';
 import {deleteCategory} from '../actions/protected-data';
 
+// Styled Components
 const WarningContainer = styled.td`
     max-width: 300px;
     background: white;
@@ -22,6 +23,7 @@ const WarningContainer = styled.td`
 `;
 WarningContainer.displayName = "WarningContainer";
 
+// Delete Category Warning Component
 export function Warning(props) {
     return (
         <WarningContainer>
@@ -29,11 +31,21 @@ export function Warning(props) {
                 <h2>Are you sure?</h2>
             </HeaderContainer>
             <p>Deleting this category ({props.categoryName}) will also remove all of its associated transactions. Delete anyway?</p>
-            <Button className="confirm-delete" primary color="#4ABDAC" onClick={() => props.dispatch(deleteCategory(props.id))}>Yes</Button>
-            <Button color="#FC4A1A" onClick={() => props.cancelDelete()}>No</Button>
+            <Button 
+                className="confirm-delete" 
+                primary color="#4ABDAC" 
+                onClick={() => props.dispatch(deleteCategory(props.id))}
+            >
+                Yes
+            </Button>
+            <Button 
+                color="#FC4A1A" 
+                onClick={() => props.cancelDelete()}
+            >
+                No
+            </Button>
         </WarningContainer> 
-    )
-}
-
+    );
+};
 
 export default connect()(Warning);

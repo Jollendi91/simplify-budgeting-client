@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import styled from 'styled-components';
 import {LoadingSpinner} from './styled-components/Elements';
 
+// Styled Components
 const SpinnerContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -20,13 +20,14 @@ const Spinner = LoadingSpinner.extend`
     color: #4ABDAC;
 `;
 
+// Loading Spinner Component
 export function MainLoadingSpinner(props) {
     return (
         <SpinnerContainer>
             <Spinner icon='spinner' />
         </SpinnerContainer>
-    )
-}
+    );
+};
 
 const mapStateToProps = state => ({
     loading: state.simplify.loading

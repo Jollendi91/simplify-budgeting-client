@@ -5,13 +5,11 @@ import BillRow from './BillRow';
 import requiresLogin from './requiresLogin';
 import MonthlyBillForm from './MonthlyBillsForm';
 import {fetchProtectedUser} from '../actions/protected-data';
-
 import styled from 'styled-components';
 import {StyledTable, StyledTBody, StyledTH} from './styled-components/Tables';
 import {HeaderContainer, ComponentContainer} from './styled-components/Elements';
 
 // Styled Component
-
 const BillsTotal = styled.div`
     padding: 15px;
     font-size: 2em;
@@ -22,7 +20,10 @@ const NoBillRow = styled.td`
     text-align: center;
 `;
 
+
+// Bills Component
 export class Bills extends React.Component {
+    //Load user data if it not already loaded
     componentDidMount() {
         if (this.props.notLoaded) {
             this.props.dispatch(fetchProtectedUser());
@@ -37,7 +38,11 @@ export class Bills extends React.Component {
         }
 
         const bills = this.props.bills.map(bill => 
-            <BillRow key={bill.id} {...bill} form={`bill-${bill.id}-update`}/>
+            <BillRow 
+                key={bill.id}  
+                form={`bill-${bill.id}-update`}
+                {...bill}
+            />
         );
 
         return (
@@ -63,14 +68,15 @@ export class Bills extends React.Component {
                     </StyledTable>
                 </section>
             </ComponentContainer>
-        )
-    }
+        );
+    };
 };
-
 
 const mapStateToProps = state => ({
     bills: state.simplify.user.bills,
-    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0), 
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => 
+        accumulator + parseFloat(currentBill.amount), 0
+    ), 
     userId: state.simplify.user.id,
     notLoaded: state.simplify.user.id === null
 });

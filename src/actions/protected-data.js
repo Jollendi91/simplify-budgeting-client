@@ -87,7 +87,7 @@ export const addBillError = error => ({
 export const addBill = (bill, amount) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
-  return  fetch(`${API_BASE_URL}/bills`, {
+    return fetch(`${API_BASE_URL}/bills`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export const addBill = (bill, amount) => (dispatch, getState) => {
 }
 
 export const UPDATE_BILL_SUCCESS = 'UPDATE_BILL_SUCCESS';
-export const updateBillSuccess = ( billId, billName, billAmount) => ({
+export const updateBillSuccess = (billId, billName, billAmount) => ({
     type: UPDATE_BILL_SUCCESS,
     billId,
     billName,

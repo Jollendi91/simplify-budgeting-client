@@ -1,8 +1,6 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-
+import {shallow} from 'enzyme';
 import {BillRow} from '../BillRow';
-import { deleteBill } from '../../actions/protected-data';
 
 describe('<BillRow />', () => {
     it('Renders without crashing', () => {

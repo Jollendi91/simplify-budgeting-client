@@ -41,11 +41,16 @@ export class CategoryForm extends React.Component {
                             ariaLabel="budget amount"
                         />
                     </div>
-                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}>Add</Button>
+                    <Button 
+                        color="#276A73" 
+                        disabled={this.props.pristine || this.props.submitting || this.props.max <= 0}
+                    >
+                        Add
+                    </Button>
                 </Inputs>    
             </form>
-        )
-    }
+        );
+    };
 }
 
 export default reduxForm({

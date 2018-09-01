@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom';
 export default () => Component => {
     function RequiresLogin(props) {
         const {authenticating, loggedIn, error, ...passThroughProps} = props;
+        
         if (authenticating) {
             return <div>Logging in...</div>
         } else if (!loggedIn || error) {
@@ -12,7 +13,7 @@ export default () => Component => {
         } 
 
         return <Component {...passThroughProps}/>;
-    }
+    };
 
     const displayName = Component.displayName || Component.name || 'Component';
     RequiresLogin.displayName = `RequiresLogin(${displayName})`;

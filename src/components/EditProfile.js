@@ -6,10 +6,8 @@ import MonthlyBillsSetup from './MonthlyBillsSetup';
 import CategorySetup from './CategorySetup';
 import RequiresLogin from './requiresLogin'
 import { fetchProtectedUser } from '../actions/protected-data';
-
 import styled from 'styled-components';
 import {ComponentContainer, HeaderContainer} from './styled-components/Elements';
-
 
 // Styled Components
 const EditContainer = ComponentContainer.extend`
@@ -59,8 +57,9 @@ const SectionContainer = styled.section`
     }
 `;
 
+// Edit Profile Component
 export class EditProfile extends React.Component {
-    
+    // Load user data if not loaded
     componentDidMount() {
         if (this.props.notLoaded) {
             this.props.dispatch(fetchProtectedUser());
@@ -71,7 +70,7 @@ export class EditProfile extends React.Component {
         if (this.props.notLoaded) {
             return (
                 <MainLoadingSpinner />
-            )
+            );
         }
         return (
             <EditContainer>
@@ -90,7 +89,7 @@ export class EditProfile extends React.Component {
                     <CategorySetup />
                 </SectionContainer>
             </EditContainer>
-         )
+         );
     }
 };
 

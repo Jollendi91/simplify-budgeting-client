@@ -13,6 +13,7 @@ const InputLabelTop = SetupInput.extend`
     }
 `;
 
+// Monthly Pay Edit Component
 export class MonthlyPayEdit extends React.Component {
     constructor(props) {
         super(props);
@@ -38,26 +39,45 @@ export class MonthlyPayEdit extends React.Component {
         let salaryForm;
         if (!this.state.editing) {
             salaryForm = <div>
-                            <Button color="#276A73" className="edit-button" onClick={() => this.setEditing()}>Edit Pay</Button>
+                            <Button 
+                                color="#276A73" 
+                                className="edit-button" 
+                                onClick={() => this.setEditing()}
+                            >
+                                Edit Pay
+                            </Button>
                         </div>
         } else {
             salaryForm = 
-            <form className="update-salary-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                <Field
-                    component={InputLabelTop}
-                    type="number"
-                    name="monthlySalary"
-                    id="monthly-salary"
-                    step="0.01"
-                    min={this.props.categoriesTotal + this.props.billsTotal}
-                    validate={[required, notEmpty]}
-                    ariaLabel="update take home pay"
-                />
-                <div>
-                    <Button color="#276A73" className="update-button" type="submit" disabled={this.props.pristine || this.props.submitting}>Update</Button>
-                    <Button primary color="#276A73" className="cancel-button" onClick={() => this.setEditing()}>Cancel</Button>
-                </div>
-            </form>
+                <form className="update-salary-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                    <Field
+                        component={InputLabelTop}
+                        type="number"
+                        name="monthlySalary"
+                        id="monthly-salary"
+                        step="0.01"
+                        min={this.props.categoriesTotal + this.props.billsTotal}
+                        validate={[required, notEmpty]}
+                        ariaLabel="update take home pay"
+                    />
+                    <div>
+                        <Button 
+                        color="#276A73" 
+                        className="update-button" 
+                        type="submit" 
+                        disabled={this.props.pristine || this.props.submitting}
+                        >
+                            Update
+                        </Button>
+                        <Button 
+                            primary color="#276A73" 
+                            className="cancel-button" 
+                            onClick={() => this.setEditing()}
+                        >
+                            Cancel
+                        </Button>
+                    </div>
+                </form>
         }
 
         return (
@@ -71,15 +91,19 @@ export class MonthlyPayEdit extends React.Component {
                     {salaryForm}
                 </section>
             </section>
-        )
+        );
     }
 };
 
 const mapStateToProps = state => ({
-    categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0),
-    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0),
+    categoriesTotal: state.simplify.user.categories.reduce((accumulator, currentCategory) => 
+        accumulator + parseFloat(currentCategory.amount), 0
+    ),
+    billsTotal: state.simplify.user.bills.reduce((accumulator, currentBill) => 
+        accumulator + parseFloat(currentBill.amount), 0
+    ),
     monthlySalary: state.simplify.user.monthlySalary
-})
+});
 
 export default reduxForm({
     form: 'monthly-salary',

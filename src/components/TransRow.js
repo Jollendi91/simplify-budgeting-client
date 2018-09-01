@@ -3,9 +3,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, notEmpty} from '../validators';
-
 import { deleteTransaction, updateTransaction } from '../actions/protected-data';
-
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {UpdateInput} from './styled-components/Forms';
@@ -60,8 +58,7 @@ const IconButton = styled.button`
    cursor: pointer;
 `;
 
-
-
+// Transaction Table Row Component
 export class TransRow extends React.Component {
     constructor(props) {
         super(props);
@@ -121,13 +118,29 @@ export class TransRow extends React.Component {
                                 />
                             </div>
                             <EditButtons>
-                                <IconButton type="submit" aria-label="save updates" disabled={this.props.pristine || this.props.submitting}><StyledIcon icon={['far', 'save']} color='#4ABDAC' disabled={this.props.pristine || this.props.submitting}/></IconButton>
-                                <IconButton aria-label="cancel transaction updates" className="cancel-button" onClick={() => this.setEditing()}><StyledIcon icon='times' color='#FC4A1A' /></IconButton>
+                                <IconButton 
+                                    type="submit" 
+                                    aria-label="save updates" 
+                                    disabled={this.props.pristine || this.props.submitting}
+                                >
+                                    <StyledIcon 
+                                        icon={['far', 'save']} 
+                                        color='#4ABDAC' 
+                                        disabled={this.props.pristine || this.props.submitting}
+                                    />
+                                </IconButton>
+                                <IconButton 
+                                    aria-label="cancel transaction updates" 
+                                    className="cancel-button" 
+                                    onClick={() => this.setEditing()}
+                                >
+                                    <StyledIcon icon='times' color='#FC4A1A' />
+                                </IconButton>
                             </EditButtons>
                         </UpdateTransactionForm>
                     </TransTD>
                 </tr>
-            )
+            );
         } else {
             return (
                 <tr>
@@ -135,13 +148,25 @@ export class TransRow extends React.Component {
                     <TransTD>{moment(this.props.date).format('M/D/YY')}</TransTD>
                     <TransTD>${parseFloat(this.props.amount).toFixed(2)}</TransTD>
                     <EditButtons>
-                        <IconButton aria-label="edit transaction" className="edit-button" onClick={() => this.setEditing()}><StyledIcon icon={['far','edit']} color='#4ABDAC'/></IconButton>
-                        <IconButton aria-label="delete transaction" className="delete-button" onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}><StyledIcon icon={['far','trash-alt']} color='#FC4A1A' /></IconButton>
+                        <IconButton 
+                            aria-label="edit transaction" 
+                            className="edit-button" 
+                            onClick={() => this.setEditing()}
+                        >
+                            <StyledIcon icon={['far','edit']} color='#4ABDAC'/>
+                        </IconButton>
+                        <IconButton 
+                            aria-label="delete transaction" 
+                            className="delete-button" 
+                            onClick={() => this.props.dispatch(deleteTransaction(this.props.id, this.props.categoryId))}
+                        >
+                            <StyledIcon icon={['far','trash-alt']} color='#FC4A1A' />
+                        </IconButton>
                     </EditButtons>
                 </tr>
-            )
+            );
         }
-    }
+    };
 }
 
 const mapStateToProps = (state, props) => ({

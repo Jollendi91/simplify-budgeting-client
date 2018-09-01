@@ -12,7 +12,6 @@ export class MonthlyBillForm extends React.Component {
     }
  
     render() {
-
         let errorMessage;
         if (this.props.error) {
             errorMessage = (
@@ -51,12 +50,17 @@ export class MonthlyBillForm extends React.Component {
                             ariaLabel="bill amount"
                         />
                     </div>
-                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Add</Button>
+                    <Button 
+                        color="#276A73" 
+                        disabled={this.props.pristine || this.props.submitting}
+                    >
+                        Add
+                    </Button>
                 </Inputs>
             </form>
-        )
+        );
     }
-}
+};
 
 export default reduxForm({
     form: 'bills',

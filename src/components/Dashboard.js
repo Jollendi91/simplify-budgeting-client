@@ -4,16 +4,13 @@ import {Legend} from 'react-easy-chart';
 import {ResponsivePieChart} from './ResponsivePieChart';
 import {connect} from 'react-redux';
 import requiresLogin from './requiresLogin';
-
 import CategoryModule from './CategoryModule';
 import {fetchProtectedUser} from '../actions/protected-data';
-
 import styled from 'styled-components';
 import {FormContainer} from './styled-components/Forms';
 import { MainLoadingSpinner } from './MainLoadingSpinner';
 
 // Styled Components
-
 const DashboardContainer = FormContainer.extend`
     top: 70px;
 
@@ -59,6 +56,7 @@ const StyledLink = styled(Link)`
     color: #000;
 `;
 
+// Dashboard Component
 export class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -73,6 +71,7 @@ export class Dashboard extends React.Component {
         }
     }
 
+    // Fetch user data if no user is loaded
     componentDidMount() {
         if (this.props.notLoaded) {
             this.props.dispatch(fetchProtectedUser());
@@ -80,18 +79,17 @@ export class Dashboard extends React.Component {
     }
 
     render() {
-
     	const categories = this.props.categories.map((category, index) => 
             <StyledLink key={index} to={`category/${category.id}`}>
                 <CategoryModule key={category.id} {...category} />
             </StyledLink>
         );
 
+        // Pie Chart configuration
         let currentColor;
         let colorNumber = 0;
         const colorArray = ['#276A73', '#4ABDAC', '#FC4A1A', '#F7B733', '#DEDCE3'];
         
-
         function getColor(i) {
             currentColor = colorArray[i];
             colorNumber++;
@@ -160,10 +158,16 @@ export class Dashboard extends React.Component {
                                         })
                                     }
                                 />
-                                <Legend horizontal data={data} dataId={'key'} config={config} styles={customStyle}/>
+                                <Legend 
+                                    horizontal 
+                                    data={data} 
+                                    dataId={'key'} 
+                                    config={config} 
+                                    styles={customStyle}
+                                />
                             </PortfolioData>
                             <GraphText>
-                            {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
+                                {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
                             </GraphText>
                         </DashboardCard>
                         <DashboardCard>
@@ -172,14 +176,19 @@ export class Dashboard extends React.Component {
                         </DashboardCard>
                     </DashboardContainer>
                 </div>
-            )
+            );
         }
-    }
+    };
 }
 
 const mapStateToProps = state => {
-    let categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => accumulator + parseFloat(currentCategory.amount), 0);
-    let billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => accumulator + parseFloat(currentBill.amount), 0);
+    let categoryTotal = state.simplify.user.categories.reduce((accumulator, currentCategory) => 
+        accumulator + parseFloat(currentCategory.amount), 0
+    );
+    
+    let billTotal = state.simplify.user.bills.reduce((accumulator, currentBill) => 
+        accumulator + parseFloat(currentBill.amount), 0
+    );
      
     return  {
         loading: state.simplify.loading,

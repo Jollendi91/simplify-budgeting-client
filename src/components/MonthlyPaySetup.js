@@ -37,12 +37,17 @@ export class MonthlyPaySetup extends React.Component {
                         validate={[required, notEmpty]}
                         ariaLabel="What is your monthly take home pay?"
                     />
-                    <Button color="#276A73" disabled={this.props.pristine || this.props.submitting}>Next</Button>
+                    <Button 
+                        color="#276A73" 
+                        disabled={this.props.pristine || this.props.submitting}
+                    >
+                        Next
+                    </Button>
                 </form>
             </section>
-        )
+        );
     }
-}
+};
 
 export default reduxForm({
     form: 'salary',

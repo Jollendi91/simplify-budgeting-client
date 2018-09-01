@@ -76,14 +76,14 @@ export const simplifyReducer = (state = initialState, action) => {
                         bill: action.billName,
                         amount: action.billAmount
                     } : bill)
-            }  
+            }
         });
 
     } else if (action.type === actions.UPDATE_BILL_ERROR) {
         return Object.assign({}, state, {
             error: action.error
         });
-        
+
     } else if (action.type === actions.DELETE_BILL_SUCCESS) {
 
         return Object.assign({}, state, {
@@ -112,18 +112,18 @@ export const simplifyReducer = (state = initialState, action) => {
         });
 
     } else if (action.type === actions.ADD_CATEGORY_ERROR) {
-        
+
         return Object.assign({}, state, {
             error: action.error
         });
 
     } else if (action.type === actions.UPDATE_CATEGORY_SUCCESS) {
 
-        return  Object.assign({}, state, {
+        return Object.assign({}, state, {
             user: {
                 ...state.user,
                 categories: state.user.categories.map(category => category.id === action.categoryId ? {
-                 ...category,
+                    ...category,
                     category: action.categoryName,
                     amount: action.categoryAmount,
                 } : category)
@@ -153,17 +153,17 @@ export const simplifyReducer = (state = initialState, action) => {
 
     } else if (action.type === actions.FETCH_TRANSACTIONS_SUCCESS) {
         const currentCategory = state.user.categories.find(category => category.id === action.categoryId);
-        
+
         //Only return transactions that are not already in the state
         const newTransactions = action.transactions.filter(transaction => !currentCategory.transactions.some(currentTransaction => currentTransaction.id === transaction.id));
-        
+
         return Object.assign({}, state, {
             user: {
                 ...state.user,
                 categories: state.user.categories.map(category => category.id === action.categoryId ? {
                     ...category,
                     transactions: [...category.transactions, ...newTransactions]
-                }: category)
+                } : category)
             }
         });
 
@@ -211,8 +211,8 @@ export const simplifyReducer = (state = initialState, action) => {
                         date: action.transDate,
                         amount: action.transAmount
                     } : transaction)
-                 } : category)
-            } 
+                } : category)
+            }
         });
 
     } else if (action.type === actions.ADD_TRANSACTION_ERROR) {
@@ -229,16 +229,16 @@ export const simplifyReducer = (state = initialState, action) => {
                 categories: state.user.categories.map(category => category.id === action.categoryId ? {
                     ...category,
                     transactions: category.transactions.filter(trans => trans.id !== action.transactionId)
-                 } : category)
-            } 
-        });       	
+                } : category)
+            }
+        });
 
     } else if (action.type === actions.DELETE_TRANSACTION_ERROR) {
 
         return Object.assign({}, state, {
             error: action.error
         });
-        
+
     } else if (action.type === actions.SETUP_STEP_SUCCESS) {
 
         return Object.assign({}, state, {

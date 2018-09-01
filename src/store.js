@@ -1,10 +1,8 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-
 import rootReducer from './reducers';
 import {createBrowserHistory} from 'history';
 import {connectRouter} from 'connected-react-router';
-
 import {loadAuthToken} from './local-storage';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
