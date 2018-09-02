@@ -37,7 +37,7 @@ Simplify is an application that simplifies the budgeting process. Inspired by a 
 #### Step 1
 ![Setup Step 1](screenshots/Simplify-Setup-1.png)
 #### Step 2
-![Setup Step 2](screenshots/Simplify -Setup-2.png)
+![Setup Step 2](screenshots/Simplify-Setup-2.png)
 #### Step 3
 ![Setup Step 3](screenshots/Simplify-Setup-3.png)
 
