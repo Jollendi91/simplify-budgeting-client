@@ -15,6 +15,9 @@ Simplify is an application that simplifies the budgeting process. Inspired by a 
   - PostgreSQL
   - Sequelize
   
+### Authentication
+  - JSON Web Tokens
+  
 ### Testing
   - Enzyme
   - Mocha
