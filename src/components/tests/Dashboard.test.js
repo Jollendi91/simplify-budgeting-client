@@ -22,7 +22,7 @@ describe('<Dashboard />', () => {
     });
 
     it('Should render the correct elements', () => {
-        const wrapper = shallow(<Dashboard {...props}/>);
+        const wrapper = shallow(<Dashboard {...props} step={null}/>);
         expect(wrapper.containsMatchingElement(<CategoryModule />)).toEqual(true);
     });
 });
