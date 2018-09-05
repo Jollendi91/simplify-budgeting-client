@@ -9,6 +9,7 @@ import {fetchProtectedUser} from '../actions/protected-data';
 import styled from 'styled-components';
 import {FormContainer} from './styled-components/Forms';
 import { MainLoadingSpinner } from './MainLoadingSpinner';
+import { Redirect } from 'react-router-dom';
 
 // Styled Components
 const DashboardContainer = FormContainer.extend`
@@ -142,6 +143,8 @@ export class Dashboard extends React.Component {
             return (
                 <MainLoadingSpinner/>
             )
+        } else if (this.props.step !== null) {
+            return <Redirect to="/account-setup"/>
         } else {
             return (
                 <div>
@@ -170,7 +173,7 @@ export class Dashboard extends React.Component {
                                 {this.state.dataDisplay ? this.state.dataDisplay : 'Click on a segment to show the value'}
                             </GraphText>
                         </DashboardCard>
-                        <DashboardCard>
+                        <DashboardCard style={{minWidth: 0}}>
                             <Header>Budgets</Header>
                             {categories}
                         </DashboardCard>

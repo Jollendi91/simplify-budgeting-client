@@ -3,6 +3,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
+import { fetchProtectedUser } from './protected-data';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
@@ -56,7 +57,10 @@ export const login = (username, password) => dispatch => {
         .then(res => res.json())
         .then(({
             authToken
-        }) => storeAuthInfo(authToken, dispatch))
+        }) => {
+            storeAuthInfo(authToken, dispatch);
+            dispatch(fetchProtectedUser());
+        })
         .catch(err => {
             const {code} = err;
             const message =

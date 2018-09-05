@@ -84,7 +84,7 @@ export class EditProfile extends React.Component {
                     <h2>Bills</h2>
                     <MonthlyBillsSetup />
                 </SectionContainer>
-                <SectionContainer className="budgets-edit">
+                <SectionContainer className="budgets-edit" style={{minWidth: 0}}>
                     <h2>Budgets</h2>
                     <CategorySetup />
                 </SectionContainer>
