@@ -148,6 +148,8 @@ export class NavBar extends React.Component {
             displayLinks: false,
             displayForm: null
         }
+
+        this.displayForm = this.displayForm.bind(this);
     }
 
     displayForm(form) {

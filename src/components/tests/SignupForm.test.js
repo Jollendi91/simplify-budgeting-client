@@ -10,7 +10,7 @@ describe('<SignupForm />', () => {
 
     it('Should run handleSumbit on form submit', () => {
         const handleSubmit = jest.fn();
-        const wrapper = shallow(<SignupForm handleSubmit={handleSubmit}/>);
+        const wrapper = shallow(<SignupForm handleSubmit={handleSubmit} hideForm={jest.fn()}/>);
         wrapper.simulate('submit');
         expect(handleSubmit).toHaveBeenCalledTimes(1);
         expect(handleSubmit).toHaveBeenCalledWith(expect.any(Function));
@@ -21,7 +21,7 @@ describe('<SignupForm />', () => {
         const dispatch = jest.fn(() => {
             return Promise.resolve()
         });
-        const wrapper = shallow(<SignupForm handleSubmit={handleSubmit} dispatch={dispatch}/>);
+        const wrapper = shallow(<SignupForm handleSubmit={handleSubmit} dispatch={dispatch} hideForm={jest.fn()}/>);
         wrapper.instance().onSubmit({
             username: 'username',
             password: 'password',
