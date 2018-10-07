@@ -31,4 +31,4 @@ describe('<SignupForm />', () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
     }); 
-}); 
+});  

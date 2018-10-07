@@ -8,7 +8,7 @@ import {HeaderContainer, LoadingSpinner} from './styled-components/Elements';
 
 export class LoginForm extends React.Component {
   onSubmit(values) {
-    return this.props.dispatch(login(values.username, values.password)).then(() => this.props.hideForm());
+    return this.props.dispatch(login(values.username, values.password)).then(() => this.props.hideForm);
   }
 
   render() {
@@ -17,7 +17,7 @@ export class LoginForm extends React.Component {
       error = (
         <div className="form-error" aria-live="polite">
           {this.props.error}
-        </div>
+        </div> 
       );
     }
 
