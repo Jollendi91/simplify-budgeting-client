@@ -181,7 +181,7 @@ export function LandingPage(props) {
                         <StyledIcon color="#276A73" icon="money-bill-wave" />
                         <h2>Budgeting Simplified</h2>
                     </header>
-                    <p>Simplify focuses on one fundamental idea, to know how much money you have, and where it is going. Knowing is the first step in taking control of your finances</p>
+                    <p>Simplify focuses on one fundamental idea: to know how much money you have, and where it is going. Knowing is the first step in taking control of your finances</p>
                 </LandingSection>
                 <LandingSection>
                     <header>
@@ -199,7 +199,7 @@ export function LandingPage(props) {
                 </LandingSection>
             </MainSection>
             <StepsContainer>
-                <h1>As Simple as 123...</h1>
+                <h1>As Simple as 1, 2, 3...</h1>
                 <StepsList>
                     <StepSection className="step-1">
                         <div>
