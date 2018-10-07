@@ -10,7 +10,7 @@ describe('<LoginForm />', () => {
 
     it('Should run handleSubmit on form submit', () => {
         const handleSubmit = jest.fn();
-        const wrapper = shallow(<LoginForm handleSubmit={handleSubmit}/>);
+        const wrapper = shallow(<LoginForm handleSubmit={handleSubmit} hideForm={jest.fn()}/>);
         wrapper.simulate('submit');
         expect(handleSubmit).toHaveBeenCalledTimes(1);
         expect(handleSubmit).toHaveBeenCalledWith(expect.any(Function));
@@ -19,7 +19,7 @@ describe('<LoginForm />', () => {
     it('Should dispatch login on onSubmit', () => {
         const dispatch = jest.fn().mockImplementation(() => Promise.resolve());
         const handleSubmit = jest.fn();
-        const wrapper = shallow(<LoginForm handleSubmit={handleSubmit} dispatch={dispatch}/>);
+        const wrapper = shallow(<LoginForm handleSubmit={handleSubmit} dispatch={dispatch} hideForm={jest.fn()}/>);
         wrapper.instance().onSubmit({username: 'username', password: 'password'});
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith(expect.any(Function));

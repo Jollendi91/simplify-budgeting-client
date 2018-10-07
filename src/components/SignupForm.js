@@ -14,12 +14,13 @@ const matchesPassword = matches('password');
 
 // Signup Form Component
 export class SignupForm extends React.Component {
+    
     onSubmit(values) {
         const {username, password} = values;
         const user = {username, password};
         return this.props.dispatch(registerUser(user))
         .then(() => this.props.dispatch(login(username, password)))
-        .then(() => this.props.hideForm);
+        .then(() => this.props.hideForm());
     }
 
     render() {
