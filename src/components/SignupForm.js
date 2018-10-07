@@ -42,8 +42,6 @@ export class SignupForm extends React.Component {
             );
         }
 
-        console.log(this.props);
-
         return (
             <FormContainer>
                 <CloseButton icon="times" onClick={() => this.props.hideForm()}/>
